@@ -1,0 +1,34 @@
+{
+  "affected_artifacts": [
+    "packages/mission",
+    "packages/value",
+    "packages/context",
+    "packages/authority"
+  ],
+  "added": [
+    "packages/mission (@sos-2/mission): versioned Mission artifacts with progressive formalization (measurable-goal invariant), explicit authority-controlled revision workflow (AuthorityGrant reference required, ACTIVE-only, version+1 supersedes chains, DERIVED_FROM revision links) and MissionStore with complete/queryable/contiguous revision history",
+    "packages/value (@sos-2/value): ValueModel artifacts (economic objectives, budgets, incentives, opportunities, typed constraints) with an explicit constraint-type registry, the frozen §3 authority precedence chain realization, and deterministic Mission subordination (REJECT at construction or FLAG via CONFLICTS_WITH trace links; value never outranks mission)",
+    "packages/context (@sos-2/context): Context artifacts over the eight §5 dimensions with an explicit, extensible dimension registry (built-ins seeded, explicit registration API, unknown dimensions rejected) and typed value validation (text/number/boolean/enum/string-list)",
+    "packages/authority (@sos-2/authority): scoped AuthorityGrants (ARTIFACT/KIND scope, permission vocabulary, TIME/REVISION expiry), deterministic grant evaluation evaluate(grant, now|revision), loud authorization gate, anti-escalation delegation, explicit versioned revocation via GrantStore, the frozen Decision action vocabulary (ACT, EXPERIMENT, GATHER_EVIDENCE, ASK, REJECT, ROLLBACK) and the first-class AskRequest contract (exact decision, typed alternatives, qualitative evidence quality, qualitative uncertainty, trade-offs, typed risk, authority insufficiency; numeric confidence rejected)",
+    "packages/mission/W1.architecture-delta.json: this Architecture Delta record"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the Semantic Spine remains the ONLY identity/envelope/trace authority: all four packages import minters, envelopes, trace links and canonical serialization from @sos-2/semantic-spine; no second identity system, no duplicated envelope logic, no invented core identifiers",
+    "the 17 typed trace link classes are frozen and unchanged; W1 uses only existing types (DERIVED_FROM for mission revision lineage, CONFLICTS_WITH for mission/value conflicts)",
+    "the frozen authority ordering of spec/architecture.md §3 is realized 1:1 and never redefined: Constitution > Mission > approved Value commitments > hard constraints > assurance policy > architecture hypothesis > candidate > implementation detail; value can never outrank mission",
+    "mission revision remains explicit, versioned and authority-controlled (spec/architecture.md §3); only ACTIVE missions can be revised and every revision requires an AuthorityGrant reference",
+    "the artifact kinds used (Mission, ValueModel, Context, AuthorityGrant, AskRequest) are among the 19 frozen core kinds; no new artifact kinds were introduced",
+    "the Decision action vocabulary is exactly the frozen six from spec/architecture.md §5; ASK remains a SUCCESS state (first-class outcome, never an error class)",
+    "evidence truth-state semantics, the 6 distinct truth states, and evidence/causal semantics are untouched (W3's scope)",
+    "System State, Architecture Graph, conformance and implementation-model semantics are untouched (W2's scope)",
+    "no frozen contract in spec/contracts/ was modified; spec/, docs/, root files and sibling-owned paths are untouched — all W1 changes are additive under the four owned packages",
+    "qualitative uncertainty only: AskRequest rejects numeric confidence fields (spec/meta-model.md confidence rule); grant evaluation is deterministic and total, and indeterminate evaluations fail loudly rather than silently passing"
+  ],
+  "boundary_changes": [
+    "new workspace packages @sos-2/mission, @sos-2/value, @sos-2/context, @sos-2/authority; each depends at runtime only on @sos-2/semantic-spine (test-only devDependencies: mission->authority and value->mission for composed-workflow evidence)"
+  ],
+  "rationale_ref": "spec/work-orders/W1-mission-value-context.md",
+  "work_order": "W1"
+}
