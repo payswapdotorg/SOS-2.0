@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/mission",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Mission model: versioned, authority-controlled mission artifacts with progressive formalization, explicit revision workflow and complete, queryable revision history (spec/architecture.md sections 3 and 5).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
