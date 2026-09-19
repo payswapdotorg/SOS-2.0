@@ -2,189 +2,28 @@
   "schemaVersion": "2.0",
   "program": "SOS-2.0",
   "status": "ACTIVE",
-  "currentFrontier": [
-    "W1",
-    "W2",
-    "W3"
-  ],
+  "currentFrontier": ["W1", "W2", "W3"],
   "currentTask": "W1+W2+W3 (first parallel wave)",
   "tasks": {
-    "W0": {
-      "status": "BOOTSTRAP_COMPLETE",
-      "dependencies": [],
-      "mergedAs": "INITIAL_BOOTSTRAP"
-    },
-    "W0.5": {
-      "status": "COMPLETE",
-      "dependencies": [
-        "W0"
-      ],
-      "mergedAs": "adf3156c904a7fbbb3214a2036396ec5a1d67212"
-    },
-    "W1": {
-      "status": "ELIGIBLE",
-      "dependencies": [
-        "W0.5"
-      ],
-      "mergedAs": null
-    },
-    "W2": {
-      "status": "ELIGIBLE",
-      "dependencies": [
-        "W0.5"
-      ],
-      "mergedAs": null
-    },
-    "W3": {
-      "status": "ELIGIBLE",
-      "dependencies": [
-        "W0.5"
-      ],
-      "mergedAs": null
-    },
-    "W4": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W2",
-        "W3"
-      ],
-      "mergedAs": null
-    },
-    "W5": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W1",
-        "W3"
-      ],
-      "mergedAs": null
-    },
-    "W6": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W1",
-        "W2",
-        "W3"
-      ],
-      "mergedAs": null
-    },
-    "W7": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W4",
-        "W5",
-        "W6"
-      ],
-      "mergedAs": null
-    },
-    "W8": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W2",
-        "W3"
-      ],
-      "mergedAs": null
-    },
-    "W9": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W2",
-        "W3",
-        "W6"
-      ],
-      "mergedAs": null
-    },
-    "W10": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W1",
-        "W8",
-        "W9"
-      ],
-      "mergedAs": null
-    },
-    "W11": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W1",
-        "W2",
-        "W8",
-        "W10"
-      ],
-      "mergedAs": null
-    },
-    "W12": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W2",
-        "W3",
-        "W8",
-        "W10"
-      ],
-      "mergedAs": null
-    },
-    "W13": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W5",
-        "W6",
-        "W7"
-      ],
-      "mergedAs": null
-    },
-    "W14": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W1",
-        "W2",
-        "W6",
-        "W10",
-        "W11",
-        "W12"
-      ],
-      "mergedAs": null
-    },
-    "W15": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W4",
-        "W5",
-        "W7",
-        "W8",
-        "W9",
-        "W10",
-        "W12",
-        "W13"
-      ],
-      "mergedAs": null
-    },
-    "W16": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W9",
-        "W10",
-        "W13",
-        "W15"
-      ],
-      "mergedAs": null
-    },
-    "W17": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W11",
-        "W12",
-        "W13",
-        "W14",
-        "W15",
-        "W16"
-      ],
-      "mergedAs": null
-    },
-    "W18": {
-      "status": "BLOCKED",
-      "dependencies": [
-        "W17"
-      ],
-      "mergedAs": null
-    }
+    "W0": {"status": "BOOTSTRAP_COMPLETE", "dependencies": [], "mergedAs": "INITIAL_BOOTSTRAP"},
+    "W0.5": {"status": "COMPLETE", "dependencies": ["W0"], "mergedAs": "adf3156c904a7fbbb3214a2036396ec5a1d67212"},
+    "W1": {"status": "ELIGIBLE", "dependencies": ["W0.5"], "mergedAs": null},
+    "W2": {"status": "ELIGIBLE", "dependencies": ["W0.5"], "mergedAs": null},
+    "W3": {"status": "ELIGIBLE", "dependencies": ["W0.5"], "mergedAs": null},
+    "W4": {"status": "BLOCKED", "dependencies": ["W2", "W3"], "mergedAs": null},
+    "W5": {"status": "BLOCKED", "dependencies": ["W1", "W3"], "mergedAs": null},
+    "W6": {"status": "BLOCKED", "dependencies": ["W1", "W2", "W3"], "mergedAs": null},
+    "W7": {"status": "BLOCKED", "dependencies": ["W4", "W5", "W6"], "mergedAs": null},
+    "W8": {"status": "BLOCKED", "dependencies": ["W2", "W3"], "mergedAs": null},
+    "W9": {"status": "BLOCKED", "dependencies": ["W2", "W3", "W6"], "mergedAs": null},
+    "W10": {"status": "BLOCKED", "dependencies": ["W1", "W8", "W9"], "mergedAs": null},
+    "W11": {"status": "BLOCKED", "dependencies": ["W1", "W2", "W8", "W10"], "mergedAs": null},
+    "W12": {"status": "BLOCKED", "dependencies": ["W2", "W3", "W8", "W10"], "mergedAs": null},
+    "W13": {"status": "BLOCKED", "dependencies": ["W5", "W6", "W7"], "mergedAs": null},
+    "W14": {"status": "BLOCKED", "dependencies": ["W1", "W2", "W6", "W10", "W11", "W12"], "mergedAs": null},
+    "W15": {"status": "BLOCKED", "dependencies": ["W4", "W5", "W7", "W8", "W9", "W10", "W12", "W13"], "mergedAs": null},
+    "W16": {"status": "BLOCKED", "dependencies": ["W9", "W10", "W13", "W15"], "mergedAs": null},
+    "W17": {"status": "BLOCKED", "dependencies": ["W11", "W12", "W13", "W14", "W15", "W16"], "mergedAs": null},
+    "W18": {"status": "BLOCKED", "dependencies": ["W17"], "mergedAs": null}
   }
 }
