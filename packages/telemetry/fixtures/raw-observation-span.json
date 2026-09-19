@@ -1,0 +1,34 @@
+{
+  "subject_ref": "otel:service:checkout",
+  "availability": "FAILURE",
+  "window": { "start": "2025-01-01T00:00:00.000Z", "end": "2025-01-01T00:00:00.150Z" },
+  "observed": {
+    "signal": "span",
+    "name": "POST /checkout",
+    "kind": "SERVER",
+    "status_code": "ERROR",
+    "status_message": "connection reset by peer",
+    "trace_id": "5b8efff798038103d269b633813fc60c",
+    "span_id": "eee19b7ec3ee1e0f",
+    "parent_span_id": null,
+    "duration_ms": 150,
+    "start_time_unix_nano": "1735689600000000123",
+    "end_time_unix_nano": "1735689600150000456",
+    "span_attributes": { "http.request.method": "POST", "http.response.status_code": 500 }
+  },
+  "attributes": {
+    "service.name": "checkout",
+    "service.namespace": "prod",
+    "telemetry.sdk.name": "opentelemetry",
+    "telemetry.sdk.language": "nodejs",
+    "telemetry.sdk.version": "1.9.1"
+  },
+  "producer": {
+    "tool": "opentelemetry",
+    "tool_version": "1.9.1",
+    "model": null,
+    "model_version": null,
+    "command": null,
+    "environment": "prod"
+  }
+}

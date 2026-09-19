@@ -1,0 +1,22 @@
+{
+  "subject_ref": "otel:service:checkout",
+  "availability": "SUCCESS",
+  "window": { "start": "2025-01-01T00:01:00.000Z", "end": "2025-01-01T00:01:00.000Z" },
+  "observed": {
+    "signal": "metric",
+    "metric_name": "http.server.request.duration.p99",
+    "metric_kind": "GAUGE",
+    "value": 230.5,
+    "time_unix_nano": "1735689660000000000",
+    "metric_attributes": { "http.route": "/checkout" }
+  },
+  "attributes": { "service.name": "checkout", "telemetry.sdk.version": "1.9.1" },
+  "producer": {
+    "tool": "opentelemetry",
+    "tool_version": "1.9.1",
+    "model": null,
+    "model_version": null,
+    "command": null,
+    "environment": null
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "id": "sos://Evidence/e7f3c74939a13049bbcf014d8e1b7ab2",
+  "kind": "telemetry",
+  "subject_ref": "sos://SystemState/75c763da757ffa2007db78e764aa24ab",
+  "availability": "SUCCESS",
+  "provenance": [
+    "observation:sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  ],
+  "source_revision": "git:219cb9c8e329b0435f2deea37ec2d5003b264931",
+  "deployment_revision": "oci:sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "observational": true,
+  "intervention": false,
+  "evidence_class": "OBSERVATIONAL",
+  "method": "telemetry:capture-availability",
+  "window": {
+    "start": "2025-01-01T00:00:00.000Z",
+    "end": "2025-01-02T00:00:00.000Z"
+  },
+  "subject_revision": "r1",
+  "confidence": {
+    "kind": "QUALITATIVE",
+    "uncertainty_class": "UNQUANTIFIED"
+  },
+  "producer": {
+    "tool": "otel-collector",
+    "tool_version": "0.90.0",
+    "model": null,
+    "model_version": null,
+    "command": "collect --env production",
+    "environment": "ci:local"
+  },
+  "llm_output": false
+}

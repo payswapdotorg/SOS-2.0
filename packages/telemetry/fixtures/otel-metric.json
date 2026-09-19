@@ -1,0 +1,13 @@
+{
+  "metricName": "http.server.request.duration.p99",
+  "metricKind": "GAUGE",
+  "timeUnixNano": "1735689660000000000",
+  "value": 230.5,
+  "attributes": { "http.route": "/checkout" },
+  "resource": {
+    "attributes": {
+      "service.name": "checkout",
+      "telemetry.sdk.version": "1.9.1"
+    }
+  }
+}

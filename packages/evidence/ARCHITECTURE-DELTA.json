@@ -1,0 +1,32 @@
+{
+  "affected_artifacts": [
+    "packages/evidence",
+    "packages/telemetry",
+    "packages/provenance"
+  ],
+  "added": [
+    "packages/evidence: @sos-2/evidence — the Evidence Graph and telemetry ingestion contracts: canonical evidence records (EvidenceRecordW3) extending the normative EvidenceRecord through the schema's open extension point (additionalProperties: true) with evidence_class, method, window, subject_revision, confidence, producer, llm_output; deterministic sos://Evidence/<32hex> ids; verbatim truth-state assignment from raw observations under the explicit method provenance 'telemetry:capture-availability'; observation/intervention distinction (exactly one class, flags derived); calibrated-numeric-vs-qualitative confidence discipline with mandatory calibration_ref; evaluateFreshness with the 4 distinct statuses FRESH / EXPIRED_TIME_WINDOW / SUPERSEDED_SUBJECT_REVISION / UNKNOWN_PROVENANCE; summarizeAvailability keeping all 6 truth states distinct; EvidenceGraph composing the spine's TraceLinkStore for evidence→subject (System State) traceability through OBSERVES links; golden fixture evidence.json",
+    "packages/telemetry: @sos-2/telemetry — the TelemetrySource ingestion contract (pull fetch + optional push subscribe) producing validated RawObservations with capture-level availability marking; InMemoryTelemetrySource with explicit gap recording (a gap is UNAVAILABLE, never silence) and explicit UNSUPPORTED surfacing; OpenTelemetry-compatible adapter modeled as types (spans/metrics/logs) with pure converters to raw observations and golden fixtures — no OTel SDK at runtime",
+    "packages/provenance: @sos-2/provenance — Producer (tool, model+version if LLM-involved, command, environment), TimeWindow (the single W3 temporal shape), ProvenanceRecord with exact source/deployment revisions (null preserved, never defaulted), verifiable provenance chains (broken chains reported as UNKNOWN with ALL unresolved hops, never silently truncated), ProvenanceStore, and the non-authoritative LLM-provenance mark; the ProvenanceRecord id kind segment registered through the spine's sanctioned registerArtifactKind API (add-only)",
+    "packages/evidence/ARCHITECTURE-DELTA.json: this Architecture Delta record — DECLARED HERE because spec/** is outside W3's owned paths; the Architect may reconcile it into spec/contracts/deltas/ at merge time"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the 6 evidence truth states remain semantically distinct (SUCCESS, FAILURE, UNKNOWN, UNAVAILABLE, UNSUPPORTED, PARTIAL) — imported from @sos-2/contracts/@sos-2/semantic-spine, never redefined, and passed through telemetry ingestion VERBATIM (assertTruthStateIs pins each state in tests)",
+    "UNAVAILABLE telemetry is NEVER interpreted as zero or as absence-of-failure (spec/architecture-lock.md forbidden shortcut): gap observations become UNAVAILABLE evidence; summarizeAvailability counts them as UNAVAILABLE, never as success or zero-failure",
+    "the normative EvidenceRecord contract (spec/contracts/evidence.schema.json) is consumed UNCHANGED: W3 extension fields travel through the schema's open extension point (additionalProperties: true); there is no schema modification and no second evidence authority",
+    "observation/intervention distinction: exactly one evidence class per record, the normative observational/intervention booleans are DERIVED (conflation is impossible and rejected loudly); strong causal claims require intervention evidence (spec/architecture.md §18)",
+    "numeric confidence is valid only where calibration exists (calibration_ref MUST be a well-formed spine artifact id); otherwise a qualitative uncertainty class is used; an LLM self-reported confidence value is never treated as calibrated truth (spec/meta-model.md) — LLM-produced records cannot carry calibrated confidence",
+    "all identities are minted by @sos-2/semantic-spine (deterministic content addressing over the canonical creation content); Evidence is one of the 19 frozen core kinds (no registration performed); ProvenanceRecord is an explicitly-registered extension kind via the sanctioned add-only registerArtifactKind API — no second kind registry",
+    "the 17 frozen trace link types are USED, not extended: evidence→subject traceability uses OBSERVES through the spine's TraceLinkStore composed inside EvidenceGraph",
+    "telemetry is INPUT, not semantic truth: truth-state assignment happens only in the evidence layer with explicit method provenance recorded on every record; ingested evidence is always OBSERVATIONAL",
+    "OpenTelemetry compatibility is an adapter/substrate only (spec/architecture.md §17 platform neutrality): OTel shapes are modeled as types with pure converters; no OTel SDK runtime dependency, no network, no collector in tests",
+    "LLM output is never authoritative evidence or authorization (spec/architecture.md §18): llm_output is derived from producer.model and cannot be hidden or claimed falsely",
+    "broken provenance chains are reported as UNKNOWN — never silently truncated; all unresolved hops are listed",
+    "evidence is reproducible from exact revisions (R30): deterministic content-addressed ids, exact source_revision/deployment_revision carried or explicitly null (preserved, never defaulted)"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/work-orders/W3-evidence-telemetry.md",
+  "work_order": "W3"
+}
