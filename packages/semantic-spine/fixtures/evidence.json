@@ -1,0 +1,11 @@
+{
+  "id": "sos://Evidence/c412ae3f8bbc84f6ddb21a69b32208ce",
+  "kind": "contract-fixture-validation",
+  "subject_ref": "sos://ImplementationModel/541b1845dff6ebfc15fef3ee55a508af",
+  "availability": "SUCCESS",
+  "provenance": ["W0.5:baseline-contract-fixture"],
+  "source_revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf",
+  "deployment_revision": null,
+  "observational": false,
+  "intervention": false
+}

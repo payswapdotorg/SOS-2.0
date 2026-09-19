@@ -1,0 +1,27 @@
+{
+  "affected_artifacts": [
+    "sos://schema/implementation-model",
+    "packages/contracts",
+    "packages/semantic-spine"
+  ],
+  "added": [
+    "packages/contracts: @sos-2/contracts normative contract types, guards, frozen vocabularies, kind registry and JSON Schema loader",
+    "packages/semantic-spine: @sos-2/semantic-spine identity minting (random + deterministic), artifact envelope lifecycle, typed trace links with store, canonical JSON serialization, Architecture Delta builder/validator, conformance classifier, golden contract fixtures",
+    "spec/contracts/implementation-model.schema.json: ImplementationModel contract schema (sos://schema/implementation-model)",
+    "spec/contracts/deltas/W0.5.architecture-delta.json: this Architecture Delta record"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the 17 typed trace link classes are frozen and unchanged: SATISFIES, REALIZES, REFINES, CONSTRAINS, IMPLEMENTS, VERIFIES, OBSERVES, SUPPORTS, CONTRADICTS, CAUSED_BY, CAUSED, DERIVED_FROM, COMPATIBLE_WITH, CONFLICTS_WITH, COMPOSES, SPECIALIZES, GENERALIZES",
+    "the 6 evidence truth states remain semantically distinct: SUCCESS, FAILURE, UNKNOWN, UNAVAILABLE, UNSUPPORTED, PARTIAL",
+    "the 19 core artifact kinds are frozen and canonical; extension happens only through the explicit kind registration API",
+    "the 7 conformance classes are frozen: IMPLEMENTATION_DETAIL, EXPECTED_VARIATION, PRESERVING_REFINEMENT, INTENTIONAL_EVOLUTION, DRIFT, UNKNOWN, CONTRADICTION",
+    "the artifact envelope field set is unchanged: id, kind, version, status, authority_ref, provenance, created_at, supersedes",
+    "no second semantic registry: @sos-2/contracts is the single normative contract source and @sos-2/semantic-spine is the only sanctioned minting authority for core identifiers",
+    "existing frozen schemas (trace-link, architecture-delta, evidence, package) are unchanged; spec/contracts was extended additively only"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/work-orders/W0.5-semantic-spine.md",
+  "work_order": "W0.5"
+}

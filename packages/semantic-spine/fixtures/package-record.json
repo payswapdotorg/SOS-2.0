@@ -1,0 +1,16 @@
+{
+  "id": "sos://Package/7f8e6f3257bd8625b2082cb4476a1d6b",
+  "semantic_capability": "sos-semantic-spine",
+  "contracts": [
+    "sos://schema/trace-link",
+    "sos://schema/architecture-delta",
+    "sos://schema/evidence",
+    "sos://schema/package",
+    "sos://schema/implementation-model"
+  ],
+  "maturity": "DISCOVERED",
+  "evidence_refs": ["sos://Evidence/c412ae3f8bbc84f6ddb21a69b32208ce"],
+  "failure_refs": [],
+  "compatibility_refs": [],
+  "composition_refs": []
+}

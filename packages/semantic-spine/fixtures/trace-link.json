@@ -1,0 +1,6 @@
+{
+  "source": "sos://ImplementationModel/541b1845dff6ebfc15fef3ee55a508af",
+  "target": "sos://ArchitectureGraph/1800df79750a147f861614a40840526c",
+  "type": "REALIZES",
+  "provenance": ["W0.5:baseline-contract-fixture"]
+}
