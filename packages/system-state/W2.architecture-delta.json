@@ -1,0 +1,32 @@
+{
+  "affected_artifacts": [
+    "packages/system-state",
+    "packages/architecture",
+    "packages/conformance"
+  ],
+  "added": [
+    "packages/system-state (@sos-2/system-state): typed, versioned SystemState over the exact eight sections of spec/architecture.md section 5 (architecture_ref, implementation, configuration, deployment, policy, environment_relationships, active_experiments, package_realizations), with the W2 exact-revision invariant enforced in both directions (git-sha for implementation, deployment-id for deployment, config-version for configuration; missing/empty/mis-kinded revisions are invalid), a typed extensible environment-relationship-kind registry (kebab-case; depends-on, promotes-to, mirrors, isolated-from), deterministic content-addressed sos://SystemState identities, and SystemStateStore with linear, contiguous, complete supersedes chains queryable root-to-newest via history()/latest()",
+    "packages/architecture (@sos-2/architecture): ArchitectureGraph as a versioned hypothesis projecting an EXACT SystemState revision (projects_system_state = {system_state_id, version}); typed node/edge kind registries seeded with the ten section-5 categories (9 node kinds: Capability, Component, Interface, DataStore, Deployment, Trust, Policy, Model, Adapter; 8 edge kinds: Dependency, Provides, Consumes, Owns, DeploysTo, Trusts, Constrains, Realizes) with explicit registration APIs mirroring the spine's kind-registry pattern; deterministic graph diffs (sorted added/removed/modified nodes and edges, byte-identical canonical output, diff(A,B) structurally distinct from diff(B,A)) with STRICT applyGraphDiff (before-values must match, additions must be new identities; apply(a, diff(a,b)) === b pinned by unit and property tests); LocalCandidate { baseGraphRef, boundedSubgraph, replacement, invariants, predictedEffects } with the ten typed section-8 operators (ADD/REMOVE/SPLIT/MERGE/REPLACE_COMPONENT, CHANGE_INTERFACE/DATA_STORE/TOPOLOGY/POLICY/MODEL) machine-enforced to the declared bounded subgraph (out-of-bounds removals/modifications, undeclared incident edges, id-reuse additions, wrong-kind CHANGE targets, non-DeploysTo topology edges and base-graph id/version mismatches are all rejected)",
+    "packages/conformance (@sos-2/conformance): the typed invariant DSL (REQUIRED_INTERFACE, FORBIDDEN_DEPENDENCY, LAYERING with bottom-to-top layers and upward-dependency violations, DATA_OWNERSHIP with exactly-one Owns edge per DataStore) evaluated by checkInvariant -> { status: PASS|FAIL|NOT_APPLICABLE, evidence: subject ids, reason } deterministically; code-to-architecture reconciliation consuming the merged @sos-2/semantic-spine classifier and ImplementationModel contract with documented normalization (componentKindMap/dependencyKindMap; registered kinds pass through, defaults Component/Dependency; declared edges projected pair-unique per the classifier's contract), producing typed records { classification, subject, reason } LINKED to semantic ids via the 17 frozen trace-link types (OBSERVES/REFINES/DERIVED_FROM/CONTRADICTS), and minimal Evidence-record-shaped drift records for DRIFT/CONTRADICTION findings with deterministic sos://Evidence/ ids minted by the spine",
+    "packages/system-state/W2.architecture-delta.json: this Architecture Delta record"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the Semantic Spine remains the ONLY identity/envelope/trace authority: all three packages import minters, envelopes, trace links, canonical serialization, the conformance classifier and the kind-registry pattern from @sos-2/semantic-spine; no second identity system, no duplicated envelope logic, no invented core identifiers",
+    "the 17 typed trace link classes are frozen and unchanged; reconciliation uses only existing types (OBSERVES, REFINES, DERIVED_FROM, CONTRADICTS) selected by the frozen CONFORMANCE_LINK_TYPES mapping",
+    "the 7 conformance classes are frozen and unchanged; classification itself is delegated entirely to the merged W0.5 classifier (classifyDifferences), never reimplemented",
+    "the artifact kinds used (SystemState, ArchitectureGraph, ImplementationModel, Experiment, Package, Evidence) are among the 19 frozen core kinds; no new artifact kinds were introduced",
+    "the ImplementationModel contract and its JSON Schema are consumed as-is; W2 normalizes instances for comparison but never mutates caller input and never redefines the contract",
+    "architecture remains a versioned hypothesis over System State (never a copy of code): every ArchitectureGraph artifact references the exact SystemState revision it projects, and applyLocalCandidate preserves that projection while leaving promotion to governed callers",
+    "no frozen contract in spec/contracts/ was modified; spec/, docs/, root files and sibling-owned paths (packages/semantic-spine, packages/contracts, packages/mission, packages/value, packages/context, packages/authority) are untouched; all W2 changes are additive under the three owned packages",
+    "drift evidence stays minimal and Evidence-record-shaped only; the full Evidence Graph remains W3's scope (no observations/telemetry/incident semantics were implemented here)",
+    "determinism discipline: canonical serialization, sorted diff output, deterministic id minting and pinned fast-check seeds (424242) make every operation repeatable; the full test suite is required to produce identical results on repeated runs",
+    "Candidate lifecycle/assurance/promotion semantics are NOT implemented here (W7+ scope): applyLocalCandidate validates and computes a diff, it never mints, promotes or self-approves anything"
+  ],
+  "boundary_changes": [
+    "new workspace packages @sos-2/system-state, @sos-2/architecture, @sos-2/conformance; runtime dependencies: system-state -> semantic-spine; architecture -> semantic-spine + system-state; conformance -> semantic-spine + architecture (test-only devDependencies add fast-check/vitest/typescript/@types/node per W0.5 convention)"
+  ],
+  "rationale_ref": "spec/work-orders/W2-system-state-architecture.md",
+  "work_order": "W2"
+}
