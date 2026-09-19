@@ -15,7 +15,7 @@
     "W6": {"status": "BLOCKED", "dependencies": ["W1", "W2", "W3"], "mergedAs": null},
     "W7": {"status": "BLOCKED", "dependencies": ["W4", "W5", "W6"], "mergedAs": null},
     "W8": {"status": "BLOCKED", "dependencies": ["W2", "W3"], "mergedAs": null},
-    "W9": {"status": "BLOCKED", "dependencies": ["W7", "W8"], "mergedAs": null},
+    "W9": {"status": "BLOCKED", "dependencies": ["W2", "W3", "W6"], "mergedAs": null},
     "W10": {"status": "BLOCKED", "dependencies": ["W1", "W8", "W9"], "mergedAs": null},
     "W11": {"status": "BLOCKED", "dependencies": ["W1", "W2", "W8", "W10"], "mergedAs": null},
     "W12": {"status": "BLOCKED", "dependencies": ["W2", "W3", "W8", "W10"], "mergedAs": null},
