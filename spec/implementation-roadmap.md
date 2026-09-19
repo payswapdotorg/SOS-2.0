@@ -2,26 +2,51 @@
 
 STATUS: FROZEN IMPLEMENTATION SEQUENCE 2.0
 
-DAG:
-W0 Governance
- -> W0.5 Semantic Spine + architecture/code integrity
- -> parallel W1 Mission, W2 Architecture, W3 Evidence
- -> parallel W4 Recovery, W5 Causal/Memory, W6 Package Core
- -> parallel W7 Search, W8 Assurance, W9 Experiment
- -> W10 Autonomy/ASK
- -> parallel W11 Console, W12 Adapters, W13 Package Ecology
- -> W14 Greenfield
- -> W15 Brownfield
- -> W16 SOS Self-Evolution
- -> W17 Integrated Dogfood
- -> W18 Final Gate
+True dependency DAG:
+
+W0
+ -> W0.5
+ -> {W1, W2, W3}
+
+After the first parallel wave, the eligible pool expands to:
+- W4 depends on W2,W3
+- W5 depends on W1,W3
+- W6 depends on W1,W2,W3
+- W8 depends on W2,W3
+
+Therefore the lead should dispatch any three eligible independent Work Orders rather than wait for a formal stage boundary.
+
+Downstream:
+W7 depends on W4,W5,W6
+W9 depends on W2,W3,W6
+W10 depends on W1,W8,W9
+W11 depends on W1,W2,W8,W10
+W12 depends on W2,W3,W8,W10
+W13 depends on W5,W6,W7
+W14 depends on W1,W2,W6,W10,W11,W12
+W15 depends on W4,W5,W7,W8,W9,W10,W12,W13
+W16 depends on W9,W10,W13,W15
+W17 depends on W11,W12,W13,W14,W15,W16
+W18 depends on W17
 
 Three-worker strategy:
-After W0.5, workers A/B/C take W1/W2/W3.
-Later, dispatch the three eligible independent Work Orders at each frontier. W7, W8 and W9 are intentionally parallel: W9 consumes the frozen Candidate/Assurance contract and may use stubs until W7/W8 implementations merge. Owned paths must be disjoint.
-Integration work is explicit and never hidden in a feature PR.
+1. Keep up to three eligible Work Orders active.
+2. Prefer disjoint owned paths.
+3. Prefer prerequisite-building Work Orders that unlock additional independent work.
+4. Do not wait for a sibling unless the dependency is explicit.
+5. Use contract fixtures/stubs when a Work Order is intentionally independent of a future implementation.
+6. Reconcile frontier after every merge.
+
+First recommended dispatch:
+Worker A -> W1
+Worker B -> W2
+Worker C -> W3
+
+Then maintain a rolling pool from the true DAG. A worker finishing early may take W4/W5/W6/W8 without waiting for the other first-wave workers if its dependencies are merged.
+
+W9 is intentionally independent of W7/W8 source code. It uses the frozen CandidateState, AssuranceCase and Evidence contracts plus contract fixtures; final cross-system integration is validated later.
 
 Work Order completion:
-acceptance criteria satisfied -> exact-head evidence -> Architect gate -> actual Git merge -> machine state reconciliation.
+acceptance criteria satisfied -> exact-head evidence -> Architect gate -> actual Git merge -> state reconciliation.
 
 No Work Order becomes eligible because a branch exists or an agent claims readiness. Dependency eligibility requires authoritative merged Git evidence.
