@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sos://schema/implementation-model",
+  "type": "object",
+  "required": ["id","revision","components","source_artifacts","interfaces","dependencies","tests","builds","deployments","runtime_mappings"],
+  "properties": {
+    "id": {"type":"string"},
+    "revision": {"type":"string"},
+    "components": {"type":"array","items":{"$ref":"#/$defs/component"}},
+    "source_artifacts": {"type":"array","items":{"$ref":"#/$defs/sourceArtifact"}},
+    "interfaces": {"type":"array","items":{"$ref":"#/$defs/interface"}},
+    "dependencies": {"type":"array","items":{"$ref":"#/$defs/dependency"}},
+    "tests": {"type":"array","items":{"$ref":"#/$defs/test"}},
+    "builds": {"type":"array","items":{"$ref":"#/$defs/build"}},
+    "deployments": {"type":"array","items":{"$ref":"#/$defs/deployment"}},
+    "runtime_mappings": {"type":"array","items":{"$ref":"#/$defs/runtimeMapping"}}
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "component": {
+      "type": "object",
+      "required": ["id","kind","realized_by","realizes"],
+      "properties": {
+        "id": {"type":"string"},
+        "kind": {"type":"string"},
+        "realized_by": {"type":"array","items":{"type":"string"}},
+        "realizes": {"type":"array","items":{"type":"string"}}
+      },
+      "additionalProperties": false
+    },
+    "sourceArtifact": {
+      "type": "object",
+      "required": ["path","revision"],
+      "properties": {
+        "path": {"type":"string"},
+        "revision": {"type":"string"}
+      },
+      "additionalProperties": false
+    },
+    "interface": {
+      "type": "object",
+      "required": ["id","provider","contract_ref","consumers"],
+      "properties": {
+        "id": {"type":"string"},
+        "provider": {"type":"string"},
+        "contract_ref": {"type":["string","null"]},
+        "consumers": {"type":"array","items":{"type":"string"}}
+      },
+      "additionalProperties": false
+    },
+    "dependency": {
+      "type": "object",
+      "required": ["source","target","kind"],
+      "properties": {
+        "source": {"type":"string"},
+        "target": {"type":"string"},
+        "kind": {"type":"string"}
+      },
+      "additionalProperties": false
+    },
+    "test": {
+      "type": "object",
+      "required": ["id","subject","framework"],
+      "properties": {
+        "id": {"type":"string"},
+        "subject": {"type":"string"},
+        "framework": {"type":["string","null"]}
+      },
+      "additionalProperties": false
+    },
+    "build": {
+      "type": "object",
+      "required": ["id","source_revision","outputs","reproducible"],
+      "properties": {
+        "id": {"type":"string"},
+        "source_revision": {"type":"string"},
+        "outputs": {"type":"array","items":{"type":"string"}},
+        "reproducible": {"type":"boolean"}
+      },
+      "additionalProperties": false
+    },
+    "deployment": {
+      "type": "object",
+      "required": ["id","build_id","environment","revision"],
+      "properties": {
+        "id": {"type":"string"},
+        "build_id": {"type":"string"},
+        "environment": {"type":"string"},
+        "revision": {"type":"string"}
+      },
+      "additionalProperties": false
+    },
+    "runtimeMapping": {
+      "type": "object",
+      "required": ["id","component","runtime_ref","environment"],
+      "properties": {
+        "id": {"type":"string"},
+        "component": {"type":"string"},
+        "runtime_ref": {"type":"string"},
+        "environment": {"type":"string"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

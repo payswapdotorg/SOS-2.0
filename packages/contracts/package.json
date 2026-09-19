@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Normative SOS 2.0 contract types, aligned 1:1 with the JSON Schemas in spec/contracts/. Single source of semantic truth for the Semantic Spine.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./schema-loader": {
+      "types": "./dist/schema-loader.d.ts",
+      "default": "./dist/schema-loader.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "ajv": "^8.17.1",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

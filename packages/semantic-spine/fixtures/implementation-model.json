@@ -1,0 +1,52 @@
+{
+  "id": "sos://ImplementationModel/541b1845dff6ebfc15fef3ee55a508af",
+  "revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf",
+  "components": [
+    {
+      "id": "contracts",
+      "kind": "library",
+      "realized_by": ["packages/contracts/src/index.ts"],
+      "realizes": []
+    },
+    {
+      "id": "semantic-spine",
+      "kind": "library",
+      "realized_by": ["packages/semantic-spine/src/index.ts"],
+      "realizes": []
+    }
+  ],
+  "source_artifacts": [
+    { "path": "packages/contracts/src/index.ts", "revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf" },
+    { "path": "packages/semantic-spine/src/index.ts", "revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf" }
+  ],
+  "interfaces": [
+    {
+      "id": "iface:sos-contracts",
+      "provider": "contracts",
+      "contract_ref": "sos://schema/implementation-model",
+      "consumers": ["semantic-spine"]
+    }
+  ],
+  "dependencies": [
+    { "source": "semantic-spine", "target": "contracts", "kind": "uses" }
+  ],
+  "tests": [
+    { "id": "test:contract-fixtures", "subject": "semantic-spine", "framework": "vitest" }
+  ],
+  "builds": [
+    {
+      "id": "build:w0.5-contracts",
+      "source_revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf",
+      "outputs": ["packages/contracts/dist"],
+      "reproducible": true
+    },
+    {
+      "id": "build:w0.5-semantic-spine",
+      "source_revision": "5b0aea0386ee56f91e53ffa0e34e74a0da1682bf",
+      "outputs": ["packages/semantic-spine/dist"],
+      "reproducible": true
+    }
+  ],
+  "deployments": [],
+  "runtime_mappings": []
+}

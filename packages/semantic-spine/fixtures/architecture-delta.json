@@ -1,0 +1,14 @@
+{
+  "affected_artifacts": [
+    "sos://ImplementationModel/541b1845dff6ebfc15fef3ee55a508af",
+    "sos://ArchitectureGraph/1800df79750a147f861614a40840526c"
+  ],
+  "added": ["sos://ImplementationModel/541b1845dff6ebfc15fef3ee55a508af"],
+  "preserved_invariants": [
+    "typed-trace-classes-frozen-at-17",
+    "evidence-truth-states-remain-semantically-distinct"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/work-orders/W0.5-semantic-spine.md",
+  "work_order": "W0.5"
+}
