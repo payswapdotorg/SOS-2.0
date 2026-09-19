@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sos://schema/trace-link",
+  "type": "object",
+  "required": ["source", "target", "type"],
+  "properties": {
+    "source": {"type": "string"},
+    "target": {"type": "string"},
+    "type": {"enum": ["SATISFIES","REALIZES","REFINES","CONSTRAINS","IMPLEMENTS","VERIFIES","OBSERVES","SUPPORTS","CONTRADICTS","CAUSED_BY","CAUSED","DERIVED_FROM","COMPATIBLE_WITH","CONFLICTS_WITH","COMPOSES","SPECIALIZES","GENERALIZES"]},
+    "provenance": {"type": "array", "items": {"type": "string"}}
+  },
+  "additionalProperties": false
+}

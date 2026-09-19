@@ -1,0 +1,10 @@
+{
+  "name": "@sos-2/core",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.0.0",
+  "scripts": {
+    "verify:repo": "node scripts/verify-repo.mjs",
+    "test": "pnpm verify:repo"
+  }
+}

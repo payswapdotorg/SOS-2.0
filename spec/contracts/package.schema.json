@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sos://schema/package",
+  "type": "object",
+  "required": ["id","semantic_capability","contracts","maturity","evidence_refs"],
+  "properties": {
+    "id": {"type":"string"},
+    "semantic_capability": {"type":"string"},
+    "contracts": {"type":"array","items":{"type":"string"}},
+    "maturity": {"enum":["DISCOVERED","FORMING","VALIDATED","MATURE","CONTEXTUALIZED","SUPERSEDED","RETIRED"]},
+    "evidence_refs": {"type":"array","items":{"type":"string"}},
+    "failure_refs": {"type":"array","items":{"type":"string"}},
+    "compatibility_refs": {"type":"array","items":{"type":"string"}},
+    "composition_refs": {"type":"array","items":{"type":"string"}}
+  },
+  "additionalProperties": false
+}

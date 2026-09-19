@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "sos://schema/evidence",
+  "type": "object",
+  "required": ["id","kind","subject_ref","availability","provenance"],
+  "properties": {
+    "id": {"type":"string"},
+    "kind": {"type":"string"},
+    "subject_ref": {"type":"string"},
+    "availability": {"enum":["SUCCESS","FAILURE","UNKNOWN","UNAVAILABLE","UNSUPPORTED","PARTIAL"]},
+    "provenance": {"type":"array","items":{"type":"string"}},
+    "source_revision": {"type":["string","null"]},
+    "deployment_revision": {"type":["string","null"]},
+    "observational": {"type":"boolean"},
+    "intervention": {"type":"boolean"}
+  },
+  "additionalProperties": true
+}
