@@ -1,0 +1,91 @@
+{
+  "envelope": {
+    "id": "sos://PackageComposition/2030ae1a8921c2f8dc3d73dc562a17b7",
+    "kind": "PackageComposition",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W6:golden-composition-fixture"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "semantic_capability": "durable-semantic-store",
+    "contracts": [
+      "contract:durable-spine-store/v1"
+    ],
+    "members": [
+      {
+        "package_id": "sos://Package/7f8e6f3257bd8625b2082cb4476a1d6b",
+        "role": "spine",
+        "bound_contracts": [
+          "sos://schema/trace-link"
+        ]
+      },
+      {
+        "package_id": "sos://Package/1083cc7f1c07fa258e7264b25ebed062",
+        "role": "store",
+        "bound_contracts": [
+          "contract:durable-store/v1"
+        ]
+      }
+    ],
+    "bindings": [
+      {
+        "kind": "PROVIDES_TO",
+        "source_role": "spine",
+        "target_role": "store",
+        "contract": "contract:durable-spine-store/v1",
+        "wiring": {
+          "channel": "artifact-write-through",
+          "durability": "strong"
+        }
+      }
+    ],
+    "preconditions": [
+      "a spine artifact registry is reachable"
+    ],
+    "postconditions": [
+      "artifacts are durably persisted with stable spine identities"
+    ],
+    "applicability": [
+      {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED",
+        "context": {
+          "tier": "durable"
+        },
+        "sample_size": 0,
+        "window": null
+      }
+    ],
+    "evidence_refs": [],
+    "failure_refs": [],
+    "compatibility_refs": [],
+    "assurance_obligations": [
+      {
+        "kind": "REPLAY",
+        "obligation": "the composed store replays a full artifact chain after restart"
+      }
+    ],
+    "context": {
+      "tier": "durable"
+    },
+    "learned_limitations": [],
+    "diversity_profile": {
+      "family": "write-through-store",
+      "dimensions": [
+        {
+          "dimension": "RESILIENCE",
+          "stance": "strong durability, higher write latency"
+        }
+      ]
+    },
+    "maturity": "FORMING",
+    "independence": [],
+    "changes": "initial composition hypothesis (W6 golden fixture)",
+    "superseded_by": null
+  }
+}
