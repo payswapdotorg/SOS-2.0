@@ -3,9 +3,9 @@
   "program": "SOS-2.0",
   "status": "ACTIVE",
   "currentFrontier": [
-    "W16"
+    "W17"
   ],
-  "currentTask": "W14+W15 (W16 unlocks on W15; W17 endgame after)",
+  "currentTask": "W17 (dogfood + adversarial evidence; W18 final architect gate after)",
   "tasks": {
     "W0": {
       "status": "BOOTSTRAP_COMPLETE",
@@ -156,17 +156,17 @@
       "mergedAs": "d0d01936360407d8a1127f15fd98251eaf7ccfe3"
     },
     "W16": {
-      "status": "ELIGIBLE",
+      "status": "COMPLETE",
       "dependencies": [
         "W9",
         "W10",
         "W13",
         "W15"
       ],
-      "mergedAs": null
+      "mergedAs": "d89d6dce3b942eeb9415879a0ce571d17faa14d2"
     },
     "W17": {
-      "status": "BLOCKED",
+      "status": "ELIGIBLE",
       "dependencies": [
         "W11",
         "W12",
