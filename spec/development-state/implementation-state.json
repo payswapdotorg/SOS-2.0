@@ -2,28 +2,187 @@
   "schemaVersion": "2.0",
   "program": "SOS-2.0",
   "status": "ACTIVE",
-  "currentFrontier": ["W14", "W15"],
+  "currentFrontier": [
+    "W15"
+  ],
   "currentTask": "W14+W15 (W16 unlocks on W15; W17 endgame after)",
   "tasks": {
-    "W0": {"status": "BOOTSTRAP_COMPLETE", "dependencies": [], "mergedAs": "INITIAL_BOOTSTRAP"},
-    "W0.5": {"status": "COMPLETE", "dependencies": ["W0"], "mergedAs": "adf3156c904a7fbbb3214a2036396ec5a1d67212"},
-    "W1": {"status": "COMPLETE", "dependencies": ["W0.5"], "mergedAs": "645f5a582ea296c5ad446ff31c7956437378e529"},
-    "W2": {"status": "COMPLETE", "dependencies": ["W0.5"], "mergedAs": "cc9354aca1570704a3ad4d3e287874967c10c28b"},
-    "W3": {"status": "COMPLETE", "dependencies": ["W0.5"], "mergedAs": "615dd7ff73fcb7c7b15237bd110e66d44792aa54"},
-    "W4": {"status": "COMPLETE", "dependencies": ["W2", "W3"], "mergedAs": "19f71220fbd32ce9f397d46d3e9b2d8cd228b893"},
-    "W5": {"status": "COMPLETE", "dependencies": ["W1", "W3"], "mergedAs": "4ab276bc9afe8de33ae507c057f0257e3ccae9ca"},
-    "W6": {"status": "COMPLETE", "dependencies": ["W1", "W2", "W3"], "mergedAs": "43297a549b81f9d6f6d9cc60c0d5a6998d799fa0"},
-    "W7": {"status": "COMPLETE", "dependencies": ["W4", "W5", "W6"], "mergedAs": "8483027586ed88d7372d2906149fc89cb63fafc3"},
-    "W8": {"status": "COMPLETE", "dependencies": ["W2", "W3"], "mergedAs": "ce26a8b085f1d74675928db2c2fab6efccb76f54"},
-    "W9": {"status": "COMPLETE", "dependencies": ["W2", "W3", "W6"], "mergedAs": "72ff4570dc3267a266566471ea63aeb529a8f891"},
-    "W10": {"status": "COMPLETE", "dependencies": ["W1", "W8", "W9"], "mergedAs": "97ff90a615272f28dac62ac7360595f2312df204"},
-    "W11": {"status": "COMPLETE", "dependencies": ["W1", "W2", "W8", "W10"], "mergedAs": "5880f2662acf3de6e3068c2419106d7cb7fecb73"},
-    "W12": {"status": "COMPLETE", "dependencies": ["W2", "W3", "W8", "W10"], "mergedAs": "2a8ce564cd100192510c2bfacc4eac8b327495c7"},
-    "W13": {"status": "COMPLETE", "dependencies": ["W5", "W6", "W7"], "mergedAs": "f6bcd2901b71192ce913f09193012122b5f056a9"},
-    "W14": {"status": "ELIGIBLE", "dependencies": ["W1", "W2", "W6", "W10", "W11", "W12"], "mergedAs": null},
-    "W15": {"status": "ELIGIBLE", "dependencies": ["W4", "W5", "W7", "W8", "W9", "W10", "W12", "W13"], "mergedAs": null},
-    "W16": {"status": "BLOCKED", "dependencies": ["W9", "W10", "W13", "W15"], "mergedAs": null},
-    "W17": {"status": "BLOCKED", "dependencies": ["W11", "W12", "W13", "W14", "W15", "W16"], "mergedAs": null},
-    "W18": {"status": "BLOCKED", "dependencies": ["W17"], "mergedAs": null}
+    "W0": {
+      "status": "BOOTSTRAP_COMPLETE",
+      "dependencies": [],
+      "mergedAs": "INITIAL_BOOTSTRAP"
+    },
+    "W0.5": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W0"
+      ],
+      "mergedAs": "adf3156c904a7fbbb3214a2036396ec5a1d67212"
+    },
+    "W1": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W0.5"
+      ],
+      "mergedAs": "645f5a582ea296c5ad446ff31c7956437378e529"
+    },
+    "W2": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W0.5"
+      ],
+      "mergedAs": "cc9354aca1570704a3ad4d3e287874967c10c28b"
+    },
+    "W3": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W0.5"
+      ],
+      "mergedAs": "615dd7ff73fcb7c7b15237bd110e66d44792aa54"
+    },
+    "W4": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W2",
+        "W3"
+      ],
+      "mergedAs": "19f71220fbd32ce9f397d46d3e9b2d8cd228b893"
+    },
+    "W5": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W1",
+        "W3"
+      ],
+      "mergedAs": "4ab276bc9afe8de33ae507c057f0257e3ccae9ca"
+    },
+    "W6": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W1",
+        "W2",
+        "W3"
+      ],
+      "mergedAs": "43297a549b81f9d6f6d9cc60c0d5a6998d799fa0"
+    },
+    "W7": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W4",
+        "W5",
+        "W6"
+      ],
+      "mergedAs": "8483027586ed88d7372d2906149fc89cb63fafc3"
+    },
+    "W8": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W2",
+        "W3"
+      ],
+      "mergedAs": "ce26a8b085f1d74675928db2c2fab6efccb76f54"
+    },
+    "W9": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W2",
+        "W3",
+        "W6"
+      ],
+      "mergedAs": "72ff4570dc3267a266566471ea63aeb529a8f891"
+    },
+    "W10": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W1",
+        "W8",
+        "W9"
+      ],
+      "mergedAs": "97ff90a615272f28dac62ac7360595f2312df204"
+    },
+    "W11": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W1",
+        "W2",
+        "W8",
+        "W10"
+      ],
+      "mergedAs": "5880f2662acf3de6e3068c2419106d7cb7fecb73"
+    },
+    "W12": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W2",
+        "W3",
+        "W8",
+        "W10"
+      ],
+      "mergedAs": "2a8ce564cd100192510c2bfacc4eac8b327495c7"
+    },
+    "W13": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W5",
+        "W6",
+        "W7"
+      ],
+      "mergedAs": "f6bcd2901b71192ce913f09193012122b5f056a9"
+    },
+    "W14": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "W1",
+        "W2",
+        "W6",
+        "W10",
+        "W11",
+        "W12"
+      ],
+      "mergedAs": "e5fcec0d76973ad6b999e54014e09bbacc882f01"
+    },
+    "W15": {
+      "status": "ELIGIBLE",
+      "dependencies": [
+        "W4",
+        "W5",
+        "W7",
+        "W8",
+        "W9",
+        "W10",
+        "W12",
+        "W13"
+      ],
+      "mergedAs": null
+    },
+    "W16": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "W9",
+        "W10",
+        "W13",
+        "W15"
+      ],
+      "mergedAs": null
+    },
+    "W17": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "W11",
+        "W12",
+        "W13",
+        "W14",
+        "W15",
+        "W16"
+      ],
+      "mergedAs": null
+    },
+    "W18": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "W17"
+      ],
+      "mergedAs": null
+    }
   }
 }
