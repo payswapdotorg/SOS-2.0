@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/autonomy",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Autonomy Policy (Work Order W10): the frozen autonomy level ladder (SUPERVISED, BOUNDED, AUTONOMOUS_LOW_RISK) scoped per action kind x blast radius; scoped authority enforcement through @sos-2/authority grant evaluation (an action requiring level L is permitted only with a currently-valid grant covering it; expired/revoked/insufficient -> DENIED with a structured reason); the risk x irreversibility escalation matrix (high-risk + low-reversibility escalate to ASK regardless of confidence — confidence is not authorization); and GOVERNED autonomy raises (raising an action's autonomy level requires an explicit authority grant for the raise itself — silent raises are rejected; raises never outlive their authorizing grant) (spec/architecture.md sections 3, 5, 18; spec/requirements.md R15; spec/architecture-lock.md forbidden shortcuts 'confidence alone authorizing risky changes' and 'unauthorized autonomy increases').",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

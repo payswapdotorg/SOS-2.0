@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/decision",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Decision Engine (Work Order W10): evaluate(request) -> DecisionRecord where the outcome is EXACTLY one of the frozen six (ACT, EXPERIMENT, GATHER_EVIDENCE, ASK, REJECT, ROLLBACK — consumed from @sos-2/authority's DECISION_ACTIONS, never redefined). Typed decision inputs: proposed action, evidence set, authority grants, uncertainty, impact, risk, reversibility, blast radius. Every DecisionRecord is REPRODUCIBLE: it carries the exact input digest (canonical hash over the request) and the ordered rule trace; re-evaluation of the same input yields the byte-identical record. Rule ordering is explicit and deterministic — authority first, then safety, then evidence (then uncertainty). Authority and the risk x irreversibility matrix are delegated to @sos-2/autonomy (the W10 autonomy policy); evidence classification and freshness to @sos-2/evidence (the merged W3 authority). Confidence is carried but NEVER consulted for authorization (spec/architecture.md sections 3, 5, 18; spec/requirements.md R15, R16, R30; spec/architecture-lock.md).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
