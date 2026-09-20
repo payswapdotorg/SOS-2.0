@@ -1,0 +1,31 @@
+{
+  "affected_artifacts": [
+    "packages/ui-contracts",
+    "apps/console"
+  ],
+  "added": [
+    "packages/ui-contracts (@sos-2/ui-contracts): the W11 view-model contracts — typed projections of domain records for display (MissionVM, SystemStateVM, ReconciliationVM, EvidenceVM, CandidateComparisonVM, AssuranceVM, ExperimentVM, AskVM, RollbackVM, PackageVM/RepertoireVM, HistoryVM, MetaStateVM), every consequential view-model carrying an upstream/downstream RationaleChain of typed spine trace links (17 frozen types, direction typology documented) plus exact evidence refs; pure types + pure projection functions, deterministic and canonical (canonical serialization/hashing over the spine serializer), zero DOM dependencies; view-model validators reject projections that drop truth states, uncertainty or provenance, and rationale chains without trace links",
+    "apps/console (@sos-2/console): the runnable Human Console — a minimal node:http server rendering semantic HTML from @sos-2/ui-contracts view-models, exposing the twelve W11 journeys (mission onboarding with create-Mission-through-domain-types, system import with paste-an-ImplementationModel, architecture/reality reconciliation, evidence investigation with subject/truth-state queries, candidate comparison, assurance review, experiment monitoring, the structured ASK view, rollback/recovery declaration, package discovery/composition repertoire, architecture history supersedes chains, read-only self-evolution review) plus a rationale chain page for every displayed decision; deterministic (no hidden state, no hidden clocks — same fixture renders byte-identical pages, pinned by golden fixture + golden hash tests); standalone demo fixture built exclusively through the domain packages' own builders (mission store revision, system-state store supersede, architecture graph lifecycle, evidence creation, living assurance evaluation, experiment simulation with fixed seed, the W10 decision engine, ASK composition/context assembly, the promotion gate, recovery declarations, the package registry put/promote/retrieve, typed trace links); zero domain logic of its own — an import-only static test rejects any local redefinition of the frozen domain vocabulary and any import outside @sos-2/*, node builtins and app modules",
+    "packages/ui-contracts/W11.architecture-delta.json: this Architecture Delta record"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the Semantic Spine remains the ONLY identity/envelope/trace authority: @sos-2/ui-contracts and @sos-2/console import minters, envelopes, trace links, vocabularies and validators from the workspace packages; no second semantic registry, no duplicated envelope logic, no invented core identifiers (the console's import-only test pins it)",
+    "the 17 typed trace link classes are frozen and unchanged; the RationaleChain direction typology only CLASSIFIES the frozen types (DEPENDENT vs ACTING) — it never renames, extends or reinterprets them",
+    "the 6 evidence truth states remain semantically distinct: view-models that drop or fold truth states are REJECTED (row-level availability from the frozen vocabulary + set-level counts carrying ALL 6 keys), and the console displays each state distinctly",
+    "evidence provenance and uncertainty are never dropped: every EvidenceRowVM carries the full provenance array, the producer, the explicit truth-state assignment method, the LLM-output mark and the Confidence mark (calibrated only with a calibration ref)",
+    "no frozen contract in spec/contracts/ was modified; spec/, docs/, root files and sibling-owned paths are untouched — all W11 changes are additive under the two owned paths (apps/console, packages/ui-contracts); pnpm-workspace.yaml already included apps/*",
+    "decision/ASK semantics are consumed, never redefined: the console renders the frozen six decision actions and the W10 ASK contract verbatim; ASK is displayed as the first-class success state it is",
+    "packages and compositions keep their evidence discipline: the demo fixture registers VALIDATED packages through the registry's own gates and validates the composition through the documented form → cite-own-evidence → promote workflow; the repertoire view never collapses diversity families into a single winner",
+    "promotion remains evidence gated in the domain layer: the console's ACT decision comes from @sos-2/promotion's gate with real interventional evidence, while the simulated experiment run stays honestly marked as evaluation infrastructure (never evidence)",
+    "self-evolution stays read-only: the MetaStateVM is a pure projection of the machine-state snapshot; the console can observe SOS self-evolution but never steer it"
+  ],
+  "boundary_changes": [
+    "new workspace package @sos-2/ui-contracts (runtime dependencies: the workspace domain packages whose types/functions it projects — semantic-spine, mission, system-state, architecture, conformance, evidence, assurance, experiments, promotion, registry, recovery-control, ask, decision, authority, provenance; test-only devDependency: packages)",
+    "new workspace app @sos-2/console (runtime dependencies: @sos-2/ui-contracts plus the domain packages it drives for the interactive journeys; no third-party runtime dependencies — plain node:http + node:fs + node:crypto)",
+    "no changes to any other package, spec file or root configuration"
+  ],
+  "rationale_ref": "spec/work-orders/W11-console.md",
+  "work_order": "W11"
+}

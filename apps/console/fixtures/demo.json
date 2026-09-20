@@ -1,0 +1,3446 @@
+{
+  "now": "2025-06-15T12:00:00Z",
+  "constitution_id": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+  "baseline_graph_id": "sos://ArchitectureGraph/0ff5594347f593a25326e06e0c242a50",
+  "missions": [
+    {
+      "envelope": {
+        "id": "sos://Mission/95f46deea816717627a018cf442fd260",
+        "kind": "Mission",
+        "version": 1,
+        "status": "SUPERSEDED",
+        "authority_ref": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "mission:onboarding-workshop-2025-05"
+        ],
+        "created_at": "2025-05-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "purpose": "Make checkout continuously better for shoppers while keeping operating costs predictable.",
+        "goals": [
+          {
+            "id": "goal-reliability",
+            "statement": "Keep checkout reliable under peak load",
+            "status": "MEASURABLE",
+            "measures": [
+              "measure-uptime"
+            ]
+          }
+        ],
+        "outcomes": [
+          {
+            "id": "outcome-stable-checkout",
+            "description": "Shoppers complete checkout without incidents",
+            "goal_refs": [
+              "goal-reliability"
+            ]
+          }
+        ],
+        "stakeholders": [
+          {
+            "id": "stakeholder-shoppers",
+            "name": "Shoppers",
+            "interest": "Fast, reliable checkout"
+          },
+          {
+            "id": "stakeholder-finance",
+            "name": "Finance",
+            "interest": "Predictable monthly cost"
+          }
+        ],
+        "measures": [
+          {
+            "id": "measure-uptime",
+            "description": "Monthly checkout uptime",
+            "target": ">= 99.9%",
+            "unit": "percent"
+          }
+        ],
+        "assumptions": [
+          {
+            "id": "assumption-load-growth",
+            "statement": "Traffic grows at most 2x year over year"
+          }
+        ],
+        "ambiguities": [
+          {
+            "id": "ambiguity-regions",
+            "statement": "Which regions matter first?",
+            "resolution": null
+          }
+        ],
+        "constraints": [
+          {
+            "id": "constraint-cost",
+            "statement": "Monthly infrastructure cost stays within budget",
+            "hard": true,
+            "bound": {
+              "axis": "monthly-cost",
+              "direction": "MAX",
+              "limit": 8000
+            }
+          }
+        ]
+      }
+    },
+    {
+      "envelope": {
+        "id": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+        "kind": "Mission",
+        "version": 2,
+        "status": "ACTIVE",
+        "authority_ref": "sos://AuthorityGrant/8b33f8878a3c87a49a60eba513f8425c",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "mission:revision-latency-goal"
+        ],
+        "created_at": "2025-05-20T00:00:00Z",
+        "supersedes": "sos://Mission/95f46deea816717627a018cf442fd260"
+      },
+      "content": {
+        "purpose": "Make checkout continuously better for EU shoppers first, with measurable cost and latency budgets.",
+        "goals": [
+          {
+            "id": "goal-reliability",
+            "statement": "Keep checkout reliable under peak load",
+            "status": "MEASURABLE",
+            "measures": [
+              "measure-uptime"
+            ]
+          },
+          {
+            "id": "goal-latency",
+            "statement": "Reduce checkout p95 latency below 250ms in the EU region",
+            "status": "MEASURABLE",
+            "measures": [
+              "measure-p95",
+              "measure-cost"
+            ]
+          }
+        ],
+        "outcomes": [
+          {
+            "id": "outcome-stable-checkout",
+            "description": "Shoppers complete checkout without incidents",
+            "goal_refs": [
+              "goal-reliability"
+            ]
+          },
+          {
+            "id": "outcome-fast-checkout",
+            "description": "EU shoppers experience fast checkout",
+            "goal_refs": [
+              "goal-latency"
+            ]
+          }
+        ],
+        "stakeholders": [
+          {
+            "id": "stakeholder-shoppers",
+            "name": "Shoppers",
+            "interest": "Fast, reliable checkout"
+          },
+          {
+            "id": "stakeholder-finance",
+            "name": "Finance",
+            "interest": "Predictable monthly cost"
+          },
+          {
+            "id": "stakeholder-eu-compliance",
+            "name": "EU compliance",
+            "interest": "Regional data handling"
+          }
+        ],
+        "measures": [
+          {
+            "id": "measure-uptime",
+            "description": "Monthly checkout uptime",
+            "target": ">= 99.9%",
+            "unit": "percent"
+          },
+          {
+            "id": "measure-p95",
+            "description": "EU checkout p95 latency",
+            "target": "<= 250",
+            "unit": "milliseconds"
+          },
+          {
+            "id": "measure-cost",
+            "description": "Monthly infrastructure cost",
+            "target": "<= 8000",
+            "unit": "euros"
+          }
+        ],
+        "assumptions": [
+          {
+            "id": "assumption-load-growth",
+            "statement": "Traffic grows at most 2x year over year"
+          }
+        ],
+        "ambiguities": [
+          {
+            "id": "ambiguity-regions",
+            "statement": "Which regions matter first?",
+            "resolution": "Resolved: EU first (this revision)"
+          }
+        ],
+        "constraints": [
+          {
+            "id": "constraint-cost",
+            "statement": "Monthly infrastructure cost stays within budget",
+            "hard": true,
+            "bound": {
+              "axis": "monthly-cost",
+              "direction": "MAX",
+              "limit": 8000
+            }
+          },
+          {
+            "id": "constraint-latency",
+            "statement": "EU checkout p95 latency stays within the declared budget",
+            "hard": true,
+            "bound": {
+              "axis": "p95-latency",
+              "direction": "MAX",
+              "limit": 250
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "graphs": [
+    {
+      "envelope": {
+        "id": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49",
+        "kind": "ArchitectureGraph",
+        "version": 1,
+        "status": "SUPERSEDED",
+        "authority_ref": "sos://Mission/95f46deea816717627a018cf442fd260",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "architecture:recovered-from-legacy"
+        ],
+        "created_at": "2025-05-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "projects_system_state": {
+          "system_state_id": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25",
+          "version": 1
+        },
+        "nodes": [
+          {
+            "id": "capability:checkout",
+            "kind": "Capability",
+            "criticality": "normal",
+            "attributes": {
+              "name": "checkout"
+            }
+          },
+          {
+            "id": "component:checkout-api",
+            "kind": "Component",
+            "criticality": "normal",
+            "attributes": {
+              "runtime": "node"
+            }
+          },
+          {
+            "id": "component:payment-service",
+            "kind": "Component",
+            "criticality": "critical",
+            "attributes": {
+              "runtime": "jvm"
+            }
+          },
+          {
+            "id": "deploy:production",
+            "kind": "Deployment",
+            "criticality": "normal",
+            "attributes": {
+              "region": "eu-west-1"
+            }
+          },
+          {
+            "id": "iface:checkout-api",
+            "kind": "Interface",
+            "criticality": "normal",
+            "attributes": {
+              "protocol": "https"
+            }
+          },
+          {
+            "id": "store:orders",
+            "kind": "DataStore",
+            "criticality": "normal",
+            "attributes": {
+              "engine": "postgres"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "source": "component:checkout-api",
+            "target": "capability:checkout",
+            "kind": "Realizes",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "component:payment-service",
+            "kind": "Dependency",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "deploy:production",
+            "kind": "DeploysTo",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "iface:checkout-api",
+            "kind": "Provides",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "store:orders",
+            "kind": "Owns",
+            "criticality": "critical",
+            "attributes": {}
+          },
+          {
+            "source": "component:payment-service",
+            "target": "deploy:production",
+            "kind": "DeploysTo",
+            "criticality": "normal",
+            "attributes": {}
+          }
+        ]
+      }
+    },
+    {
+      "envelope": {
+        "id": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+        "kind": "ArchitectureGraph",
+        "version": 2,
+        "status": "ACTIVE",
+        "authority_ref": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "architecture:edge-cache-hypothesis"
+        ],
+        "created_at": "2025-06-01T00:00:00Z",
+        "supersedes": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49"
+      },
+      "content": {
+        "projects_system_state": {
+          "system_state_id": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+          "version": 2
+        },
+        "nodes": [
+          {
+            "id": "capability:checkout",
+            "kind": "Capability",
+            "criticality": "normal",
+            "attributes": {
+              "name": "checkout"
+            }
+          },
+          {
+            "id": "component:checkout-api",
+            "kind": "Component",
+            "criticality": "normal",
+            "attributes": {
+              "runtime": "node"
+            }
+          },
+          {
+            "id": "component:payment-service",
+            "kind": "Component",
+            "criticality": "critical",
+            "attributes": {
+              "runtime": "jvm"
+            }
+          },
+          {
+            "id": "component:render-cache",
+            "kind": "Component",
+            "criticality": "normal",
+            "attributes": {
+              "runtime": "edge"
+            }
+          },
+          {
+            "id": "deploy:production",
+            "kind": "Deployment",
+            "criticality": "normal",
+            "attributes": {
+              "region": "eu-west-1"
+            }
+          },
+          {
+            "id": "iface:checkout-api",
+            "kind": "Interface",
+            "criticality": "normal",
+            "attributes": {
+              "protocol": "https"
+            }
+          },
+          {
+            "id": "policy:gdpr",
+            "kind": "Policy",
+            "criticality": "normal",
+            "attributes": {
+              "jurisdiction": "EU"
+            }
+          },
+          {
+            "id": "store:orders",
+            "kind": "DataStore",
+            "criticality": "normal",
+            "attributes": {
+              "engine": "postgres"
+            }
+          }
+        ],
+        "edges": [
+          {
+            "source": "component:checkout-api",
+            "target": "capability:checkout",
+            "kind": "Realizes",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "component:payment-service",
+            "kind": "Dependency",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "deploy:production",
+            "kind": "DeploysTo",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "iface:checkout-api",
+            "kind": "Provides",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:checkout-api",
+            "target": "store:orders",
+            "kind": "Owns",
+            "criticality": "critical",
+            "attributes": {}
+          },
+          {
+            "source": "component:payment-service",
+            "target": "deploy:production",
+            "kind": "DeploysTo",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:render-cache",
+            "target": "capability:checkout",
+            "kind": "Realizes",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "component:render-cache",
+            "target": "store:orders",
+            "kind": "Dependency",
+            "criticality": "normal",
+            "attributes": {}
+          },
+          {
+            "source": "policy:gdpr",
+            "target": "store:orders",
+            "kind": "Constrains",
+            "criticality": "normal",
+            "attributes": {}
+          }
+        ]
+      }
+    }
+  ],
+  "system_states": [
+    {
+      "envelope": {
+        "id": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25",
+        "kind": "SystemState",
+        "version": 1,
+        "status": "SUPERSEDED",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "system-state:legacy-import"
+        ],
+        "created_at": "2025-05-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "architecture_ref": {
+          "artifact_id": "sos://ArchitectureGraph/0ff5594347f593a25326e06e0c242a50",
+          "version": 1
+        },
+        "implementation": [
+          {
+            "artifact_id": "sos://ImplementationModel/bd5cdc3b92a182a2914f8625369d2d3d",
+            "revision": {
+              "kind": "git-sha",
+              "value": "0000000000000000000000000000000000000001"
+            }
+          }
+        ],
+        "configuration": [],
+        "deployment": [
+          {
+            "deployment_id": "deploy:checkout-prod-legacy",
+            "environment": "production",
+            "revision": {
+              "kind": "deployment-id",
+              "value": "deploy:checkout-prod-legacy"
+            }
+          }
+        ],
+        "policy": [],
+        "environment_relationships": [],
+        "active_experiments": [],
+        "package_realizations": []
+      }
+    },
+    {
+      "envelope": {
+        "id": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+        "kind": "SystemState",
+        "version": 2,
+        "status": "SUPERSEDED",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "system-state:observed-2025-05-20"
+        ],
+        "created_at": "2025-05-20T00:00:00Z",
+        "supersedes": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25"
+      },
+      "content": {
+        "architecture_ref": {
+          "artifact_id": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49",
+          "version": 1
+        },
+        "implementation": [
+          {
+            "artifact_id": "sos://ImplementationModel/6a9f6dd05e36deaa097615e4fa71b792",
+            "revision": {
+              "kind": "git-sha",
+              "value": "1111111111111111111111111111111111111111"
+            }
+          }
+        ],
+        "configuration": [
+          {
+            "config_id": "checkout-config",
+            "revision": {
+              "kind": "config-version",
+              "value": "v41"
+            }
+          }
+        ],
+        "deployment": [
+          {
+            "deployment_id": "deploy:checkout-prod-2025-05",
+            "environment": "production",
+            "revision": {
+              "kind": "deployment-id",
+              "value": "deploy:checkout-prod-2025-05"
+            }
+          }
+        ],
+        "policy": [
+          {
+            "policy_id": "deployment-policy",
+            "version": 3
+          }
+        ],
+        "environment_relationships": [
+          {
+            "source": "staging",
+            "target": "production",
+            "kind": "promotes-to"
+          }
+        ],
+        "active_experiments": [],
+        "package_realizations": []
+      }
+    },
+    {
+      "envelope": {
+        "id": "sos://SystemState/5804c3002feeb804681319da72290857",
+        "kind": "SystemState",
+        "version": 3,
+        "status": "ACTIVE",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "system-state:current-observed"
+        ],
+        "created_at": "2025-06-01T00:00:00Z",
+        "supersedes": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1"
+      },
+      "content": {
+        "architecture_ref": {
+          "artifact_id": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+          "version": 2
+        },
+        "implementation": [
+          {
+            "artifact_id": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+            "revision": {
+              "kind": "git-sha",
+              "value": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+            }
+          }
+        ],
+        "configuration": [
+          {
+            "config_id": "checkout-config",
+            "revision": {
+              "kind": "config-version",
+              "value": "v42"
+            }
+          }
+        ],
+        "deployment": [
+          {
+            "deployment_id": "deploy:checkout-prod-2025-06-01",
+            "environment": "production",
+            "revision": {
+              "kind": "deployment-id",
+              "value": "deploy:checkout-prod-2025-06-01"
+            }
+          }
+        ],
+        "policy": [
+          {
+            "policy_id": "deployment-policy",
+            "version": 4
+          }
+        ],
+        "environment_relationships": [
+          {
+            "source": "staging",
+            "target": "production",
+            "kind": "promotes-to"
+          },
+          {
+            "source": "production",
+            "target": "production-dr",
+            "kind": "mirrors"
+          }
+        ],
+        "active_experiments": [
+          {
+            "experiment_id": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+            "environment": "production"
+          }
+        ],
+        "package_realizations": [
+          {
+            "package_id": "sos://Package/015fd901223467c906e636da56def541",
+            "version": "1",
+            "realized_by": [
+              "component:checkout-api"
+            ]
+          },
+          {
+            "package_id": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+            "version": "1",
+            "realized_by": [
+              "component:render-cache"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "observed_model": {
+    "id": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+    "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+    "components": [
+      {
+        "id": "component:checkout-api",
+        "kind": "service",
+        "realized_by": [
+          "src/checkout/api.ts",
+          "src/checkout/routes.ts"
+        ],
+        "realizes": [
+          "component:checkout-api"
+        ]
+      },
+      {
+        "id": "component:payment-service",
+        "kind": "service",
+        "realized_by": [
+          "src/payment/service.ts"
+        ],
+        "realizes": [
+          "component:payment-service"
+        ]
+      },
+      {
+        "id": "component:render-cache",
+        "kind": "service",
+        "realized_by": [
+          "src/edge/cache.ts"
+        ],
+        "realizes": [
+          "component:render-cache"
+        ]
+      },
+      {
+        "id": "component:audit-log",
+        "kind": "library",
+        "realized_by": [
+          "src/audit/log.ts"
+        ],
+        "realizes": []
+      }
+    ],
+    "source_artifacts": [
+      {
+        "path": "src/checkout/api.ts",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      },
+      {
+        "path": "src/checkout/routes.ts",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      },
+      {
+        "path": "src/payment/service.ts",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      },
+      {
+        "path": "src/edge/cache.ts",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      },
+      {
+        "path": "src/audit/log.ts",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      }
+    ],
+    "interfaces": [
+      {
+        "id": "iface:checkout-api",
+        "provider": "component:checkout-api",
+        "contract_ref": null,
+        "consumers": [
+          "component:payment-service"
+        ]
+      }
+    ],
+    "dependencies": [
+      {
+        "source": "component:checkout-api",
+        "target": "component:payment-service",
+        "kind": "uses"
+      },
+      {
+        "source": "component:checkout-api",
+        "target": "component:render-cache",
+        "kind": "uses"
+      },
+      {
+        "source": "component:render-cache",
+        "target": "store:orders",
+        "kind": "reads"
+      },
+      {
+        "source": "component:checkout-api",
+        "target": "component:audit-log",
+        "kind": "imports"
+      }
+    ],
+    "tests": [
+      {
+        "id": "test:checkout-api",
+        "subject": "component:checkout-api",
+        "framework": "vitest"
+      },
+      {
+        "id": "test:render-cache",
+        "subject": "component:render-cache",
+        "framework": "vitest"
+      }
+    ],
+    "builds": [
+      {
+        "id": "build:checkout-2025-06-01",
+        "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+        "outputs": [
+          "dist/checkout"
+        ],
+        "reproducible": true
+      }
+    ],
+    "deployments": [
+      {
+        "id": "deploy:checkout-prod-2025-06-01",
+        "build_id": "build:checkout-2025-06-01",
+        "environment": "production",
+        "revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+      }
+    ],
+    "runtime_mappings": [
+      {
+        "id": "rt:checkout-api",
+        "component": "component:checkout-api",
+        "runtime_ref": "proc:checkout-api",
+        "environment": "production"
+      },
+      {
+        "id": "rt:render-cache",
+        "component": "component:render-cache",
+        "runtime_ref": "cdn:edge-cache",
+        "environment": "production"
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "id": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+      "kind": "rollback-rehearsal",
+      "subject_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:rollback-rehearsal"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "rehearsal:executed-and-timed",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "STRONG"
+      },
+      "producer": {
+        "tool": "rehearsal-runner",
+        "tool_version": "2.0.0",
+        "model": null,
+        "model_version": null,
+        "command": "rehearsal run checkout-rollback",
+        "environment": "staging"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/17dd4f7631487eef3767c37cc13bf01e",
+      "kind": "telemetry",
+      "subject_ref": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:uptime-telemetry"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "STRONG"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/38018133f31a8dc83e57436c05f59d7e",
+      "kind": "telemetry",
+      "subject_ref": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "availability": "UNSUPPORTED",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:guardrail-telemetry-unsupported"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd",
+      "kind": "telemetry",
+      "subject_ref": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:legacy-adapter-zero-usage"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/41f9f69a22fe01338c412acc9ea4ebf4",
+      "kind": "load-test",
+      "subject_ref": "sos://ImplementationModel/c0630253104d1030c2d356adaa898a07",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:cache-load-test"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "load-test:threshold-check",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "STRONG"
+      },
+      "producer": {
+        "tool": "vitest",
+        "tool_version": "3.0.0",
+        "model": null,
+        "model_version": null,
+        "command": "pnpm -r test",
+        "environment": "ci:github-actions:ubuntu-24.04"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/4f31a15858c89e3ba5f4ab9dbe7cd5bb",
+      "kind": "incident-report",
+      "subject_ref": "sos://ImplementationModel/c0630253104d1030c2d356adaa898a07",
+      "availability": "FAILURE",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:cache-cold-start-incident"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "incident:postmortem",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/547892dc9c0d1389402c8068ea3fde22",
+      "kind": "integration-test",
+      "subject_ref": "sos://ImplementationModel/3fc6b07bad14da0e043c825a64e4b772",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:queue-integration-test"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "test-run:exit-code",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "STRONG"
+      },
+      "producer": {
+        "tool": "vitest",
+        "tool_version": "3.0.0",
+        "model": null,
+        "model_version": null,
+        "command": "pnpm -r test",
+        "environment": "ci:github-actions:ubuntu-24.04"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/582f687089e0ba79cfd3392440490b38",
+      "kind": "composed-system-canary",
+      "subject_ref": "sos://PackageComposition/a4be9c6949ee3f290b597ea901ddb162",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:composition-own-evidence-2"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "composition:canary-comparison",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/5da882fa3cd98fd9e595785467117d94",
+      "kind": "shadow-observation",
+      "subject_ref": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+      "availability": "UNKNOWN",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:cache-shadow-unknown"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "shadow:pending-analysis",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/69c02dd1669761c6f3e9c9ef7bc65c5a",
+      "kind": "telemetry",
+      "subject_ref": "sos://ImplementationModel/c0630253104d1030c2d356adaa898a07",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:cache-telemetry"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+      "kind": "canary-observation",
+      "subject_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:queue-canary"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "canary:threshold-comparison",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/9b073019c18188c3c5e74ecb29c433e9",
+      "kind": "telemetry",
+      "subject_ref": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "availability": "UNAVAILABLE",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:model-collector-outage"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/a4269ded728478b48a30c98aecfeb958",
+      "kind": "incident-report",
+      "subject_ref": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25",
+      "availability": "FAILURE",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:payment-incident-2025-05"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "incident:postmortem",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "STRONG"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/adca8839fe46cf8cf6c4ca1adf91a886",
+      "kind": "composed-system-test",
+      "subject_ref": "sos://PackageComposition/a4be9c6949ee3f290b597ea901ddb162",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:composition-own-evidence"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": false,
+      "intervention": true,
+      "evidence_class": "INTERVENTIONAL",
+      "method": "composition:combined-scenario",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "WEAK"
+      },
+      "producer": {
+        "tool": "vitest",
+        "tool_version": "3.0.0",
+        "model": null,
+        "model_version": null,
+        "command": "pnpm -r test",
+        "environment": "ci:github-actions:ubuntu-24.04"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/ca1104d2a10156d029cda7d2f709c052",
+      "kind": "architecture-analysis",
+      "subject_ref": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:llm-architecture-analysis"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "llm:structured-analysis",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED"
+      },
+      "producer": {
+        "tool": "architecture-analyst",
+        "tool_version": "0.9.0",
+        "model": "gpt-architecture",
+        "model_version": "2025-05",
+        "command": "analyze checkout repository",
+        "environment": "analysis-sandbox"
+      },
+      "llm_output": true
+    },
+    {
+      "id": "sos://Evidence/e17faa4351a3aef9096b58e47473b1ad",
+      "kind": "telemetry",
+      "subject_ref": "sos://ImplementationModel/3fc6b07bad14da0e043c825a64e4b772",
+      "availability": "SUCCESS",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:queue-telemetry"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    },
+    {
+      "id": "sos://Evidence/f536b882067ccd68799cd7cc8c021c0c",
+      "kind": "telemetry",
+      "subject_ref": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+      "availability": "PARTIAL",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "evidence:latency-telemetry-partial"
+      ],
+      "source_revision": "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2",
+      "deployment_revision": "deploy:checkout-prod-2025-06-01",
+      "observational": true,
+      "intervention": false,
+      "evidence_class": "OBSERVATIONAL",
+      "method": "telemetry:capture-availability",
+      "window": {
+        "start": "2025-06-01T00:00:00Z",
+        "end": "2025-06-30T00:00:00Z"
+      },
+      "subject_revision": null,
+      "confidence": {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "MODERATE"
+      },
+      "producer": {
+        "tool": "otel-collector",
+        "tool_version": "1.2.0",
+        "model": null,
+        "model_version": null,
+        "command": null,
+        "environment": "production"
+      },
+      "llm_output": false
+    }
+  ],
+  "candidates": [
+    {
+      "envelope": {
+        "id": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+        "kind": "CandidateState",
+        "version": 1,
+        "status": "ACTIVE",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "candidate:durable-queue-search"
+        ],
+        "created_at": "2025-06-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "invariants": [
+          "The checkout API contract is preserved",
+          "Order writes remain transactional"
+        ],
+        "predicted_effects": [
+          "EU p95 latency decreases",
+          "Monthly cost decreases (fewer synchronous DB round-trips)"
+        ],
+        "causal_claim": true,
+        "confidence": {
+          "kind": "QUALITATIVE",
+          "uncertainty_class": "MODERATE"
+        },
+        "base_subject_revision": "system-state-v2",
+        "hypothesis_ref": "sos://CausalHypothesis/ad768bb40c9a558e667d10f26f0cc282",
+        "bounded_subgraph_ref": {
+          "graph_id": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+          "version": 2
+        },
+        "context": {
+          "environment": "production",
+          "region": "eu",
+          "workload": "peak-hour"
+        }
+      }
+    },
+    {
+      "envelope": {
+        "id": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+        "kind": "CandidateState",
+        "version": 1,
+        "status": "ACTIVE",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "candidate:edge-cache-search"
+        ],
+        "created_at": "2025-06-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "invariants": [
+          "The checkout API contract is preserved",
+          "GDPR constraints on order data are respected"
+        ],
+        "predicted_effects": [
+          "EU p95 latency decreases sharply",
+          "CDN cost increases"
+        ],
+        "causal_claim": true,
+        "confidence": {
+          "kind": "QUALITATIVE",
+          "uncertainty_class": "WEAK"
+        },
+        "base_subject_revision": "system-state-v2",
+        "hypothesis_ref": "sos://CausalHypothesis/174b198ea05d209b7277531704f8589f",
+        "bounded_subgraph_ref": {
+          "graph_id": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+          "version": 2
+        },
+        "context": {
+          "environment": "production",
+          "region": "eu",
+          "workload": "steady"
+        }
+      }
+    }
+  ],
+  "assurance_cases": [
+    {
+      "artifact": {
+        "envelope": {
+          "id": "sos://AssuranceCase/ef561845d9e2996ae239fd7237054053",
+          "kind": "AssuranceCase",
+          "version": 1,
+          "status": "ACTIVE",
+          "authority_ref": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+          "provenance": [
+            "W11:console:demo-fixture",
+            "assurance:queue-candidate-review"
+          ],
+          "created_at": "2025-06-01T00:00:00Z",
+          "supersedes": null
+        },
+        "content": {
+          "claims": [
+            {
+              "id": "claim-reliable",
+              "statement": "Checkout remains reliable under the durable-queue candidate"
+            },
+            {
+              "id": "claim-recoverable",
+              "statement": "Recovery from the candidate completes within the declared bound"
+            }
+          ],
+          "arguments": [
+            {
+              "id": "argument-reliability",
+              "strategy": "Canary evidence plus rollback rehearsal supports both reliability and recoverability",
+              "conclusion": "claim-reliable",
+              "premises": [
+                "claim-recoverable"
+              ]
+            }
+          ],
+          "assumptions": [
+            {
+              "id": "assumption-steady-load",
+              "statement": "Load stays within the tested envelope during the canary"
+            }
+          ],
+          "hazards": [
+            {
+              "id": "hazard-payment-outage",
+              "description": "Queue backpressure delays payment calls under peak load"
+            }
+          ],
+          "controls": [
+            {
+              "id": "control-guardrails",
+              "mechanism": "Wired guardrails roll the canary back automatically",
+              "addresses": [
+                "hazard-payment-outage"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "evidence_id": "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+              "role": "VERIFIES",
+              "claim_ref": "claim-reliable"
+            },
+            {
+              "evidence_id": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+              "role": "VERIFIES",
+              "claim_ref": "claim-recoverable"
+            }
+          ],
+          "validity_conditions": [
+            {
+              "kind": "IMPLEMENTATION",
+              "subject": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+              "valid_revisions": [
+                "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+              ]
+            },
+            {
+              "kind": "ENVIRONMENT",
+              "subject": "production",
+              "valid_revisions": [
+                "eu-west-1"
+              ]
+            }
+          ],
+          "objections": [
+            {
+              "id": "objection-single-region",
+              "statement": "The rehearsal only covered the eu-west-1 region; failover behavior elsewhere is unproven",
+              "raised_at": "2025-06-10T00:00:00Z",
+              "status": "OPEN",
+              "resolution": null
+            },
+            {
+              "id": "objection-old-collector",
+              "statement": "Canary evidence was produced by collector 1.1.x while telemetry discipline requires 1.2.x",
+              "raised_at": "2025-06-08T00:00:00Z",
+              "status": "RESOLVED",
+              "resolution": {
+                "note": "Collector 1.2.0 re-collected the same window; thresholds unchanged (see the uptime telemetry provenance)",
+                "resolved_at": "2025-06-09T00:00:00Z",
+                "provenance": [
+                  "W11:console:demo-fixture",
+                  "objection:collector-recheck"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "evaluation": {
+        "case_id": "sos://AssuranceCase/ef561845d9e2996ae239fd7237054053",
+        "case_version": 1,
+        "evaluated_at": "2025-06-15T12:00:00Z",
+        "verdict": "OBJECTIONED",
+        "invalidations": [],
+        "open_objections": [
+          {
+            "id": "objection-single-region",
+            "statement": "The rehearsal only covered the eu-west-1 region; failover behavior elsewhere is unproven",
+            "raised_at": "2025-06-10T00:00:00Z",
+            "status": "OPEN",
+            "resolution": null
+          }
+        ]
+      }
+    },
+    {
+      "artifact": {
+        "envelope": {
+          "id": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+          "kind": "AssuranceCase",
+          "version": 1,
+          "status": "ACTIVE",
+          "authority_ref": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+          "provenance": [
+            "W11:console:demo-fixture",
+            "assurance:queue-promotion-case"
+          ],
+          "created_at": "2025-06-01T00:00:00Z",
+          "supersedes": null
+        },
+        "content": {
+          "claims": [
+            {
+              "id": "claim-evidence-current",
+              "statement": "The supporting evidence for the queue candidate is current and interventional"
+            },
+            {
+              "id": "claim-safe-to-promote",
+              "statement": "The durable-queue candidate is safe to promote under the declared guardrails and recovery bound"
+            }
+          ],
+          "arguments": [
+            {
+              "id": "argument-promotion",
+              "strategy": "Fresh interventional canary evidence plus a timed rollback rehearsal supports the promotion claim",
+              "conclusion": "claim-safe-to-promote",
+              "premises": [
+                "claim-evidence-current"
+              ]
+            }
+          ],
+          "assumptions": [
+            {
+              "id": "assumption-canary-population",
+              "statement": "The canary population is representative of peak-hour EU traffic"
+            }
+          ],
+          "hazards": [
+            {
+              "id": "hazard-write-latency",
+              "description": "The queue write path adds latency to order writes"
+            }
+          ],
+          "controls": [
+            {
+              "id": "control-write-guardrail",
+              "mechanism": "The write-latency guardrail is wired to automatic rollback",
+              "addresses": [
+                "hazard-write-latency"
+              ]
+            }
+          ],
+          "evidence": [
+            {
+              "evidence_id": "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+              "role": "VERIFIES",
+              "claim_ref": "claim-evidence-current"
+            },
+            {
+              "evidence_id": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+              "role": "VERIFIES",
+              "claim_ref": "claim-safe-to-promote"
+            }
+          ],
+          "validity_conditions": [
+            {
+              "kind": "IMPLEMENTATION",
+              "subject": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+              "valid_revisions": [
+                "3f9c1a2b8d7e4f60a1b2c3d4e5f6a7b8c9d0e1f2"
+              ]
+            }
+          ],
+          "objections": [
+            {
+              "id": "objection-rehearsal-scope",
+              "statement": "The rehearsal must cover the full rollback path including the payment-service restart",
+              "raised_at": "2025-06-11T00:00:00Z",
+              "status": "RESOLVED",
+              "resolution": {
+                "note": "Rehearsal v2 covered the full path including the payment-service restart; total time 214s < 300s bound",
+                "resolved_at": "2025-06-12T00:00:00Z",
+                "provenance": [
+                  "W11:console:demo-fixture",
+                  "objection:rehearsal-v2"
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "evaluation": {
+        "case_id": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+        "case_version": 1,
+        "evaluated_at": "2025-06-15T12:00:00Z",
+        "verdict": "VALID",
+        "invalidations": [],
+        "open_objections": []
+      }
+    }
+  ],
+  "experiment": {
+    "artifact": {
+      "envelope": {
+        "id": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+        "kind": "Experiment",
+        "version": 1,
+        "status": "ACTIVE",
+        "authority_ref": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "experiment:queue-canary-plan"
+        ],
+        "created_at": "2025-06-01T00:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "design": {
+          "kind": "TREATMENT_CONTROL",
+          "population": {
+            "description": "Production checkout requests in the EU region during peak hours",
+            "unit": "REQUEST",
+            "context": {
+              "environment": "production",
+              "region": "eu",
+              "workload": "peak-hour"
+            }
+          },
+          "allocation": {
+            "unit": "REQUEST",
+            "assignment": "DETERMINISTIC_HASH",
+            "arms": [
+              {
+                "id": "control",
+                "role": "CONTROL",
+                "candidate_ref": null
+              },
+              {
+                "id": "treatment",
+                "role": "TREATMENT",
+                "candidate_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff"
+              }
+            ],
+            "ratios": [
+              9,
+              1
+            ]
+          },
+          "metrics": [
+            {
+              "id": "metric-p95",
+              "role": "PRIMARY",
+              "description": "Checkout p95 latency (ms)",
+              "direction": "DECREASE"
+            },
+            {
+              "id": "metric-cost",
+              "role": "SECONDARY",
+              "description": "Monthly cost proxy (credits per 1k requests)",
+              "direction": "DECREASE"
+            },
+            {
+              "id": "metric-error-rate",
+              "role": "GUARDRAIL",
+              "description": "Checkout error rate (%) — at most 1%",
+              "direction": "DECREASE",
+              "guardrail_threshold": 1
+            },
+            {
+              "id": "metric-write-latency",
+              "role": "GUARDRAIL",
+              "description": "Order write p99 latency (ms) — at most 400",
+              "direction": "DECREASE",
+              "guardrail_threshold": 400
+            }
+          ],
+          "stopping_criteria": [
+            {
+              "kind": "MAX_SAMPLES",
+              "max_samples": 5000
+            },
+            {
+              "kind": "EARLY_SUCCESS",
+              "description": "Stop early when the primary and every guardrail hold for two consecutive windows"
+            }
+          ],
+          "rollback_criteria": [
+            {
+              "id": "rollback-errors",
+              "guardrail_metric_ids": [
+                "metric-error-rate"
+              ],
+              "description": "Roll back when the error-rate guardrail trips"
+            },
+            {
+              "id": "rollback-write-latency",
+              "guardrail_metric_ids": [
+                "metric-write-latency"
+              ],
+              "description": "Roll back when order write latency breaches its bound"
+            }
+          ]
+        },
+        "stage": {
+          "phase": "CANARY",
+          "exposure_percent": 10
+        },
+        "canary_ladder": [
+          5,
+          10,
+          25,
+          50
+        ],
+        "candidate_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+        "hypothesis_ref": "sos://CausalHypothesis/ad768bb40c9a558e667d10f26f0cc282",
+        "producer": {
+          "tool": "experiment-runner",
+          "tool_version": "1.1.0",
+          "model": null,
+          "model_version": null,
+          "command": "experiment plan queue-canary",
+          "environment": "production"
+        }
+      }
+    },
+    "result": {
+      "id": "sos://Evaluation/4d8653e025cdac4c7cd690e352a156af",
+      "experiment_id": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "candidate_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "hypothesis_ref": "sos://CausalHypothesis/ad768bb40c9a558e667d10f26f0cc282",
+      "observed_at": "2025-06-15T12:00:00Z",
+      "sample_size": 480,
+      "outcomes": [
+        {
+          "metric_id": "metric-p95",
+          "arm_id": "control",
+          "value": 231.38412971548206,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-cost",
+          "arm_id": "control",
+          "value": 41.85814014323101,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-error-rate",
+          "arm_id": "control",
+          "value": 0.40226709384030923,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-write-latency",
+          "arm_id": "control",
+          "value": 308.94192939932134,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-p95",
+          "arm_id": "treatment",
+          "value": 194.98124101826065,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-cost",
+          "arm_id": "treatment",
+          "value": 37.97218764112088,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-error-rate",
+          "arm_id": "treatment",
+          "value": 0.50175916585563,
+          "availability": "SUCCESS"
+        },
+        {
+          "metric_id": "metric-write-latency",
+          "arm_id": "treatment",
+          "value": 330.59792787875557,
+          "availability": "SUCCESS"
+        }
+      ],
+      "simulated": true,
+      "simulator": {
+        "version": "@sos-2/experiments:simulator@1",
+        "seed": 424242
+      },
+      "provenance": [
+        "W11:console:demo-fixture",
+        "experiment:simulated-canary-run"
+      ],
+      "producer": {
+        "tool": "experiment-simulator",
+        "tool_version": "1.1.0",
+        "model": null,
+        "model_version": null,
+        "command": "simulate queue-canary --seed 424242",
+        "environment": "sandbox"
+      }
+    },
+    "evaluation": {
+      "overall_availability": "SUCCESS",
+      "guardrails": [
+        {
+          "metric_id": "metric-error-rate",
+          "arm_id": "treatment",
+          "status": "SATISFIED",
+          "availability": "SUCCESS",
+          "observed_value": 0.50175916585563,
+          "threshold": 1,
+          "direction": "DECREASE",
+          "reason": "guardrail metric-error-rate observed 0.50175916585563 on arm treatment, within threshold 1 (direction DECREASE)"
+        },
+        {
+          "metric_id": "metric-write-latency",
+          "arm_id": "treatment",
+          "status": "SATISFIED",
+          "availability": "SUCCESS",
+          "observed_value": 330.59792787875557,
+          "threshold": 400,
+          "direction": "DECREASE",
+          "reason": "guardrail metric-write-latency observed 330.59792787875557 on arm treatment, within threshold 400 (direction DECREASE)"
+        }
+      ],
+      "primary": [
+        {
+          "metric_id": "metric-p95",
+          "status": "SATISFIED",
+          "classification": "ESTABLISHED",
+          "candidate_arm_id": "treatment",
+          "candidate_value": 194.98124101826065,
+          "comparison": [
+            {
+              "arm_id": "control",
+              "value": 231.38412971548206
+            }
+          ],
+          "direction": "DECREASE",
+          "reason": "metric metric-p95: candidate arm treatment observed 194.98124101826065 vs control control observed 231.38412971548206 (direction DECREASE)"
+        }
+      ],
+      "secondary": [
+        {
+          "metric_id": "metric-cost",
+          "status": "SATISFIED",
+          "classification": "ESTABLISHED",
+          "candidate_arm_id": "treatment",
+          "candidate_value": 37.97218764112088,
+          "comparison": [
+            {
+              "arm_id": "control",
+              "value": 41.85814014323101
+            }
+          ],
+          "direction": "DECREASE",
+          "reason": "metric metric-cost: candidate arm treatment observed 37.97218764112088 vs control control observed 41.85814014323101 (direction DECREASE)"
+        }
+      ],
+      "stopping": [
+        {
+          "kind": "STOPPING",
+          "rule_id": "max-samples",
+          "description": "stop when the observed sample size reaches 5000 allocation units",
+          "triggered": false,
+          "reason": "observed sample size 480 has not reached 5000",
+          "conditions": [
+            {
+              "condition": "sample_size (480) >= 5000",
+              "satisfied": false
+            }
+          ]
+        },
+        {
+          "kind": "STOPPING",
+          "rule_id": "early-success",
+          "description": "Stop early when the primary and every guardrail hold for two consecutive windows",
+          "triggered": true,
+          "reason": "every primary metric is satisfied and every guardrail is satisfied",
+          "conditions": [
+            {
+              "condition": "primary metric metric-p95 is SATISFIED",
+              "satisfied": true
+            },
+            {
+              "condition": "guardrail metric-error-rate is SATISFIED",
+              "satisfied": true
+            },
+            {
+              "condition": "guardrail metric-write-latency is SATISFIED",
+              "satisfied": true
+            }
+          ]
+        }
+      ],
+      "rollback": [
+        {
+          "kind": "ROLLBACK",
+          "rule_id": "rollback-errors",
+          "description": "Roll back when the error-rate guardrail trips",
+          "triggered": false,
+          "reason": "every referenced guardrail is SATISFIED",
+          "conditions": [
+            {
+              "condition": "guardrail metric-error-rate is SATISFIED (availability SUCCESS)",
+              "satisfied": false
+            }
+          ]
+        },
+        {
+          "kind": "ROLLBACK",
+          "rule_id": "rollback-write-latency",
+          "description": "Roll back when order write latency breaches its bound",
+          "triggered": false,
+          "reason": "every referenced guardrail is SATISFIED",
+          "conditions": [
+            {
+              "condition": "guardrail metric-write-latency is SATISFIED (availability SUCCESS)",
+              "satisfied": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "ask": {
+    "request": {
+      "envelope": {
+        "id": "sos://AskRequest/700927c9f9547f548a6ce5b3c924b003",
+        "kind": "AskRequest",
+        "version": 1,
+        "status": "ACTIVE",
+        "authority_ref": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "ask:cache-promotion-escalation"
+        ],
+        "created_at": "2025-06-15T12:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "decision": "Decide the escalated action: Retire the legacy SOAP payment adapter from the checkout implementation (action RETIRE, blast radius COMPONENT, risk LOW, reversibility REVERSIBLE, input digest eb1fc07d995b577247336ff03e039e39e81919dde6801e4ff90dbdb4153c4c5f).",
+        "alternatives": [
+          {
+            "id": "act-on-judgment",
+            "action": "ACT",
+            "description": "Proceed on explicit judgment despite irreducible uncertainty."
+          },
+          {
+            "id": "gather-evidence",
+            "action": "GATHER_EVIDENCE",
+            "description": "Try to reduce the uncertainty anyway."
+          },
+          {
+            "id": "reject",
+            "action": "REJECT",
+            "description": "Refuse the action."
+          }
+        ],
+        "evidence_quality": {
+          "quality": "MODERATE",
+          "summary": "1 admissible evidence record(s) backed the escalated decision request (quality MODERATE)"
+        },
+        "uncertainty": {
+          "uncertainty_class": "IRREDUCIBLE",
+          "basis": "Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide"
+        },
+        "trade_offs": [
+          "risk LOW vs reversibility REVERSIBLE",
+          "impact HIGH vs evidence quality MODERATE",
+          "required autonomy BOUNDED vs presented authority PERMITTED"
+        ],
+        "risk": {
+          "description": "The proposed action carries LOW risk with REVERSIBLE reversibility at blast radius COMPONENT and impact HIGH.",
+          "severity": "LOW"
+        },
+        "authority_insufficiency": "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)"
+      }
+    },
+    "context": {
+      "ask_id": "sos://AskRequest/700927c9f9547f548a6ce5b3c924b003",
+      "decision_record_ref": "sos://Decision/6dafecf394d3a1f957d1cb209b7f7b9a",
+      "origin_input_digest": "eb1fc07d995b577247336ff03e039e39e81919dde6801e4ff90dbdb4153c4c5f",
+      "priority": "LOW",
+      "decision_request": {
+        "action_kind": "RETIRE",
+        "action_description": "Retire the legacy SOAP payment adapter from the checkout implementation",
+        "target_kind": "ARTIFACT",
+        "target": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+        "blast_radius": "COMPONENT",
+        "impact": "HIGH",
+        "risk": "LOW",
+        "reversibility": "REVERSIBLE",
+        "causal_claim": false
+      },
+      "alternatives": [
+        {
+          "id": "act-on-judgment",
+          "action": "ACT",
+          "description": "Proceed on explicit judgment despite irreducible uncertainty."
+        },
+        {
+          "id": "gather-evidence",
+          "action": "GATHER_EVIDENCE",
+          "description": "Try to reduce the uncertainty anyway."
+        },
+        {
+          "id": "reject",
+          "action": "REJECT",
+          "description": "Refuse the action."
+        }
+      ],
+      "evidence_summary": [
+        {
+          "ref": "sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd",
+          "provided": true,
+          "availability": "SUCCESS",
+          "evidence_class": "OBSERVATIONAL",
+          "freshness": "FRESH",
+          "freshness_reason": "evidence sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd is bound to the current subject revision and its observation window has not closed"
+        }
+      ],
+      "evidence_quality": "MODERATE",
+      "uncertainty": {
+        "uncertainty_class": "IRREDUCIBLE",
+        "basis": "Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide"
+      },
+      "risk": {
+        "description": "The proposed action carries LOW risk with REVERSIBLE reversibility at blast radius COMPONENT and impact HIGH.",
+        "severity": "LOW"
+      },
+      "authority_insufficiency": "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)",
+      "rule_trace": [
+        {
+          "rule": "R0_SHAPE",
+          "order": 1,
+          "outcome": null,
+          "code": null,
+          "reason": "request shape is valid: every vocabulary respected, evidence records well-formed W3, grants and raises well-formed"
+        },
+        {
+          "rule": "R1_AUTHORITY",
+          "order": 2,
+          "outcome": null,
+          "code": "PERMITTED",
+          "reason": "authority sufficient: permitted at level BOUNDED: grant sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000 is currently valid, covers the target and carries permission RETIRE — autonomy is bounded by the grant's explicit scope, permission set and expiry (grants consulted: sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000; raises applied: none)"
+        },
+        {
+          "rule": "R2_SAFETY",
+          "order": 3,
+          "outcome": null,
+          "code": null,
+          "reason": "no rollback signals wired and no matrix escalation: risk LOW with reversibility REVERSIBLE"
+        },
+        {
+          "rule": "R3_EVIDENCE",
+          "order": 4,
+          "outcome": null,
+          "code": null,
+          "reason": "evidence sufficient: 1 admissible record(s)"
+        },
+        {
+          "rule": "R4_UNCERTAINTY",
+          "order": 5,
+          "outcome": "ASK",
+          "code": "UNCERTAINTY_IRREDUCIBLE",
+          "reason": "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)"
+        }
+      ],
+      "authority": {
+        "required_level": "BOUNDED",
+        "effective_level": "BOUNDED",
+        "verdict_code": "PERMITTED",
+        "grant_ref": "sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000",
+        "consulted_grant_refs": [
+          "sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000"
+        ],
+        "applied_raise_refs": []
+      }
+    },
+    "decision": {
+      "envelope": {
+        "id": "sos://Decision/6dafecf394d3a1f957d1cb209b7f7b9a",
+        "kind": "Decision",
+        "version": 1,
+        "status": "DRAFT",
+        "authority_ref": null,
+        "provenance": [
+          "W11:console:demo-fixture",
+          "decision:legacy-adapter-retirement-request"
+        ],
+        "created_at": "2025-06-15T12:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "action": "ASK",
+        "engine_version": "1.0.0",
+        "input_digest": "eb1fc07d995b577247336ff03e039e39e81919dde6801e4ff90dbdb4153c4c5f",
+        "rule_trace": [
+          {
+            "rule": "R0_SHAPE",
+            "order": 1,
+            "outcome": null,
+            "code": null,
+            "reason": "request shape is valid: every vocabulary respected, evidence records well-formed W3, grants and raises well-formed"
+          },
+          {
+            "rule": "R1_AUTHORITY",
+            "order": 2,
+            "outcome": null,
+            "code": "PERMITTED",
+            "reason": "authority sufficient: permitted at level BOUNDED: grant sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000 is currently valid, covers the target and carries permission RETIRE — autonomy is bounded by the grant's explicit scope, permission set and expiry (grants consulted: sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000; raises applied: none)"
+          },
+          {
+            "rule": "R2_SAFETY",
+            "order": 3,
+            "outcome": null,
+            "code": null,
+            "reason": "no rollback signals wired and no matrix escalation: risk LOW with reversibility REVERSIBLE"
+          },
+          {
+            "rule": "R3_EVIDENCE",
+            "order": 4,
+            "outcome": null,
+            "code": null,
+            "reason": "evidence sufficient: 1 admissible record(s)"
+          },
+          {
+            "rule": "R4_UNCERTAINTY",
+            "order": 5,
+            "outcome": "ASK",
+            "code": "UNCERTAINTY_IRREDUCIBLE",
+            "reason": "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)"
+          }
+        ],
+        "request_summary": {
+          "action_kind": "RETIRE",
+          "action_description": "Retire the legacy SOAP payment adapter from the checkout implementation",
+          "target": {
+            "kind": "ARTIFACT",
+            "artifact_id": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22"
+          },
+          "blast_radius": "COMPONENT",
+          "impact": "HIGH",
+          "risk": "LOW",
+          "reversibility": "REVERSIBLE",
+          "causal_claim": false,
+          "uncertainty": {
+            "uncertainty_class": "IRREDUCIBLE",
+            "basis": "Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide"
+          }
+        },
+        "authority": {
+          "required_level": "BOUNDED",
+          "effective_level": "BOUNDED",
+          "verdict_code": "PERMITTED",
+          "grant_ref": "sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000",
+          "consulted_grant_refs": [
+            "sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000"
+          ],
+          "applied_raise_refs": []
+        },
+        "escalation": {
+          "code": "UNCERTAINTY_IRREDUCIBLE",
+          "message": "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)"
+        },
+        "resolution": null,
+        "evidence_refs": [
+          "sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd"
+        ],
+        "confidence": null,
+        "reasons": [
+          "decision ASK for \"Retire the legacy SOAP payment adapter from the checkout implementation\"",
+          "permitted at level BOUNDED: grant sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000 is currently valid, covers the target and carries permission RETIRE — autonomy is bounded by the grant's explicit scope, permission set and expiry",
+          "1 current SUCCESS record(s) satisfy the impact-scaled evidence requirement",
+          "evidence record sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd is admissible: OBSERVATIONAL, SUCCESS, subject-bound to the decision target, FRESH at 2025-06-15T12:00:00Z",
+          "uncertainty is IRREDUCIBLE (Whether any off-platform EU partner still integrates the legacy SOAP interface cannot be observed from telemetry — only judgment can decide) — only judgment can decide; the exact decision is escalated to the competent authority (ASK is a first-class, successful outcome)"
+        ]
+      }
+    }
+  },
+  "grant": {
+    "envelope": {
+      "id": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+      "kind": "AuthorityGrant",
+      "version": 1,
+      "status": "ACTIVE",
+      "authority_ref": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "grant:queue-promotion-authority"
+      ],
+      "created_at": "2025-06-01T00:00:00Z",
+      "supersedes": null
+    },
+    "content": {
+      "grantee": "sos://Decision/promotion-actor",
+      "scope": {
+        "kind": "ARTIFACT",
+        "artifact_id": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff"
+      },
+      "permissions": [
+        "PROMOTE"
+      ],
+      "expiry": {
+        "kind": "TIME",
+        "at": "2025-07-01T00:00:00Z"
+      },
+      "revoked_at": null,
+      "revocation_provenance": []
+    }
+  },
+  "promotion": {
+    "decision": "ACT",
+    "reasons": [
+      "all promotion gates passed — the candidate is promoted (ACT)",
+      "authority grant sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec is VALID at 2025-06-15T12:00:00Z, covers the candidate and carries PROMOTE",
+      "assurance case sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98 verdict is SATISFIED and validity is CURRENT at 2025-06-15T12:00:00Z",
+      "2 current intervention-grade SUCCESS record(s) about the candidate satisfy the evidence requirement",
+      "evidence record sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z",
+      "evidence record sos://Evidence/01f1b6d18bf798a6e293fb2301364f03 is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z",
+      "bounded recovery declared: Redeploy the prior production deployment (deploy:checkout-prod-2025-06-01) and drain the queue (max 300s)",
+      "candidate sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff is based on the current System State revision \"system-state-v2\""
+    ],
+    "gates": {
+      "authority": {
+        "passes": true,
+        "decision": null,
+        "grant_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+        "reasons": [
+          "authority grant sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec is VALID at 2025-06-15T12:00:00Z, covers the candidate and carries PROMOTE"
+        ]
+      },
+      "assurance": {
+        "structurally_valid": true,
+        "verdict": "SATISFIED",
+        "effective_validity": "CURRENT",
+        "passes": true,
+        "reasons": [
+          "assurance case sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98 verdict is SATISFIED and validity is CURRENT at 2025-06-15T12:00:00Z"
+        ]
+      },
+      "evidence": {
+        "satisfied": true,
+        "requires": "INTERVENTIONAL",
+        "satisfying": [
+          "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+          "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03"
+        ],
+        "rejected_simulated": [],
+        "real_interventional_considered": 2,
+        "reasons": [
+          "2 current intervention-grade SUCCESS record(s) about the candidate satisfy the evidence requirement",
+          "evidence record sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z",
+          "evidence record sos://Evidence/01f1b6d18bf798a6e293fb2301364f03 is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z"
+        ]
+      },
+      "systemState": {
+        "compatible": true,
+        "reasons": [
+          "candidate sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff is based on the current System State revision \"system-state-v2\""
+        ]
+      },
+      "guardrails": {
+        "triggered": [],
+        "reasons": []
+      },
+      "recovery": {
+        "declared": true,
+        "valid": true,
+        "reasons": [
+          "bounded recovery declared: Redeploy the prior production deployment (deploy:checkout-prod-2025-06-01) and drain the queue (max 300s)"
+        ]
+      }
+    },
+    "record": {
+      "envelope": {
+        "id": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+        "kind": "Decision",
+        "version": 1,
+        "status": "DRAFT",
+        "authority_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+        "provenance": [
+          "W11:console:demo-fixture",
+          "promotion:queue-candidate-gate"
+        ],
+        "created_at": "2025-06-15T12:00:00Z",
+        "supersedes": null
+      },
+      "content": {
+        "action": "ACT",
+        "candidate_ref": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+        "authority_grant_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+        "assurance_case_ref": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+        "evidence_refs": [
+          "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+          "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03"
+        ],
+        "reasons": [
+          "all promotion gates passed — the candidate is promoted (ACT)",
+          "authority grant sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec is VALID at 2025-06-15T12:00:00Z, covers the candidate and carries PROMOTE",
+          "assurance case sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98 verdict is SATISFIED and validity is CURRENT at 2025-06-15T12:00:00Z",
+          "2 current intervention-grade SUCCESS record(s) about the candidate satisfy the evidence requirement",
+          "evidence record sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z",
+          "evidence record sos://Evidence/01f1b6d18bf798a6e293fb2301364f03 is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-06-15T12:00:00Z",
+          "bounded recovery declared: Redeploy the prior production deployment (deploy:checkout-prod-2025-06-01) and drain the queue (max 300s)",
+          "candidate sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff is based on the current System State revision \"system-state-v2\""
+        ],
+        "recovery": {
+          "mechanism": "Redeploy the prior production deployment (deploy:checkout-prod-2025-06-01) and drain the queue",
+          "max_recovery_seconds": 300,
+          "containment_exception": null,
+          "rollback_triggers": [
+            {
+              "experiment_id": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+              "trigger": {
+                "kind": "ROLLBACK",
+                "rule_id": "rollback-errors",
+                "description": "Roll back when the error-rate guardrail trips",
+                "triggered": false,
+                "reason": "every referenced guardrail is SATISFIED",
+                "conditions": [
+                  {
+                    "condition": "guardrail metric-error-rate is SATISFIED (availability SUCCESS)",
+                    "satisfied": false
+                  }
+                ]
+              }
+            },
+            {
+              "experiment_id": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+              "trigger": {
+                "kind": "ROLLBACK",
+                "rule_id": "rollback-write-latency",
+                "description": "Roll back when order write latency breaches its bound",
+                "triggered": false,
+                "reason": "every referenced guardrail is SATISFIED",
+                "conditions": [
+                  {
+                    "condition": "guardrail metric-write-latency is SATISFIED (availability SUCCESS)",
+                    "satisfied": false
+                  }
+                ]
+              }
+            }
+          ],
+          "authority_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec"
+        },
+        "system_state_revision": "system-state-v2",
+        "live_trigger_rule_ids": [
+          "rollback-errors",
+          "rollback-write-latency"
+        ]
+      }
+    }
+  },
+  "recovery_declaration": {
+    "envelope": {
+      "id": "sos://RecoveryDeclaration/76a7ea9e51bdd5bbd1cda0dee566acfc",
+      "kind": "RecoveryDeclaration",
+      "version": 1,
+      "status": "ACTIVE",
+      "authority_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+      "provenance": [
+        "W11:console:demo-fixture",
+        "recovery:promotion-rollback-declaration"
+      ],
+      "created_at": "2025-06-15T12:00:00Z",
+      "supersedes": null
+    },
+    "content": {
+      "change_ref": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+      "mechanism": {
+        "kind": "ROLLBACK_DEPLOYMENT",
+        "to_deployment_id": "deploy:checkout-prod-2025-06-01"
+      },
+      "trigger": {
+        "kind": "BUDGET",
+        "metric": "checkout-error-rate",
+        "threshold": "1%",
+        "window_ms": 300000
+      },
+      "authority_ref": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+      "evidence_ref": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+      "exception": null
+    }
+  },
+  "repertoire": {
+    "query": {
+      "capability": "checkout"
+    },
+    "candidates": [
+      {
+        "kind": "COMPOSITION",
+        "id": "sos://PackageComposition/d579872f2e9820a307e86c1e8da74e1e",
+        "version": 3,
+        "semantic_capability": "Fast-and-cheap checkout delivery (buffered writes + edge rendering)",
+        "contracts": [
+          "sos://schema/durable-queue",
+          "sos://schema/render-cache"
+        ],
+        "maturity": "VALIDATED",
+        "altitude": "VALIDATED_COMPOSITION",
+        "family": "balanced-composition",
+        "dimensions": [
+          {
+            "dimension": "COST",
+            "stance": "balances CDN cost against round-trip savings"
+          },
+          {
+            "dimension": "LATENCY",
+            "stance": "targets p95 < 250ms end to end"
+          }
+        ],
+        "applicability": [
+          {
+            "kind": "QUALITATIVE",
+            "uncertainty_class": "WEAK",
+            "context": {
+              "environment": "production",
+              "region": "eu",
+              "workload": "peak-hour"
+            },
+            "sample_size": 4,
+            "window": {
+              "start": "2025-06-01T00:00:00Z",
+              "end": "2025-06-30T00:00:00Z"
+            }
+          }
+        ],
+        "best_estimate": null,
+        "uncertainty": {
+          "uncertainty_class": "WEAK",
+          "basis": "NO_QUERY_CONTEXT"
+        },
+        "evidence_context": {
+          "total_refs": 2,
+          "resolved": 2,
+          "unresolved": 0,
+          "classes": {
+            "OBSERVATIONAL_SUCCESS": 0,
+            "COMPARATIVE": 0,
+            "INTERVENTIONAL": 2,
+            "FAILURE": 0,
+            "TRANSFER": 0,
+            "COMPOSITION": 0,
+            "LONGEVITY_DECAY": 0,
+            "UNCLASSIFIED": 0
+          },
+          "availability": {
+            "SUCCESS": 2,
+            "FAILURE": 0,
+            "UNKNOWN": 0,
+            "UNAVAILABLE": 0,
+            "UNSUPPORTED": 0,
+            "PARTIAL": 0
+          },
+          "successes": 2,
+          "failures": 0
+        },
+        "learned_limitations": [],
+        "failure_contexts": [],
+        "assurance_obligations": [
+          {
+            "kind": "CONTROLLED_EXPERIMENT",
+            "obligation": "Run a controlled experiment on the composed system before promotion"
+          }
+        ],
+        "realizations": [],
+        "members": [
+          {
+            "package_id": "sos://Package/015fd901223467c906e636da56def541",
+            "role": "write-buffer",
+            "bound_contracts": [
+              "sos://schema/durable-queue"
+            ]
+          },
+          {
+            "package_id": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+            "role": "render-edge",
+            "bound_contracts": [
+              "sos://schema/render-cache"
+            ]
+          }
+        ],
+        "bindings": [
+          {
+            "kind": "CONFIGURES",
+            "source_role": "render-edge",
+            "target_role": "write-buffer",
+            "contract": "sos://schema/durable-queue",
+            "wiring": {
+              "cache_flush": "on-write-commit"
+            }
+          }
+        ],
+        "independence": [],
+        "context_match": "NO_QUERY_CONTEXT"
+      },
+      {
+        "kind": "PACKAGE",
+        "id": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+        "version": 1,
+        "semantic_capability": "Edge-cached checkout rendering",
+        "contracts": [
+          "sos://schema/render-cache"
+        ],
+        "maturity": "VALIDATED",
+        "altitude": "VALIDATED_PACKAGE",
+        "family": "latency-optimized",
+        "dimensions": [
+          {
+            "dimension": "LATENCY",
+            "stance": "optimizes for p99 render latency < 50ms in-region"
+          },
+          {
+            "dimension": "COST",
+            "stance": "accepts higher CDN cost"
+          },
+          {
+            "dimension": "HUMAN_COMPREHENSIBILITY",
+            "stance": "cache invalidation reasoning is explicit and logged"
+          }
+        ],
+        "applicability": [
+          {
+            "kind": "QUALITATIVE",
+            "uncertainty_class": "STRONG",
+            "context": {
+              "environment": "production",
+              "region": "eu"
+            },
+            "sample_size": 31,
+            "window": {
+              "start": "2025-06-01T00:00:00Z",
+              "end": "2025-06-30T00:00:00Z"
+            }
+          }
+        ],
+        "best_estimate": null,
+        "uncertainty": {
+          "uncertainty_class": "STRONG",
+          "basis": "NO_QUERY_CONTEXT"
+        },
+        "evidence_context": {
+          "total_refs": 2,
+          "resolved": 2,
+          "unresolved": 0,
+          "classes": {
+            "OBSERVATIONAL_SUCCESS": 1,
+            "COMPARATIVE": 0,
+            "INTERVENTIONAL": 1,
+            "FAILURE": 0,
+            "TRANSFER": 0,
+            "COMPOSITION": 0,
+            "LONGEVITY_DECAY": 0,
+            "UNCLASSIFIED": 0
+          },
+          "availability": {
+            "SUCCESS": 2,
+            "FAILURE": 0,
+            "UNKNOWN": 0,
+            "UNAVAILABLE": 0,
+            "UNSUPPORTED": 0,
+            "PARTIAL": 0
+          },
+          "successes": 2,
+          "failures": 0
+        },
+        "learned_limitations": [
+          "Cold-start latency spikes after cache invalidation (see the retained failure evidence)"
+        ],
+        "failure_contexts": [
+          {
+            "ref": "sos://Evidence/4f31a15858c89e3ba5f4ab9dbe7cd5bb",
+            "availability": "FAILURE",
+            "window": {
+              "start": "2025-06-01T00:00:00Z",
+              "end": "2025-06-30T00:00:00Z"
+            },
+            "subject_revision": null
+          }
+        ],
+        "assurance_obligations": [
+          {
+            "kind": "SHADOW",
+            "obligation": "Shadow-render before serving any live traffic in a new region"
+          }
+        ],
+        "realizations": [
+          {
+            "ref": "sos://ImplementationModel/c0630253104d1030c2d356adaa898a07",
+            "revision": "r1",
+            "note": "Edge cache for checkout rendering"
+          }
+        ],
+        "members": null,
+        "bindings": null,
+        "independence": null,
+        "context_match": "NO_QUERY_CONTEXT"
+      },
+      {
+        "kind": "PACKAGE",
+        "id": "sos://Package/015fd901223467c906e636da56def541",
+        "version": 1,
+        "semantic_capability": "Durable checkout write buffering",
+        "contracts": [
+          "sos://schema/durable-queue"
+        ],
+        "maturity": "VALIDATED",
+        "altitude": "VALIDATED_PACKAGE",
+        "family": "cost-optimized",
+        "dimensions": [
+          {
+            "dimension": "COST",
+            "stance": "optimizes for lower monthly cost (fewer synchronous round-trips)"
+          },
+          {
+            "dimension": "RESILIENCE",
+            "stance": "buffers upstream outages for the queue depth window"
+          },
+          {
+            "dimension": "OPERATIONAL_COMPLEXITY",
+            "stance": "accepts one more stateful component to operate"
+          }
+        ],
+        "applicability": [
+          {
+            "kind": "QUALITATIVE",
+            "uncertainty_class": "MODERATE",
+            "context": {
+              "environment": "production",
+              "workload": "peak-hour"
+            },
+            "sample_size": 14,
+            "window": {
+              "start": "2025-06-01T00:00:00Z",
+              "end": "2025-06-30T00:00:00Z"
+            }
+          }
+        ],
+        "best_estimate": null,
+        "uncertainty": {
+          "uncertainty_class": "MODERATE",
+          "basis": "NO_QUERY_CONTEXT"
+        },
+        "evidence_context": {
+          "total_refs": 2,
+          "resolved": 2,
+          "unresolved": 0,
+          "classes": {
+            "OBSERVATIONAL_SUCCESS": 1,
+            "COMPARATIVE": 0,
+            "INTERVENTIONAL": 1,
+            "FAILURE": 0,
+            "TRANSFER": 0,
+            "COMPOSITION": 0,
+            "LONGEVITY_DECAY": 0,
+            "UNCLASSIFIED": 0
+          },
+          "availability": {
+            "SUCCESS": 2,
+            "FAILURE": 0,
+            "UNKNOWN": 0,
+            "UNAVAILABLE": 0,
+            "UNSUPPORTED": 0,
+            "PARTIAL": 0
+          },
+          "successes": 2,
+          "failures": 0
+        },
+        "learned_limitations": [
+          "Assumes peak-hour traffic shapes similar to the observed EU pattern"
+        ],
+        "failure_contexts": [],
+        "assurance_obligations": [
+          {
+            "kind": "CANARY",
+            "obligation": "Canary every adoption for at least one ladder cycle before full exposure"
+          }
+        ],
+        "realizations": [
+          {
+            "ref": "sos://ImplementationModel/3fc6b07bad14da0e043c825a64e4b772",
+            "revision": "r1",
+            "note": "Queue-backed checkout write buffer"
+          }
+        ],
+        "members": null,
+        "bindings": null,
+        "independence": null,
+        "context_match": "NO_QUERY_CONTEXT"
+      }
+    ],
+    "families": [
+      "balanced-composition",
+      "cost-optimized",
+      "latency-optimized"
+    ],
+    "family_counts": {
+      "balanced-composition": 1,
+      "latency-optimized": 1,
+      "cost-optimized": 1
+    },
+    "altitudes_present": [
+      "VALIDATED_COMPOSITION",
+      "VALIDATED_PACKAGE"
+    ],
+    "matched_count": 3,
+    "total_current_entries": 3
+  },
+  "package_evidence": {
+    "sos://Package/015fd901223467c906e636da56def541": [
+      "sos://Evidence/547892dc9c0d1389402c8068ea3fde22",
+      "sos://Evidence/e17faa4351a3aef9096b58e47473b1ad"
+    ],
+    "sos://Package/2adb5a792e36cf8fc917361abdb01bcd": [
+      "sos://Evidence/41f9f69a22fe01338c412acc9ea4ebf4",
+      "sos://Evidence/69c02dd1669761c6f3e9c9ef7bc65c5a"
+    ],
+    "sos://PackageComposition/d579872f2e9820a307e86c1e8da74e1e": [
+      "sos://Evidence/adca8839fe46cf8cf6c4ca1adf91a886",
+      "sos://Evidence/582f687089e0ba79cfd3392440490b38"
+    ]
+  },
+  "machine_state": {
+    "schemaVersion": "2.0",
+    "program": "SOS-2.0",
+    "status": "ACTIVE",
+    "currentFrontier": [
+      "W11",
+      "W12"
+    ],
+    "currentTask": "W11+W12 (final parallel wave; W14 unlocks after both)",
+    "tasks": {
+      "W0": {
+        "status": "BOOTSTRAP_COMPLETE",
+        "dependencies": [],
+        "mergedAs": "INITIAL_BOOTSTRAP"
+      },
+      "W0.5": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W0"
+        ],
+        "mergedAs": "adf3156c904a7fbbb3214a2036396ec5a1d67212"
+      },
+      "W1": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W0.5"
+        ],
+        "mergedAs": "645f5a582ea296c5ad446ff31c7956437378e529"
+      },
+      "W2": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W0.5"
+        ],
+        "mergedAs": "cc9354aca1570704a3ad4d3e287874967c10c28b"
+      },
+      "W3": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W0.5"
+        ],
+        "mergedAs": "615dd7ff73fcb7c7b15237bd110e66d44792aa54"
+      },
+      "W4": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W2",
+          "W3"
+        ],
+        "mergedAs": "19f71220fbd32ce9f397d46d3e9b2d8cd228b893"
+      },
+      "W5": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W1",
+          "W3"
+        ],
+        "mergedAs": "4ab276bc9afe8de33ae507c057f0257e3ccae9ca"
+      },
+      "W6": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W1",
+          "W2",
+          "W3"
+        ],
+        "mergedAs": "43297a549b81f9d6f6d9cc60c0d5a6998d799fa0"
+      },
+      "W7": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W4",
+          "W5",
+          "W6"
+        ],
+        "mergedAs": "8483027586ed88d7372d2906149fc89cb63fafc3"
+      },
+      "W8": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W2",
+          "W3"
+        ],
+        "mergedAs": "ce26a8b085f1d74675928db2c2fab6efccb76f54"
+      },
+      "W9": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W2",
+          "W3",
+          "W6"
+        ],
+        "mergedAs": "72ff4570dc3267a266566471ea63aeb529a8f891"
+      },
+      "W10": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W1",
+          "W8",
+          "W9"
+        ],
+        "mergedAs": "97ff90a615272f28dac62ac7360595f2312df204"
+      },
+      "W11": {
+        "status": "ELIGIBLE",
+        "dependencies": [
+          "W1",
+          "W2",
+          "W8",
+          "W10"
+        ],
+        "mergedAs": null
+      },
+      "W12": {
+        "status": "ELIGIBLE",
+        "dependencies": [
+          "W2",
+          "W3",
+          "W8",
+          "W10"
+        ],
+        "mergedAs": null
+      },
+      "W13": {
+        "status": "COMPLETE",
+        "dependencies": [
+          "W5",
+          "W6",
+          "W7"
+        ],
+        "mergedAs": "f6bcd2901b71192ce913f09193012122b5f056a9"
+      },
+      "W14": {
+        "status": "BLOCKED",
+        "dependencies": [
+          "W1",
+          "W2",
+          "W6",
+          "W10",
+          "W11",
+          "W12"
+        ],
+        "mergedAs": null
+      },
+      "W15": {
+        "status": "BLOCKED",
+        "dependencies": [
+          "W4",
+          "W5",
+          "W7",
+          "W8",
+          "W9",
+          "W10",
+          "W12",
+          "W13"
+        ],
+        "mergedAs": null
+      },
+      "W16": {
+        "status": "BLOCKED",
+        "dependencies": [
+          "W9",
+          "W10",
+          "W13",
+          "W15"
+        ],
+        "mergedAs": null
+      },
+      "W17": {
+        "status": "BLOCKED",
+        "dependencies": [
+          "W11",
+          "W12",
+          "W13",
+          "W14",
+          "W15",
+          "W16"
+        ],
+        "mergedAs": null
+      },
+      "W18": {
+        "status": "BLOCKED",
+        "dependencies": [
+          "W17"
+        ],
+        "mergedAs": null
+      }
+    }
+  },
+  "links": [
+    {
+      "source": "sos://Mission/95f46deea816717627a018cf442fd260",
+      "target": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "target": "sos://Mission/95f46deea816717627a018cf442fd260",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "target": "sos://Constitution/fa5fab3f2c2696ccd1cf4e1166245ec9",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49",
+      "target": "sos://Mission/95f46deea816717627a018cf442fd260",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49",
+      "target": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "target": "sos://ArchitectureGraph/46237205e26a9960d198286d3b9d3f49",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "target": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "target": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "type": "IMPLEMENTS",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/17dd4f7631487eef3767c37cc13bf01e",
+      "target": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/f536b882067ccd68799cd7cc8c021c0c",
+      "target": "sos://SystemState/9ad5a9e4a591fedc4ee3f18fa1c31cc1",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/a4269ded728478b48a30c98aecfeb958",
+      "target": "sos://SystemState/a44cc6fe348e83a0800a83538fdaec25",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/9b073019c18188c3c5e74ecb29c433e9",
+      "target": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/ca1104d2a10156d029cda7d2f709c052",
+      "target": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/791c3aab4e97387674b76a7bc8e3c0eb",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/5da882fa3cd98fd9e595785467117d94",
+      "target": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/38018133f31a8dc83e57436c05f59d7e",
+      "target": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "target": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+      "target": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "target": "sos://CausalHypothesis/ad768bb40c9a558e667d10f26f0cc282",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evaluation/4d8653e025cdac4c7cd690e352a156af",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evaluation/4d8653e025cdac4c7cd690e352a156af",
+      "target": "sos://CausalHypothesis/ad768bb40c9a558e667d10f26f0cc282",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evaluation/4d8653e025cdac4c7cd690e352a156af",
+      "target": "sos://Experiment/f5aea109ab97e24fa6b35ada7dd6b77a",
+      "type": "CAUSED_BY",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://AssuranceCase/ef561845d9e2996ae239fd7237054053",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://AssuranceCase/ef561845d9e2996ae239fd7237054053",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+      "target": "sos://AssuranceCase/3bb0613185c828cfbf23e056fa45dc98",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+      "target": "sos://AuthorityGrant/1b874ffb7550bc2e023faa7092855aec",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://RecoveryDeclaration/76a7ea9e51bdd5bbd1cda0dee566acfc",
+      "target": "sos://Decision/97e22f8d682a7256b1d019d1244cb6f4",
+      "type": "CONSTRAINS",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/01f1b6d18bf798a6e293fb2301364f03",
+      "target": "sos://RecoveryDeclaration/76a7ea9e51bdd5bbd1cda0dee566acfc",
+      "type": "VERIFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Evidence/3dd15793f83a7b4d7151fec54a4093dd",
+      "target": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "type": "OBSERVES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Decision/6dafecf394d3a1f957d1cb209b7f7b9a",
+      "target": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Decision/6dafecf394d3a1f957d1cb209b7f7b9a",
+      "target": "sos://AuthorityGrant/2e1c3d7ead632b0a2f9e6c3a8bf42000",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://AskRequest/700927c9f9547f548a6ce5b3c924b003",
+      "target": "sos://Decision/6dafecf394d3a1f957d1cb209b7f7b9a",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Package/015fd901223467c906e636da56def541",
+      "target": "sos://CandidateState/859e6efc20ecd7ada8881479cffe23ff",
+      "type": "REALIZES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+      "target": "sos://CandidateState/a9a3027727ea154817d5c15ac8f3df0c",
+      "type": "REALIZES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/a4be9c6949ee3f290b597ea901ddb162",
+      "target": "sos://Package/015fd901223467c906e636da56def541",
+      "type": "COMPOSES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/a4be9c6949ee3f290b597ea901ddb162",
+      "target": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+      "type": "COMPOSES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/76d6438f4a4b62175df4bbaf219add91",
+      "target": "sos://PackageComposition/a4be9c6949ee3f290b597ea901ddb162",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/d579872f2e9820a307e86c1e8da74e1e",
+      "target": "sos://PackageComposition/76d6438f4a4b62175df4bbaf219add91",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/d579872f2e9820a307e86c1e8da74e1e",
+      "target": "sos://Package/015fd901223467c906e636da56def541",
+      "type": "COMPOSES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://PackageComposition/d579872f2e9820a307e86c1e8da74e1e",
+      "target": "sos://Package/2adb5a792e36cf8fc917361abdb01bcd",
+      "type": "COMPOSES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://SystemState/5804c3002feeb804681319da72290857",
+      "target": "sos://ArchitectureGraph/ddbd1b54f96ff5b4efbfc4a33260a019",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://SystemState/5804c3002feeb804681319da72290857",
+      "target": "sos://ImplementationModel/bd49b598455bf3ca8a3494efb53e2b22",
+      "type": "DERIVED_FROM",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    },
+    {
+      "source": "sos://SystemState/5804c3002feeb804681319da72290857",
+      "target": "sos://Mission/180c73e9a29e183b58acfeea5dbcdc34",
+      "type": "SATISFIES",
+      "provenance": [
+        "W11:console:demo-fixture"
+      ]
+    }
+  ]
+}
