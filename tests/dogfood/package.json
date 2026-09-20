@@ -1,0 +1,57 @@
+{
+  "name": "@sos-2/dogfood",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Integrated Dogfood (Work Order W17): ONE connected end-to-end scenario exercising every stage of the merged system through the public exports of the three harness apps' underlying packages \u2014 mission formalization -> greenfield realization (W14) -> brownfield optimization loop (W15) -> self-evolution meta loop (W16) \u2014 one semantic subgraph from Mission to learned ecology updates, every handoff a typed trace link, every artifact carrying its exact revision, plus the machine-checked R1-R31 requirement coverage ledger.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/scenario.js",
+  "types": "./dist/scenario.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/scenario.d.ts",
+      "default": "./dist/scenario.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/brownfield": "workspace:*",
+    "@sos-2/causal": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/conformance": "workspace:*",
+    "@sos-2/context": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/greenfield": "workspace:*",
+    "@sos-2/memory": "workspace:*",
+    "@sos-2/meta-evolution": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/recovery": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/retrieval": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@sos-2/ui-contracts": "workspace:*",
+    "@sos-2/value": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

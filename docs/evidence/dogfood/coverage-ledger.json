@@ -1,0 +1,346 @@
+{
+  "ledger": "sos-2.0-w17-requirement-coverage",
+  "work_order": "W17",
+  "base_commit": "152eff1b5e01adc3ac3742552e0477aad3209578",
+  "generated_by": "W17 worker (generated from tests/dogfood/src/coverage.ts — the machine-checked twin; agreement enforced by tests/dogfood/test/coverage-ledger.test.ts)",
+  "revision_tokens": {
+    "realizedRevision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2",
+    "systemStateRevision": "system-state@v1",
+    "metaProcessRevision": "meta-process@v1..v3",
+    "dogfoodProvenance": "W17:dogfood"
+  },
+  "notes": [
+    "Every requirement R1-R31 is exercised by the ONE integrated dogfood scenario in tests/dogfood/test/dogfood.test.ts (titles rendered from DOGFOOD_CASES).",
+    "The adversarial fault classes (13 frozen classes, tests/adversarial/) complement this ledger but are NOT requirement coverage: they prove detection/containment, not the happy path.",
+    "Evidence binds to the exact work-order head SHA (AGENTS.md rule 10); the revision tokens above are the exact in-scenario revisions the assertions pin."
+  ],
+  "requirements": [
+    {
+      "requirement": "R1",
+      "statement": "Mission-first.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "mission formalization: the raw mission becomes a governed, versioned Mission artifact with progressive goal measurability",
+        "greenfield (W14 stages, ASK path): mission -> candidate at the highest validated altitude -> ASK escalation -> human resolution -> realization -> reconciliation -> evidence"
+      ],
+      "stage": "mission formalization (W14 stage 1)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R2",
+      "statement": "Progressive mission formalization.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "mission formalization: the raw mission becomes a governed, versioned Mission artifact with progressive goal measurability"
+      ],
+      "stage": "mission formalization (W14 stage 1)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R3",
+      "statement": "Explicit mission evolution.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "mission evolution: an explicit, authority-controlled revision produces Mission v2 with a DERIVED_FROM chain"
+      ],
+      "stage": "mission revision (@sos-2/mission)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R4",
+      "statement": "Separate Value Model.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "value model: a separate ValueModel is created subordinated to the mission, and a budget conflict is surfaced as a CONFLICTS_WITH link"
+      ],
+      "stage": "value model subordination (@sos-2/value)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R5",
+      "statement": "Contextual realization.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "context: a Context artifact conditions the realization (production, edge platform, GDPR cohort)",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "context artifact (@sos-2/context)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R6",
+      "statement": "Greenfield and brownfield.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "greenfield (W14 stages, ASK path): mission -> candidate at the highest validated altitude -> ASK escalation -> human resolution -> realization -> reconciliation -> evidence",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield pipeline stages 1-6 (W14, ASK path)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R7",
+      "statement": "Versioned System State.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "realization: the System State revision, declared ArchitectureGraph hypothesis and ImplementationModel are mutually consistent at the exact realized revision"
+      ],
+      "stage": "greenfield realization (W14 stage 4)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R8",
+      "statement": "Architecture as hypothesis and executable constraint.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "realization: the System State revision, declared ArchitectureGraph hypothesis and ImplementationModel are mutually consistent at the exact realized revision",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield realization (W14 stage 4)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R9",
+      "statement": "Semantic Spine and evidence traceability.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "integrated trace chain: ONE connected semantic subgraph from the Mission to the learned ecology updates, with directed query paths across all three loops"
+      ],
+      "stage": "integrated trace chain (W17 connective tissue)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R10",
+      "statement": "Causal reasoning.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "causal grounding: an observational correlation is promoted to a CORRELATIONAL hypothesis through the only sanctioned path (no strong causal claim without intervention)"
+      ],
+      "stage": "causal grounding (@sos-2/causal)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R11",
+      "statement": "Multiple candidate states.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "brownfield loop stages 1-9 (W15, nominal world)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R12",
+      "statement": "Pareto and Quality-Diversity search.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "brownfield loop stages 1-9 (W15, nominal world)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R13",
+      "statement": "Safe evolution.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned",
+        "brownfield decision point (degraded world): the guardrail breach drives ROLLBACK with a bounded recovery declaration"
+      ],
+      "stage": "brownfield loop stages 1-9 (W15, nominal world)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R14",
+      "statement": "Rollback/recovery.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield decision point (degraded world): the guardrail breach drives ROLLBACK with a bounded recovery declaration"
+      ],
+      "stage": "brownfield promotion/rollback (W15 stages 6-7, degraded world)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R15",
+      "statement": "Authority-aware autonomy.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "greenfield (W14 stages, ASK path): mission -> candidate at the highest validated altitude -> ASK escalation -> human resolution -> realization -> reconciliation -> evidence",
+        "greenfield decision point (ACT path): with a covering grant presented, the engine acts directly",
+        "self-evolution (W16 stages): the meta loop runs over the same object system — separation, proposals, governance guard, effectiveness, decisions (REJECT/ROLLBACK/ASK/ACT), rollback restore and liability memory"
+      ],
+      "stage": "greenfield pipeline stages 1-6 (W14, ASK path)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R16",
+      "statement": "First-class ASK.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "greenfield (W14 stages, ASK path): mission -> candidate at the highest validated altitude -> ASK escalation -> human resolution -> realization -> reconciliation -> evidence",
+        "self-evolution (W16 stages): the meta loop runs over the same object system — separation, proposals, governance guard, effectiveness, decisions (REJECT/ROLLBACK/ASK/ACT), rollback restore and liability memory"
+      ],
+      "stage": "greenfield pipeline stages 1-6 (W14, ASK path)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R17",
+      "statement": "Contextual personalization.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "context: a Context artifact conditions the realization (production, edge platform, GDPR cohort)",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "context artifact (@sos-2/context)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R18",
+      "statement": "Platform neutrality.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "evidence: the unobserved cold-start probe stays UNAVAILABLE (never folded into success or zero), and OTel telemetry is ingested platform-neutrally",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield evidence ingestion (W14 stage 6) + telemetry ingestion (W15 stage 1)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R19",
+      "statement": "Architecture and liability memory.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned",
+        "self-evolution (W16 stages): the meta loop runs over the same object system — separation, proposals, governance guard, effectiveness, decisions (REJECT/ROLLBACK/ASK/ACT), rollback restore and liability memory"
+      ],
+      "stage": "brownfield loop stages 1-9 (W15, nominal world)",
+      "revision": "meta-process@v1..v3"
+    },
+    {
+      "requirement": "R20",
+      "statement": "Self-evolution.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "self-evolution (W16 stages): the meta loop runs over the same object system — separation, proposals, governance guard, effectiveness, decisions (REJECT/ROLLBACK/ASK/ACT), rollback restore and liability memory"
+      ],
+      "stage": "meta-evolution loop stages 1-7 (W16)",
+      "revision": "meta-process@v1..v3"
+    },
+    {
+      "requirement": "R21",
+      "statement": "Truthful failure states.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "evidence: the unobserved cold-start probe stays UNAVAILABLE (never folded into success or zero), and OTel telemetry is ingested platform-neutrally",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield evidence ingestion (W14 stage 6) + telemetry ingestion (W15 stage 1)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R22",
+      "statement": "Evidence-based explainability.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "explainability: the realized SystemState exposes a valid rationale chain and the evidence pool projects onto a deterministic evidence view model"
+      ],
+      "stage": "rationale + evidence view models (@sos-2/ui-contracts)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R23",
+      "statement": "Architecture/code reconciliation.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "greenfield reconciliation: the realized implementation vs the declared architecture classifies honestly (PRESERVING_REFINEMENT + IMPLEMENTATION_DETAIL)",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield reconciliation (W14 stage 5)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R24",
+      "statement": "Reusable packages.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "package ecology: validated member packages, a VALIDATED composition with its OWN evidence (member evidence never substitutes), and a diverse multi-family repertoire"
+      ],
+      "stage": "package ecology (@sos-2/packages + @sos-2/composition + @sos-2/registry)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R25",
+      "statement": "First-class package compositions.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "package ecology: validated member packages, a VALIDATED composition with its OWN evidence (member evidence never substitutes), and a diverse multi-family repertoire"
+      ],
+      "stage": "package ecology (@sos-2/packages + @sos-2/composition + @sos-2/registry)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R26",
+      "statement": "Context-conditioned package applicability.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "brownfield loop stages 1-9 (W15, nominal world)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R27",
+      "statement": "Independent composition evidence.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "package ecology: validated member packages, a VALIDATED composition with its OWN evidence (member evidence never substitutes), and a diverse multi-family repertoire"
+      ],
+      "stage": "package ecology (@sos-2/packages + @sos-2/composition + @sos-2/registry)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R28",
+      "statement": "Solution diversity.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "package ecology: validated member packages, a VALIDATED composition with its OWN evidence (member evidence never substitutes), and a diverse multi-family repertoire",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "package ecology (@sos-2/packages + @sos-2/composition + @sos-2/registry)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R29",
+      "statement": "Reasoning at the highest safe abstraction level.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "greenfield (W14 stages, ASK path): mission -> candidate at the highest validated altitude -> ASK escalation -> human resolution -> realization -> reconciliation -> evidence",
+        "brownfield (W15 stages, nominal world): the greenfield-realized system is ingested, recovered into competing hypotheses, optimized, assured, experimented, gated, reconciled and learned"
+      ],
+      "stage": "greenfield pipeline stages 1-6 (W14, ASK path)",
+      "revision": "31f2a9c07d9e5b864a2c0f7d3e8b1a6c95d4f0e2"
+    },
+    {
+      "requirement": "R30",
+      "statement": "Exact revision/evidence reproducibility.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "realization: the System State revision, declared ArchitectureGraph hypothesis and ImplementationModel are mutually consistent at the exact realized revision",
+        "integrated trace chain: ONE connected semantic subgraph from the Mission to the learned ecology updates, with directed query paths across all three loops",
+        "determinism: the entire integrated scenario is a pure function of its input (byte-identical canonical projection across runs)"
+      ],
+      "stage": "greenfield realization (W14 stage 4)",
+      "revision": "W17:dogfood"
+    },
+    {
+      "requirement": "R31",
+      "statement": "SOS applies the same discipline to itself.",
+      "test_file": "tests/dogfood/test/dogfood.test.ts",
+      "test_cases": [
+        "self-evolution (W16 stages): the meta loop runs over the same object system — separation, proposals, governance guard, effectiveness, decisions (REJECT/ROLLBACK/ASK/ACT), rollback restore and liability memory"
+      ],
+      "stage": "meta-evolution loop stages 1-7 (W16)",
+      "revision": "meta-process@v1..v3"
+    }
+  ]
+}
