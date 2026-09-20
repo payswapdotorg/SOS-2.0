@@ -1,0 +1,60 @@
+{
+  "envelope": {
+    "id": "sos://Decision/9b7096988531ea9ea261a5057bcfb775",
+    "kind": "Decision",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": "sos://AuthorityGrant/5c78cb12a00ec1500b378f35cef98deb",
+    "provenance": [
+      "W9:promotion-test"
+    ],
+    "created_at": "2025-01-02T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "action": "ACT",
+    "candidate_ref": "sos://CandidateState/74fecdeeec988b8161ade05aea187aad",
+    "authority_grant_ref": "sos://AuthorityGrant/5c78cb12a00ec1500b378f35cef98deb",
+    "assurance_case_ref": "sos://AssuranceCase/374735cd6f491fa7f98b1547cd2a7bcb",
+    "evidence_refs": [
+      "sos://Evidence/e943b7bd11cc45394bebaa960c61d1dc"
+    ],
+    "reasons": [
+      "all promotion gates passed — the candidate is promoted (ACT)",
+      "authority grant sos://AuthorityGrant/5c78cb12a00ec1500b378f35cef98deb is VALID at 2025-01-02T00:00:00.000Z, covers the candidate and carries PROMOTE",
+      "assurance case sos://AssuranceCase/374735cd6f491fa7f98b1547cd2a7bcb verdict is SATISFIED and validity is CURRENT at 2025-01-02T00:00:00.000Z",
+      "1 current intervention-grade SUCCESS record(s) about the candidate satisfy the evidence requirement",
+      "evidence record sos://Evidence/e943b7bd11cc45394bebaa960c61d1dc is admissible: INTERVENTIONAL, SUCCESS, subject-bound to the candidate, FRESH at 2025-01-02T00:00:00.000Z",
+      "bounded recovery declared: Feature-flag kill switch reverting to the direct-read path; stateless components, no data migration. (max 30s)",
+      "candidate sos://CandidateState/74fecdeeec988b8161ade05aea187aad is based on the current System State revision \"system-state:r1\""
+    ],
+    "recovery": {
+      "mechanism": "Feature-flag kill switch reverting to the direct-read path; stateless components, no data migration.",
+      "max_recovery_seconds": 30,
+      "containment_exception": null,
+      "rollback_triggers": [
+        {
+          "experiment_id": "sos://Experiment/0221320f3610fd34c8f8cf74461c41fc",
+          "trigger": {
+            "kind": "ROLLBACK",
+            "rule_id": "error-budget",
+            "description": "Roll back when the error-rate guardrail is breached or cannot be established.",
+            "triggered": false,
+            "reason": "every referenced guardrail is SATISFIED",
+            "conditions": [
+              {
+                "condition": "guardrail error-rate is SATISFIED (availability SUCCESS)",
+                "satisfied": false
+              }
+            ]
+          }
+        }
+      ],
+      "authority_ref": null
+    },
+    "system_state_revision": "system-state:r1",
+    "live_trigger_rule_ids": [
+      "error-budget"
+    ]
+  }
+}
