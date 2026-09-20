@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/brownfield-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Brownfield Harness (Work Order W15): a runnable end-to-end harness over the golden brownfield scenario (the fake 'merch-catalog-legacy' legacy system) executing the brownfield optimization loop deterministically — BOTH worlds: the nominal world (healthy simulated experiment -> honest EXPERIMENT decision) and the degraded world (guardrail breach -> ROLLBACK decision + bounded recovery declaration + failure/rollback memory). Zero domain logic: everything is imported from @sos-2/brownfield. Prints the deterministic summary and exits 0 ONLY if both trace chains are complete. No network, no time dependence (single caller-supplied instant, fixed seed).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "default": "./dist/main.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo:build": "pnpm run build && node dist/write-fixture.js",
+    "start": "pnpm run build && node dist/main.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/brownfield": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
