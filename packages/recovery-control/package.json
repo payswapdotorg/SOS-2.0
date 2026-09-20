@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/recovery-control",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Recovery Control: the rollback contract — every live change declares a bounded recovery mechanism, trigger, authority and evidence (RecoveryDeclaration artifacts, extension kind registered through the spine); unbounded/unspecified recovery is REJECTED unless an explicit governed exception record exists; the trusted recovery policy (require_bounded_recovery) is mutable ONLY through the authority-gated path (origin TRUSTED_OPERATORS + a valid @sos-2/authority grant carrying REVISE, plus a governed exception to weaken), and candidate-originated attempts to disable assurance controls are ALWAYS rejected (spec/architecture-lock.md) (Work Order W8; spec/architecture.md section 13, docs/assurance-model.md, R14).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/evidence": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

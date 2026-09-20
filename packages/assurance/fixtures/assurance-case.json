@@ -1,0 +1,100 @@
+{
+  "envelope": {
+    "id": "sos://AssuranceCase/cfd0c4d34161d82b443866725f7fc63e",
+    "kind": "AssuranceCase",
+    "version": 1,
+    "status": "ACTIVE",
+    "authority_ref": null,
+    "provenance": [
+      "W8:golden-fixture:assurance-case"
+    ],
+    "created_at": "2025-01-02T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "claims": [
+      {
+        "id": "claim-payments-safe",
+        "statement": "The payment flow is safe to operate in production."
+      },
+      {
+        "id": "claim-payments-correct",
+        "statement": "Payment totals are computed correctly for every checkout."
+      },
+      {
+        "id": "claim-payments-recoverable",
+        "statement": "Any in-flight payment can be recovered without data loss."
+      }
+    ],
+    "arguments": [
+      {
+        "id": "argument-safety",
+        "strategy": "Correctness plus recoverability jointly establish operational safety.",
+        "conclusion": "claim-payments-safe",
+        "premises": [
+          "claim-payments-correct",
+          "claim-payments-recoverable"
+        ]
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "assumption-corpus-representative",
+        "statement": "The test corpus is representative of production traffic."
+      }
+    ],
+    "hazards": [
+      {
+        "id": "hazard-double-charge",
+        "description": "A retried payment charges the customer twice."
+      }
+    ],
+    "controls": [
+      {
+        "id": "control-idempotency-key",
+        "mechanism": "Idempotency keys on every payment request.",
+        "addresses": [
+          "hazard-double-charge"
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "evidence_id": "sos://Evidence/e0208d2410daf6ab8c7c890738ee918b",
+        "role": "SUPPORTS",
+        "claim_ref": "claim-payments-correct"
+      },
+      {
+        "evidence_id": "sos://Evidence/9b543e55da960863a8dee086ac6f8983",
+        "role": "VERIFIES",
+        "claim_ref": "claim-payments-correct"
+      }
+    ],
+    "validity_conditions": [
+      {
+        "kind": "IMPLEMENTATION",
+        "subject": "payments-service",
+        "valid_revisions": [
+          "rev-0001",
+          "rev-0002"
+        ]
+      },
+      {
+        "kind": "ENVIRONMENT",
+        "subject": "prod-eu",
+        "valid_revisions": [
+          "env-2025-01"
+        ]
+      }
+    ],
+    "objections": [
+      {
+        "id": "objection-corpus-coverage",
+        "statement": "The corpus does not cover currency-conversion rounding.",
+        "raised_at": "2025-01-02T00:00:00.000Z",
+        "status": "OPEN",
+        "resolution": null
+      }
+    ]
+  }
+}

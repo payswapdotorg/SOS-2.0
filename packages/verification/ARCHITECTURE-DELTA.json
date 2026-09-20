@@ -1,0 +1,27 @@
+{
+  "affected_artifacts": [
+    "packages/verification"
+  ],
+  "added": [
+    "packages/verification: @sos-2/verification — the runtime verification adapter CONTRACT (spec/architecture.md section 13 'runtime verification', section 17 platform neutrality): typed monitor definitions (MonitorDefinition { id, property } as TYPED VALUES — the @sos-2/conformance Invariant precedent, deliberately not artifacts), a small typed property DSL (ALWAYS invariant predicates, RESPONSE trigger->response with optional deadline, CUSTOM engine-specific payloads as the platform-neutrality escape hatch), validated monitor events { predicate, holds, at } (events are INPUT, never semantic truth — W3 discipline), and the RuntimeMonitorEngine interface { id, supportedProperties, evaluate } with a structural guard",
+    "packages/verification contract authority: the FROZEN verdict-to-availability mapping (MONITOR_VERDICT_AVAILABILITY: SATISFIED->SUCCESS, VIOLATED->FAILURE, INCONCLUSIVE->UNKNOWN|UNAVAILABLE|UNSUPPORTED|PARTIAL) enforced by assertValidMonitorEvaluationResult — ADAPTERS ARE NOT AUTHORITY: a rogue engine violating the mapping, minting non-W3 evidence, forging the exact-revision binding (subject_ref/subject_revision/source_revision/deployment_revision), using a wrong evidence kind, omitting the OBSERVES link or returning an empty reason is refused loudly by the sanctioned entry point evaluateMonitor",
+    "packages/verification evidence: evaluation results as Evidence records (kind 'runtime-monitor') minted through the merged W3 authority (@sos-2/evidence createEvidence — deterministic content-addressed ids, OBSERVATIONAL class, explicit method provenance 'runtime-verification:<engine-id>'); every result binds to the exact SystemState/implementation/deployment revisions of the evaluation context (nulls preserved, never defaulted) and carries an OBSERVES trace link to the monitored SystemState; shared helpers (mintMonitorEvidence, monitorObservesLink) let third-party engines produce contract-conformant results",
+    "packages/verification reference engine: createInMemoryReferenceEngine — the in-memory reference implementation (ALWAYS + RESPONSE) with witness discipline (VIOLATED requires a positively witnessed violation or deadline miss), gap discipline (no observations of a predicate -> INCONCLUSIVE/UNAVAILABLE — a gap is data about missing data, never read as satisfaction), vacuity discipline (a RESPONSE property never exercised -> INCONCLUSIVE/UNKNOWN with an explicit reason — vacuous satisfaction is never reported) and truthful UNSUPPORTED for CUSTOM/unsupported property kinds (never folded into UNKNOWN); deterministic stable event ordering (by instant, then input position)",
+    "packages/verification/ARCHITECTURE-DELTA.json: this Architecture Delta record — DECLARED HERE because spec/** is outside W8's owned paths; the Architect may reconcile it into spec/contracts/deltas/ at merge time"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the Semantic Spine remains the ONLY identity/trace authority and @sos-2/evidence the ONLY evidence authority: monitor evidence records are minted and validated by the merged W3 package; no new artifact kinds are introduced (monitor definitions are typed values — the W2 Invariant precedent); the 17 frozen trace link types are USED (OBSERVES), not extended",
+    "the 6 evidence truth states remain distinct and the mapping from monitor verdicts is frozen: SATISFIED is only ever SUCCESS, VIOLATED is only ever FAILURE, and INCONCLUSIVE is one of the four honest not-conclusive states — each chosen for its truthful sub-cause (UNKNOWN: undeterminable on the finite trace / unexercised; UNAVAILABLE: a gap with no observations; UNSUPPORTED: the engine cannot evaluate the property kind; PARTIAL: some triggers answered, some open)",
+    "absence of observation is never treated as observation of absence (spec/architecture-lock.md forbidden-shortcut family): an ALWAYS monitor over an empty trace is never SATISFIED; a RESPONSE property never exercised is never SATISFIED (vacuous satisfaction is explicitly refused and reported)",
+    "platform neutrality (spec/architecture.md section 17): real engines are adapters behind the contract — the reference engine is one adapter, not the authority; the CONTRACT validates every engine's outputs (mapping, W3 validity, revision binding, links) and refuses dishonest adapters",
+    "exact-revision binding (R30): every result carries the SystemState id + version, the subject revision token and the implementation/deployment revisions from the caller-supplied context — no hidden clocks, no ambient state, and no adapter can forge the binding",
+    "LLM output is never authoritative evidence or authorization (spec/architecture.md section 18): producers flow through the W3 Producer contract; monitor evidence is always OBSERVATIONAL with explicit method provenance"
+  ],
+  "boundary_changes": [
+    "new package boundary: packages/verification depends on @sos-2/semantic-spine, @sos-2/evidence and @sos-2/provenance (all merged at the W8 base) — consumption only, no modifications to any merged package"
+  ],
+  "rationale_ref": "spec/work-orders/W8-assurance.md",
+  "work_order": "W8"
+}
