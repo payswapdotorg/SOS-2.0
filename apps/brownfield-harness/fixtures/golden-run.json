@@ -1,0 +1,1028 @@
+{
+  "generated_by": "@sos-2/brownfield-harness write-fixture (deterministic; re-runnable)",
+  "variants": {
+    "nominal": {
+      "decision": "EXPERIMENT",
+      "summary_text": "SOS 2.0 Brownfield Optimization Loop — merch-catalog-legacy @ f7a3c59e1b2d\ningested: 6 modules, 5 dependencies, 1 interfaces, 6 runtime observations (telemetry: 4 ingested, 1 gaps recorded)\nhypotheses: 4 (ambiguity: yes; strategies: DIRECT, MERGED_REALIZATIONS)\nretrieved: 3 candidates across 3 families (durable-queue, edge-cache, legacy-monolith) at altitudes VALIDATED_PACKAGE < PACKAGE_ADAPTATION\ncandidate: legacy-search -> legacy-search-optimized (package sos://Package/1af99466bdc5ab90d348a97a4240f2f9, family durable-queue; bounded: 1 nodes / 5 edges; invariants preserved: 2)\nassurance: VALID (objections retained: 1; blocks promotion: no)\nexperiment: SUCCESS (SIMULATED, seed 20250601; guardrails breached: 0; rollback triggers fired: 0)\ndecision: EXPERIMENT (guardrails tripped: no; bounded recovery declared: yes)\ndrift: IMPLEMENTATION_DETAIL=6, PRESERVING_REFINEMENT=1, DRIFT=5\nlearned: 4 memory entries, transfer TRANSFER_SUCCESS, 1 decay signals, 2 ecology packages updated\ntrace chain: COMPLETE (41 links, 30 artifacts reachable from the ImplementationModel)",
+      "summary": {
+        "system_name": "merch-catalog-legacy",
+        "source_revision": "f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+        "ingested": {
+          "modules": 6,
+          "dependencies": 5,
+          "interfaces": 1,
+          "runtime_observations": 6,
+          "telemetry_ingested": 4,
+          "telemetry_gaps": 1
+        },
+        "hypotheses": {
+          "count": 4,
+          "ambiguity_detected": true,
+          "strategies": [
+            "DIRECT",
+            "MERGED_REALIZATIONS"
+          ]
+        },
+        "retrieved": {
+          "candidates": 3,
+          "families": [
+            "durable-queue",
+            "edge-cache",
+            "legacy-monolith"
+          ],
+          "altitudes": [
+            "VALIDATED_PACKAGE",
+            "PACKAGE_ADAPTATION"
+          ]
+        },
+        "candidate": {
+          "target_component": "legacy-search",
+          "replacement_component": "legacy-search-optimized",
+          "package_id": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "family": "durable-queue",
+          "bounded_nodes": 1,
+          "bounded_edges": 5,
+          "invariants_preserved": 2
+        },
+        "assurance": {
+          "verdict": "VALID",
+          "objections_retained": 1,
+          "blocks": false
+        },
+        "experiment": {
+          "overall_availability": "SUCCESS",
+          "simulated": true,
+          "seed": 20250601,
+          "guardrails_breached": 0,
+          "rollback_triggers_fired": 0
+        },
+        "decision": {
+          "action": "EXPERIMENT",
+          "guardrails_tripped": false,
+          "recovery_declared": true
+        },
+        "drift": {
+          "IMPLEMENTATION_DETAIL": 6,
+          "EXPECTED_VARIATION": 0,
+          "PRESERVING_REFINEMENT": 1,
+          "INTENTIONAL_EVOLUTION": 0,
+          "DRIFT": 5,
+          "UNKNOWN": 0,
+          "CONTRADICTION": 0
+        },
+        "learned": {
+          "memory_entries": 4,
+          "transfer_outcome": "TRANSFER_SUCCESS",
+          "decay_signals": 1,
+          "ecology_packages": 2
+        },
+        "trace": {
+          "links": 41,
+          "artifacts_reachable": 30,
+          "complete": true
+        }
+      },
+      "trace": [
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://Evidence/56d1f505247e88420acb988d9db1fe5b",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:input-digest:2789fd8d7603e94130601c79b9c7809aaadfe8b24b0937094fc2e64cd683c3ca"
+          ]
+        },
+        {
+          "source": "sos://Evidence/56d1f505247e88420acb988d9db1fe5b",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:ingestion"
+          ]
+        },
+        {
+          "source": "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "VERIFIES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+            "architecture:sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "VERIFIES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+            "architecture:sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc@v1"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://Evidence/affd6de0e7ab81dc3276a649b3b1cb83",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:retrieval"
+          ]
+        },
+        {
+          "source": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:durable-queue"
+          ]
+        },
+        {
+          "source": "sos://Package/9e856a6864f9f1b0b23a9d667c5f5dc9",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:edge-cache"
+          ]
+        },
+        {
+          "source": "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:legacy-monolith"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:evolution"
+          ]
+        },
+        {
+          "source": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "target": "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "type": "REFINES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:evolution"
+          ]
+        },
+        {
+          "source": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "target": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:package-family:durable-queue"
+          ]
+        },
+        {
+          "source": "sos://AssuranceCase/6f85ba829c0db68e1a6fd7d658a4161a",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:assurance"
+          ]
+        },
+        {
+          "source": "sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W8:runtime-verification:sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "experiment:sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "target": "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "experiment:sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "result:sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+          "target": "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "type": "OBSERVES",
+          "provenance": [
+            "result:sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+          "target": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "type": "CAUSED_BY",
+          "provenance": [
+            "result:sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Decision/e307106bfea23fdb436613f6cd979481",
+          "target": "sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:promotion",
+            "brownfield:decision:EXPERIMENT"
+          ]
+        },
+        {
+          "source": "sos://AuthorityGrant/bc92153bcfebb94d404cdf253fff090f",
+          "target": "sos://Decision/e307106bfea23fdb436613f6cd979481",
+          "type": "CONSTRAINS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:promotion",
+            "brownfield:grantee:agent:w15-brownfield-loop"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "OBSERVES",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "REFINES",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://Evidence/d6618cfff9b1c30f3436172b28be1cfb",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/3504b0b4ce5b43286a47b74aec3a5f90",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/5f41de6e1054e87a6e57108cdd3e0994",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/4f4a74502b8cee1111fd6a24e42ba917",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/1be890b780abbe0b5966d142596886b7",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/e35f14a1811e407d5c674844dc80cda0",
+          "target": "sos://Decision/e307106bfea23fdb436613f6cd979481",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:learning"
+          ]
+        },
+        {
+          "source": "sos://Evidence/e35f14a1811e407d5c674844dc80cda0",
+          "target": "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:decay-signal:USAGE_DECAY"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureMemory/80965c0aebbc2d81b24a5457755b2d4e",
+          "target": "sos://Evidence/e35f14a1811e407d5c674844dc80cda0",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:learning"
+          ]
+        }
+      ],
+      "chain": {
+        "complete": true,
+        "root": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+        "reachable": [
+          "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "sos://ArchitectureMemory/80965c0aebbc2d81b24a5457755b2d4e",
+          "sos://AssuranceCase/6f85ba829c0db68e1a6fd7d658a4161a",
+          "sos://AuthorityGrant/bc92153bcfebb94d404cdf253fff090f",
+          "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "sos://Decision/e307106bfea23fdb436613f6cd979481",
+          "sos://Evaluation/0132b7c1aee65040293aefa7494fb0e1",
+          "sos://Evidence/1be890b780abbe0b5966d142596886b7",
+          "sos://Evidence/3504b0b4ce5b43286a47b74aec3a5f90",
+          "sos://Evidence/4f4a74502b8cee1111fd6a24e42ba917",
+          "sos://Evidence/56d1f505247e88420acb988d9db1fe5b",
+          "sos://Evidence/5f41de6e1054e87a6e57108cdd3e0994",
+          "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+          "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "sos://Evidence/affd6de0e7ab81dc3276a649b3b1cb83",
+          "sos://Evidence/d6618cfff9b1c30f3436172b28be1cfb",
+          "sos://Evidence/e35f14a1811e407d5c674844dc80cda0",
+          "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "sos://Package/9e856a6864f9f1b0b23a9d667c5f5dc9",
+          "sos://SystemState/d6d9db27941a88f161dbf268610a508c"
+        ],
+        "missing": [],
+        "link_count": 41
+      }
+    },
+    "degraded": {
+      "decision": "ROLLBACK",
+      "summary_text": "SOS 2.0 Brownfield Optimization Loop — merch-catalog-legacy @ f7a3c59e1b2d\ningested: 6 modules, 5 dependencies, 1 interfaces, 6 runtime observations (telemetry: 4 ingested, 1 gaps recorded)\nhypotheses: 4 (ambiguity: yes; strategies: DIRECT, MERGED_REALIZATIONS)\nretrieved: 3 candidates across 3 families (durable-queue, edge-cache, legacy-monolith) at altitudes VALIDATED_PACKAGE < PACKAGE_ADAPTATION\ncandidate: legacy-search -> legacy-search-optimized (package sos://Package/1af99466bdc5ab90d348a97a4240f2f9, family durable-queue; bounded: 1 nodes / 5 edges; invariants preserved: 2)\nassurance: VALID (objections retained: 1; blocks promotion: no)\nexperiment: FAILURE (SIMULATED, seed 20250601; guardrails breached: 1; rollback triggers fired: 1)\ndecision: ROLLBACK (guardrails tripped: yes; bounded recovery declared: yes)\ndrift: IMPLEMENTATION_DETAIL=6, PRESERVING_REFINEMENT=1, DRIFT=5\nlearned: 6 memory entries, transfer TRANSFER_FAILURE, 1 decay signals, 2 ecology packages updated\ntrace chain: COMPLETE (41 links, 30 artifacts reachable from the ImplementationModel)",
+      "summary": {
+        "system_name": "merch-catalog-legacy",
+        "source_revision": "f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+        "ingested": {
+          "modules": 6,
+          "dependencies": 5,
+          "interfaces": 1,
+          "runtime_observations": 6,
+          "telemetry_ingested": 4,
+          "telemetry_gaps": 1
+        },
+        "hypotheses": {
+          "count": 4,
+          "ambiguity_detected": true,
+          "strategies": [
+            "DIRECT",
+            "MERGED_REALIZATIONS"
+          ]
+        },
+        "retrieved": {
+          "candidates": 3,
+          "families": [
+            "durable-queue",
+            "edge-cache",
+            "legacy-monolith"
+          ],
+          "altitudes": [
+            "VALIDATED_PACKAGE",
+            "PACKAGE_ADAPTATION"
+          ]
+        },
+        "candidate": {
+          "target_component": "legacy-search",
+          "replacement_component": "legacy-search-optimized",
+          "package_id": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "family": "durable-queue",
+          "bounded_nodes": 1,
+          "bounded_edges": 5,
+          "invariants_preserved": 2
+        },
+        "assurance": {
+          "verdict": "VALID",
+          "objections_retained": 1,
+          "blocks": false
+        },
+        "experiment": {
+          "overall_availability": "FAILURE",
+          "simulated": true,
+          "seed": 20250601,
+          "guardrails_breached": 1,
+          "rollback_triggers_fired": 1
+        },
+        "decision": {
+          "action": "ROLLBACK",
+          "guardrails_tripped": true,
+          "recovery_declared": true
+        },
+        "drift": {
+          "IMPLEMENTATION_DETAIL": 6,
+          "EXPECTED_VARIATION": 0,
+          "PRESERVING_REFINEMENT": 1,
+          "INTENTIONAL_EVOLUTION": 0,
+          "DRIFT": 5,
+          "UNKNOWN": 0,
+          "CONTRADICTION": 0
+        },
+        "learned": {
+          "memory_entries": 6,
+          "transfer_outcome": "TRANSFER_FAILURE",
+          "decay_signals": 1,
+          "ecology_packages": 2
+        },
+        "trace": {
+          "links": 41,
+          "artifacts_reachable": 30,
+          "complete": true
+        }
+      },
+      "trace": [
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://Evidence/ea669fd0435467fd156ac281cfe355ac",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:input-digest:a6c8ff038bebf6bec90ed0f2c2762877ec708836dfca0ce987e048c53c6d228b"
+          ]
+        },
+        {
+          "source": "sos://Evidence/ea669fd0435467fd156ac281cfe355ac",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:ingestion"
+          ]
+        },
+        {
+          "source": "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "VERIFIES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+            "architecture:sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "VERIFIES",
+          "provenance": [
+            "W4:runtime-conformance:sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+            "architecture:sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc@v1"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Component"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:DIRECT",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "target": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "type": "OBSERVES",
+          "provenance": [
+            "W4:recovery:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+            "source-revision:f7a3c59e1b2d4f6a8c0e2b4d6f8a0c2e4b6d8f0a",
+            "recovery:strategy:MERGED_REALIZATIONS",
+            "recovery:assignment:library=Component,service=Adapter"
+          ]
+        },
+        {
+          "source": "sos://Evidence/affd6de0e7ab81dc3276a649b3b1cb83",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:retrieval"
+          ]
+        },
+        {
+          "source": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:durable-queue"
+          ]
+        },
+        {
+          "source": "sos://Package/9e856a6864f9f1b0b23a9d667c5f5dc9",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:edge-cache"
+          ]
+        },
+        {
+          "source": "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "COMPATIBLE_WITH",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:retrieved:legacy-monolith"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "target": "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:evolution"
+          ]
+        },
+        {
+          "source": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "target": "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "type": "REFINES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:evolution"
+          ]
+        },
+        {
+          "source": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "target": "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:package-family:durable-queue"
+          ]
+        },
+        {
+          "source": "sos://AssuranceCase/6f85ba829c0db68e1a6fd7d658a4161a",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:assurance"
+          ]
+        },
+        {
+          "source": "sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+          "target": "sos://SystemState/d6d9db27941a88f161dbf268610a508c",
+          "type": "OBSERVES",
+          "provenance": [
+            "W8:runtime-verification:sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+            "system-state:sos://SystemState/d6d9db27941a88f161dbf268610a508c@v1"
+          ]
+        },
+        {
+          "source": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "experiment:sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "target": "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "experiment:sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+          "target": "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "type": "VERIFIES",
+          "provenance": [
+            "result:sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+          "target": "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "type": "OBSERVES",
+          "provenance": [
+            "result:sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+          "target": "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "type": "CAUSED_BY",
+          "provenance": [
+            "result:sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+            "sos://schema/trace-link"
+          ]
+        },
+        {
+          "source": "sos://Decision/8c3015d17fbd5948c3e892ce070b78ae",
+          "target": "sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:promotion",
+            "brownfield:decision:ROLLBACK"
+          ]
+        },
+        {
+          "source": "sos://AuthorityGrant/bc92153bcfebb94d404cdf253fff090f",
+          "target": "sos://Decision/8c3015d17fbd5948c3e892ce070b78ae",
+          "type": "CONSTRAINS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:promotion",
+            "brownfield:grantee:agent:w15-brownfield-loop"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "OBSERVES",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "REFINES",
+          "provenance": [
+            "W2:reconcile:sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda->sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc"
+          ]
+        },
+        {
+          "source": "sos://Evidence/d6618cfff9b1c30f3436172b28be1cfb",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/3504b0b4ce5b43286a47b74aec3a5f90",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/5f41de6e1054e87a6e57108cdd3e0994",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/4f4a74502b8cee1111fd6a24e42ba917",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/1be890b780abbe0b5966d142596886b7",
+          "target": "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "type": "CONTRADICTS",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:reconciliation",
+            "brownfield:drift:DRIFT"
+          ]
+        },
+        {
+          "source": "sos://Evidence/4330f356a3489474d1f2c8b1169af842",
+          "target": "sos://Decision/8c3015d17fbd5948c3e892ce070b78ae",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:learning"
+          ]
+        },
+        {
+          "source": "sos://Evidence/4330f356a3489474d1f2c8b1169af842",
+          "target": "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "type": "OBSERVES",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:decay-signal:USAGE_DECAY"
+          ]
+        },
+        {
+          "source": "sos://ArchitectureMemory/161cda3d0547dee99c9289e9a1277d07",
+          "target": "sos://Evidence/4330f356a3489474d1f2c8b1169af842",
+          "type": "DERIVED_FROM",
+          "provenance": [
+            "W15:brownfield-golden-scenario",
+            "brownfield:stage:learning"
+          ]
+        }
+      ],
+      "chain": {
+        "complete": true,
+        "root": "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+        "reachable": [
+          "sos://ArchitectureGraph/110211861dbc2db84708a5542a4e689a",
+          "sos://ArchitectureGraph/36c557f539c25671a47eef5a1baad6e7",
+          "sos://ArchitectureGraph/36ee2d7f2cee50090ff439cc28a586ac",
+          "sos://ArchitectureGraph/64b0cce7dbbf51616a0171d8d31d5cfc",
+          "sos://ArchitectureGraph/9a5983d6427eb96e17622889f7a88efb",
+          "sos://ArchitectureGraph/d7cd11e325680ff2ef664b42507fbfac",
+          "sos://ArchitectureMemory/161cda3d0547dee99c9289e9a1277d07",
+          "sos://AssuranceCase/6f85ba829c0db68e1a6fd7d658a4161a",
+          "sos://AuthorityGrant/bc92153bcfebb94d404cdf253fff090f",
+          "sos://CandidateState/8ab34d77c5a0ebf22f7ccb3f32d42e18",
+          "sos://CausalHypothesis/905e58768a438059a2d499bb5c03df20",
+          "sos://Decision/8c3015d17fbd5948c3e892ce070b78ae",
+          "sos://Evaluation/5579c8765b0e8838284ee4dae11cdb19",
+          "sos://Evidence/1be890b780abbe0b5966d142596886b7",
+          "sos://Evidence/3504b0b4ce5b43286a47b74aec3a5f90",
+          "sos://Evidence/4330f356a3489474d1f2c8b1169af842",
+          "sos://Evidence/4f4a74502b8cee1111fd6a24e42ba917",
+          "sos://Evidence/5f41de6e1054e87a6e57108cdd3e0994",
+          "sos://Evidence/7d934952bfa06c1380f58770af4315e8",
+          "sos://Evidence/89f39bc2193a7ea973e775361db4346d",
+          "sos://Evidence/90bfa8c7dc1927d8352a586463d4790c",
+          "sos://Evidence/affd6de0e7ab81dc3276a649b3b1cb83",
+          "sos://Evidence/d6618cfff9b1c30f3436172b28be1cfb",
+          "sos://Evidence/ea669fd0435467fd156ac281cfe355ac",
+          "sos://Experiment/f1b46bbe3d33e95196082132183336ff",
+          "sos://ImplementationModel/e05c97ba87b3b03c649c3f2349c91cda",
+          "sos://Package/1af99466bdc5ab90d348a97a4240f2f9",
+          "sos://Package/7d2c3d55292c3bc461b6aa7c3f0b19e0",
+          "sos://Package/9e856a6864f9f1b0b23a9d667c5f5dc9",
+          "sos://SystemState/d6d9db27941a88f161dbf268610a508c"
+        ],
+        "missing": [],
+        "link_count": 41
+      }
+    }
+  },
+  "stdout": "SOS 2.0 Brownfield Optimization Loop — end-to-end harness (golden scenario: merch-catalog-legacy)\n\n--- world 1/2: NOMINAL (healthy simulated experiment) ---\nSOS 2.0 Brownfield Optimization Loop — merch-catalog-legacy @ f7a3c59e1b2d\ningested: 6 modules, 5 dependencies, 1 interfaces, 6 runtime observations (telemetry: 4 ingested, 1 gaps recorded)\nhypotheses: 4 (ambiguity: yes; strategies: DIRECT, MERGED_REALIZATIONS)\nretrieved: 3 candidates across 3 families (durable-queue, edge-cache, legacy-monolith) at altitudes VALIDATED_PACKAGE < PACKAGE_ADAPTATION\ncandidate: legacy-search -> legacy-search-optimized (package sos://Package/1af99466bdc5ab90d348a97a4240f2f9, family durable-queue; bounded: 1 nodes / 5 edges; invariants preserved: 2)\nassurance: VALID (objections retained: 1; blocks promotion: no)\nexperiment: SUCCESS (SIMULATED, seed 20250601; guardrails breached: 0; rollback triggers fired: 0)\ndecision: EXPERIMENT (guardrails tripped: no; bounded recovery declared: yes)\ndrift: IMPLEMENTATION_DETAIL=6, PRESERVING_REFINEMENT=1, DRIFT=5\nlearned: 4 memory entries, transfer TRANSFER_SUCCESS, 1 decay signals, 2 ecology packages updated\ntrace chain: COMPLETE (41 links, 30 artifacts reachable from the ImplementationModel)\n\n--- world 2/2: DEGRADED (guardrail breach -> ROLLBACK path variant) ---\nSOS 2.0 Brownfield Optimization Loop — merch-catalog-legacy @ f7a3c59e1b2d\ningested: 6 modules, 5 dependencies, 1 interfaces, 6 runtime observations (telemetry: 4 ingested, 1 gaps recorded)\nhypotheses: 4 (ambiguity: yes; strategies: DIRECT, MERGED_REALIZATIONS)\nretrieved: 3 candidates across 3 families (durable-queue, edge-cache, legacy-monolith) at altitudes VALIDATED_PACKAGE < PACKAGE_ADAPTATION\ncandidate: legacy-search -> legacy-search-optimized (package sos://Package/1af99466bdc5ab90d348a97a4240f2f9, family durable-queue; bounded: 1 nodes / 5 edges; invariants preserved: 2)\nassurance: VALID (objections retained: 1; blocks promotion: no)\nexperiment: FAILURE (SIMULATED, seed 20250601; guardrails breached: 1; rollback triggers fired: 1)\ndecision: ROLLBACK (guardrails tripped: yes; bounded recovery declared: yes)\ndrift: IMPLEMENTATION_DETAIL=6, PRESERVING_REFINEMENT=1, DRIFT=5\nlearned: 6 memory entries, transfer TRANSFER_FAILURE, 1 decay signals, 2 ecology packages updated\ntrace chain: COMPLETE (41 links, 30 artifacts reachable from the ImplementationModel)\n\nharness verdict: COMPLETE — both loops form one connected trace chain from ImplementationModel to the learned ecology updates (exit 0)"
+}
