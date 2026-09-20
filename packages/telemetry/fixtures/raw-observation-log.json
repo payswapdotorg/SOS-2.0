@@ -1,0 +1,24 @@
+{
+  "subject_ref": "otel:service:checkout",
+  "availability": "FAILURE",
+  "window": { "start": "2025-01-01T00:00:12.000Z", "end": "2025-01-01T00:00:12.000Z" },
+  "observed": {
+    "signal": "log",
+    "severity_number": 17,
+    "severity_text": "ERROR",
+    "body": "upstream connection reset",
+    "trace_id": "5b8efff798038103d269b633813fc60c",
+    "span_id": "eee19b7ec3ee1e0f",
+    "time_unix_nano": "1735689612000000000",
+    "log_attributes": { "app.component": "api" }
+  },
+  "attributes": { "service.name": "checkout", "deployment.environment.name": "production" },
+  "producer": {
+    "tool": "opentelemetry",
+    "tool_version": null,
+    "model": null,
+    "model_version": null,
+    "command": null,
+    "environment": "production"
+  }
+}

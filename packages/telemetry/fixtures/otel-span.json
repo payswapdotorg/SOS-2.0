@@ -1,0 +1,20 @@
+{
+  "traceId": "5b8efff798038103d269b633813fc60c",
+  "spanId": "eee19b7ec3ee1e0f",
+  "parentSpanId": null,
+  "name": "POST /checkout",
+  "kind": "SERVER",
+  "startTimeUnixNano": "1735689600000000123",
+  "endTimeUnixNano": "1735689600150000456",
+  "status": { "code": "ERROR", "message": "connection reset by peer" },
+  "attributes": { "http.request.method": "POST", "http.response.status_code": 500 },
+  "resource": {
+    "attributes": {
+      "service.name": "checkout",
+      "service.namespace": "prod",
+      "telemetry.sdk.name": "opentelemetry",
+      "telemetry.sdk.language": "nodejs",
+      "telemetry.sdk.version": "1.9.1"
+    }
+  }
+}

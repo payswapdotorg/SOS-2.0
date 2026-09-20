@@ -1,0 +1,35 @@
+{
+  "name": "@sos-2/provenance",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Provenance: producer records (tool, model+version, command, environment), exact source/deployment revisions, time windows and context, verifiable provenance chains (broken chains reported as UNKNOWN, never silently truncated), preservation of the underlying source availability, and non-authoritative LLM provenance (spec/architecture.md sections 5 and 18; requirements R9, R22, R30).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "timeUnixNano": "1735689612000000000",
+  "severityNumber": 17,
+  "severityText": "ERROR",
+  "body": "upstream connection reset",
+  "attributes": { "app.component": "api" },
+  "resource": {
+    "attributes": {
+      "service.name": "checkout",
+      "deployment.environment.name": "production"
+    }
+  },
+  "traceId": "5b8efff798038103d269b633813fc60c",
+  "spanId": "eee19b7ec3ee1e0f"
+}
