@@ -1,0 +1,52 @@
+{
+  "name": "@sos-2/greenfield",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Greenfield pipeline orchestrator (Work Order W14): mission formalization -> capability derivation + candidate composition at the highest validated altitude -> human decision flow (ACT/ASK) -> traceable realization (System State revision + declared ArchitectureGraph hypothesis) -> architecture reconciliation -> evidence ingestion — one connected Mission->SystemState semantic subgraph through the spine (spec/architecture.md section 15; requirements R6, R29).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/conformance": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/optimization": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/retrieval": "workspace:*",
+    "@sos-2/search": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/telemetry": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

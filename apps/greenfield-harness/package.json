@@ -1,0 +1,49 @@
+{
+  "name": "@sos-2/greenfield-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Greenfield harness (Work Order W14): a runnable end-to-end harness executing the greenfield pipeline on a golden demo scenario — deterministic (fixed inputs, fixed seed, byte-identical outputs across runs, snapshot-tested including the trace graph), printing the mission -> candidate -> decision -> realization -> reconciliation -> evidence summary and exiting 0 only if every stage succeeded and the trace chain is complete. Zero domain logic of its own: everything is imported from @sos-2/*.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "default": "./dist/main.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "golden:write": "pnpm run build && node dist/write-fixture.js",
+    "start": "pnpm run build && node dist/main.js",
+    "dev": "pnpm run start",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/greenfield": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/telemetry": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
