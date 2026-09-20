@@ -1,0 +1,142 @@
+{
+  "envelope": {
+    "id": "sos://CausalHypothesis/1be0fa16f7bfcf890d8a01ed437962c9",
+    "kind": "CausalHypothesis",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W5:fixture"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "statement": "Enabling the write-through cache caused p99 read latency to drop.",
+    "claim_strength": "CAUSAL",
+    "intervention": {
+      "description": "Enable the write-through cache layer on the read path.",
+      "target_ref": "sos://SystemState/fc5474c94e50302b2eb5ea5251c1ec4c"
+    },
+    "mechanism": "Cache hits bypass the primary datastore round-trip, so tail read latency falls with the hit rate.",
+    "predicted_outcomes": [
+      {
+        "id": "p99-drop",
+        "description": "p99 read latency falls below 200ms.",
+        "metric": "p99-latency",
+        "direction": "DECREASE"
+      },
+      {
+        "id": "db-qps-drop",
+        "description": "Primary datastore read QPS falls.",
+        "metric": "db-read-qps",
+        "direction": "DECREASE"
+      }
+    ],
+    "assumptions": [
+      {
+        "id": "traffic-stable",
+        "statement": "Traffic volume is comparable across the compared windows."
+      },
+      {
+        "id": "telemetry-trust",
+        "statement": "Latency telemetry is available and trustworthy."
+      }
+    ],
+    "context": {
+      "environment": "production",
+      "service": "checkout"
+    },
+    "alternatives": [
+      {
+        "id": "traffic-shift",
+        "explanation": "A traffic-volume shift reduced tail latency independently of the cache."
+      },
+      {
+        "id": "deploy-coincidence",
+        "explanation": "A concurrent deployment changed the latency profile."
+      }
+    ],
+    "refutations": [
+      {
+        "id": "latency-flat",
+        "description": "p99 read latency is unchanged when the cache is enabled under comparable traffic."
+      }
+    ],
+    "graph": {
+      "factors": [
+        {
+          "id": "cache-enabled",
+          "description": "Write-through cache layer is enabled."
+        },
+        {
+          "id": "p99-latency",
+          "description": "p99 read latency."
+        },
+        {
+          "id": "traffic-volume",
+          "description": "Request traffic volume."
+        }
+      ],
+      "edges": [
+        {
+          "type": "CONTRIBUTES_TO",
+          "cause": "cache-enabled",
+          "effect": "p99-latency"
+        },
+        {
+          "type": "CONTRIBUTES_TO",
+          "cause": "traffic-volume",
+          "effect": "p99-latency"
+        },
+        {
+          "type": "CONFOUNDS",
+          "confounder": "traffic-volume",
+          "cause": "cache-enabled",
+          "effect": "p99-latency"
+        }
+      ]
+    },
+    "observational_evidence": [
+      {
+        "evidence_class": "OBSERVATIONAL",
+        "evidence_id": "sos://Evidence/ec6d4247543dc0032a2833cb27126891",
+        "subject_ref": "sos://SystemState/fc5474c94e50302b2eb5ea5251c1ec4c",
+        "availability": "SUCCESS",
+        "source_revision": "git:219cb9c8e329b0435f2deea37ec2d5003b264931",
+        "subject_revision": "r1",
+        "window": {
+          "start": "2025-01-01T00:00:00.000Z",
+          "end": "2025-01-02T00:00:00.000Z"
+        }
+      }
+    ],
+    "interventional_evidence": [
+      {
+        "evidence_class": "INTERVENTIONAL",
+        "evidence_id": "sos://Evidence/b8654ae9c7847fdf8580a1caa4a14270",
+        "subject_ref": "sos://SystemState/fc5474c94e50302b2eb5ea5251c1ec4c",
+        "availability": "SUCCESS",
+        "source_revision": "git:219cb9c8e329b0435f2deea37ec2d5003b264931",
+        "subject_revision": "r1",
+        "window": {
+          "start": "2025-01-01T00:00:00.000Z",
+          "end": "2025-01-02T00:00:00.000Z"
+        }
+      }
+    ],
+    "uncertainty": {
+      "kind": "QUALITATIVE",
+      "uncertainty_class": "MODERATE"
+    },
+    "producer": {
+      "tool": "sos-causal-analyst",
+      "tool_version": "0.1.0",
+      "model": null,
+      "model_version": null,
+      "command": "pnpm -r test",
+      "environment": "ci:local"
+    },
+    "correlation_origin": null
+  }
+}

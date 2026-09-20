@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/causal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Causal Knowledge: intervention hypotheses with mechanisms, predicted outcomes, retained assumptions, alternative explanations and refutation conditions; strict OBSERVATIONAL vs INTERVENTIONAL evidence-class separation (a strong causal claim requires intervention evidence — observational-only causal upgrades are rejected at construction); correlation records typed distinctly from causal claims and promoted only explicitly and evidence-gated; the minimal causal graph of factors plus contributes-to/confounds edges; every hypothesis carrying exact evidence provenance and calibrated-or-qualitative uncertainty (Work Order W5; requirements R10, R21, R22, R30).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

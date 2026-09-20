@@ -1,0 +1,135 @@
+{
+  "envelope": {
+    "id": "sos://ArchitectureMemory/f5440c62f185fd4833f2d4c1451e8b5a",
+    "kind": "ArchitectureMemory",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W5:fixture"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "entries": [
+      {
+        "entry_kind": "PREDICTION",
+        "id": "pred-p99-drop",
+        "recorded_at": "2025-01-01T00:00:00.000Z",
+        "statement": "p99 read latency will fall below 200ms after the cache rollout.",
+        "subject_ref": "sos://SystemState/d1b9fc09e2e7106c27ca1c730795afa0",
+        "hypothesis_ref": "sos://CausalHypothesis/1ee5d438d521416a2a2e128708967254",
+        "context": {
+          "environment": "production",
+          "service": "checkout"
+        }
+      },
+      {
+        "entry_kind": "OBSERVATION",
+        "id": "obs-p99-baseline",
+        "recorded_at": "2025-01-01T00:00:00.000Z",
+        "statement": "p99 read latency is 480ms before the rollout.",
+        "evidence_refs": [
+          "sos://Evidence/5ff6c8c3f1a4e6ffcf8fe556cfa94496"
+        ],
+        "context": {
+          "environment": "production"
+        }
+      },
+      {
+        "entry_kind": "OUTCOME",
+        "id": "outcome-p99-after-rollout",
+        "recorded_at": "2025-01-05T00:00:00.000Z",
+        "statement": "p99 read latency is 160ms one week after the cache rollout.",
+        "prediction_refs": [
+          "pred-p99-drop"
+        ],
+        "realized": "REALIZED",
+        "evidence_refs": [
+          "sos://Evidence/68f6c621aa48cf0ecab7b53688b46420"
+        ],
+        "context": {
+          "environment": "production"
+        }
+      },
+      {
+        "entry_kind": "FAILURE",
+        "id": "fail-cache-stampede",
+        "recorded_at": "2025-01-02T00:00:00.000Z",
+        "statement": "A cache stampede on cold start raised error rates for 9 minutes.",
+        "evidence_refs": [
+          "sos://Evidence/49905463ccf47a5c7ec8493b27cb432a"
+        ],
+        "context": {
+          "environment": "production",
+          "region": "eu-1",
+          "deploy": "cache-v1"
+        }
+      },
+      {
+        "entry_kind": "LIABILITY",
+        "id": "liab-cache-invalidation",
+        "recorded_at": "2025-01-02T00:00:00.000Z",
+        "statement": "Cache invalidation is manual and undocumented; stale reads are possible.",
+        "severity": "HIGH",
+        "owner_kind": "TEAM",
+        "resolution": {
+          "state": "OPEN",
+          "note": null,
+          "resolved_at": null,
+          "resolution_evidence_refs": []
+        },
+        "context": {
+          "environment": "production",
+          "component": "cache"
+        }
+      },
+      {
+        "entry_kind": "ROLLBACK",
+        "id": "rb-cache-v2",
+        "recorded_at": "2025-01-10T00:00:00.000Z",
+        "statement": "Rolled back cache-v2 after elevated 5xx rates.",
+        "from_revision": "oci:sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "to_revision": "oci:sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "reason": "Elevated 5xx rates on the write path after the v2 rollout.",
+        "evidence_refs": [
+          "sos://Evidence/7a2fac6775b486173d7dd492b2ce92b4"
+        ],
+        "context": {
+          "environment": "production"
+        }
+      },
+      {
+        "entry_kind": "LEARNED_RULE",
+        "id": "rule-warm-cache-rollout",
+        "recorded_at": "2025-01-05T00:00:00.000Z",
+        "statement": "Warm the cache before shifting production traffic after any cache-layer change.",
+        "applicability": {
+          "change_kind": "cache-layer",
+          "environment": "production"
+        },
+        "evidence_refs": [
+          "sos://Evidence/cea4e14af9f3d98cdefdb83e758cae7a"
+        ],
+        "uncertainty": {
+          "kind": "QUALITATIVE",
+          "uncertainty_class": "MODERATE"
+        }
+      }
+    ],
+    "update": {
+      "producer": {
+        "tool": "sos-memory-recorder",
+        "tool_version": "0.1.0",
+        "model": null,
+        "model_version": null,
+        "command": "pnpm -r test",
+        "environment": "ci:local"
+      },
+      "evidence_refs": [
+        "sos://Evidence/52e1eb1487436d1986c2ce999478e7fd"
+      ]
+    }
+  }
+}

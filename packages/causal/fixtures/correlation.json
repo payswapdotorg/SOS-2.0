@@ -1,0 +1,59 @@
+{
+  "envelope": {
+    "id": "sos://CorrelationRecord/e5b96c7c7b97c2d90be6e2bbf1217dc0",
+    "kind": "CorrelationRecord",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W5:fixture"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "statement": "Cache hit rate correlates with p99 read latency.",
+    "variables": [
+      {
+        "id": "cache-hit-rate",
+        "description": "Fraction of reads served from the cache."
+      },
+      {
+        "id": "p99-latency",
+        "description": "p99 read latency."
+      }
+    ],
+    "direction": "NEGATIVE",
+    "context": {
+      "environment": "production",
+      "service": "checkout"
+    },
+    "observational_evidence": [
+      {
+        "evidence_class": "OBSERVATIONAL",
+        "evidence_id": "sos://Evidence/22b8cc374b472f43fffa213e3e53eeea",
+        "subject_ref": "sos://SystemState/fc5474c94e50302b2eb5ea5251c1ec4c",
+        "availability": "SUCCESS",
+        "source_revision": "git:219cb9c8e329b0435f2deea37ec2d5003b264931",
+        "subject_revision": "r1",
+        "window": {
+          "start": "2025-01-01T00:00:00.000Z",
+          "end": "2025-01-02T00:00:00.000Z"
+        }
+      }
+    ],
+    "interventional_evidence": [],
+    "uncertainty": {
+      "kind": "QUALITATIVE",
+      "uncertainty_class": "UNQUANTIFIED"
+    },
+    "producer": {
+      "tool": "sos-causal-analyst",
+      "tool_version": "0.1.0",
+      "model": null,
+      "model_version": null,
+      "command": "pnpm -r test",
+      "environment": "ci:local"
+    }
+  }
+}
