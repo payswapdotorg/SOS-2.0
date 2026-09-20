@@ -1,0 +1,30 @@
+{
+  "affected_artifacts": [
+    "sos://schema/package",
+    "packages/packages",
+    "packages/composition",
+    "packages/registry"
+  ],
+  "added": [
+    "packages/packages: @sos-2/packages — evidence-backed package artifacts (spine envelope + the §5 content field set: contracts, preconditions/postconditions, realizations, context-conditioned applicability, evidence refs, failure refs, compatibility refs, composition refs, assurance obligations, declaring context, learned limitations, diversity profile, maturity, version note, superseded_by), the normative toPackageRecord projection onto the closed 8-key sos://schema/package record, the strict evidence-gated maturity lifecycle (one-lucky-success promotion rejected), calibrated applicability discipline (numeric probability only with calibration + sample size + time window + context; never a universal score) and the Beta-posterior baseline",
+    "packages/composition: @sos-2/composition — first-class PackageComposition artifacts (frozen core kind) with members and typed bindings, the own-evidence discipline (composition evidence is evidence about the composition's chain; member evidence never substitutes) and the independence discipline (member probabilities are never multiplied without an explicit IndependenceJustification)",
+    "packages/registry: @sos-2/registry — the package/composition registry: versioned spine-identity entries, linear contiguous supersession chains (superseded never returned as current; monotonic failure memory), evidence-gated promotion as the only maturity-changing path, member compatibility checks + COMPOSES trace links for compositions, and altitude-ordered diversity-preserving retrieval by capability + context carrying uncertainty, evidence context, learned limitations and failure contexts",
+    "packages/packages/architecture-delta.json: this Architecture Delta record (validated by the spine's assertValidArchitectureDelta in packages/packages/test/delta.test.ts)"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the 7 package maturity states are frozen and unchanged: DISCOVERED, FORMING, VALIDATED, MATURE, CONTEXTUALIZED, SUPERSEDED, RETIRED (imported from @sos-2/contracts PACKAGE_MATURITIES, never redefined; spec/architecture-lock.md places Package maturity outside ordinary redefinition)",
+    "the normative PackageRecord contract (sos://schema/package, additionalProperties: false) is unchanged; @sos-2/packages projects onto it exactly and reproduces the W0.5 golden package-record fixture bit-exactly",
+    "no second semantic/evidence/package authority: identities are minted by @sos-2/semantic-spine; evidence records and the uncertainty-class vocabulary come from @sos-2/evidence; time windows from @sos-2/provenance; the registry composes spine primitives and never stores evidence",
+    "packages require evidence (spec/architecture.md §18); compositions require their own evidence — member evidence never substitutes (locked invariant, machine-checked by the own-evidence discipline)",
+    "package promotion after one lucky success is rejected (spec/architecture-lock.md forbidden shortcut; machine-checked by the frozen promotion gates)",
+    "composition probabilities are never multiplied without justified independence (spec/architecture.md §12 + lock; machine-checked — combineMemberProbabilities rejects the unjustified path)",
+    "the retrieval altitude ladder from spec/architecture.md §10 is honored as a typed field (validated composition -> validated package -> adaptation; pattern/novel/synthesis reserved downstream); diversity is preserved — no universal winner replaces the diverse repertoire (every matching family's best candidate is always in the result)",
+    "the 6 evidence truth states remain distinct: SUCCESS, FAILURE, UNKNOWN, UNAVAILABLE, UNSUPPORTED, PARTIAL (unresolved refs are reported as unresolved/UNAVAILABLE, never as zero or absence-of-failure)",
+    "existing frozen contracts and the merged W0.5/W1/W2/W3 packages are unchanged; the change is additive within the W6 owned paths packages/packages, packages/composition, packages/registry"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/work-orders/W6-package-core.md",
+  "work_order": "W6"
+}

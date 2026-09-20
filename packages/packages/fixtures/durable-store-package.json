@@ -1,0 +1,66 @@
+{
+  "envelope": {
+    "id": "sos://Package/1083cc7f1c07fa258e7264b25ebed062",
+    "kind": "Package",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W6:durable-store-fixture"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "semantic_capability": "durable-artifact-store",
+    "contracts": [
+      "contract:durable-store/v1"
+    ],
+    "preconditions": [
+      "a POSIX filesystem or object store is reachable"
+    ],
+    "postconditions": [
+      "writes are persisted before acknowledgment"
+    ],
+    "realizations": [],
+    "applicability": [
+      {
+        "kind": "QUALITATIVE",
+        "uncertainty_class": "UNQUANTIFIED",
+        "context": {
+          "tier": "durable"
+        },
+        "sample_size": 0,
+        "window": null
+      }
+    ],
+    "evidence_refs": [
+      "sos://Evidence/c412ae3f8bbc84f6ddb21a69b32208ce"
+    ],
+    "failure_refs": [],
+    "compatibility_refs": [],
+    "composition_refs": [],
+    "assurance_obligations": [
+      {
+        "kind": "TEST",
+        "obligation": "write-then-read round trips preserve artifact bytes exactly"
+      }
+    ],
+    "context": {
+      "tier": "durable"
+    },
+    "learned_limitations": [],
+    "diversity_profile": {
+      "family": "write-through-store",
+      "dimensions": [
+        {
+          "dimension": "RESILIENCE",
+          "stance": "fsync before acknowledgment"
+        }
+      ]
+    },
+    "maturity": "DISCOVERED",
+    "changes": "initial discovery (W6 companion fixture)",
+    "superseded_by": null
+  }
+}
