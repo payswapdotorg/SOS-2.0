@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/self-evolution-harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Self-Evolution Harness (Work Order W16): a runnable end-to-end harness over the golden self-evolution scenario (SOS-process fixtures: the W15 golden object system + the golden meta-strategy state) executing BOTH paths deterministically — the HEALTHY path (a governance-preserving MetaChange measured, decisioned, promoted, revision applied) and the ADVERSARIAL path (a governance-weakening proposal rejected by the non-disableable guard; a failed/effectiveness-negative change rolled back AND retained in liability memory), plus the first-class ASK path. Zero domain logic: everything is imported from @sos-2/meta-evolution. Prints the deterministic summary (proposals -> guard verdicts -> measurements -> decisions -> retained failures -> process revision) and exits 0 ONLY if every stage succeeded and the trace chain is complete. No network, no time dependence (single caller-supplied instant, fixed seed).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "default": "./dist/main.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo:build": "pnpm run build && node dist/write-fixture.js",
+    "start": "pnpm run build && node dist/main.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/meta-evolution": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
