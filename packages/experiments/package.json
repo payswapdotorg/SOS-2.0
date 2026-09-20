@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/experiments",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Experiments: the controlled evolution plane — Experiment artifacts (spine envelopes, frozen kind Experiment) with treatment/control or alternatives design, typed POPULATION and ALLOCATION semantics (typed units and assignment), primary/secondary/GUARDRAIL metrics, stopping and rollback criteria; the strict SHADOW -> CANARY -> CONTROLLED_EXPERIMENT lifecycle with typed staged exposure levels; typed result records linked to the candidate AND the causal hypothesis through VERIFIES/OBSERVES/CAUSED_BY trace links with truthful 6-state availability; guardrail evaluation where a FAILING or UNKNOWN guardrail is never silently treated as success; typed stopping/rollback trigger records with exact conditions; and a deterministic fixed-seed in-memory simulator whose outcomes are marked simulated and never presented as intervention evidence (Work Order W9, parallel slot C; requirements R13, R14, R21).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

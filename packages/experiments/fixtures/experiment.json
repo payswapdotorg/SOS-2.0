@@ -1,0 +1,115 @@
+{
+  "envelope": {
+    "id": "sos://Experiment/a3ccfc88e90cb12f88edccf76632e743",
+    "kind": "Experiment",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": null,
+    "provenance": [
+      "W9:test"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "design": {
+      "kind": "TREATMENT_CONTROL",
+      "population": {
+        "description": "Checkout read traffic in the production region.",
+        "unit": "REQUEST",
+        "context": {
+          "environment": "production",
+          "service": "checkout"
+        }
+      },
+      "allocation": {
+        "unit": "REQUEST",
+        "assignment": "RANDOM",
+        "arms": [
+          {
+            "id": "control",
+            "role": "CONTROL",
+            "candidate_ref": null
+          },
+          {
+            "id": "treatment",
+            "role": "TREATMENT",
+            "candidate_ref": "sos://CandidateState/fca98abaeefedbe016337d47d8656d1d"
+          }
+        ],
+        "ratios": [
+          1,
+          1
+        ]
+      },
+      "metrics": [
+        {
+          "id": "p99-latency",
+          "role": "PRIMARY",
+          "description": "p99 read latency (ms).",
+          "direction": "DECREASE"
+        },
+        {
+          "id": "db-read-qps",
+          "role": "SECONDARY",
+          "description": "Primary datastore read QPS.",
+          "direction": "DECREASE"
+        },
+        {
+          "id": "error-rate",
+          "role": "GUARDRAIL",
+          "description": "Read error rate (fraction) — lower is safer.",
+          "direction": "DECREASE",
+          "guardrail_threshold": 0.01
+        }
+      ],
+      "stopping_criteria": [
+        {
+          "kind": "MAX_SAMPLES",
+          "max_samples": 10000
+        },
+        {
+          "kind": "MAX_DURATION_SECONDS",
+          "max_duration_seconds": 86400
+        },
+        {
+          "kind": "EARLY_SUCCESS",
+          "description": "Stop when the primary metric is satisfied and guardrails hold."
+        },
+        {
+          "kind": "SAFETY",
+          "description": "Stop for safety when any guardrail is breached or not established."
+        }
+      ],
+      "rollback_criteria": [
+        {
+          "id": "error-budget",
+          "guardrail_metric_ids": [
+            "error-rate"
+          ],
+          "description": "Roll back when the error-rate guardrail is breached or cannot be established."
+        }
+      ]
+    },
+    "stage": {
+      "phase": "SHADOW",
+      "exposure_percent": 0
+    },
+    "canary_ladder": [
+      1,
+      5,
+      25,
+      50
+    ],
+    "candidate_ref": "sos://CandidateState/fca98abaeefedbe016337d47d8656d1d",
+    "hypothesis_ref": "sos://CausalHypothesis/912d2924d94738d18b1bcf0d0c552b47",
+    "producer": {
+      "tool": "sos-experiments",
+      "tool_version": "0.1.0",
+      "model": null,
+      "model_version": null,
+      "command": "pnpm -r test",
+      "environment": "ci:local"
+    }
+  }
+}

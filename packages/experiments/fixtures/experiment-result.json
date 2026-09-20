@@ -1,0 +1,59 @@
+{
+  "id": "sos://Evaluation/35543899865db133f9cb091243ed9236",
+  "experiment_id": "sos://Experiment/a3ccfc88e90cb12f88edccf76632e743",
+  "candidate_ref": "sos://CandidateState/fca98abaeefedbe016337d47d8656d1d",
+  "hypothesis_ref": "sos://CausalHypothesis/912d2924d94738d18b1bcf0d0c552b47",
+  "observed_at": "2025-01-02T00:00:00.000Z",
+  "sample_size": 10000,
+  "outcomes": [
+    {
+      "metric_id": "p99-latency",
+      "arm_id": "control",
+      "value": 240.4,
+      "availability": "SUCCESS"
+    },
+    {
+      "metric_id": "p99-latency",
+      "arm_id": "treatment",
+      "value": 180.2,
+      "availability": "SUCCESS"
+    },
+    {
+      "metric_id": "db-read-qps",
+      "arm_id": "control",
+      "value": 5012.5,
+      "availability": "SUCCESS"
+    },
+    {
+      "metric_id": "db-read-qps",
+      "arm_id": "treatment",
+      "value": 3201.3,
+      "availability": "SUCCESS"
+    },
+    {
+      "metric_id": "error-rate",
+      "arm_id": "control",
+      "value": 0.0051,
+      "availability": "SUCCESS"
+    },
+    {
+      "metric_id": "error-rate",
+      "arm_id": "treatment",
+      "value": 0.0063,
+      "availability": "SUCCESS"
+    }
+  ],
+  "simulated": false,
+  "simulator": null,
+  "provenance": [
+    "W9:test"
+  ],
+  "producer": {
+    "tool": "sos-experiments",
+    "tool_version": "0.1.0",
+    "model": null,
+    "model_version": null,
+    "command": "pnpm -r test",
+    "environment": "ci:local"
+  }
+}

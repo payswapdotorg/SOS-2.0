@@ -1,0 +1,41 @@
+{
+  "name": "@sos-2/promotion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Promotion: the evidence-gated promotion/rollback gate — evaluatePromotion(candidate, { authority, assurance, evidence }) checks CURRENT authority (a valid, unexpired, unrevoked AuthorityGrant from @sos-2/authority — confidence is NOT authorization), CURRENT assurance (an AssuranceCase-shaped fixture input with claims, verdict and validity — NOT assumed valid; invalid, expired, superseded or violated cases block promotion) and CURRENT evidence (intervention-grade for causal claims, fresh, never simulated); decision outcomes are exactly the frozen six (ACT, EXPERIMENT, GATHER_EVIDENCE, ASK, REJECT, ROLLBACK) consumed from @sos-2/authority's frozen vocabulary; promotion records declare a BOUNDED recovery mechanism (a structural mirror of the unmerged W8 @sos-2/recovery-control contract) with rollback triggers wired to @sos-2/experiments guardrail trigger records (Work Order W9, parallel slot C; requirements R13, R14, R15; spec/architecture.md §13, §14).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "envelope": {
+    "id": "sos://CandidateState/fca98abaeefedbe016337d47d8656d1d",
+    "kind": "CandidateState",
+    "version": 1,
+    "status": "DRAFT",
+    "authority_ref": "sos://Constitution/9adb696728b256d62bc7f4e2c796a401",
+    "provenance": [
+      "W9:test"
+    ],
+    "created_at": "2025-01-01T00:00:00.000Z",
+    "supersedes": null
+  },
+  "content": {
+    "invariants": [
+      "p99 read latency stays below 500ms",
+      "no data loss on cache eviction"
+    ],
+    "predicted_effects": [
+      "p99 read latency drops below 200ms",
+      "primary datastore read QPS falls"
+    ],
+    "causal_claim": true,
+    "confidence": null,
+    "base_subject_revision": "system-state:r1",
+    "hypothesis_ref": "sos://CausalHypothesis/912d2924d94738d18b1bcf0d0c552b47",
+    "bounded_subgraph_ref": null,
+    "context": {
+      "environment": "production",
+      "service": "checkout"
+    }
+  }
+}
