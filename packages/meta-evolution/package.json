@@ -1,0 +1,55 @@
+{
+  "name": "@sos-2/meta-evolution",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Self-Evolution + Meta-Adaptation (Work Order W16, parallel slot A): a pure, deterministic META-EVOLUTION orchestrator that applies SOS to itself WITHOUT allowing evolution to weaken governance — strict OBJECT/META separation (the object loop runs the W15 brownfield golden fixtures; the meta loop proposes typed, versioned MetaChange records against the SOS PROCESS itself), meta-proposals generated through the package registry (R24 reuse — SOS internals consume the same package mechanism) and ranked by Pareto + quality-diversity (R12 applied to internals), a NON-DISABLEABLE governance guard (typed rejections; the guard is outside the evolvable surface), adaptation-effectiveness measurement on the frozen section-11 axes through the fixed-seed simulator (simulated outcomes marked — never intervention evidence), authority-aware decision + promotion (ASK is first-class), ROLLBACK with a recovery-control-shaped declaration and EXACT process restoration, and LIABILITY MEMORY — failed self-changes retained forever as failure memory with reduced future proposal probability (R19) — with the traceability invariant that every stage handoff is a typed spine trace link and the full result is ONE connected semantic subgraph from MetaChange proposal to decision to applied revision or rollback + retained failure (spec/architecture.md section 16, R3/R13/R14/R19/R20/R31).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/assurance": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy": "workspace:*",
+    "@sos-2/brownfield": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/ecology": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/memory": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/optimization": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/promotion": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/retrieval": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@sos-2/transfer": "workspace:*",
+    "@sos-2/verification": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
