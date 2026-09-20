@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/transfer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Transfer: transfer evidence as a distinct evidence class — applying a package/composition in a NEW context is recorded as context-conditioned transfer evidence whose outcomes feed the TARGET-context applicability estimate and NEVER the source's (machine-checked); specialization/generalization as typed lineage operations (SPECIALIZES / GENERALIZES frozen trace types) creating new package records with copied-forward evidence, failures and learned limitations; and first-class retained negative evidence — failed transfers, invalidated assumptions and contexts-of-failure are never dropped (Work Order W13; spec/architecture.md §5, §11, §12, §18; docs/package-ecology.md).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/causal": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@sos-2/provenance": "workspace:*",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
