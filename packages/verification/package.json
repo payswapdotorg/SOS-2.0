@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/verification",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Runtime Verification: the pluggable monitor-engine adapter CONTRACT — typed monitor definitions (ALWAYS/RESPONSE properties, CUSTOM engine-specific payloads), validated monitor events, evaluation results as @sos-2/evidence Evidence records with truthful availability under a frozen verdict-to-truth-state mapping enforced by the contract (adapters are never the authority), binding every result to an exact SystemState/implementation revision; one in-memory reference engine is included, real engines are adapters (Work Order W8; spec/architecture.md sections 13 and 17, R21, R18 platform neutrality).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/provenance": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
