@@ -1,0 +1,40 @@
+{
+  "name": "@sos-2/retrieval",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Retrieval: the search-facing facade over @sos-2/registry (the registry stays the data authority) composing registry results into search context — the diverse candidate set with uncertainty, evidence context, learned limitations and failure contexts surfaced, composition own-evidence views (member evidence never substitutes), and the Bayesian update path (Beta/Dirichlet posteriors for binary/counts outcomes with sample size and time window preserved; numeric outputs marked uncalibrated unless calibration evidence is attached) (Work Order W7; requirements R26, R27, R29).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
