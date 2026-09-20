@@ -1,0 +1,55 @@
+{
+  "name": "@sos-2/console",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Human Console (Work Order W11): a runnable, deterministic, server-rendered console exposing the twelve SOS journeys — mission onboarding, system import, architecture/reality reconciliation, evidence investigation, candidate comparison, assurance review, experiment monitoring, ASK, rollback, package discovery/composition, architecture history and self-evolution review. Zero domain logic of its own: everything is imported from @sos-2/* (the app renders view-models projected by @sos-2/ui-contracts).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
+  },
+  "files": [
+    "dist",
+    "fixtures"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "demo:build": "pnpm run build && node dist/demo/write-fixture.js",
+    "dev": "pnpm run build && node dist/server.js",
+    "start": "node dist/server.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/assurance": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/conformance": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/promotion": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/recovery-control": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/ui-contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
