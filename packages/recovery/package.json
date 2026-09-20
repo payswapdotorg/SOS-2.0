@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/recovery",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 brownfield architecture recovery: competing ArchitectureGraph hypotheses from an observed ImplementationModel with retained provenance, uncertainty and ambiguity markers, DERIVED_FROM/OBSERVES trace links to the source model revision, declared-graph comparison reusing @sos-2/conformance classification, and a deterministic human-readable reconciliation report (spec/architecture.md sections 6 and 15, docs/code-to-architecture.md, R6/R23).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/conformance": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "fast-check": "^3.23.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
