@@ -3,7 +3,7 @@
   "program": "SOS-2.0",
   "status": "ACTIVE",
   "currentFrontier": [
-    "W15"
+    "W16"
   ],
   "currentTask": "W14+W15 (W16 unlocks on W15; W17 endgame after)",
   "tasks": {
@@ -142,7 +142,7 @@
       "mergedAs": "e5fcec0d76973ad6b999e54014e09bbacc882f01"
     },
     "W15": {
-      "status": "ELIGIBLE",
+      "status": "COMPLETE",
       "dependencies": [
         "W4",
         "W5",
@@ -153,10 +153,10 @@
         "W12",
         "W13"
       ],
-      "mergedAs": null
+      "mergedAs": "d0d01936360407d8a1127f15fd98251eaf7ccfe3"
     },
     "W16": {
-      "status": "BLOCKED",
+      "status": "ELIGIBLE",
       "dependencies": [
         "W9",
         "W10",
