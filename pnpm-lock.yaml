@@ -1564,12 +1564,27 @@ importers:
 
   packages/web-contracts:
     dependencies:
+      '@sos-2/architecture':
+        specifier: workspace:*
+        version: link:../architecture
       '@sos-2/ask':
         specifier: workspace:*
         version: link:../ask
+      '@sos-2/assurance':
+        specifier: workspace:*
+        version: link:../assurance
       '@sos-2/authority':
         specifier: workspace:*
         version: link:../authority
+      '@sos-2/causal':
+        specifier: workspace:*
+        version: link:../causal
+      '@sos-2/composition':
+        specifier: workspace:*
+        version: link:../composition
+      '@sos-2/context':
+        specifier: workspace:*
+        version: link:../context
       '@sos-2/decision':
         specifier: workspace:*
         version: link:../decision
@@ -1579,6 +1594,15 @@ importers:
       '@sos-2/experiments':
         specifier: workspace:*
         version: link:../experiments
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/memory':
+        specifier: workspace:*
+        version: link:../memory
+      '@sos-2/meta-evolution':
+        specifier: workspace:*
+        version: link:../meta-evolution
       '@sos-2/mission':
         specifier: workspace:*
         version: link:../mission
