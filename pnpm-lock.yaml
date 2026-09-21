@@ -8,6 +8,37 @@ importers:
 
   .: {}
 
+  apps/api:
+    dependencies:
+      '@sos-2/api-contracts':
+        specifier: workspace:*
+        version: link:../../packages/api-contracts
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+    devDependencies:
+      '@sos-2/evidence':
+        specifier: workspace:*
+        version: link:../../packages/evidence
+      '@sos-2/mission':
+        specifier: workspace:*
+        version: link:../../packages/mission
+      '@sos-2/system-state':
+        specifier: workspace:*
+        version: link:../../packages/system-state
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   apps/brownfield-harness:
     dependencies:
       '@sos-2/brownfield':
@@ -202,6 +233,8 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  infra/deployment: {}
+
   packages/adapters:
     dependencies:
       '@sos-2/authority':
@@ -226,6 +259,22 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/api-contracts:
+    dependencies:
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -711,6 +760,8 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/github: {}
+
   packages/greenfield:
     dependencies:
       '@sos-2/architecture':
@@ -774,6 +825,64 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/live-store:
+    dependencies:
+      '@sos-2/architecture':
+        specifier: workspace:*
+        version: link:../architecture
+      '@sos-2/assurance':
+        specifier: workspace:*
+        version: link:../assurance
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../authority
+      '@sos-2/causal':
+        specifier: workspace:*
+        version: link:../causal
+      '@sos-2/context':
+        specifier: workspace:*
+        version: link:../context
+      '@sos-2/decision':
+        specifier: workspace:*
+        version: link:../decision
+      '@sos-2/evidence':
+        specifier: workspace:*
+        version: link:../evidence
+      '@sos-2/experiments':
+        specifier: workspace:*
+        version: link:../experiments
+      '@sos-2/memory':
+        specifier: workspace:*
+        version: link:../memory
+      '@sos-2/mission':
+        specifier: workspace:*
+        version: link:../mission
+      '@sos-2/packages':
+        specifier: workspace:*
+        version: link:../packages
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/system-state':
+        specifier: workspace:*
+        version: link:../system-state
+    devDependencies:
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
