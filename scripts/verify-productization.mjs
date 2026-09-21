@@ -22,6 +22,7 @@ const state = JSON.parse(fs.readFileSync(path.join(root, "spec/productization-st
 const workDir = path.join(root, "spec/productization-work-orders");
 const workFiles = fs.readdirSync(workDir).filter((f) => f.endsWith(".md") && f !== "README.md");
 const ids = new Set();
+const ownedPaths = [];
 
 for (const file of workFiles) {
   const text = fs.readFileSync(path.join(workDir, file), "utf8");
@@ -29,6 +30,14 @@ for (const file of workFiles) {
   if (!match) throw new Error("Productization Work Order without ID: " + file);
   if (ids.has(match[1])) throw new Error("Duplicate productization Work Order: " + match[1]);
   ids.add(match[1]);
+
+  const owned = text.match(/^Owned paths:\s*(.+)$/m);
+  if (owned) {
+    for (const raw of owned[1].split(",")) {
+      const p = raw.trim();
+      if (p && !p.startsWith("repository-wide")) ownedPaths.push({ path: p, file });
+    }
+  }
 }
 
 const expectedIds = Object.keys(state.tasks);
@@ -37,6 +46,17 @@ for (const id of expectedIds) {
 }
 for (const id of ids) {
   if (!state.tasks[id]) throw new Error("Work Order exists without machine state entry: " + id);
+}
+
+for (let i = 0; i < ownedPaths.length; i += 1) {
+  for (let j = i + 1; j < ownedPaths.length; j += 1) {
+    const a = ownedPaths[i].path;
+    const b = ownedPaths[j].path;
+    const prefix = (x, y) => y === x || y.startsWith(x + "/");
+    if (prefix(a, b) || prefix(b, a)) {
+      throw new Error(`Owned path collision: ${ownedPaths[i].file} (${a}) vs ${ownedPaths[j].file} (${b})`);
+    }
+  }
 }
 
 function assertNoCycles(tasks) {
@@ -58,12 +78,19 @@ function assertNoCycles(tasks) {
 assertNoCycles(state.tasks);
 
 for (const [id, task] of Object.entries(state.tasks)) {
+  if (!Array.isArray(task.dependencies)) throw new Error("Dependencies must be an array for " + id);
+  if (!["READY","BLOCKED","COMPLETE"].includes(task.status)) {
+    throw new Error("Invalid task status for " + id + ": " + task.status);
+  }
   if (task.status === "READY") {
-    for (const dep of task.dependencies || []) {
+    for (const dep of task.dependencies) {
       const d = state.tasks[dep];
       const satisfied = d.status === "COMPLETE" || Boolean(d.mergedAs);
       if (!satisfied) throw new Error("READY task " + id + " has unmet dependency " + dep);
     }
+  }
+  if (task.status === "COMPLETE" && !task.mergedAs) {
+    throw new Error("COMPLETE task must record mergedAs: " + id);
   }
 }
 
@@ -100,4 +127,5 @@ for (const requiredPhrase of [
 console.log("SOS productization repository contract check: PASS");
 console.log("Productization Work Orders:", workFiles.length);
 console.log("Frontier:", state.currentFrontier.join(", "));
-console.log("All dependency edges acyclic and machine-consistent.");
+console.log("Owned paths:", ownedPaths.length);
+console.log("All dependency edges, owned paths and machine state are consistent.");
