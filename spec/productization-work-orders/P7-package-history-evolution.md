@@ -1,17 +1,34 @@
-# P7 — Package Ecology + History + Self-Evolution UX
+# P7 — Continuous Observation + System Monitoring Plane
 
-Dependencies: P1, P2
-Owned paths: apps/web/packages, apps/web/history, apps/web/evolution
+Dependencies: P2, P3  
+Owned paths: packages/observation, packages/event-ingestion, packages/telemetry-runtime, apps/api/observation, tests/observation  
+Worker: A in wave 3
 
-Worker: A
+## Goal
 
-Goal:
-Expose reusable knowledge, version history and SOS self-evolution without misleading the user.
+Allow SOS to continuously understand system state without keeping a permanent coding body alive.
 
-Acceptance:
-- package repertoire and compatibility/conflict view
-- composition workspace entry point
-- revision timeline and diff
-- current canonical self-evolution state
-- demo fixture clearly separated from live state
-- learned rules, failures and liabilities discoverable
+## Inputs
+
+- GitHub repository/webhook events
+- CI/build/test/security events
+- deployment events
+- runtime logs, metrics and traces
+- incidents/provider health
+- scheduled repository/runtime probes
+- explicit user observations
+
+## Behavior
+
+Observation -> Evidence -> System State reconciliation -> shortfall/opportunity detection.
+
+Use scheduled probes only where event/telemetry coverage is insufficient.
+
+## Acceptance
+
+- a complete observation loop works while no body is active
+- GitHub push/PR events update live projections
+- runtime/CI evidence preserves truth states and provenance
+- stale/unavailable observation is distinguishable from success
+- observation events are replay-safe
+- observation does not mutate semantic truth outside authoritative domain stores
