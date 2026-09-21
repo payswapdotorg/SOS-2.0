@@ -1,106 +1,114 @@
-# SOS 2.0 Productization Tech Lead Handoff
+# SOS 2.0 Final Productization + Autonomous Execution Handoff
 
-The SOS W0-W18 core program is COMPLETE and frozen. Do not reopen it for ordinary product work.
+W0-W18 is COMPLETE and frozen. Do not reopen the core for ordinary product work.
 
-Productization starts at P0 and is governed by:
-- spec/productization-requirements.md
-- spec/productization-roadmap.md
-- spec/productization-state/implementation-state.json
-- spec/productization-work-orders/*
-- docs/ux/user-journey-simulation.md
-- docs/ux/sharenet-inspired-design.md
-- docs/deployment/free-tier-plan.md
+## Source of truth
 
-## Important distinction
+Use these in order:
 
-apps/console is the proven deterministic W11 reference harness.
-It is not the production deployment surface.
+1. AGENTS.md
+2. ARCHITECT_START_HERE.md
+3. frozen core specs/evidence
+4. spec/productization-requirements.md
+5. spec/productization-execution-architecture.md
+6. spec/productization-roadmap.md
+7. spec/productization-state/implementation-state.json
+8. spec/productization-work-orders/*
+9. deployment/UX docs
 
-apps/web becomes the production user-facing console.
+## Product identity
 
-The production web layer must consume the same domain packages and ui-contracts. It may not recreate SOS semantics.
+SOS is the persistent Spirit/control plane.
 
-## Current user-facing findings
+Reasoning providers are replaceable brains/mechanisms.
 
-The existing console successfully exposes all twelve architectural journeys and its tests cover them, but the journey simulation found four product-level problems:
+Harnesses and body runtimes are replaceable execution bodies.
 
-1. fixture/live-state confusion is possible because the self-evolution view uses an intentionally frozen W11/W12 machine snapshot;
-2. mission and brownfield onboarding are too engineering-oriented;
-3. evidence, reconciliation and assurance are too table-heavy for primary navigation;
-4. change lifecycle surfaces are individually correct but not yet one coherent task flow.
+Observation/event adapters let SOS continuously understand systems without a permanent body.
 
-The productization plan addresses these without weakening the core semantics.
+The user computer is optional for cloud/remote execution.
 
-## First worker wave
+## Target user journey
 
-After P0:
+```text
+User mission
+  -> connect GitHub
+  -> greenfield or brownfield onboarding
+  -> formalize mission
+  -> recover/plan architecture
+  -> candidates + assurance
+  -> durable worker task graph
+  -> summon capability-matching body
+  -> execute in bounded environment
+  -> independent evaluation
+  -> repair/retry/ASK
+  -> commit/PR/push
+  -> deploy
+  -> observe runtime
+  -> verify mission outcome
+  -> package learning
+```
 
-Worker A -> P1 Production Web Console Shell
-Worker B -> P2 Live Persistence + API Boundary
-Worker C -> P3 Free-Tier Deployment Foundation
+## Current product surfaces
 
-Second wave:
-A -> P4 Onboarding
-B -> P5 Evidence + Reality Workspace
-C -> P6 Candidate + Assurance + Experiment + ASK
+- apps/console = deterministic reference harness only
+- apps/web = production target
+- live API/store = canonical product state boundary
+- Observation Plane = webhooks/telemetry/CI/scheduled probes
+- Execution Fabric = Harness Contract + Body Broker + sandbox/runtime adapters
+- Spirit Orchestrator = durable task graph + up to three concurrent worker lanes
+- GitHub adapter = project/workspace bridge
+- cloud bodies = primary autonomous execution path
+- local companion/IDE/browser = optional private/local body path
+- independent evaluator = completion gate
 
-Third wave:
-A -> P7 Package/History/Self-Evolution UX
-B -> P8 Live Actions + Identity/Authority
-C -> P9 Production Hardening
+## First dispatch
 
-Then all workers -> P10 Product Dogfood.
-Architect -> P11 Product Release Gate.
+After P0 is accepted/completed:
 
-## Product architecture
+Wave 1: P1 / P2 / P3
+Wave 2: P4 / P5 / P10
+Wave 3: P7 / P8 / P6
+Wave 4: P9 / P11 + architect review/tests
+Wave 5: P12 / P13 / P14
+Wave 6: P15
+Final: P16
 
-The production user loop is:
+## External platforms
 
-Mission
--> Current System State
--> Shortfall/Opportunity
--> Candidates
--> Assurance
--> Experiment
--> Decision or ASK
--> Promotion/Rollback
--> Evidence
--> Learning
--> Package/Repertoire update
+Do not hard-code SOS to Codex, Claude, VS Code, a browser, Vercel or another vendor.
 
-The UI should make this loop visible.
+Use capability-based adapters.
 
-## ShareNet-inspired interaction language
+Preferred integration order:
+1. native API/SDK/app-server
+2. MCP/equivalent protocol
+3. local companion
+4. browser/IDE extension
+5. UI automation last
 
-Use:
-- calm warm-light shell;
-- sparse content;
-- persistent left rail on desktop;
-- bottom navigation on mobile;
-- dominant current-state hero;
-- concise status blocks;
-- timeline/topology for relationships;
-- detail drawers/sheets;
-- explicit loading/error/unknown/unavailable/partial states.
+## LLM connection
 
-Do not copy ShareNet branding or semantics.
+A user does not need to connect their own LLM just to start.
 
-## Deployment
+The deployed product should provide a managed reasoning-provider route, with optional BYO provider connections. Every provider result carries model/version provenance and remains non-authoritative.
 
-Target validation topology:
-Vercel Hobby + Neon Free + Upstash Redis Free + Cloudflare R2 Free.
+## Body availability
 
-Provider roles are documented in docs/deployment/free-tier-plan.md.
+Cloud/remote bodies can operate while the user's computer is off.
 
-No provider becomes a semantic authority.
-Redis is never canonical.
-Raw evidence payloads may live in R2, while semantic metadata remains in the Evidence Graph/durable database.
+Local-only tasks queue until the local body reconnects.
+
+## Continuous monitoring
+
+No permanent body is required for ongoing governance.
+
+GitHub events, CI, deployment events, runtime telemetry, provider health and scheduled probes feed Evidence/System State. Bodies are summoned only for active work.
 
 ## Release standard
 
-A productization Work Order is complete only after:
-Architect gate
--> exact reviewed head merged
--> productization machine state reconciled.
+A task is not complete because a body returns success.
 
-P10 must simulate the product as a fresh human user, not merely execute unit tests.
+Completion requires appropriate independent evidence, exact source/deployment revisions, authority checks, retained uncertainty and reproducibility.
+
+P16 requires the exact tested head and production deployment revision, plus the complete productization evidence bundle.
