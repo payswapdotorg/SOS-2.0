@@ -1,0 +1,16 @@
+{
+  "name": "@sos-2/github",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "description": "SOS 2.0 provider-neutral GitHub/project adapter (Work Order P4): the typed GitHubPort project-adapter contract — connection (OAuth/GitHub-App least-privilege repository scope — the CONNECTION CONTRACT, not a live vendor flow), repository discovery, branch/revision selection, empty-repository detection, snapshot/metadata import, webhook registration where supported, and PR/commit operations — all behind provider-neutral interfaces with an injectable HTTP/request port. Includes an in-memory reference implementation (deterministic, used by tests and local development) and a typed capability surface: unsupported operations answer with an explicit typed UNSUPPORTED outcome, never a silent failure. Real-system connection state is honestly NOT_YET_CONNECTED (validation GitHub account pending); connection evidence is NEVER fabricated. Declares ZERO dependencies of any kind (lockfile byte-identity rule, following the P3 precedent); the test toolchain is borrowed at run time from the frozen W17 adversarial suite (pnpm --filter @sos-2/adversarial exec vitest/tsc).",
+  "scripts": {
+    "typecheck": "pnpm --filter @sos-2/adversarial exec tsc -p ../../packages/github/tsconfig.json",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "verify:contracts": "node scripts/check-zero-deps.mjs && pnpm --filter @sos-2/adversarial exec tsc -p ../../packages/github/tsconfig.json",
+    "test": "pnpm --filter @sos-2/web-contracts run build && pnpm --filter @sos-2/adversarial exec vitest run --config ../../packages/github/vitest.config.ts && pnpm --filter @sos-2/adversarial exec vitest run --config ../../packages/web-contracts/onboarding/vitest.config.ts && pnpm --filter @sos-2/adversarial exec vitest run --config ../../apps/web/onboarding/vitest.config.ts"
+  }
+}
