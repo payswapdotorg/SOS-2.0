@@ -1,11 +1,9 @@
 {
   "schemaVersion": "2.0",
   "program": "SOS-2.0",
-  "status": "ACTIVE",
-  "currentFrontier": [
-    "W18"
-  ],
-  "currentTask": "W18 (final architect gate \u2014 end-to-end audit, no worker)",
+  "status": "COMPLETE",
+  "currentFrontier": [],
+  "currentTask": "program complete (W18 final architect gate passed; 19/19 work orders dispositioned)",
   "tasks": {
     "W0": {
       "status": "BOOTSTRAP_COMPLETE",
@@ -178,11 +176,11 @@
       "mergedAs": "06700a90b5ff384a165b7dda7fb7bc3a300f8491"
     },
     "W18": {
-      "status": "ELIGIBLE",
+      "status": "COMPLETE",
       "dependencies": [
         "W17"
       ],
-      "mergedAs": null
+      "mergedAs": "e6be279387b83331afbaf72b8962dcd50031fc9c"
     }
   }
 }
