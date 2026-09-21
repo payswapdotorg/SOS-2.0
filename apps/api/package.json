@@ -1,0 +1,41 @@
+{
+  "name": "@sos-2/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Live API (Work Order P2): a plain Node + TypeScript service implementing @sos-2/api-contracts over @sos-2/live-store ports (in-memory reference backend; provider adapters attach later WITHOUT contract change). Route surface: mission / system-state / evidence / task / body-lease / observation reads+writes, event ingestion with replay protection (POST /events), and a health endpoint reporting per-provider availability as typed UNKNOWN/UNAVAILABLE when unconfigured. The request handler is TRANSPORT-AGNOSTIC (plain ApiRequest -> ApiResponse), so the same contract can later be hosted in Vercel functions or an external worker boundary without change; the node:http binding runs as a plain Node process (repo-standard ESM + tsc build, no vendor framework). No long-running work inside the request lifetime. The only impure boundary is the composition root: the system clock and the port are injected at startup (mirroring the apps/console precedent).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/api-contracts": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
