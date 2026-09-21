@@ -1,8 +1,8 @@
 # P9 — Authority-Gated Actions + Independent Evaluation
 
 Dependencies: P5, P6, P7, P8  
-Owned paths: packages/action-gateway, packages/evaluator, packages/evaluation-orchestration, apps/web/action-components, tests/actions-and-evaluation  
-Worker: C in wave 4
+Owned paths: packages/action-gateway, packages/evaluator, packages/evaluation-orchestration, apps/actions, tests/actions-and-evaluation  
+Worker: A in wave 4
 
 ## Goal
 
