@@ -1,7 +1,7 @@
 # P7 — Continuous Observation + System Monitoring Plane
 
 Dependencies: P2, P3  
-Owned paths: packages/observation, packages/event-ingestion, packages/telemetry-runtime, apps/api/observation, tests/observation  
+Owned paths: packages/observation, packages/event-ingestion, packages/telemetry-runtime, apps/observation, tests/observation  
 Worker: A in wave 3
 
 ## Goal
