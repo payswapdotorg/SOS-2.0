@@ -1,21 +1,41 @@
-# P9 — Production Hardening + Observability
+# P9 — Authority-Gated Actions + Independent Evaluation
 
-Dependencies: P3, P4, P5, P6, P7, P8
-Owned paths: infra/observability, docs/operations, tests/production
+Dependencies: P5, P6, P7, P8  
+Owned paths: packages/action-gateway, packages/evaluator, packages/evaluation-orchestration, apps/web/action-components, tests/actions-and-evaluation  
+Worker: C in wave 4
 
-Worker: C
+## Goal
 
-Goal:
-Make the deployed product observable, diagnosable and safe under provider/runtime failures.
+Connect real-world actions and completion checks to the existing Authority, Assurance, Decision and Evidence semantics.
 
-Acceptance:
-- deployment health checks
-- DB/Redis/R2 health checks
-- structured request and decision tracing
-- provider outage truth states
-- rate limits
-- audit trail
-- backup/restore rehearsal
-- preview isolation
-- no secret leakage
-- operational runbook
+## Actions
+
+- commit/push/PR
+- deployment
+- configuration changes
+- remediation
+- promotion
+- rollback
+- body lifecycle actions
+
+## Evaluation
+
+Independent evaluators may use:
+
+- tests
+- static/contract checks
+- browser journeys
+- runtime verification
+- security checks
+- mission metrics
+- deployment checks
+
+## Acceptance
+
+- every consequential action re-evaluates current authority
+- expired/revoked grants fail closed
+- body cannot approve its own output
+- evaluation evidence is linked to exact source/deployment revisions
+- failed evaluations feed repair/retry or ASK
+- rollback produces evidence
+- action idempotency and replay protection work
