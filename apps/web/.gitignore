@@ -1,0 +1,9 @@
+# @sos-2/web build output
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env.*
+*.log

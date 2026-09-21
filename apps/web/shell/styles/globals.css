@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+/*
+ * The SOS console warm-light design system (docs/ux/sharenet-inspired-design.md:
+ * "sparse warm-light visual system, restrained semantic status colors").
+ *
+ * Status semantics (never color as the only semantic channel — every chip
+ * renders a glyph and a label alongside the tone):
+ *   green  (--color-ok)       healthy / validated / satisfied
+ *   amber  (--color-warn)     degraded / recovering / attention
+ *   red    (--color-stop)     blocked / failure / rollback
+ *   neutral (stone)           inactive
+ *   epistemic (--color-epistemic)  the SEPARATE unknown/unavailable
+ *                                  treatment (dashed outline + question
+ *                                  glyph + explicit label) for uncertainty.
+ *
+ * Interaction hierarchy adapted from the ShareNet reference (interaction
+ * hierarchy and information density only — no brand identity, labels,
+ * iconography or domain meaning copied).
+ */
+
+@theme {
+  --color-paper: #faf8f3;
+  --color-surface: #ffffff;
+  --color-surface-warm: #f4f0e8;
+  --color-ink: #2b2620;
+  --color-ink-soft: #6f675c;
+  --color-line: #e8e1d4;
+  --color-line-strong: #d8cebb;
+
+  --color-ok: #1f7a4d;
+  --color-ok-soft: #e6f2eb;
+  --color-warn: #94660e;
+  --color-warn-soft: #f9efdb;
+  --color-stop: #a23429;
+  --color-stop-soft: #f9e8e5;
+  --color-epistemic: #5d5871;
+  --color-epistemic-soft: #efeef5;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+  }
+
+  /* A visible, consistent keyboard focus ring everywhere (a11y contract). */
+  :focus-visible {
+    outline: 2px solid var(--color-epistemic);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion is honored globally (no animations ship with the shell). */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* The epistemic treatment: dashed outline for unknown/unavailable surfaces. */
+.epistemic-dashed {
+  border-style: dashed;
+}

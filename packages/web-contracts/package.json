@@ -1,0 +1,43 @@
+{
+  "name": "@sos-2/web-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 product web console view-model contracts (Work Order P1): pure types + pure projection functions for the production shell — mission hero, system condition, shortfall/opportunity, next allowed action, active autonomous work (tasks, body leases, observation status), the overview cards (current change, evidence quality, experiment status, package reuse, recent learning), the first-class state-block model (loading/empty/unknown/unavailable/partial/error) and the navigation/authority-mode view states. Every product view model carries what, why (rationale chain of typed spine trace links), evidence refs, uncertainty, authority and next allowed action, plus an explicit DEMO-vs-LIVE data-source marker so demo fixture state can never render as live state. Zero domain logic, zero DOM dependencies: vocabularies (truth states, trace types, phases, classifications, permissions) are imported from the owning @sos-2/* packages — never redefined.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p core/tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "pnpm run build && vitest run --config core/vitest.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/ui-contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
