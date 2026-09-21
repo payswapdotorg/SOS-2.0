@@ -1,6 +1,6 @@
 # Productization Work Orders
 
-These Work Orders productize the completed W0-W18 SOS core and add the post-W18 execution fabric without redefining frozen semantics.
+These Work Orders productize the frozen W0-W18 SOS core and add the post-W18 execution fabric without redefining frozen semantics.
 
 One Work Order = one branch/PR.
 Owned paths are disjoint across the entire productization program.
