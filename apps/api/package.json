@@ -1,0 +1,40 @@
+{
+  "name": "@sos-2/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Live API Service (Work Order P2): a plain Node + TypeScript service implementing @sos-2/api-contracts over @sos-2/live-store ports — mission/system-state/evidence/task/body-lease reads+writes, the observation event ingestion endpoint (with replay protection), and the health endpoint reporting per-provider availability as typed UNKNOWN/UNAVAILABLE when unconfigured. Zero vendor framework (node:http + repo-standard ESM + tsc build); the ROUTER is a pure request/response function (framework-independent, hostable later in Vercel functions or an external worker boundary WITHOUT contract change); NO long-running work inside request lifetimes (every handler is one bounded store operation); all clocks/ports/stores are injected (deterministic core; the CLI entry is the single composition root). Test-only workspace devDependencies (@sos-2/mission, @sos-2/system-state, @sos-2/evidence) exist solely to mint VALID domain records for contract fixtures; runtime dependencies are exactly @sos-2/api-contracts + @sos-2/live-store.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/server.js",
+  "types": "./dist/server.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/main.js",
+    "start": "node dist/main.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/api-contracts": "workspace:*",
+    "@sos-2/live-store": "workspace:*"
+  },
+  "devDependencies": {
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
