@@ -1,0 +1,96 @@
+{
+  "schemaVersion": "1.0",
+  "record": "W18 Final Architect Gate \u2014 machine-checkable audit record",
+  "work_order": "W18",
+  "auditor": "The Architect (final gate is architect-personal; no worker brief, no delegation)",
+  "base_head": "7d7930e (gov: reconcile state after W17 merge)",
+  "executed_at_head": "7d7930e (all checks below ran on the exact final main head)",
+  "machine_backbone": {
+    "check": "full workspace build + test on the final head",
+    "packages_built": 46,
+    "test_summary_lines_passed": 92,
+    "failures": 0,
+    "verify_repo": "PASS (19 work orders discovered, frontier W18 before this gate)"
+  },
+  "points": [
+    {
+      "point": "frozen invariants verified",
+      "result": "PASS",
+      "evidence": [
+        "packages/contracts/src/artifact-kinds.ts is the declared ONLY normative source of artifact kinds (19 core, add-only registerArtifactKind, no unregister); truth-states/trace-links likewise in packages/contracts/src/",
+        "local TRUTH_STATES restatements in packages/brownfield/src/experiment-stage.ts and packages/meta-evolution/src/effectiveness.ts examined: runtime type-guards (asTruthState) with values identical to the canonical six, types imported from the authority \u2014 defensive validation, not parallel authority",
+        "W16 governance-guard property tests pin the frozen seven-invariant list against randomized weakening sequences; W17 adversarial class 13 (governance-weakening self-evolution) is machine-rejected"
+      ]
+    },
+    {
+      "point": "all Work Orders reconciled",
+      "result": "PASS",
+      "evidence": [
+        "spec/development-state/implementation-state.json: W0 BOOTSTRAP_COMPLETE (INITIAL_BOOTSTRAP), W0.5 and W1-W17 COMPLETE with exact mergedAs SHAs, W18 ELIGIBLE pending only this gate",
+        "every work order file has a merged delta record; spec/contracts/deltas/index.json is the canonical registry (26 entries incl. this record)"
+      ]
+    },
+    {
+      "point": "promoted changes have exact evidence",
+      "result": "PASS",
+      "evidence": [
+        "packages/promotion gate + W16 assertMeasuredBeforePromotion (unmeasured promotion REJECTED, pinned by negative tests)",
+        "docs/evidence/dogfood/coverage-ledger.json: R1-R31 complete, every entry with test_file + test_cases + stage + revision token; machine-checked twin agreement enforced by tests/dogfood/test/coverage-ledger.test.ts (8 checks, green)"
+      ]
+    },
+    {
+      "point": "no duplicate semantic authorities",
+      "result": "PASS",
+      "evidence": [
+        "@sos-2/semantic-spine is the sole identity/trace/canonical authority; all sos:// ids minted through it",
+        "hash usage outside the spine audited: evidence/provenance/runtime-conformance/verification import contentHash/isArtifactId FROM the spine; ui-contracts/canonical.ts consumes the spine canonicalSerialize for non-identity view-model digests (documented CONSUMED, never re-implemented)"
+      ]
+    },
+    {
+      "point": "architecture/code correspondence healthy or explicitly governed",
+      "result": "PASS",
+      "evidence": [
+        "25 Architecture Delta records (W0.5-W17) each schema-validated at this gate (see spec/contracts/deltas/index.json)",
+        "packages/recovery drift classification (CONFORMANT / DRIFT_DETECTED / AMBIGUOUS) exercised in the W17 integrated dogfood; spec/architecture-lock.md pins the frozen architecture"
+      ]
+    },
+    {
+      "point": "package evidence and diversity validated",
+      "result": "PASS",
+      "evidence": [
+        "packages/ecology (W13) + packages/optimization (W9) suites green; W17 dogfood exercises ecology updates and the W16 MAP-Elites repertoire over the 9 section-11 diversity dimensions",
+        "R12/R28 per-family candidate floor >= 1 enforced by the W16 guard; diversity collapse is adversarial class 11 (green)"
+      ]
+    },
+    {
+      "point": "assurance validity current",
+      "result": "PASS",
+      "evidence": [
+        "packages/assurance (W8) suite green; W16 promotion-time assurance case with retained RESOLVED objection truthfully evaluated and projected onto the W9 fixture surface",
+        "adversarial class 06 (assurance monitor failure) green \u2014 assurance failure is surfaced, never swallowed"
+      ]
+    },
+    {
+      "point": "self-evolution boundary verified",
+      "result": "PASS",
+      "evidence": [
+        "packages/meta-evolution governance guard is non-disableable: pure function over the frozen invariant list, apply-path re-runs the guard (GUARD_BYPASS_ATTEMPT), property tests over randomized applied-change sequences with interleaved weakening attempts",
+        "object/meta separation structural (typed OBJECT_META_CONFLATION rejections machine-checked both directions); adversarial class 13 green"
+      ]
+    },
+    {
+      "point": "zero-history recovery demonstrated",
+      "result": "PASS",
+      "evidence": [
+        "packages/recovery reconstructs competing ArchitectureGraph hypotheses from the observed ImplementationModel ALONE (no prior-state input): 56 tests green incl. byte-identical determinism from creation inputs",
+        "W15 brownfield degraded world: guardrail breach -> ROLLBACK with assertExactRestore (parameters byte-equal to the trial base); recovery-control bounded declarations wired (mechanism, max_recovery_seconds, triggers, authority ref)"
+      ]
+    }
+  ],
+  "architect_approval": "APPROVED \u2014 the program is complete: 19/19 work orders dispositioned, 46 packages green, the R1-R31 acceptance evidence machine-checkable, and every frozen invariant held under adversarial pressure.",
+  "completion": {
+    "architect_approval": "APPROVED",
+    "actual_merge": "this commit (W18 artifacts pushed to main by the architect)",
+    "canonical_reconciliation": "spec/contracts/deltas/index.json + implementation-state program closure in the following gov commit"
+  }
+}

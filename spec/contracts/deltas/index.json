@@ -1,0 +1,220 @@
+{
+  "schemaVersion": "1.0",
+  "purpose": "W18 canonical reconciliation: the registry of every Architecture Delta record merged into main, each validated against the architecture-delta schema at final-gate time. This index is the canonical map; each record remains the authoritative delta for its work order.",
+  "count": 26,
+  "records": [
+    {
+      "path": "docs/evidence/dogfood/ARCHITECTURE-DELTA.json",
+      "work_order": "W17",
+      "rationale_ref": "spec/work-orders/W17-integrated-dogfood.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/adapters/ARCHITECTURE-DELTA.json",
+      "work_order": "W12",
+      "rationale_ref": "spec/work-orders/W12-platform-adapters.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/ask/ARCHITECTURE-DELTA.json",
+      "work_order": "W10",
+      "rationale_ref": "spec/work-orders/W10-autonomy-ask.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/assurance/ARCHITECTURE-DELTA.json",
+      "work_order": "W8",
+      "rationale_ref": "spec/work-orders/W8-assurance.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/autonomy/ARCHITECTURE-DELTA.json",
+      "work_order": "W10",
+      "rationale_ref": "spec/work-orders/W10-autonomy-ask.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/brownfield/W15.architecture-delta.json",
+      "work_order": "W15",
+      "rationale_ref": "spec/work-orders/W15-brownfield.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/causal/ARCHITECTURE-DELTA.json",
+      "work_order": "W5",
+      "rationale_ref": "spec/work-orders/W5-causal-memory.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/decision/ARCHITECTURE-DELTA.json",
+      "work_order": "W10",
+      "rationale_ref": "spec/work-orders/W10-autonomy-ask.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/deployment/ARCHITECTURE-DELTA.json",
+      "work_order": "W12",
+      "rationale_ref": "spec/work-orders/W12-platform-adapters.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/ecology/W13.architecture-delta.json",
+      "work_order": "W13",
+      "rationale_ref": "spec/work-orders/W13-package-ecology.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/evidence/ARCHITECTURE-DELTA.json",
+      "work_order": "W3",
+      "rationale_ref": "spec/work-orders/W3-evidence-telemetry.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/experiments/ARCHITECTURE-DELTA.json",
+      "work_order": "W9",
+      "rationale_ref": "spec/work-orders/W9-experimentation.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/greenfield/ARCHITECTURE-DELTA.json",
+      "work_order": "W14",
+      "rationale_ref": "spec/work-orders/W14-greenfield.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/meta-evolution/W16.architecture-delta.json",
+      "work_order": "W16",
+      "rationale_ref": "spec/work-orders/W16-self-evolution.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/mission/W1.architecture-delta.json",
+      "work_order": "W1",
+      "rationale_ref": "spec/work-orders/W1-mission-value-context.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/packages/architecture-delta.json",
+      "work_order": "W6",
+      "rationale_ref": "spec/work-orders/W6-package-core.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/promotion/ARCHITECTURE-DELTA.json",
+      "work_order": "W9",
+      "rationale_ref": "spec/work-orders/W9-experimentation.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/recovery-control/ARCHITECTURE-DELTA.json",
+      "work_order": "W8",
+      "rationale_ref": "spec/work-orders/W8-assurance.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/recovery/W4.architecture-delta.json",
+      "work_order": "W4",
+      "rationale_ref": "spec/work-orders/W4-recovery-conformance.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/runtimes/ARCHITECTURE-DELTA.json",
+      "work_order": "W12",
+      "rationale_ref": "spec/work-orders/W12-platform-adapters.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/search/W7.architecture-delta.json",
+      "work_order": "W7",
+      "rationale_ref": "spec/work-orders/W7-search.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/system-state/W2.architecture-delta.json",
+      "work_order": "W2",
+      "rationale_ref": "spec/work-orders/W2-system-state-architecture.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/ui-contracts/W11.architecture-delta.json",
+      "work_order": "W11",
+      "rationale_ref": "spec/work-orders/W11-console.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "packages/verification/ARCHITECTURE-DELTA.json",
+      "work_order": "W8",
+      "rationale_ref": "spec/work-orders/W8-assurance.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "spec/contracts/deltas/W0.5.architecture-delta.json",
+      "work_order": "W0.5",
+      "rationale_ref": "spec/work-orders/W0.5-semantic-spine.md",
+      "schema": "spec/contracts/architecture-delta.schema.json",
+      "validation": "PASS",
+      "base_authority": "spec/contracts/deltas/ (W0.5 canonical; per-package records in their owned paths per the W13+ convention, each declaring affected artifacts + preserved invariants)"
+    },
+    {
+      "path": "docs/evidence/final-gate/audit-record.json",
+      "work_order": "W18",
+      "rationale_ref": "spec/work-orders/W18-final-gate.md",
+      "schema": "(review record, not an architecture change: W18 owns repository-wide review/reconciliation artifacts; the audit record validates the delta registry itself)",
+      "validation": "PASS",
+      "base_authority": "final architect gate"
+    }
+  ],
+  "notes": [
+    "W0 is the repository bootstrap itself (state: BOOTSTRAP_COMPLETE, mergedAs INITIAL_BOOTSTRAP); it predates the delta discipline and is exempt from the work-order file requirement by scripts/verify-repo.mjs.",
+    "Every record above was re-validated against spec/contracts/architecture-delta.schema.json at final-gate time on the W18 base head.",
+    "The per-package placement (W13+ convention) is canonical: each delta lives in its work order's owned path; spec/contracts/deltas/ holds the W0.5 record and this index."
+  ]
+}
