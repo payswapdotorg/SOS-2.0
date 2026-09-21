@@ -1,0 +1,34 @@
+{
+  "name": "@sos-2/api-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 API Contracts (Work Order P2): the typed boundary of the live API surface — transport-agnostic request/response envelopes, typed error envelopes (UNKNOWN, UNAVAILABLE, CONFLICT/stale-revision, DUPLICATE/replayed, NOT_FOUND, INVALID), opaque pagination cursors, revision headers, event ingestion payloads and provider-health payloads. Pure types + guards; zero external runtime dependencies (the only dependency is the workspace spine, whose vocabulary — canonical serialization and the frozen truth states — is consumed verbatim and never redefined; Work Order P2, spec/productization-requirements.md 'Providers remain adapters', docs/deployment/free-tier-plan.md).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

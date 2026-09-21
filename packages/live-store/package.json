@@ -1,0 +1,48 @@
+{
+  "name": "@sos-2/live-store",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Live Store (Work Order P2): durable, provider-neutral repositories for the live product state — Mission, Context, SystemState, Evidence, Architecture, Candidate, Assurance, Experiment, Decision, AuthorityGrant, Package, history (ArchitectureMemory/CausalHypothesis), development state, task state (the §6 task-durability shape), body lease state and observation events — plus the provider PORTS for the free-tier reference stack: PostgresStoreAdapter (Neon target: durable canonical state), RedisCoordinationAdapter (Upstash target: cache/leases/idempotency ONLY — NEVER canonical) and ObjectStoreAdapter (Cloudflare R2 target: large immutable artifacts by content hash). A complete in-memory reference implementation is included; real provider SDKs attach in later waves as optional peers WITHOUT contract change. Domain record shapes are STORED AND RETURNED VERBATIM, validated by the owning packages' own guards (consumed — never redefined); the Semantic Spine remains the only identity/serialization authority; semantic IDs and exact revisions are preserved, never re-minted, never rewritten.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/assurance": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/causal": "workspace:*",
+    "@sos-2/context": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/memory": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*"
+  },
+  "devDependencies": {
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
