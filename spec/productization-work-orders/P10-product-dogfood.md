@@ -1,40 +1,19 @@
-# P10 — Product Dogfood + Accessibility + Deployment Rehearsal
+# P10 — Package Ecology + History + Self-Evolution UX
 
-Dependencies: P7, P8, P9
-Owned paths: tests/product-dogfood, tests/accessibility, docs/evidence/productization
+Dependencies: P1, P2  
+Owned paths: apps/web package/history/evolution routes, packages/web-contracts ecology projections  
+Worker: A in wave 2
 
-All three workers participate.
+## Goal
 
-Goal:
-Simulate the full product as a human user and verify discoverability, truthfulness and action safety.
+Turn the remaining architectural capabilities into understandable production workspaces.
 
-Required journeys:
-greenfield onboarding
-brownfield onboarding
-reality/drift investigation
-evidence investigation
-candidate selection
-assurance objection
-experiment
-ASK resolution
-promotion
-rollback
-package composition
-history
-self-evolution
+## Acceptance
 
-Required negative scenarios:
-stale state
-missing evidence
-provider outage
-expired authority
-contradictory evidence
-unsafe candidate
-failed rollback
-demo/live-state confusion
-
-Acceptance:
-Fresh user can complete representative greenfield and brownfield tasks without developer knowledge.
-All consequential states expose rationale/evidence/authority.
-Accessibility checks pass.
-Deployment rehearsal produces deterministic evidence bundle.
+- package discovery becomes a composition workspace
+- contextual applicability, uncertainty, failures and assurance obligations remain visible
+- package compositions have independent evidence
+- history is a timeline plus revision diff
+- self-evolution reads canonical live state
+- machine/demo state is explicitly labelled
+- every surface exposes what/why/evidence/uncertainty/authority/next action
