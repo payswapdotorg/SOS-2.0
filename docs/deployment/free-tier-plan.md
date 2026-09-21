@@ -1,90 +1,89 @@
-# SOS 2.0 Free-Tier Deployment Plan
+# SOS 2.0 Free-Tier Deployment + Execution Plan
 
-Status: planned. No provider deployment is currently evidenced in the SOS-2.0 repository.
+Status: planned validation topology.
 
-## Target topology
+## Target control-plane topology
 
-Vercel Hobby -> production web console and lightweight API
-Neon Free -> durable PostgreSQL state
-Upstash Redis Free -> cache, idempotency, rate limiting and lightweight queues
-Cloudflare R2 Free -> large evidence/import/report artifacts
-GitHub Actions -> source/CI
+Vercel Hobby -> apps/web and lightweight API endpoints
+Neon Free -> durable PostgreSQL semantic/application state
+Upstash Redis Free -> cache, idempotency, rate limiting, leases and lightweight queue coordination
+Cloudflare R2 Free -> large immutable evidence/import/report artifacts
+GitHub Actions -> source/CI and bounded repository validation
+
+Important: the control-plane web deployment must not be used as the hidden long-running worker. Autonomous execution is a replaceable external worker/body concern.
+
+## Execution topology
+
+```text
+Vercel web/API
+      |
+      +---- durable task/state ----> Neon
+      |
+      +---- coordination ---------> Redis
+      |
+      +---- artifacts ------------> R2
+      |
+      +---- event/evidence <------- GitHub / CI / telemetry
+      |
+      +---- summon body ----------> Execution Fabric
+                                      |
+                              +-------+-------+
+                              |               |
+                         cloud body      remote/local body
+```
+
+The first reference body must be capable of bounded cloud execution. Higher-scale/long-running body providers remain adapters.
 
 ## Provider roles
 
 Vercel:
-Host apps/web. Current official Hobby documentation lists a $0 plan with previews and automatic CI/CD, but Hobby is for personal/non-commercial use. Revisit plan before commercialization.
+Host the production Next.js console and lightweight request/response APIs. Do not rely on request lifetime for long-running autonomous work.
 
 Neon:
-Store structured durable application state. Current Free plan documentation lists free projects/branches/compute/storage allowances and scale-to-zero.
+Canonical durable product state: mission, System State projections, evidence metadata, task state, authority, decisions, experiments, packages and history.
 
 Upstash:
-Use only for ephemeral acceleration/coordination. Current Free Redis includes 256 MB data, 10 GB monthly bandwidth and 500K monthly commands.
+Short-lived acceleration and coordination. Redis is never canonical.
 
 Cloudflare R2:
-Use for unstructured artifacts. Current free allowance includes 10 GB-month Standard storage, 1M Class A requests and 10M Class B requests monthly, with free Internet egress.
+Large immutable evidence/import/report objects. Semantic metadata and content hashes remain in the durable semantic layer.
 
-## Web architecture
+GitHub:
+Source control/project state through the GitHub adapter; webhooks/events feed Observation.
 
-Create apps/web as the production Next.js app.
-Keep apps/console as the deterministic reference harness.
-Both consume the same domain and ui-contract packages.
-Never copy domain semantics into the web layer.
-
-## Persistence
-
-Neon stores:
-mission projections
-context projections
-System State projections
-artifact indexes
-evidence metadata
-authority grants
-decisions
-experiments
-package registry metadata
-history
-
-R2 stores:
-repository snapshots
-import files
-telemetry batches
-experiment artifacts
-generated reports
-large immutable evidence objects
-
-Store content hashes and R2 object references in the semantic/evidence layer.
-
-Upstash stores:
-short-lived cache
-idempotency keys
-rate limits
-job leases
-lightweight queue state
-
-Redis is never canonical.
+Execution body providers:
+Provider-neutral adapters. A body must advertise capabilities, isolation, resource envelope and task lifecycle. User-device bodies are optional.
 
 ## Environment isolation
 
-Local: fixtures plus local adapters.
-Preview: isolated Neon branch, isolated Redis namespace/database, R2 preview prefix.
-Production: isolated Neon project/branch, Redis database, R2 production prefix.
+Local: deterministic fixtures plus local adapters.
+Preview: isolated Neon branch, isolated Redis namespace/database, R2 preview prefix and isolated execution workspaces.
+Production: isolated durable stores, execution workspaces and production artifact namespace.
 
-Preview must never mutate production state.
+Preview must never mutate production.
+
+## User-device rule
+
+Cloud/remote jobs continue while the user's computer is off.
+
+Local-only jobs remain durable and queue until the local companion reconnects.
 
 ## Scheduled work
 
-Vercel Hobby Cron is acceptable only for low-frequency maintenance because Hobby scheduling is once per day. Higher-frequency orchestration moves to another worker/provider or a paid tier.
+Low-frequency maintenance may use Vercel Hobby Cron. Long-running/high-frequency observation or orchestration belongs to an external worker/provider.
 
 ## Deployment acceptance
 
 - UI production smoke tests
-- database connectivity
-- Redis connectivity
-- R2 read/write
-- evidence persistence
+- durable DB
+- Redis
+- R2
+- webhook/event ingestion
+- observation/evidence persistence
+- cloud body lease/execution smoke
+- body-loss recovery
 - exact deployment revision in System State
 - rollback path
 - preview isolation
 - no secret leakage
-- representative journey smoke suite
+- representative greenfield autonomous build smoke
