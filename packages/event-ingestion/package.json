@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/event-ingestion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Event Ingestion (Work Order P7): the Observation Plane ingestion boundary. Normalizes the §5 input families (GitHub repository/webhook events, CI/build/test/security events, deployment events, runtime telemetry, incidents/provider health, scheduled probes, explicit user observations) into P2 replay-protected observation events through typed source adapters. EVERY event carries a delivery id; duplicates are answered with the typed DUPLICATE outcome from the durable P2 store — never double-applied. Payloads are OPAQUE canonical-JSON preserved verbatim (truth states inside payloads survive ingestion bit-exact and are never folded into success or zero). Scheduled probes are first-class but HONEST about being fallback: the coverage ledger reports where event/telemetry coverage is insufficient, and probes are only due where a real gap exists (the work-order behavior rule). Source health is tracked per source (last event, outcome counts, poll failures) with no hidden clocks (injected Clock everywhere) and zero ambient network/process/time in package src — real provider endpoints attach later as adapters; the package never fabricates their evidence.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/telemetry": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

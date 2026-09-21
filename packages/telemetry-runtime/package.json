@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/telemetry-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Telemetry Runtime (Work Order P7): the poll-driven host side of runtime telemetry ingestion. Pulls W3 TelemetrySource ports on the observation loop's ticks and converts every RawObservation capture into a replay-protected observation event through the P7 event-ingestion pipeline — carrying the capture VERBATIM so capture-level availability truth states (SUCCESS/FAILURE/UNKNOWN/UNAVAILABLE/UNSUPPORTED/PARTIAL) survive bit-exact (gaps stay gaps; unavailable is never folded into zero or success). Pull failures are typed outcomes with honest failure reasons; the runtime fabricates nothing. Provider health signals surface as events for the provider-health projection. No ambient timers/network/process: the tick source, telemetry sources, clock and pipeline are all injected; real telemetry backends attach later as TelemetrySource adapters.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/event-ingestion": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/telemetry": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
