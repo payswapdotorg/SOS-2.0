@@ -1,0 +1,24 @@
+name: 'P3 deployment toolchain setup'
+description: >-
+  Shared setup for the free-tier deployment contract verification (Work
+  Order P3): checkout at the exact head, Node with native TypeScript type
+  stripping, corepack-pinned pnpm, workspace install. Composite steps
+  only — no secrets, no credentials, fully offline-capable apart from the
+  standard action setup downloads.
+runs:
+  using: composite
+  steps:
+    - name: Check out the repository (exact head)
+      uses: actions/checkout@v4
+    - name: Set up Node (>= 22.18, native TS type stripping)
+      uses: actions/setup-node@v4
+      with:
+        node-version: 24
+    - name: Enable pnpm (corepack, pinned by packageManager)
+      shell: bash
+      run: |
+        corepack enable
+        pnpm --version
+    - name: Install workspace dependencies
+      shell: bash
+      run: pnpm install

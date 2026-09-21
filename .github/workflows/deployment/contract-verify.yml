@@ -1,0 +1,54 @@
+name: Deployment contract verification (reusable)
+
+# Work Order P3 — reusable deployment contract verification definition.
+# Invoked by the THIN top-level caller .github/workflows/deploy-contract.yml
+# (GitHub auto-discovers only top-level .github/workflows/*.yml; the
+# definitions live here under .github/workflows/deployment/**).
+#
+# This job verifies CONTRACTS, not deployments: environment schema
+# validation, secret policy, preview isolation, provider config sanity and
+# revision-record shape — all offline, with NO credentials (no real cloud
+# accounts exist for this Work Order; nothing here fabricates deployment
+# evidence). Secret failures report NAMES and pattern ids, never values.
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-deployment-contracts:
+    name: free-tier deployment contracts (offline, no credentials)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Toolchain setup (checkout + node + pnpm + install)
+        uses: ./.github/workflows/deployment/actions/setup-toolchain
+
+      - name: Repository contract verification (frozen checks)
+        run: |
+          node scripts/verify-repo.mjs
+          node scripts/verify-productization.mjs
+
+      - name: infra/deployment declares ZERO dependencies (lockfile discipline root cause)
+        run: pnpm --filter @sos-2/infra-deployment run verify:zero-deps
+
+      - name: Secret policy scan over P3-owned files (names, never values)
+        run: pnpm --filter @sos-2/infra-deployment run verify:secrets
+
+      - name: infra/deployment typecheck (strict, borrowed toolchain)
+        run: pnpm --filter @sos-2/infra-deployment run typecheck
+
+      - name: Deterministic contract tests (environment schema, secret policy, preview isolation, provider sanity, revision records, health, body providers, delegation boundary)
+        run: pnpm --filter @sos-2/infra-deployment run test
+
+      - name: Install determinism (lockfile discipline)
+        run: |
+          BEFORE=$(md5sum pnpm-lock.yaml | cut -d' ' -f1)
+          pnpm install >/dev/null
+          AFTER=$(md5sum pnpm-lock.yaml | cut -d' ' -f1)
+          if [ "$BEFORE" != "$AFTER" ]; then
+            echo "pnpm install is not deterministic over the workspace manifests (lockfile hash changed on re-install)"
+            exit 1
+          fi
+          echo "pnpm install deterministic: $AFTER"

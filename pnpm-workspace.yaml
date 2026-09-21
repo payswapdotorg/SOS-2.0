@@ -7,3 +7,11 @@ packages:
   # suites"). Test-only wiring; no package source, app, spec or script is
   # touched by this entry.
   - tests/*
+  # P3: the free-tier deployment foundation is a workspace package so that
+  # `pnpm -r --if-present test` includes its deterministic contract suites
+  # (work-order P3 task packet, following the W17 test-only wiring
+  # precedent). The package declares ZERO dependencies — this line changes
+  # no dependency graph and pnpm-lock.yaml remains byte-identical (pinned
+  # by tests + CI); the test toolchain is borrowed at run time from the
+  # frozen W17 suites via `pnpm --filter @sos-2/adversarial exec ...`.
+  - infra/deployment
