@@ -1,178 +1,102 @@
 # SOS 2.0 User Journey Simulation and UX Findings
 
 Research inputs:
-- apps/console W11 implementation and tests
-- W18 dogfood and final-gate evidence
-- pectoraux/ShareNet UI architecture
+- apps/console W11 implementation/tests
+- W18 dogfood/final-gate evidence
+- ShareNet UI architecture
+- post-W18 Spirit/Body/Observation product model
 
 ## Existing console
 
 apps/console is a real runnable human console with 12 journeys, navigation, deterministic rendering, mission creation, system import, rationale pages and HTTP smoke coverage.
 
-It is intentionally zero-network and fixture-backed. That makes it an excellent reference harness, but not the production product.
+It remains a deterministic reference harness, not the production product.
 
-## Journey 1: first-time mission owner
+## Productization findings
 
-Overview -> Mission.
+The original 12-journey simulation remains valid. Additional journeys discovered after the Spirit/Body model are mandatory.
 
-What works:
-Mission, revision history, provenance, goals, measures, constraints and ambiguities are visible. Creation uses domain validation.
+## Journey 13: mission -> empty GitHub repository -> implementation
 
-Finding:
-A large engineering form is less natural than progressive formalization.
+Desired flow:
+Mission -> GitHub connection -> architecture/candidate -> assurance -> worker task graph -> body -> implementation -> independent evaluation -> PR/push -> deployment -> completion evidence.
 
-Change:
-Mission wizard: purpose -> outcomes -> stakeholders -> measures -> hard constraints -> ambiguities -> review -> authority confirmation.
+UX requirement:
+The user should see progress and evidence, not raw agent transcripts. "Done" must mean evidence-gated completion.
 
-## Journey 2: existing-system owner
+## Journey 14: continuous monitoring without a body
 
-Overview -> System import.
+Desired flow:
+GitHub/CI/runtime/deployment events -> Observation -> Evidence -> System State -> opportunity/shortfall.
 
-What works:
-ImplementationModel validation, System State projection and reconciliation all appear together.
+UX requirement:
+Show "SOS is watching" separately from "a body is working." No permanent worker indicator should be implied.
 
-Finding:
-JSON paste is an engineering test surface, not onboarding.
+## Journey 15: body interruption
 
-Change:
-Repository/runtime import wizard with JSON as advanced mode.
+Desired flow:
+task running -> body lost/provider outage -> checkpoint -> re-plan/select another body -> resume.
 
-## Journey 3: understand current reality
+UX requirement:
+Task state persists. The body is presented as an interchangeable execution resource.
 
-Overview -> Reconciliation -> Evidence.
+## Journey 16: user's computer is off
 
-What works:
-Declared versus observed, frozen conformance classes, classifier reasons and drift evidence are explicit.
+Desired flow:
+cloud body continues -> user closes website/laptop -> task timeline continues -> user returns to completed/evidence-backed state.
 
-Finding:
-Dense tables are cognitively expensive.
+UX requirement:
+Never imply local-device availability is required for cloud execution.
 
-Change:
-System health hero, architecture/reality diff, then drill-down tables/drawers. Provide investigate, gather-evidence and create-candidate next actions.
+## Journey 17: optional local body
 
-## Journey 4: evidence
+Desired flow:
+user grants local companion -> SOS receives capability set -> local-only task -> device disconnect -> queue -> reconnect -> reconcile -> resume.
 
-Overview -> Evidence.
+UX requirement:
+Clearly distinguish cloud execution from local-device access and show exact scope.
 
-What works:
-Six truth states stay distinct; provenance and LLM non-authority are visible; filtering exists.
+## Existing journey adaptations
 
-Finding:
-Causal/intervention meaning and freshness are not yet the dominant mental model.
+Mission onboarding:
+Progressive formalization, not an engineering form.
 
-Change:
-Filters and tabs for subject, context, time, observation/intervention, freshness, provenance, support and contradiction.
+Brownfield:
+Repository/runtime wizard first; raw JSON only advanced.
 
-## Journey 5: candidates
+Reality:
+Hero + architecture/reality diff + evidence drawers, not table-first.
 
-Overview -> Candidates.
+Evidence:
+Subject/context/time/intervention/provenance/freshness/support/contradiction are primary.
 
-What works:
-Side-by-side candidate comparison, uncertainty, evidence context and diversity without a single winner.
+Candidates:
+Shortfall -> target capability -> candidate set -> predicted effects -> constraints -> evidence -> assurance.
 
-Finding:
-The relationship to the current mission shortfall is implicit.
+Assurance:
+Objections expose resolve/request-evidence/verify/reject/ASK next actions.
 
-Change:
-Shortfall -> target capability -> candidate set -> predicted effects -> constraints -> evidence -> assurance readiness -> next decision.
-
-## Journey 6: assurance
-
-Candidates -> Assurance.
-
-What works:
-Claims, objections, validity and derived verdict are preserved.
-
-Finding:
-Objections lack an obvious next-action workflow.
-
-Change:
-Resolve, request evidence, run verification, reject, or ASK.
-
-## Journey 7: experiment
-
-Assurance -> Experiments.
-
-What works:
-Lifecycle, guardrails, stopping triggers, rollback triggers and honest simulation marking.
-
-Finding:
-The demo is read-only.
-
-Change:
+Experiment:
 Design -> approve -> shadow -> canary -> monitor -> stop/rollback/promote.
 
-## Journey 8: ASK
+ASK:
+Actionable inbox with human resolution and provenance.
 
-Candidate/Assurance -> ASK.
+Packages:
+Composition workspace with independent composition evidence.
 
-What works:
-Exact decision, alternatives, evidence quality, uncertainty, trade-offs, risk, authority insufficiency and rule trace are visible.
+History:
+Timeline + revision diff.
 
-Finding:
-This is one of the strongest existing surfaces.
+Self-evolution:
+Canonical live state only; fixture clearly marked DEMO.
 
-Change:
-Turn ASK into an actionable inbox with authorized human resolution and provenance.
+## Global product requirement
 
-## Journey 9: rollback
-
-Experiment -> Rollback.
-
-What works:
-Mechanism, trigger, authority, evidence and promotion linkage are explicit.
-
-Finding:
-Read-only in demo.
-
-Change:
-Make execution available only when an AuthorityGrant covers rollback. Show exact target revision and expected blast radius.
-
-## Journey 10: packages
-
-Overview -> Packages.
-
-What works:
-Families, diversity dimensions, contextual applicability, uncertainty, evidence, limitations, failures and assurance obligations.
-
-Finding:
-Inspection stops short of composition.
-
-Change:
-Composition workspace with compatibility/conflict, context-conditioned estimate, assurance preview, save and experiment.
-
-## Journey 11: history
-
-Overview -> History.
-
-What works:
-Identity-preserving supersedes chains.
-
-Finding:
-Good audit surface but not yet reasoning-oriented.
-
-Change:
-Timeline of mission, architecture, system-state, evidence, experiment, outcome and learned package; allow revision diff.
-
-## Journey 12: self-evolution
-
-Overview -> Self-evolution.
-
-What works:
-Read-only machine-state projection.
-
-Important issue:
-The demo fixture contains an intentionally frozen W11/W12 machine-state snapshot while the real program is now W18 COMPLETE. This is correct for deterministic testing but would be misleading if presented as live production state.
-
-Change:
-Production self-evolution must read canonical current state. Keep the fixture clearly marked DEMO.
-
-## Global conclusions
-
-1. Keep apps/console as deterministic reference harness.
-2. Build a production web console with task-oriented navigation.
-3. Landing page must answer current mission, current system condition, current shortfall/opportunity, current SOS activity and next action.
-4. Use progressive disclosure: outcome -> rationale -> evidence -> raw artifact.
-5. Every consequential action exposes what, why, evidence, uncertainty, authority and next action.
-6. Use ShareNet-inspired sparse warm-light shell, strong state hero, restrained cards, timeline/topology views, desktop left rail, mobile bottom navigation and detail drawers.
-7. Do not copy ShareNet domain language or brand identity.
+Every consequential screen answers:
+What is happening?
+Why does SOS believe this?
+What evidence supports it?
+What remains uncertain?
+What authority is required?
+What can happen next?
