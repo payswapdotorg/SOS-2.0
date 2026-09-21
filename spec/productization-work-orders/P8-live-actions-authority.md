@@ -1,17 +1,30 @@
-# P8 — Live Actions + Identity/Authority Integration
+# P8 — Harness Adapters + Cloud/Remote Bodies
 
-Dependencies: P2, P3, P4, P6
-Owned paths: packages/auth-adapter, packages/action-gateway, apps/web action components
-Worker: B
+Dependencies: P5  
+Owned paths: packages/harness-adapters, packages/body-runtimes, packages/sandbox, apps/worker-runtimes, tests/harness-adapters  
+Worker: B in wave 3
 
-Goal:
-Connect real actions to identity, AuthorityGrant and execution adapters.
+## Goal
 
-Acceptance:
-- authentication identity separated from SOS authority
-- every action re-evaluates current authority
-- expired/revoked grants fail closed
-- ASK resolution produces DecisionRecord
-- execution produces Evidence
-- rollback produces Evidence
-- action idempotency and replay protection
+Provide the first real execution bodies, prioritizing cloud/remote operation so SOS can work while the user's computer is off.
+
+## Required reference bodies
+
+- disposable cloud coding/shell body
+- browser/evaluator body
+- GitHub-aware project body
+
+Optional adapters:
+
+- private remote runner
+- local companion
+- IDE/browser integrations
+
+## Acceptance
+
+- at least one cloud body can be leased and released
+- body can access an isolated workspace
+- task continues when the user's computer is offline
+- filesystem/network/secrets are bounded
+- body emits observations and artifacts
+- body provider can be replaced without changing task semantics
