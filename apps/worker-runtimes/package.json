@@ -1,0 +1,45 @@
+{
+  "name": "@sos-2/worker-runtimes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Worker Runtime Host (Work Order P8): the local reference of the external worker topology \u2014 a plain Node + TypeScript host that leases a reference body through the P5 Body Broker, executes a bounded task in the @sos-2/sandbox bounded environment, emits observations/artifacts through the typed execution-fabric boundaries, and releases the body. NO long-running work inside any request lifetime: the host runs on an INJECTED tick/command source (poll-driven, testable offline \u2014 no ambient timers). The \u00a77 user-device model is enforced at the scheduling gate: cloud/remote bodies run regardless of the user's device (the task continues while the user's computer is off \u2014 pinned by tests with the device reported offline), user-device bodies QUEUE while the device is offline and resume when it returns. Body replacement mid-task rides the fabric's replaceBodyForTask (task identity and state preserved). Honest completion discipline (\u00a710): the host builds the Spirit-side verification record from the executed step outcomes (evidence refs = observation ids + captured artifact ids); a denied, unsupported or failed step completes the task with verified:false \u2014 never fabricated. The only impure boundary is the composition root (system clock injection), mirroring the apps/api precedent.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/harness-adapters": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/sandbox": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
