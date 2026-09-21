@@ -1,3 +1,9 @@
 packages:
   - apps/*
   - packages/*
+  # W17: the dogfood + adversarial suites are workspace packages so that
+  # `pnpm -r --if-present test` includes them (work-order W17 task packet:
+  # "extend the root vitest workspace so `pnpm -r test` includes your
+  # suites"). Test-only wiring; no package source, app, spec or script is
+  # touched by this entry.
+  - tests/*

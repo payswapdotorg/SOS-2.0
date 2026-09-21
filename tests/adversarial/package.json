@@ -1,0 +1,45 @@
+{
+  "name": "@sos-2/adversarial",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Adversarial Verification (Work Order W17): the 13 frozen adversarial classes. Each suite CONSTRUCTS the fault, asserts the system DETECTS or CONTAINS it (typed rejection/failure record \u2014 never a silent pass, never a crash), and asserts the trace chain stays queryable afterward.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/adapters": "workspace:*",
+    "@sos-2/architecture": "workspace:*",
+    "@sos-2/assurance": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy": "workspace:*",
+    "@sos-2/causal": "workspace:*",
+    "@sos-2/conformance": "workspace:*",
+    "@sos-2/contracts": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/deployment": "workspace:*",
+    "@sos-2/diversity": "workspace:*",
+    "@sos-2/ecology": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/meta-evolution": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/promotion": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/registry": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@sos-2/verification": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
