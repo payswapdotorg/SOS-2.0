@@ -4,8 +4,7 @@
   "status": "READY",
   "currentFrontier": [
     "P11",
-    "P6",
-    "P7"
+    "P6"
   ],
   "tasks": {
     "P0": {
@@ -59,12 +58,12 @@
       "mergedAs": null
     },
     "P7": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P2",
         "P3"
       ],
-      "mergedAs": null
+      "mergedAs": "3bf3a4c07c61197163d70a32fbaf777ceee62b67"
     },
     "P8": {
       "status": "COMPLETE",
