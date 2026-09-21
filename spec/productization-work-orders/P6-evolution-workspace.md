@@ -1,7 +1,7 @@
 # P6 — Spirit Orchestrator + Worker/Task Runtime
 
 Dependencies: P2, P5  
-Owned paths: packages/orchestrator, packages/task-graph, packages/worker-runtime, packages/reasoning-broker, apps/api/orchestrator, tests/orchestration  
+Owned paths: packages/orchestrator, packages/task-graph, packages/worker-runtime, packages/reasoning-broker, apps/orchestrator, tests/orchestration  
 Worker: C in wave 3
 
 ## Goal
