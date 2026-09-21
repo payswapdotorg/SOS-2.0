@@ -1,7 +1,7 @@
 # P12 — Continuous Autonomy, Body Lifecycle + Recovery
 
 Dependencies: P6, P7, P8, P9, P11  
-Owned paths: packages/autonomy-runtime, packages/task-runtime, apps/api/worker-runtime, tests/autonomy  
+Owned paths: packages/autonomy-runtime, packages/task-runtime, apps/task-runner, tests/autonomy  
 Worker: assigned in wave 5
 
 ## Goal
