@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/harness-adapters",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Harness Provider Adapters (Work Order P8): the adapter contracts mapping the merged P5 Harness Contract onto the §4 integration shapes — native API/SDK-style providers (the highest control surface), an MCP/equivalent-protocol shape, and the local companion/service-bridge shape — each as a TYPED PORT with an INJECTABLE TRANSPORT (real provider endpoints attach later through the same adapters without contract change; tests use fakes and the in-process bridges). Capability advertisement is honest and binding: each adapter declares exactly what it supports and unsupported operations answer typed UNSUPPORTED results (never silent, never a surprise capability); request and reply payloads are validated against exact field sets (the anti-smuggling rule — the seam carries no authority fields, a body/provider cannot widen authority through it). Provider identity is provenance metadata only (never a selection key: the §4 tier selection is deterministic, vendor-blind, pinned by provider-name-flip tests). Honest connection statuses: NOT_YET_CONNECTED for real providers (validation accounts pending — connection evidence is never fabricated) and an explicit simulated marker when a reference/fake transport backs the adapter. Body provider replacement preserves task semantics: an adapter-served body registers with the P5 broker like any HarnessContract and the broker's replaceBodyLease swaps adapters underneath an active lease while task identity/state survive (pinned by tests). In-process bridges serve any HarnessContract (including the P8 reference bodies) through every adapter shape for local development and deterministic tests.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

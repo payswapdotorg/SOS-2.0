@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/body-runtimes",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Reference Body Runtimes (Work Order P8): THREE reference bodies behind the merged P5 Harness Contract, each advertising honest capabilities. (1) The DISPOSABLE CLOUD CODING/SHELL BODY \u2014 the reference implementation of the primary autonomous execution path: workspace read/write bounded by a @sos-2/sandbox environment, shell exec through a deterministic in-process shell simulator with an INJECTABLE command registry (no real process spawning), git operations as typed records, artifact capture, observation emission and a cursor-based event stream; leased through the P5 broker and isolated in a sandbox; its lifecycle is independent of any local-device presence (placement cloud). (2) The BROWSER/EVALUATOR BODY \u2014 capability-advertised browser journeys (open/interact) as typed records through an injectable browser port; the real browser bridge is a later-wave adapter; this body proves the contract. (3) THE GITHUB-AWARE PROJECT BODY \u2014 repository operations (branch/commit/PR) through the P4 provider-neutral GitHubPort with a sandbox-bounded staging workspace and typed network exchange records; honest NOT_YET_CONNECTED failures when no real credentials exist (never fabricated). Unsupported operations are typed UNSUPPORTED everywhere; sandbox boundary violations surface as truthful FAILED results carrying the typed denial. No real cloud accounts exist: all three are LOCAL REFERENCE RUNTIMES \u2014 deterministic, offline-testable, satisfying the SAME Harness Contract; real provider endpoints attach later through @sos-2/harness-adapters without contract change.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/sandbox": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
