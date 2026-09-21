@@ -1,20 +1,28 @@
-# P11 — Product Release Gate
+# P11 — Local Companion + Browser/IDE Bridges
 
-Dependencies: P10
-Owned paths: repository-wide release/reconciliation artifacts
-Architect owned
+Dependencies: P3, P5, P8  
+Owned paths: apps/companion, packages/local-companion, packages/browser-bridge, packages/ide-bridge, docs/local-execution, tests/local-bridges  
+Worker: B in wave 4
 
-Gate:
-- production UX journeys verified
-- apps/console remains deterministic and green
-- live API/provider adapters preserve semantic authority
-- deployment uses documented free-tier topology for validation
-- user can discover all major capabilities
-- live state is never confused with fixture state
-- actions are authority gated
-- audit/evidence traceability preserved
-- rollback rehearsed
-- zero-history productization recovery works
+## Goal
 
-Completion:
-Architect approval + actual merge + productization state reconciliation.
+Support private/local bodies when work requires a user's local machine, while keeping the cloud body path independent.
+
+## Scope
+
+- authenticated local companion
+- private workspace/file access
+- local shell/process integration
+- optional browser bridge
+- optional IDE bridge
+- offline queueing
+- reconnect and state reconciliation
+
+## Acceptance
+
+- cloud tasks do not require the companion
+- local-only tasks queue while device is offline
+- companion cannot exceed granted scope
+- local observations are provenance-labelled
+- browser/IDE extensions are adapters, not SOS authorities
+- reconnect does not duplicate or lose task events
