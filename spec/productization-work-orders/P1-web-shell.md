@@ -1,12 +1,12 @@
 # P1 — Production Web Console Shell
 
 Dependencies: P0  
-Owned paths: apps/web, packages/web-contracts  
+Owned paths: apps/web/shell, packages/web-contracts/core  
 Worker: A in wave 1
 
 ## Goal
 
-Create the production Next.js console using the ShareNet-inspired interaction hierarchy while exposing the live Spirit/Body/Observation state without leaking internal architecture vocabulary.
+Create the production Next.js console using the ShareNet-inspired interaction hierarchy while exposing live Spirit/Body/Observation state without leaking internal architecture vocabulary.
 
 ## Acceptance
 
