@@ -6,7 +6,7 @@
   "tasks":{
     "P0":{"status":"READY","dependencies":[],"mergedAs":null},
     "P1":{"status":"BLOCKED","dependencies":["P0"],"mergedAs":null},
-    "P2":{"status":"BLOCKED","dependencies":["P0"],"mergedAsnull":null},
+    "P2":{"status":"BLOCKED","dependencies":["P0"],"mergedAs":null},
     "P3":{"status":"BLOCKED","dependencies":["P0"],"mergedAs":null},
     "P4":{"status":"BLOCKED","dependencies":["P1","P2"],"mergedAs":null},
     "P5":{"status":"BLOCKED","dependencies":["P1","P2"],"mergedAs":null},
