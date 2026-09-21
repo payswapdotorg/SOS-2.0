@@ -1,8 +1,8 @@
 # P10 — Package Ecology + History + Self-Evolution UX
 
 Dependencies: P1, P2  
-Owned paths: apps/web package/history/evolution routes, packages/web-contracts ecology projections  
-Worker: A in wave 2
+Owned paths: apps/web/workspaces, packages/web-contracts/ecology  
+Worker: C in wave 2
 
 ## Goal
 
