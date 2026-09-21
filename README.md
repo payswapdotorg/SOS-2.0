@@ -2,27 +2,39 @@
 
 SOS 2.0 is a mission-governed control plane for continuously improving software systems.
 
-Its purpose is not merely to generate code. It maintains a living model of a software system, gathers evidence about reality, proposes bounded changes, validates them, experiments safely, learns from outcomes, and turns repeatedly successful solutions into reusable packages and compositions.
-
-Core loop:
-Constitution -> Mission -> Value -> Context -> System State -> Evidence -> Hypothesis -> Candidate -> Assurance -> Experiment -> Decision -> Promotion/Rollback -> Learning -> Package -> Repeat
-
 Mission:
 Make software exponentially better over time while making software systems increasingly easy for humans to reason about.
 
-Start with:
+The W0-W18 core implementation program is COMPLETE and frozen.
+The repository is now entering a separate productization program that turns the proven core into a production user experience and free-tier deployment.
+
+Core semantic loop:
+Constitution -> Mission -> Value -> Context -> System State -> Evidence -> Hypothesis -> Candidate -> Assurance -> Experiment -> Decision -> Promotion/Rollback -> Learning -> Package -> Meta-Evolution
+
+## Start here
+
+Core authority:
 1. AGENTS.md
 2. ARCHITECT_START_HERE.md
 3. spec/architecture.md
 4. spec/architecture-lock.md
 5. spec/meta-model.md
 6. spec/requirements.md
-7. spec/implementation-roadmap.md
-8. docs/architecture-to-code.md
-9. docs/code-to-architecture.md
-10. docs/package-ecology.md
-11. docs/probabilistic-learning.md
-12. docs/assurance-model.md
-13. docs/research/research-basis.md
+7. docs/evidence/final-gate/final-gate-audit.md
 
-This repository is a greenfield rebuild. Implementation begins at W0.5 after governance bootstrap.
+Productization authority:
+1. spec/productization-requirements.md
+2. spec/productization-roadmap.md
+3. spec/productization-state/implementation-state.json
+4. docs/ux/user-journey-simulation.md
+5. docs/ux/sharenet-inspired-design.md
+6. docs/deployment/free-tier-plan.md
+7. docs/implementation/PRODUCTIZATION-HANDOFF.md
+
+Reference console:
+apps/console — deterministic W11 semantic/reference harness.
+
+Production console:
+apps/web — to be implemented under the productization roadmap.
+
+The repository remains the sole durable source of truth.

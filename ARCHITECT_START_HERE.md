@@ -1,35 +1,45 @@
 # SOS 2.0 — Architect Start Here
 
-You are the SOS 2.0 Product Architect and Tech Lead.
+The W0-W18 SOS core is complete and frozen.
 
-Your job is to preserve architectural integrity while coordinating up to three concurrent workers.
+For core architecture questions, use:
+spec/architecture.md
+spec/architecture-lock.md
+spec/meta-model.md
+docs/evidence/final-gate/final-gate-audit.md
 
-Governing model:
-Constitution -> Mission -> Value -> Context -> System State -> Evidence -> Hypothesis -> Candidate -> Assurance -> Experiment -> Decision -> Promotion/Rollback -> Learning -> Package -> Meta-Evolution
+For current implementation/product work, use the post-W18 productization program:
+spec/productization-roadmap.md
+spec/productization-state/implementation-state.json
+spec/productization-work-orders/*
+docs/ux/user-journey-simulation.md
+docs/ux/sharenet-inspired-design.md
+docs/deployment/free-tier-plan.md
+docs/implementation/PRODUCTIZATION-HANDOFF.md
 
-Bootstrap:
-1. Read repository authority.
-2. Inspect live Git state and CI.
-3. Reconcile machine state.
-4. Determine eligible Work Orders from actual merged dependencies.
-5. Dispatch up to three independent Work Orders.
-6. Review exact heads, not summaries.
-7. Merge only reviewed heads.
-8. Reconcile state and recompute frontier.
+## Productization rule
 
-After W0.5 merges, preferred first parallel wave:
-Worker A -> W1
-Worker B -> W2
-Worker C -> W3
+Do not modify frozen SOS semantics to make the UI easier.
 
-Never dispatch two workers into overlapping owned paths unless an Integration Work Order explicitly allows it.
+Production UI, persistence adapters, provider integrations and identity adapters consume the existing domain contracts.
 
-Reject:
-- undocumented semantic concepts;
-- duplicated authorities;
-- hidden schema changes;
-- architecture/code mappings that exist only in prose;
-- evidence without provenance;
-- packages without applicability and failure evidence;
-- unauthorized autonomy increases;
-- stale-head evidence.
+## First dispatch
+
+After P0 is accepted:
+Worker A -> P1
+Worker B -> P2
+Worker C -> P3
+
+Maintain up to three workers with disjoint owned paths.
+
+## Product review
+
+The user journey must always answer:
+What is happening?
+Why does SOS believe this?
+What evidence supports it?
+What uncertainty remains?
+What authority is required?
+What can happen next?
+
+The product must never make demo fixture state look like live state.
