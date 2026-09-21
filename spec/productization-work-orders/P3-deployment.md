@@ -1,7 +1,7 @@
 # P3 — Free-Tier Deployment Foundation
 
 Dependencies: P0  
-Owned paths: infra, deployment configs, apps/web deployment files, docs/deployment  
+Owned paths: infra/deployment, .github/workflows/deployment, docs/deployment/runtime  
 Worker: C in wave 1
 
 ## Goal
