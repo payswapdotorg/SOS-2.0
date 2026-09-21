@@ -1,5 +1,5 @@
-import { ExperimentsPage } from '../../shell/components/pages/experiments-page';
+import { EvolutionWorkspace } from '../../ecology/shell/pages/evolution-workspace';
 
 export default function Page() {
-  return <ExperimentsPage />;
+  return <EvolutionWorkspace />;
 }

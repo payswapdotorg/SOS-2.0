@@ -1,5 +1,5 @@
-import { PackagesPage } from '../../shell/components/pages/packages-page';
+import { PackagesWorkspace } from '../../ecology/shell/pages/packages-workspace';
 
 export default function Page() {
-  return <PackagesPage />;
+  return <PackagesWorkspace />;
 }

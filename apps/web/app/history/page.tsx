@@ -1,5 +1,5 @@
-import { HistoryPage } from '../../shell/components/pages/history-page';
+import { HistoryWorkspace } from '../../ecology/shell/pages/history-workspace';
 
 export default function Page() {
-  return <HistoryPage />;
+  return <HistoryWorkspace />;
 }
