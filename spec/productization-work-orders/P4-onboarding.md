@@ -1,7 +1,7 @@
 # P4 — Mission + Repository Onboarding
 
 Dependencies: P1, P2  
-Owned paths: apps/web onboarding routes/components, packages/web-contracts onboarding, packages/github  
+Owned paths: apps/web/onboarding, packages/web-contracts/onboarding, packages/github  
 Worker: A in wave 2
 
 ## Goal
