@@ -8,7 +8,9 @@ spec/architecture-lock.md
 spec/meta-model.md
 docs/evidence/final-gate/final-gate-audit.md
 
-For current implementation/product work, use the post-W18 productization program:
+For current implementation/product work, use the post-W18 program:
+spec/productization-requirements.md
+spec/productization-execution-architecture.md
 spec/productization-roadmap.md
 spec/productization-state/implementation-state.json
 spec/productization-work-orders/*
@@ -19,18 +21,27 @@ docs/implementation/PRODUCTIZATION-HANDOFF.md
 
 ## Productization rule
 
-Do not modify frozen SOS semantics to make the UI easier.
+Do not modify frozen SOS semantics to make the product or execution fabric easier.
 
-Production UI, persistence adapters, provider integrations and identity adapters consume the existing domain contracts.
+Production UI, persistence adapters, observation adapters, reasoning providers, harnesses, body runtimes, GitHub adapters and identity adapters consume existing domain contracts and may not redefine them.
+
+## Spirit / brain / body rule
+
+- SOS is the persistent Spirit/control plane.
+- LLMs/planners are replaceable reasoning mechanisms, never authorities.
+- Harnesses/bodies are replaceable execution mechanisms, never authorities.
+- A body lease is ephemeral; task state and evidence are durable.
+- Cloud/remote bodies must not depend on the user's computer being online.
+- Continuous observation must work without an active body.
 
 ## First dispatch
 
-After P0 is accepted:
-Worker A -> P1
-Worker B -> P2
-Worker C -> P3
+After P0:
+Wave 1 -> Worker A P1, Worker B P2, Worker C P3.
 
-Maintain up to three workers with disjoint owned paths.
+Then follow the exact dependency graph in spec/productization-roadmap.md and implementation-state.json.
+
+Workers stop at WAITING_FOR_ARCHITECT whenever they discover a possible frozen-contract change, semantic ambiguity, authority gap, or cross-owned-path dependency not already represented by the Work Order.
 
 ## Product review
 
