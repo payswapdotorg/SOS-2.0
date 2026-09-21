@@ -1,0 +1,42 @@
+{
+  "name": "@sos-2/observation-host",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Observation Host (Work Order P7): the composition root of the no-body Observation Plane. A plain Node + TypeScript host (repo-standard ESM + tsc build, no vendor framework — the apps/api + apps/worker-runtimes precedent): assembles the durable in-memory P2 live-store, the P7 event-ingestion pipeline, the telemetry runtime, the live projections, the read-only System State claims port and the observation loop with EVERYTHING injected (clock, sources, claims, wiring). The composition root is the single impure boundary (SystemClock via Date.now — the documented exception; everything deeper is deterministic and offline-testable). Reference event sources are deterministic scripted adapters with explicit simulated markers; real provider endpoints (GitHub webhooks, CI buses, deployment trackers, telemetry backends) attach later behind the same ports reporting honest NOT_YET_CONNECTED until real connection evidence exists. The host runs one bounded drain per tick on an injected tick source — no ambient timers, no long-running work inside any drain.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/event-ingestion": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/observation": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@sos-2/telemetry-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

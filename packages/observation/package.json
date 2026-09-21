@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/observation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Observation Plane core (Work Order P7): the no-body observation loop. Folds replay-protected observation events into deterministic LIVE PROJECTIONS (repository branch heads + open PRs, latest CI runs, deployed revisions, provider health), reconciles observed revisions against System State claims with typed findings (ALIGNED / DIVERGED / UNVERIFIED / STALE — stale and unavailable are distinguishable from success, never folded), and detects shortfalls/opportunities as non-authoritative typed records for the orchestrator to consume. Observation NEVER mutates semantic truth: the loop reads the observation-event store and writes only its own projections/findings; the System State is consumed through a read-only claims port. Projections are derived views rebuilt deterministically from events — canonical semantics remain in the authoritative domain stores (§5). No body, no harness, no network: everything (clock, repositories, claims) is injected.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/event-ingestion": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
