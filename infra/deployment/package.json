@@ -1,0 +1,17 @@
+{
+  "name": "@sos-2/infra-deployment",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "description": "SOS 2.0 Free-Tier Deployment Foundation (Work Order P3): configuration-as-code + infrastructure contracts for the free-tier validation topology — typed environment schema (local/preview/production, fail-closed, secrets never echoed), provider configuration contracts (Vercel project scope, Neon naming/migrations, Upstash namespaces with the encoded NEVER-CANONICAL rule, R2 immutable object layout, GitHub CI topology), preview/production isolation footprints, secret-shape policy, deployment revision registration, provider health diagnostics (UNKNOWN|UNAVAILABLE|DEGRADED|HEALTHY, never a fabricated HEALTHY), execution/body provider configuration (ZERO imports from or into packages/*) and the long-running work delegation boundary (Vercel request lifetime never owns long-running work). Honest status: NOT_YET_DEPLOYED — this package verifies CONTRACTS, not deployments; validation accounts pending. Declares ZERO dependencies (lockfile byte-identity rule); the test toolchain is borrowed at run time from the frozen W17 adversarial suite (pnpm --filter @sos-2/adversarial exec vitest/tsc).",
+  "scripts": {
+    "typecheck": "pnpm --filter @sos-2/adversarial exec tsc -p ../../infra/deployment/tsconfig.json",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "verify:secrets": "node scripts/secret-scan.mjs",
+    "verify:contracts": "node scripts/check-zero-deps.mjs && node scripts/secret-scan.mjs && pnpm --filter @sos-2/adversarial exec tsc -p ../../infra/deployment/tsconfig.json && pnpm --filter @sos-2/adversarial exec vitest run --config ../../infra/deployment/vitest.config.ts",
+    "test": "pnpm --filter @sos-2/adversarial exec vitest run --config ../../infra/deployment/vitest.config.ts"
+  }
+}

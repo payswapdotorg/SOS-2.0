@@ -1,0 +1,27 @@
+name: P3 deployment contracts
+
+# Work Order P3 — THIN top-level caller. GitHub auto-discovers workflows
+# only at .github/workflows/*.yml (top level); the actual reusable
+# definition lives at .github/workflows/deployment/contract-verify.yml
+# and the shared setup composite action at
+# .github/workflows/deployment/actions/setup-toolchain/action.yml.
+#
+# Verifies free-tier deployment CONTRACTS (environment schema, secret
+# policy, preview isolation, provider config sanity, revision-record
+# shape) offline with no credentials — it must PASS on the base repo and
+# on every pull request. The frozen .github/workflows/verify.yml is not
+# modified by this addition.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'wo/p3-deployment'
+
+jobs:
+  deployment-contracts:
+    name: thin caller -> deployment/contract-verify.yml
+    uses: ./.github/workflows/deployment/contract-verify.yml
+    permissions:
+      contents: read
