@@ -1,8 +1,8 @@
 # P14 — Production Hardening, Security, Cost + Reliability
 
 Dependencies: P3, P6, P7, P8, P9, P11  
-Owned paths: infra, packages/security, packages/cost-policy, tests/production-hardening, docs/operations  
-Worker: assigned in wave 5
+Owned paths: infra/production-hardening, packages/security, packages/cost-policy, tests/production-hardening, docs/operations  
+Worker: C in wave 5
 
 ## Goal
 
