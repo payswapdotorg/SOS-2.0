@@ -1,0 +1,34 @@
+{
+  "name": "@sos-2/runtime-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Runtime Contracts (Work Order P5): the typed runtime vocabulary for runtime/execution integration — the harness integration priority order of spec/productization-execution-architecture.md section 4 (native API/SDK/app-server -> MCP/equivalent protocol -> local companion/service bridge -> browser/IDE extension -> UI automation LAST) as a typed, deterministic selection model (SOS must never require an extension when an equivalent safe API is available); runtime capability envelopes (capability + operation vocabulary + candidate integration surfaces); the bounded-environment description (filesystem scope, network egress policy, isolation level, resource limits, environment variable NAMES only — never secret values, mirroring the P3 environment contract discipline); and the non-semantic identifier discipline (runtime identifiers are NEVER SOS semantic identities — the guard rejects sos://-shaped values loudly). Pure types + guards + pure functions; no process.env, no clock, no network, no randomness. The P3 body-provider configuration vocabulary (@sos-2/infra-deployment) is aligned BY SPEC (both mirror section 3 of the execution architecture) and deliberately NOT imported — each vocabulary is independently pinned to the spec surfaces, following the P3 structural-isolation precedent.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

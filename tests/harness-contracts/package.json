@@ -1,0 +1,40 @@
+{
+  "name": "@sos-2/harness-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Harness Contracts Acceptance Suites (Work Order P5): the acceptance proof of the harness protocol + body broker + execution fabric. A fake/reference body (a complete in-memory implementation of the §9 HarnessContract: workspace, shell, browser where advertised, git, artifacts, observations, events) executes a COMPLETE bounded task through the public contract surface — create -> workspace write -> shell exec -> git commit -> artifacts capture -> observations emit -> complete. The suites pin every P5 acceptance criterion: capabilities are explicit and provider-neutral; body lease expiry/revocation fails closed; a body cannot mint authority (negative tests: forged authority payloads rejected with typed denials); provider/vendor identity never becomes SOS semantic identity; body replacement preserves task identity (kill mid-task -> new body -> resume -> same task id, same durable state). Structural scans pin ZERO new external dependencies (workspace :* + the existing toolchain only) and offline determinism (no Date.now/Math.random/fetch/process.env in the owned package sources).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

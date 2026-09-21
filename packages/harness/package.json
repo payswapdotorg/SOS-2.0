@@ -1,0 +1,35 @@
+{
+  "name": "@sos-2/harness",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Harness Contract (Work Order P5): the provider-neutral execution contract of spec/productization-execution-architecture.md section 9 as typed interfaces — identity(), capabilities(), createTask(), resumeTask(), pauseTask(), cancelTask(), workspace.read(), workspace.write(), shell.exec(), browser.open(), browser.interact(), git.status(), git.diff(), git.commit(), git.push(), git.createBranch(), git.createPullRequest(), artifacts.capture(), observations.emit(), events.subscribe() — where supported: unsupported capabilities are EXPLICIT through typed capability advertisement, never silent failure. The capability advertisement model mirrors the section 3 body advertisement list field-for-field (capabilities, isolation level, network policy, filesystem scope, browser/shell/git capability, runtime/cloud integrations, supported task lifecycle, evidence/artifact capture, cost and resource envelope). The advertisement is BINDING: isOperationAdvertised maps every section 9 operation onto the advertisement, and unsupported operations answer a typed UNSUPPORTED result. Harness/provider identity is NEVER SOS semantic identity (runtime identifier discipline consumed from @sos-2/runtime-contracts). Bodies are replaceable execution mechanisms, never authorities: the contract surface carries no authority fields at all.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

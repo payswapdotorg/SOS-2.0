@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/execution-fabric",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Execution Fabric (Work Order P5): the provider-neutral orchestration surface composing the Harness Contract (@sos-2/harness) and the Body Broker (@sos-2/body-broker) into bounded task execution — task state persisted through the durable P2 repositories of @sos-2/live-store (the §6 TaskRecord shape, checkpoints, content-addressed artifacts, observation events with replay protection), observations emitted through the typed observation boundary, and AUTHORITY INTEGRATION on every consequential operation: the CURRENT authority grant is resolved to its head revision over the durable AuthorityGrantRepository and re-evaluated through @sos-2/authority's evaluateGrant (the W12 ExecutionAdapter pattern — expired/revoked/missing grants yield typed denials and the operation NEVER runs). A body CANNOT mint or widen authority: the operation surface validates exact request shapes (injected authority keys are typed-rejected), grants resolve ONLY from the durable store, and body outputs enter the observation boundary as NON-AUTHORITATIVE pre-semantic input — a body completion report never certifies a task (§10: completeTask requires the Spirit-side verification record). Task identity is durable: body replacement (kill mid-task -> new body -> resume) preserves the task id and all durable state.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
