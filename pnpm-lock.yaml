@@ -55,6 +55,52 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  apps/companion:
+    dependencies:
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../../packages/body-broker
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../../packages/body-runtimes
+      '@sos-2/browser-bridge':
+        specifier: workspace:*
+        version: link:../../packages/browser-bridge
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../../packages/execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../../packages/harness
+      '@sos-2/ide-bridge':
+        specifier: workspace:*
+        version: link:../../packages/ide-bridge
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/local-companion':
+        specifier: workspace:*
+        version: link:../../packages/local-companion
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../../packages/runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   apps/console:
     dependencies:
       '@sos-2/architecture':
@@ -160,6 +206,40 @@ importers:
       '@sos-2/telemetry':
         specifier: workspace:*
         version: link:../../packages/telemetry
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  apps/observation:
+    dependencies:
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../../packages/event-ingestion
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/observation':
+        specifier: workspace:*
+        version: link:../../packages/observation
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../../packages/provenance
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../../packages/telemetry
+      '@sos-2/telemetry-runtime':
+        specifier: workspace:*
+        version: link:../../packages/telemetry-runtime
     devDependencies:
       '@types/node':
         specifier: ^22.10.0
@@ -579,6 +659,31 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/browser-bridge:
+    dependencies:
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../harness
+      '@sos-2/harness-adapters':
+        specifier: workspace:*
+        version: link:../harness-adapters
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/causal:
     dependencies:
       '@sos-2/evidence':
@@ -800,6 +905,31 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/event-ingestion:
+    dependencies:
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/evidence:
     dependencies:
       '@sos-2/provenance':
@@ -997,6 +1127,31 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/ide-bridge:
+    dependencies:
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../harness
+      '@sos-2/harness-adapters':
+        specifier: workspace:*
+        version: link:../harness-adapters
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/live-store:
     dependencies:
       '@sos-2/architecture':
@@ -1045,6 +1200,34 @@ importers:
       '@sos-2/telemetry':
         specifier: workspace:*
         version: link:../telemetry
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/local-companion:
+    dependencies:
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../harness
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
       '@types/node':
         specifier: ^22.10.0
         version: 22.20.4
@@ -1174,6 +1357,28 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/observation:
+    dependencies:
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../event-ingestion
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -1610,6 +1815,34 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/telemetry-runtime:
+    dependencies:
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../event-ingestion
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -2059,6 +2292,92 @@ importers:
       '@sos-2/semantic-spine':
         specifier: workspace:*
         version: link:../../packages/semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/local-bridges:
+    dependencies:
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../../packages/body-broker
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../../packages/body-runtimes
+      '@sos-2/browser-bridge':
+        specifier: workspace:*
+        version: link:../../packages/browser-bridge
+      '@sos-2/companion':
+        specifier: workspace:*
+        version: link:../../apps/companion
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../../packages/execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../../packages/harness
+      '@sos-2/harness-adapters':
+        specifier: workspace:*
+        version: link:../../packages/harness-adapters
+      '@sos-2/ide-bridge':
+        specifier: workspace:*
+        version: link:../../packages/ide-bridge
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/local-companion':
+        specifier: workspace:*
+        version: link:../../packages/local-companion
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../../packages/runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/observation:
+    dependencies:
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../../packages/event-ingestion
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/observation':
+        specifier: workspace:*
+        version: link:../../packages/observation
+      '@sos-2/observation-host':
+        specifier: workspace:*
+        version: link:../../apps/observation
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../../packages/telemetry
+      '@sos-2/telemetry-runtime':
+        specifier: workspace:*
+        version: link:../../packages/telemetry-runtime
     devDependencies:
       '@types/node':
         specifier: ^22.10.0
