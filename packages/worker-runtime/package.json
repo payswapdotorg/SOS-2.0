@@ -1,0 +1,43 @@
+{
+  "name": "@sos-2/worker-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Worker Runtime (Work Order P6): the contract a WORKER fulfils while executing an assigned task through the P5 harness. The runtime consumes @sos-2/harness operations (createTask/resumeTask/pauseTask/cancelTask and the workspace/shell/browser/git/artifacts/observations surfaces) through the merged execution fabric's uniform gate pipeline (task -> lease -> authority -> advertisement -> dispatch), acquires its body through @sos-2/body-broker leases, and makes CAPABILITY-CHECKED calls: an unadvertised operation is a typed UNSUPPORTED consumed from the contract's own binding advertisement map (isOperationAdvertised) — never a silent failure. CHECKPOINT DISCIPLINE: periodic durable checkpoints (progress + artifact refs) recorded through the fabric's recordCheckpoint and chained into the durable task graph, so a crashed worker RESUMES FROM CHECKPOINT, not from zero (pinned by tests). RESULT EMISSION: typed WorkerResult records carrying evidence refs (durable observation ids + content-addressed artifact ids — never fabricated), the EXACT workspace revision, provenance (provider identity + model + version when the reasoning broker participated) and an HONEST status — a worker reporting completion NEVER certifies mission success (section 10): the orchestrator routes every completion report to independent verification. The reference implementation is a deterministic in-process worker driven by injected ports (clock, fabric, broker, stores) — ZERO real process spawning in library code; simulated crashes are explicit, deterministic injections. Determinism: no Date.now/Math.random/fetch/process.env in this package's src — everything is injected.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/reasoning-broker": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/authority": "workspace:*"
+  }
+}

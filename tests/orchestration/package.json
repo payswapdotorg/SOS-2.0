@@ -1,0 +1,48 @@
+{
+  "name": "@sos-2/orchestration-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Orchestration Acceptance Suites (Work Order P6): the acceptance proof of the Spirit Orchestrator + durable task graph + worker runtime + reasoning broker over the merged P2 live-store records and the P5 harness/body-broker/execution-fabric foundation. SIX PINNED SUITES: (1) Concurrency — three lanes dispatch onto DISJOINT owned paths and a colliding assignment is a typed denial, never silent overlap; (2) Mission/authority — every task in every journey carries BOTH references (scan-pinned across all fixtures); (3) Non-authoritative reasoning — broker output NEVER reaches authority or verification verdicts (structural scans: the analysis type carries the validated non_authoritative marker, no authority or verification field is ever populated from broker output, 'ra:' analysis ids are typed violations when presented as verification evidence); (4) Managed default — a full journey completes with ZERO bring-your-own providers configured (the user never needs a personal LLM); (5) Crash safety — worker/body failures mid-journey leave the graph structurally valid (invariant scans) and the failed task recoverable (typed failures, RETRYABLE recovery, checkpoint-chain resume, no task lost or silently completed); (6) No silent bypass — every authority/assurance bypass attempt is a typed violation naming the rule and field, and ASK escalations land in the AskQueue as first-class records (ASK is a success state). Plus determinism/structure suites: the full journey is byte-reproducible, the section 6 task-durability field list is representable field-for-field, imports are restricted to merged + P6-owned workspace packages (unmerged siblings never referenced), zero new external dependencies, and structural scans pin no Date.now/Math.random/fetch/process.env/ambient timers/child_process in the owned package sources outside the documented apps/orchestrator composition boundary (the repository's fixed vitest seed throughout).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/orchestrator": "workspace:*",
+    "@sos-2/orchestrator-host": "workspace:*",
+    "@sos-2/reasoning-broker": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
