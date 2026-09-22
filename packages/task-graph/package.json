@@ -1,0 +1,36 @@
+{
+  "name": "@sos-2/task-graph",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Durable Task Graph (Work Order P6): the mission-linked, authority-pinned durable work graph of the Spirit Orchestrator. Every TaskNode carries a MISSION REFERENCE and an AUTHORITY REFERENCE (pinned by tests — no task exists outside mission + authority), an owned-path scope (assignment onto DISJOINT scopes only — a collision is a typed assignment denial, never silent overlap), validated acyclic dependencies, a typed six-state machine (PENDING/RUNNING/PAUSED/CANCELLED/COMPLETED/FAILED — typed transitions only, COMPLETED is VERIFICATION-GATED: the final verification record gates the transition and a worker completion report never certifies), the checkpoint chain, retries/recovery state (a failed task is marked RETRYABLE, never silently done), unresolved uncertainty, the cost envelope and the final verification record ref. The full section 6 task-durability field list of spec/productization-execution-architecture.md is representable field-for-field (pinned by tests). Crash safety: worker crashes, provider outages and body loss produce TYPED task failures that leave the graph structurally valid — invariant scans + property tests pin no orphaned references, no partial writes and no lost tasks. Persistence is append-only through the P2 live-store task records VERBATIM: the node snapshot serializes into the record's plan field and every section 6 field maps natively onto the P2 TaskRecord shape; the store never redefines the graph's shapes. Identity discipline: task ids are caller-supplied RUNTIME identifiers (no local identity minting; spine-shaped ids are rejected loudly); mission and authority references are spine artifact ids validated by the spine's own guards. Determinism: no Date.now/Math.random/fetch/process.env in this package's src — the clock and stores are injected.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

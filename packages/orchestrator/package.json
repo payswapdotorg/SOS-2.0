@@ -1,0 +1,46 @@
+{
+  "name": "@sos-2/orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Spirit Orchestrator (Work Order P6): the governed control loop of the persistent Spirit over the merged P2 live-store records and the P5 Harness Contract / Body Broker / Execution Fabric. MISSION-AWARE DECOMPOSITION: a Mission (consumed from @sos-2/mission) decomposes into a durable task graph — decomposition is a TYPED RECORD (inputs, plan, rationale) routed through the reasoning broker as NON-AUTHORITATIVE input; the task graph itself is authoritative structure built by DETERMINISTIC CODE. Up to THREE concurrent worker lanes with assignment only onto DISJOINT owned-path scopes — a collision is a typed assignment denial, never silent overlap (pinned). Typed assignment + handoff records (task, lane, worker ref, lease ref; the handoff carries authority context + workspace revision); pause/resume/cancel as first-class section 9 operations with durable state transitions. ASK ESCALATION through @sos-2/ask's AskQueue — ASK IS A SUCCESS STATE, never an exception class, never a silent bypass (pinned). WORKER RESULT INGESTION: results arrive as evidence-bound records and route to INDEPENDENT VERIFICATION — a worker reporting completion NEVER certifies mission success (no self-approval); the verification record gates task COMPLETED transitions (pinned). THE ARCHITECT ROLE IS A GOVERNED CONTROL FUNCTION: typed ArchitectGate records for consequential transitions (merge/promote/deploy-class), carrying the authority reference acted under; the architect function is recorded, bounded, and CANNOT MINT AUTHORITY — every bypass attempt is a typed violation naming the field and rule (pinned). Determinism: no Date.now/Math.random/fetch/process.env in this package's src — the clock, stores, broker, fabric and providers are injected.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/reasoning-broker": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0",
+    "@sos-2/body-runtimes": "workspace:*"
+  }
+}

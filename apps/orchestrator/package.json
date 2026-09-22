@@ -1,0 +1,50 @@
+{
+  "name": "@sos-2/orchestrator-host",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Orchestrator Host (Work Order P6): the plain Node + TypeScript composition root of the Spirit Orchestrator (the apps/api + apps/worker-runtimes precedent — no vendor framework). THE SINGLE IMPURE BOUNDARY: this app injects the clock and the ports (the documented system-clock module is the only Date.now in the app; the DETERMINISTIC demo main runs on a ManualClock at a fixed instant — the demo state is explicitly simulated, never presented as live). The composition assembles the in-memory durable P2 stores, the Body Broker (with the P8 reference cloud bodies registered), the Execution Fabric, the durable Task Graph, the Reasoning Broker (managed default ALWAYS present — the demo journey runs with ZERO bring-your-own providers configured: a user never needs a personal LLM to start), the worker runtime, the independent verifier, the AskQueue and the ArchitectGate, and runs the orchestrator loop on an INJECTED TICK SOURCE (a bounded finite source — no ambient timers). The demo main executes a deterministic three-lane journey end-to-end: mission -> decomposition -> 3 concurrent lanes on disjoint owned-path scopes -> crash + recovery of one lane (explicit deterministic simulated crash injection) -> verification-gated completion (no self-approval) -> architect-gated mission completion -> honest report with explicit simulated markers.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/orchestrator": "workspace:*",
+    "@sos-2/reasoning-broker": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*",
+    "@sos-2/sandbox": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
