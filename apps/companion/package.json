@@ -1,0 +1,46 @@
+{
+  "name": "@sos-2/companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Local Companion Host (Work Order P11): the plain Node + TypeScript host of the authenticated local companion — the composition root assembling the durable P2 stores, the P5 Body Broker + Execution Fabric, the LocalCompanion contract (pairing authority, credential store, granted-scope private file port, simulated local process seam, durable local event log) and the §9 companion body (placement user-device), with the optional tier-4 browser/IDE bridges attached behind their honest simulated reference transports. The host runs on an INJECTED tick/command source (poll-driven, testable offline — no ambient timers; the apps/api + apps/worker-runtimes precedent). The §7 user-device model is enforced at the scheduling gate: local-only work orders QUEUE while the device reports offline and run when it reconnects (reconciliation FIRST — the durable local event log replays into the P2 live-store exactly-once, gap-free); cloud work orders never consult device presence (the task continues while the user's computer is off — cloud tasks never require the companion). The only impure boundary is the composition root (system clock injection). NO real desktop app ships in this Work Order: the honest installation status is NOT_YET_INSTALLED (reference runtime only; evidence never fabricated).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "pnpm run build && node dist/index.js",
+    "start": "pnpm run build && node dist/index.js",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/browser-bridge": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/ide-bridge": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/local-companion": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

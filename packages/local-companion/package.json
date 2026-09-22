@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/local-companion",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Local Companion (Work Order P11): the authenticated local companion contract — the LOCAL BODY PATH over the merged P5 Harness Contract. Companion session/authentication: pairing + session records as typed records with an injectable credential store and an injectable pairing authority (the companion cannot mint sessions or authority itself; session token VALUES never echo — only NAMES, the P8 sandbox secrets discipline). Private workspace/file access is scope-granted: a granted-scope check runs before EVERY access (unknown root, absolute path, '..' escape, read-only root or an expired grant is a typed COMPANION_SCOPE_DENIED denial — never silent, never a crash); grants are re-evaluated against the injected clock before consequential operations. Local shell/process integration runs through an injectable LocalProcess seam — the reference implementation is a deterministic in-process simulator with an injectable command registry (zero real process spawning in library code); a command outside the granted process allowlist is a typed COMPANION_PROCESS_DENIED denial. Offline queueing: local-only work orders queue while the device reports offline and run when it reconnects (cloud tasks never require the companion). Reconnect + state reconciliation: the companion reconciles its durable local event log against the P2 live-store observation events through idempotent, replay-protected ingestion — exactly-once, gap-free sequence continuity (a gap is a typed COMPANION_RECONCILIATION_GAP violation, never silent). Every local observation carries provenance naming the local source + device identity (the @sos-2/telemetry provenance discipline over @sos-2/provenance Producer records). LocalCompanionBody implements the merged P5 Harness Contract (placement user-device) so the companion registers with the P5 Body Broker behind the Execution Fabric like any body — honest capability advertisement, typed UNSUPPORTED for unadvertised operations, no authority fields anywhere on the surface. NO real desktop app ships in this Work Order: the package carries provider-neutral contracts plus LOCAL REFERENCE RUNTIMES (deterministic, offline-testable); real companions attach later through the same seams without contract change.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

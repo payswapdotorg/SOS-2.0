@@ -1,0 +1,37 @@
+{
+  "name": "@sos-2/browser-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Browser Bridge (Work Order P11): the OPTIONAL browser bridge — the §4 tier-4 ('extension') adapter contract bridging a browser extension onto the companion/harness surface. Typed ports with INJECTABLE TRANSPORTS (the P8 LocalBridgeTransport command-dispatch precedent): every command is dispatched with a JSON body over an injectable BrowserBridgeTransport and every reply is validated against the operation's exact typed shape — a malformed reply is a truthful FAILED result, never a silent success. THE SEAM CARRIES NO AUTHORITY: every marshaled request/reply is validated against an EXACT field set; a smuggled grant/permission/authority key is a typed violation NAMING the field (browser/IDE extensions are ADAPTERS, never SOS authorities). Honest connection statuses consumed from the merged P8 vocabulary: NOT_YET_CONNECTED while no real extension exists (connection evidence is never fabricated) with the explicit simulated marker when the deterministic reference transport backs the bridge. NO real browser extension ships in this Work Order: provider-neutral contracts plus a LOCAL REFERENCE RUNTIME (deterministic, offline-testable); real extensions attach later through the same transports without contract change.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/harness-adapters": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
