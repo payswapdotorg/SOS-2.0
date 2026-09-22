@@ -1,0 +1,46 @@
+{
+  "name": "@sos-2/local-bridge-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Local Companion + Browser/IDE Bridge Acceptance Suites (Work Order P11): the acceptance proof of the local companion, the offline queueing/reconciliation discipline and the tier-4 bridges. Cloud-independence: a full cloud-body journey completes with ZERO companion presence (the P8 cloud journey re-run in a companion-absent world, pinned structurally by the file's import set). Offline queueing: local-only work orders queue while the device reports offline and run when it reconnects \u2014 nothing lost, nothing duplicated. Scope enforcement: out-of-scope file access and un-granted consequential operations are typed denials with truthful FAILED results through the public \u00a79 contract behind the P5 broker. Reconnect reconciliation: event replay deduplication is exactly-once with gap-free sequence continuity (a gap is a typed violation). Provenance labelling: every local observation names its source + device identity; secrets never echo (output scans across all journeys). Bridges are adapters: no authority fields marshal across any bridge; a smuggled grant key is a typed violation naming the field. Honest statuses: NOT_YET_INSTALLED/NOT_YET_CONNECTED surfaces never fabricate connection evidence. Structural scans: zero new external dependencies (workspace:* + the existing toolchain only, checked against the base lockfile), offline determinism (no Date.now/Math.random/fetch/process.env/ambient timers/child_process in the owned sources outside the documented apps/companion composition boundary), the repository's fixed vitest seed, and only merged + P11-owned workspace imports (unmerged siblings never referenced).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/browser-bridge": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/harness-adapters": "workspace:*",
+    "@sos-2/ide-bridge": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/local-companion": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/companion": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
