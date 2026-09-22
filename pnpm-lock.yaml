@@ -251,6 +251,64 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  apps/orchestrator:
+    dependencies:
+      '@sos-2/ask':
+        specifier: workspace:*
+        version: link:../../packages/ask
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../../packages/body-broker
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../../packages/body-runtimes
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../../packages/execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../../packages/harness
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/mission':
+        specifier: workspace:*
+        version: link:../../packages/mission
+      '@sos-2/orchestrator':
+        specifier: workspace:*
+        version: link:../../packages/orchestrator
+      '@sos-2/reasoning-broker':
+        specifier: workspace:*
+        version: link:../../packages/reasoning-broker
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../../packages/runtime-contracts
+      '@sos-2/sandbox':
+        specifier: workspace:*
+        version: link:../../packages/sandbox
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+      '@sos-2/task-graph':
+        specifier: workspace:*
+        version: link:../../packages/task-graph
+      '@sos-2/worker-runtime':
+        specifier: workspace:*
+        version: link:../../packages/worker-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   apps/self-evolution-harness:
     dependencies:
       '@sos-2/meta-evolution':
@@ -1411,6 +1469,58 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/orchestrator:
+    dependencies:
+      '@sos-2/ask':
+        specifier: workspace:*
+        version: link:../ask
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../body-broker
+      '@sos-2/decision':
+        specifier: workspace:*
+        version: link:../decision
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../execution-fabric
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/mission':
+        specifier: workspace:*
+        version: link:../mission
+      '@sos-2/reasoning-broker':
+        specifier: workspace:*
+        version: link:../reasoning-broker
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/task-graph':
+        specifier: workspace:*
+        version: link:../task-graph
+      '@sos-2/worker-runtime':
+        specifier: workspace:*
+        version: link:../worker-runtime
+    devDependencies:
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../body-runtimes
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/packages:
     dependencies:
       '@sos-2/evidence':
@@ -1488,6 +1598,28 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/reasoning-broker:
+    dependencies:
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -1800,6 +1932,28 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/task-graph:
+    dependencies:
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/telemetry:
     dependencies:
       '@sos-2/provenance':
@@ -2049,6 +2203,49 @@ importers:
         specifier: workspace:*
         version: link:../ui-contracts
     devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/worker-runtime:
+    dependencies:
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../body-broker
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../harness
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/reasoning-broker':
+        specifier: workspace:*
+        version: link:../reasoning-broker
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/task-graph':
+        specifier: workspace:*
+        version: link:../task-graph
+    devDependencies:
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../authority
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../body-runtimes
       '@types/node':
         specifier: ^22.10.0
         version: 22.20.4
@@ -2378,6 +2575,64 @@ importers:
       '@sos-2/telemetry-runtime':
         specifier: workspace:*
         version: link:../../packages/telemetry-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/orchestration:
+    dependencies:
+      '@sos-2/ask':
+        specifier: workspace:*
+        version: link:../../packages/ask
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../../packages/body-broker
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../../packages/body-runtimes
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../../packages/execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../../packages/harness
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/mission':
+        specifier: workspace:*
+        version: link:../../packages/mission
+      '@sos-2/orchestrator':
+        specifier: workspace:*
+        version: link:../../packages/orchestrator
+      '@sos-2/orchestrator-host':
+        specifier: workspace:*
+        version: link:../../apps/orchestrator
+      '@sos-2/reasoning-broker':
+        specifier: workspace:*
+        version: link:../../packages/reasoning-broker
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../../packages/runtime-contracts
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+      '@sos-2/task-graph':
+        specifier: workspace:*
+        version: link:../../packages/task-graph
+      '@sos-2/worker-runtime':
+        specifier: workspace:*
+        version: link:../../packages/worker-runtime
     devDependencies:
       '@types/node':
         specifier: ^22.10.0
