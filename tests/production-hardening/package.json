@@ -1,0 +1,15 @@
+{
+  "name": "@sos-2/tests-production-hardening",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Production Hardening acceptance suite (Work Order P14): the pinned acceptance tests for security, cost and reliability — no cross-project workspace access (typed denial, fail-closed); no secret leakage through artifacts/logs (redaction or denial + observed redaction); bounded execution cost (typed denial, honest ACCOUNTING_UNKNOWN); stale/expired authority fails closed (COMPOSED with the real merged P9 action gateway); body crash and provider outage recover cleanly through typed dead-letter records with bounded retry then ASK and honest UNKNOWN provider health; preview cannot mutate production (pinned isolation contract); operational diagnostics identify the responsible task/body/provider; the complete runbook exists; structural discipline (zero deps, offline determinism, fixed seed, merged + P14-owned imports only). Declares ZERO dependencies (lockfile byte-identity rule): composition with merged packages happens through test-time module aliases and the toolchain is borrowed at run time from the frozen W17 adversarial suite.",
+  "scripts": {
+    "typecheck": "pnpm --filter @sos-2/adversarial exec tsc -p ../../tests/production-hardening/tsconfig.json",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "test": "pnpm --filter @sos-2/adversarial exec vitest run --config ../../tests/production-hardening/vitest.config.ts"
+  }
+}

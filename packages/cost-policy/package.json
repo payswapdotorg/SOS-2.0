@@ -1,0 +1,15 @@
+{
+  "name": "@sos-2/cost-policy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "description": "SOS 2.0 Cost + Reliability policy contracts (Work Order P14): task concurrency/cost budgets (typed ALLOW / BUDGET_EXCEEDED denial / ACCOUNTING_UNKNOWN when accounting is incomplete — never silently guessed), rate limiting over action/executor invocations (typed limit policies with deterministic reference limiter and retry-after backoff hints), provider health with honest UNKNOWN during outage windows (the P7 truthful-stale discipline; no fabricated health), dead-letter/retry handling with bounded retry/backoff then ASK (never silent drop, never infinite retry) and abuse containment (a task exhibiting abuse signatures is suspended pending ASK — the suspension is observed evidence, not silent termination). Deterministic reference implementations with injectable seams; real billing systems, rate-limit infrastructure and provider status pages attach later as adapters without contract change. Declares ZERO dependencies (lockfile byte-identity rule, the P3 precedent); the test toolchain is borrowed at run time from the frozen W17 adversarial suite.",
+  "scripts": {
+    "typecheck": "pnpm --filter @sos-2/adversarial exec tsc -p ../../packages/cost-policy/tsconfig.json",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "test": "pnpm --filter @sos-2/adversarial exec vitest run --config ../../packages/cost-policy/vitest.config.ts"
+  }
+}

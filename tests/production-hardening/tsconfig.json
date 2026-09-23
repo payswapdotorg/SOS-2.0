@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "typeRoots": ["../../tests/adversarial/node_modules/@types"],
+    "paths": {
+      "@sos-2/security": ["../../packages/security/src/index.ts"],
+      "@sos-2/cost-policy": ["../../packages/cost-policy/src/index.ts"],
+      "@sos-2/action-gateway": ["../../packages/action-gateway/src/index.ts"],
+      "vitest": ["../../tests/adversarial/node_modules/vitest/dist/index.d.ts"]
+    }
+  },
+  "include": ["*.ts"]
+}
