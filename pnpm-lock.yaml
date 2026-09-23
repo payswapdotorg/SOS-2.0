@@ -8,6 +8,28 @@ importers:
 
   .: {}
 
+  apps/actions:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../../packages/action-gateway
+      '@sos-2/evaluation-orchestration':
+        specifier: workspace:*
+        version: link:../../packages/evaluation-orchestration
+      '@sos-2/evaluator':
+        specifier: workspace:*
+        version: link:../../packages/evaluator
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   apps/api:
     dependencies:
       '@sos-2/api-contracts':
@@ -415,6 +437,18 @@ importers:
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
   infra/deployment: {}
+
+  packages/action-gateway:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
   packages/adapters:
     dependencies:
@@ -956,6 +990,41 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/evaluation-orchestration:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../action-gateway
+      '@sos-2/evaluator':
+        specifier: workspace:*
+        version: link:../evaluator
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/evaluator:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../action-gateway
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -2246,6 +2315,31 @@ importers:
       '@sos-2/body-runtimes':
         specifier: workspace:*
         version: link:../body-runtimes
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/actions-and-evaluation:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../../packages/action-gateway
+      '@sos-2/actions':
+        specifier: workspace:*
+        version: link:../../apps/actions
+      '@sos-2/evaluation-orchestration':
+        specifier: workspace:*
+        version: link:../../packages/evaluation-orchestration
+      '@sos-2/evaluator':
+        specifier: workspace:*
+        version: link:../../packages/evaluator
+    devDependencies:
       '@types/node':
         specifier: ^22.10.0
         version: 22.20.4
