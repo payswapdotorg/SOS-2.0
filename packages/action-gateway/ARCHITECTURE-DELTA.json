@@ -1,0 +1,39 @@
+{
+  "work_order": "P9",
+  "rationale_ref": "spec/productization-work-orders/P9-actions-evaluation.md",
+  "affected_artifacts": [
+    "packages/action-gateway",
+    "packages/evaluator",
+    "packages/evaluation-orchestration",
+    "apps/actions",
+    "tests/actions-and-evaluation"
+  ],
+  "added_paths": [
+    "packages/action-gateway/**",
+    "packages/evaluator/**",
+    "packages/evaluation-orchestration/**",
+    "apps/actions/**",
+    "tests/actions-and-evaluation/**"
+  ],
+  "preserved_invariants": [
+    "frozen W0-W18 semantics and every merged package/app/test untouched; only the five owned paths are created",
+    "every consequential action re-evaluates the CURRENT authority grant at action time; a grant held at planning time is never sufficient",
+    "expired, revoked, or never-held grants fail closed as typed ACTION_AUTHORITY_DENIED denials; executors never run; no retry-until-success",
+    "no self-approval: an evaluator bound to a body/actor cannot certify that actor's output (typed EVALUATION_INDEPENDENCE_VIOLATION before the probe runs)",
+    "action outcomes and verdicts are content-addressed and bound to the exact source and deployment revisions they acted on or evaluated",
+    "rollback is a first-class action with its own evidence chain: what, from which revision to which, why, plus a verification observation of the rolled-back state (honestly UNKNOWN when unobservable)",
+    "client-supplied idempotency keys with replay protection: duplicates return the recorded original outcome exactly once; event appends deduplicate",
+    "aggregation is evidence combination only; summaries carry certification NOT_ASSERTED and never certify mission success",
+    "LLM/reasoning output is advisory-only, labelled ADVISORY_REASONING and non-authoritative, ledgered separately, and never an evidence source",
+    "honest statuses: NOT_YET_CONNECTED probes and executors never fabricate real-provider evidence; absent evidence yields UNKNOWN, never PASS",
+    "the action gateway carries no authority fields of its own; smuggled authority keys are typed rejections naming the field",
+    "zero new external dependencies; pnpm-lock.yaml and pnpm-workspace.yaml unchanged; offline determinism outside the documented apps/actions composition boundary"
+  ],
+  "boundary_changes": [
+    "packages/action-gateway: new leaf workspace member (no workspace imports); consumed only by packages/evaluator, packages/evaluation-orchestration, apps/actions, tests/actions-and-evaluation",
+    "packages/evaluator: new workspace member; imports only @sos-2/action-gateway (P9-owned)",
+    "packages/evaluation-orchestration: new workspace member; imports only @sos-2/action-gateway and @sos-2/evaluator (P9-owned)",
+    "apps/actions: new composition-root app; imports only P9-owned members; nothing at this base consumes it",
+    "tests/actions-and-evaluation: new acceptance suite; imports only P9-owned members and vitest"
+  ]
+}

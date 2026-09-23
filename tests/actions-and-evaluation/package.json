@@ -1,0 +1,21 @@
+{
+  "name": "@sos-2/tests-actions-and-evaluation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/actions": "workspace:*"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
