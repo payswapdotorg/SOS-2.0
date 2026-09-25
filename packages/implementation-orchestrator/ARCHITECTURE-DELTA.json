@@ -1,0 +1,37 @@
+{
+  "work_order": "P13",
+  "rationale_ref": "spec/productization-work-orders/P13-mission-to-implementation.md",
+  "affected_artifacts": [
+    "packages/implementation-orchestrator",
+    "packages/greenfield-runtime",
+    "packages/project-realization",
+    "tests/mission-to-repo"
+  ],
+  "added": [
+    "packages/implementation-orchestrator/**",
+    "packages/greenfield-runtime/**",
+    "packages/project-realization/**",
+    "tests/mission-to-repo/**"
+  ],
+  "preserved_invariants": [
+    "frozen W0-W18 semantics and every merged package/app/test untouched; only the four owned paths are created (pure additions)",
+    "the P6 durable task graph is THE graph: every planned task becomes a @sos-2/task-graph node carrying mission_ref + authority_ref, with typed transitions, disjoint owned-path scopes and verification-gated completion",
+    "every consequential git/deploy action (commit, push, pull-request, deployment, rollback) flows through the P9 action-gateway with action-time CURRENT authority re-evaluation — the pipeline never calls a git CLI, a filesystem or a deployment API directly",
+    "completion is gated ONLY by the independent P9 evaluation suite: the pipeline requests certification, the evaluator grants or denies; the pipeline and the acting body never certify their own output (a completion request from the acting body is a typed independence violation)",
+    "bodies never self-certify and never mint authority: body selection and assignment go through the P5 broker contracts (capability-based, vendor-blind, cloud placement for the flagship journey); body output is non-authoritative input",
+    "ASK is first-class: insufficient authority or evidence produces typed PipelineAsks at formalization, planning, realization and completion — never a guess, never a silent default, never an invented approval",
+    "the user device is optional: the journey progresses purely on cloud tick sources with the user tick absent; all required resources are remote (cloud bodies, cloud stores)",
+    "LLM/reasoning output is never authoritative: the formalizer/planner seams are replaceable mechanisms whose typed output is re-validated and never enters authority, evidence or verdicts",
+    "honest statuses: NOT_YET_CONNECTED for real endpoints, UNKNOWN where evidence is absent — reference executors/bodies/adapters are deterministic simulators behind injectable seams and no completion is ever fabricated from absent evidence",
+    "every stage transition emits a P7-discipline observation event (replay-protected, durable) — the timeline a disconnected user replays on return",
+    "zero new external dependencies: workspace:* + the existing toolchain only; pnpm-lock.yaml and pnpm-workspace.yaml remain byte-identical (the gov commit refreshes importers after merge)",
+    "offline determinism: no Date.now/Math.random/fetch/process.env/ambient timers/child_process in the owned package sources — clocks, stores, seams and tick sources are injected"
+  ],
+  "boundary_changes": [
+    "packages/implementation-orchestrator: new one-directional workspace member; imports only merged packages (@sos-2/action-gateway, @sos-2/evaluator, @sos-2/harness, @sos-2/mission, @sos-2/semantic-spine); consumed only by packages/greenfield-runtime and tests/mission-to-repo",
+    "packages/project-realization: new one-directional workspace member; imports only @sos-2/action-gateway (P9-owned); consumed only by packages/greenfield-runtime and tests/mission-to-repo",
+    "packages/greenfield-runtime: new one-directional workspace member; imports only merged packages plus the two P13 siblings; consumed only by tests/mission-to-repo",
+    "tests/mission-to-repo: new acceptance-suite workspace member (tests/* already in pnpm-workspace.yaml); imports only merged + P13-owned workspace packages and vitest",
+    "nothing at this base consumes any of the four new members — the workspace dependency graph stays acyclic and pnpm-workspace.yaml is untouched"
+  ]
+}

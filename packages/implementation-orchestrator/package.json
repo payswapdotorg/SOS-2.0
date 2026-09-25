@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/implementation-orchestrator",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Implementation Orchestrator (Work Order P13): the mission-to-plan-to-graph front half of the flagship greenfield journey. Mission intake as typed records (raw user mission -> formalized @sos-2/mission artifact, or a TYPED ASK where formalization cannot proceed — never a guess, never a silent default); architecture/capability planning produces an ImplementationPlan as typed, inspectable, content-addressed records (mission link, capability requirements, candidate structure, assurance constraints) that are DATA for the P6 task graph — never an imperative interpreter of their own; worker decomposition turns the plan into typed task-node specs with dependency edges, per-node capability requirements (the §3 harness vocabulary, consumed never re-defined) and per-node evaluation requirements (which P9 evaluators must pass before a node counts complete), validated for acyclicity and disjoint owned-path scopes. ASK is first-class at every stage (the P6 discipline): a PipelineAsk is a typed, content-addressed record. Determinism: no Date.now/Math.random/fetch/process.env/ambient timers/child_process in src — the clock is injected, identities are caller-supplied or content-derived.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
