@@ -1,0 +1,26 @@
+{
+  "affected_artifacts": [
+    "tests/autonomous-build",
+    "docs/evidence/productization/b-autonomous-build"
+  ],
+  "added": [
+    "tests/autonomous-build (P15 lane B: the @sos-2/tests-autonomous-build dogfood package — the composition world (flagship greenfield world, autonomy world, observation world) + the autonomous-build journey suites: flagship §11 journey, no-body observation, anomaly->summoned-body->evidence-gated repair, interruption->replacement->resume, provider outage, user-offline replay, structural discipline)",
+    "docs/evidence/productization/b-autonomous-build (P15 lane B: one machine-readable evidence record per journey + this Architecture Delta — exact base/head revisions, terminal states, evidence-graph links, retained uncertainty, simulated windows, reproducibility)"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "P15 lane B is TEST/EVIDENCE-ONLY: the frozen W0-W18 core and every merged productization wave (P0-P14) remain untouched — the dogfood consumes public exports only (packages/*, apps/*, infra/* read-only; no product source, manifest, spec or script is modified on this lane branch; pnpm-workspace.yaml unchanged — tests/* was already a workspace glob)",
+    "completion is granted ONLY by the independent evaluation suite (never the acting body's opinion): the acting body's self-certification is a typed INDEPENDENCE_DENIED pinned by test (flagship-journey.test.ts), a body-bound runtime verifier parks the journey with a typed ask and it never completes — bodies never self-certify",
+    "the user device is optional (P12 §7): the flagship journey completes with zero user-online ticks after kick-off; cloud bodies never depend on the user's computer being online; the disconnected-user timeline replays on return with exact revisions and retained uncertainty; presence is recorded, never consulted",
+    "honest outage statuses: a provider outage reads truthful UNAVAILABLE (typed window) with the lease SUSPECTED (UNKNOWN — never LOST without a verified failure, never fabricated liveness); no progress is fabricated during outage windows; bounded backoff then ASK — never an infinite loop; the outage window stays visible in the timeline and the evidence-only cost ledger",
+    "body replacement preserves semantic identity: the replacement inherits the task identity, authority context and the LAST durable verified checkpoint (fail-closed content-addressed integrity); the task record shows continuity (accumulated checkpoints and evidence), not a restart; killing a body does not lose the task",
+    "continuous observation works with ZERO bodies active (P7): events still ingest, System State stays truthful (FRESH/STALE/UNVERIFIED honest, never a fabricated success), nothing fabricates progress; a body is summoned only through the P9 action surface (authority-gated body-lifecycle with action-time re-evaluation, fail-closed typed denial)",
+    "exact-revision discipline: every journey asserts the P15 acceptance shape — exact-revision links across the repository (commits/push/PR), the runtime (workspace head), the deployment (sourceSha at the head) and the evidence graph (verdictRefs targeting the exact head); all unresolved uncertainty stays visible",
+    "zero external dependencies: the owned package uses workspace:* imports only + the existing toolchain (typescript ^5.5.0, vitest ^3.0.0, @types/node ^22.10.0); pnpm-lock.yaml and pnpm-workspace.yaml are byte-identical on the lane branch (the local install's importer refresh is reset before commit — no lockfile diff)",
+    "offline determinism: no ambient time, randomness, environment, network, processes or timers in the owned sources (every clock, store, seam, probe and outage window is injected); fixed vitest seed 424242; run-to-run identical results; no real GitHub API calls, no real body/reasoning providers, no real deployment targets, no network"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/productization-work-orders/P15-product-dogfood.md",
+  "work_order": "P15"
+}
