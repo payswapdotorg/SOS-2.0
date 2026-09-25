@@ -1,0 +1,15 @@
+{
+  "name": "@sos-2/security",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "description": "SOS 2.0 Security hardening contracts (Work Order P14): workspace isolation (cross-project workspace access is a typed ISOLATION denial, fail-closed), secrets isolation (references never values; secret-shaped values emitted into artifacts/logs are redacted or denied at the observation boundary, with the redaction itself observed), credential scoping over the P9 action-family vocabulary (a credential scoped to X cannot mint actions of family Y; broker scope escalation is a typed violation) and the policy audit trail (every allow/deny/redact/unknown decision appends a durable, replay-safe, content-addressed audit record through the P7 event discipline — never a second source of truth). Deterministic reference implementations with injectable seams; real platform sandboxing, secret stores and network policy engines attach later as adapters without contract change. Honest statuses: NOT_YET_CONNECTED for real enforcement endpoints; a policy that cannot be evaluated honestly reports UNKNOWN. Declares ZERO dependencies (lockfile byte-identity rule, the P3 precedent); the test toolchain is borrowed at run time from the frozen W17 adversarial suite (pnpm --filter @sos-2/adversarial exec tsc/vitest).",
+  "scripts": {
+    "typecheck": "pnpm --filter @sos-2/adversarial exec tsc -p ../../packages/security/tsconfig.json",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "test": "pnpm --filter @sos-2/adversarial exec vitest run --config ../../packages/security/vitest.config.ts"
+  }
+}
