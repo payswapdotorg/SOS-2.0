@@ -1,0 +1,35 @@
+{
+  "journey_id": "promotion",
+  "test_id": "tests/product-dogfood/test/promotion.test.ts::P15 Lane A — promotion: a verified candidate becomes the live system state",
+  "base_sha": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "head_sha": "a7c090bc76cbd0dbb730850bca82e20cd8e7994e",
+  "terminal_state": "PRODUCTION_PROMOTED (the production environment deployment is ACTIVE at the promoted source sha)",
+  "evidence_graph_links": [
+    "commit receipt sourceRevision (the produced source sha, content-addressed)",
+    "push receipt sourceRevision (the promoted source sha)",
+    "pull-request receipt sourceRevision (the promoted source sha)",
+    "deployment receipt sourceRevision + deploymentRevision (staging ACTIVE)",
+    "promotion receipt sourceRevision + deploymentRevision (production ACTIVE — supersedes staging)",
+    "ReferenceWorld.heads.get('workspace') (the exact workspace head)",
+    "ReferenceWorld.pushes[0] (the exact remote + ref + sha)",
+    "ReferenceWorld.pullRequests[0] (the exact PR title + head + base branches)",
+    "ReferenceWorld.deployments.get(stagingId) (staging ACTIVE at promotedSha)",
+    "ReferenceWorld.deployments.get(productionId) (production ACTIVE at promotedSha — different id from staging)",
+    "ReferenceWorld.activeByEnvironment.get('staging') (the staging active id)",
+    "ReferenceWorld.activeByEnvironment.get('production') (the production active id)",
+    "action event log (5 entries: commit + push + pull-request + deployment + promotion, in chronological order)",
+    "evidence sink (>= 5 records, one per action outcome)"
+  ],
+  "retained_uncertainty": [
+    "remaining uncertainty: the reference executor (ReferenceExecutor) is a deterministic simulator — never presented as a real git provider",
+    "remaining uncertainty: the github-adapter is a reference provider (P4) — SIMULATED connection states, never a real GitHub connection",
+    "remaining uncertainty: the deployment-target is a reference executor (P9) — deterministic in-memory deployment world, no real deployment evidence exists",
+    "remaining uncertainty: every action's authority is re-evaluated at action time (no planning-time grant is sufficient)"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-product-dogfood exec vitest run test/promotion.test.ts",
+    "deterministic": true,
+    "bit_exact_reproduction": true
+  }
+}

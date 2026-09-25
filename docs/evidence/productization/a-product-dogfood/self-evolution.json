@@ -1,0 +1,32 @@
+{
+  "journey_id": "self-evolution",
+  "test_id": "tests/product-dogfood/test/self-evolution.test.ts::P15 Lane A — self-evolution: the meta loop updates the learned ecology as DATA",
+  "base_sha": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "head_sha": "a7c090bc76cbd0dbb730850bca82e20cd8e7994e",
+  "terminal_state": "META_LOOP_COMPLETE (one connected trace chain from the initial meta-process to every learned ecology update)",
+  "evidence_graph_links": [
+    "initial meta-process envelope id (sos://MetaProcess/<32 hex>)",
+    "final meta-process envelope id (sos://MetaProcess/<32 hex>)",
+    "every minted process revision (content-addressed, in mint order)",
+    "every meta-change envelope id + provenance (content-addressed, sos://<Kind>/<32 hex>)",
+    "every measurement (change + candidate + hypothesis_id + trial + experiment + result — typed trace links)",
+    "every retention (ArchitectureMemoryArtifact + outcome_evidence + transfer_record_id + decay_signal_id)",
+    "every decision (change + engine_record + revise_grant + promotion_record + promote_grant + assurance_case + recovery + ask_id + activated_revision)",
+    "every rollback (change + promotion_record + promote_grant + restore + retired_trial)",
+    "the meta loop's trace chain (one connected semantic subgraph — chain.complete === true)",
+    "the brownfield object loop's trace chain (one connected semantic subgraph for both nominal + degraded variants)"
+  ],
+  "retained_uncertainty": [
+    "remaining uncertainty: effectiveness.simulated = true (the meta loop's effectiveness measurements are honestly SIMULATED — never presented as live evidence)",
+    "remaining uncertainty: effectiveness.seed (the deterministic seed rides along — reproducibility visible)",
+    "remaining uncertainty: retained_failures.penalty_demonstrated = true (the R19 penalty is demonstrated — never dropped)",
+    "remaining uncertainty: retained_failures.memory_entry_kinds + transfer_outcomes (the failure memory is RETAINED — never hidden)",
+    "remaining uncertainty: the process_revision.restore_exact = true (the final revision restores bit-exactly — the W16 reproducibility pin)"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-product-dogfood exec vitest run test/self-evolution.test.ts",
+    "deterministic": true,
+    "bit_exact_reproduction": true
+  }
+}

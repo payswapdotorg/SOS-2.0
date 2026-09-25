@@ -1,0 +1,32 @@
+{
+  "journey_id": "rollback",
+  "test_id": "tests/product-dogfood/test/rollback.test.ts::P15 Lane A — rollback: live state returns to the prior revision with evidence",
+  "base_sha": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "head_sha": "a7c090bc76cbd0dbb730850bca82e20cd8e7994e",
+  "terminal_state": "ROLLBACK_COMPLETE (v2 production deployment ROLLED_BACK; v1 deployment restored ACTIVE at the prior source sha)",
+  "evidence_graph_links": [
+    "v1 commit receipt sourceRevision (the initial source sha)",
+    "v1 deployment receipt deploymentRevision (v1 production ACTIVE)",
+    "v2 commit receipt sourceRevision (the regressed source sha)",
+    "v2 deployment receipt deploymentRevision (v2 production ACTIVE — supersedes v1)",
+    "rollback receipt sourceRevision (the restored v1 sha) + deploymentRevision (the restored deployment id)",
+    "ReferenceWorld.deployments.get(v2DeploymentId) (v2 production ROLLED_BACK)",
+    "ReferenceWorld.deployments.get(restoredDeploymentId) (restored production ACTIVE at v1Sha — different id from v2)",
+    "ReferenceWorld.activeByEnvironment.get('production') (the restored v1 deployment id)",
+    "rollback verification record (verdict VERIFIED | UNKNOWN, expectedSourceSha = v1Sha, observedSourceSha = v1Sha | null)",
+    "action event log (5 entries: commit + deployment + commit + deployment + rollback, in chronological order)",
+    "evidence sink (>= 5 records, one per action outcome, including the rollback verification evidence)"
+  ],
+  "retained_uncertainty": [
+    "remaining uncertainty: the rollback verification verdict is VERIFIED or UNKNOWN (honest — the ReferenceRollbackVerifier is a deterministic simulator; its verdict is never presented as live verification)",
+    "remaining uncertainty: when the verdict is UNKNOWN, the limitation is retained (visible — never a fabricated VERIFIED)",
+    "remaining uncertainty: the rollback recovery declaration is NULL when the gate has already evaluated the live triggers (the ROLLBACK is driven by the live triggers, not by the recovery declaration — the decision record carries the reasons)",
+    "remaining uncertainty: the reference executor (ReferenceExecutor) is a deterministic simulator — never presented as a real git provider"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-product-dogfood exec vitest run test/rollback.test.ts",
+    "deterministic": true,
+    "bit_exact_reproduction": true
+  }
+}
