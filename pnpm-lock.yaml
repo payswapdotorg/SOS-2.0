@@ -941,6 +941,8 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/cost-policy: {}
+
   packages/decision:
     dependencies:
       '@sos-2/authority':
@@ -2019,6 +2021,8 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/security: {}
+
   packages/semantic-spine:
     dependencies:
       '@sos-2/contracts':
@@ -2882,6 +2886,8 @@ importers:
       vitest:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/production-hardening: {}
 
 packages:
 
