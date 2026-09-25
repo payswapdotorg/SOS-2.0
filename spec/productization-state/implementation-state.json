@@ -2,9 +2,7 @@
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
-  "currentFrontier": [
-    "P16"
-  ],
+  "currentFrontier": [],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -143,11 +141,11 @@
       "mergedAs": "55680b9bbb46b8433cb9d57b86eba20f32b3c69b"
     },
     "P16": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P15"
       ],
-      "mergedAs": null
+      "mergedAs": "df7dcb512c94728ce9414138cc56ee6344b49592"
     }
   }
 }
