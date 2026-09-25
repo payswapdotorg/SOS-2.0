@@ -26,7 +26,7 @@ const ownedPaths = [];
 
 for (const file of workFiles) {
   const text = fs.readFileSync(path.join(workDir, file), "utf8");
-  const match = text.match(/^# (P\d+)/m);
+  const match = text.match(/^# (P\d+(?:-[A-Z])?)(?![\d-])/m);
   if (!match) throw new Error("Productization Work Order without ID: " + file);
   if (ids.has(match[1])) throw new Error("Duplicate productization Work Order: " + match[1]);
   ids.add(match[1]);

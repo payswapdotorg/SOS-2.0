@@ -122,3 +122,46 @@ Mission
   -> Package / Repertoire update
   -> Meta-Evolution
 ```
+
+---
+
+## Production Connectivity phase (P17–P20)
+
+P0–P16 proved that SOS has the right architecture. P17–P20 prove that SOS actually exists
+as a continuously operating system.
+
+```text
+                         W0–W18 ✓ FROZEN
+                               |
+                         P0–P16 ✓ COMPLETE
+                               |
+                    ┌──────────┴──────────┐
+                    │       P17           │
+                    │ REAL PRODUCT        │
+                    │ CONNECTIVITY        │
+                    └──────────┬──────────┘
+                               |
+          ┌────────────────────┼────────────────────┐
+          │                    │                    │
+        P17-A                P17-B                P17-C
+     Persistence +        GitHub + real         Real execution +
+     deployment          body providers        observation
+          │                    │                    │
+          └────────────────────┼────────────────────┘
+                               |
+                             P18
+                    Live UX + action wiring
+                               |
+                             P19
+                    End-to-end real dogfood
+                               |
+                             P20
+                       Production release
+```
+
+Program rules (operator directive 2026-09-25): real connectivity evidence — not merely
+configuration validation; never fabricate HEALTHY/CONNECTED state; bodies stay replaceable
+and cannot self-certify; no vendor becomes part of SOS semantics; the user computer remains
+optional; every worker preserves deterministic reference-mode tests and adds real-provider
+integration tests separately; completion of the phase requires successful real-system
+evidence and reproducibility.

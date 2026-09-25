@@ -2,7 +2,11 @@
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
-  "currentFrontier": [],
+  "currentFrontier": [
+    "P17-A",
+    "P17-B",
+    "P17-C"
+  ],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -146,6 +150,44 @@
         "P15"
       ],
       "mergedAs": "df7dcb512c94728ce9414138cc56ee6344b49592"
+    },
+    "P17-A": {
+      "status": "READY",
+      "dependencies": [
+        "P16"
+      ]
+    },
+    "P17-B": {
+      "status": "READY",
+      "dependencies": [
+        "P16"
+      ]
+    },
+    "P17-C": {
+      "status": "READY",
+      "dependencies": [
+        "P16"
+      ]
+    },
+    "P18": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "P17-A",
+        "P17-B",
+        "P17-C"
+      ]
+    },
+    "P19": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "P18"
+      ]
+    },
+    "P20": {
+      "status": "BLOCKED",
+      "dependencies": [
+        "P19"
+      ]
     }
   }
 }

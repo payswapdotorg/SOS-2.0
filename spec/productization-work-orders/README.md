@@ -46,3 +46,16 @@ Architecture Change Request -> impact analysis -> evidence/research -> Architect
 - A body cannot certify its own work.
 
 Workers stop at WAITING_FOR_ARCHITECT for frozen-contract changes, semantic ambiguity, authority gaps, cross-owned-path dependencies or vendor assumptions not covered by the Work Order.
+
+## Production-connectivity extension (P17–P20)
+
+P17-A / P17-B / P17-C are parallel lanes of one wave (same rules as every Work Order;
+hyphenated lane IDs are first-class machine-state task IDs). P18 is the architect-led
+integration pass; P19 is the real-world dogfood; P20 is the architect-owned production
+release gate.
+
+Additional lane rules: real-provider work must distinguish `CONNECTED`, `UNKNOWN`,
+`UNAVAILABLE` and `DEGRADED` states honestly and never fabricate provider state; secrets
+arrive via environment only and never enter commits, logs or evidence; deterministic
+reference-mode tests must remain green and real-provider integration tests are added
+separately.
