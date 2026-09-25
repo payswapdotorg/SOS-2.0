@@ -1,0 +1,36 @@
+{
+  "work_order": "P12",
+  "rationale_ref": "spec/productization-work-orders/P12-continuous-autonomy.md",
+  "affected_artifacts": [
+    "packages/autonomy-runtime",
+    "packages/task-runtime",
+    "apps/task-runner",
+    "tests/autonomy"
+  ],
+  "added": [
+    "packages/autonomy-runtime/**",
+    "packages/task-runtime/**",
+    "apps/task-runner/**",
+    "tests/autonomy/**"
+  ],
+  "preserved_invariants": [
+    "frozen W0-W18 semantics and every merged package/app/test untouched; only the four owned paths are created",
+    "leases are granted/renewed/revoked through the P9 action-gateway body-lifecycle family with action-time CURRENT authority re-evaluation; a revoked/expired/never-held grant fails closed as a typed denial and execution stops (never a bypass)",
+    "SUSPECTED is not LOST: a missed beat is truthful UNKNOWN (the body may be alive) and ONLY a verified failure observation transitions to LOST — death is never fabricated",
+    "checkpoints are content-addressed and fail-closed: a corrupted or tampered checkpoint is a typed CHECKPOINT_INVALID denial, never silently re-derived",
+    "a task resumed from a verified checkpoint continues the SAME P6 work graph from the checkpointed step — never a silent restart, never skipped verification, never fabricated progress",
+    "body replacement preserves task/artifact identity; in-flight side effects are reconciled from the durable store, never assumed; the honestly UNKNOWN is carried as unresolved uncertainty",
+    "cancellation is first-class and durable: a cancelled task stays cancelled across body replacement and emits the P9 action evidence chain",
+    "provider outages are typed windows with truthful UNAVAILABLE statuses — never silent retry storms; recovery follows bounded fixed-schedule backoff with typed retry records, then ASK when bounds are exhausted (never an infinite loop)",
+    "cost/resource accounting appends typed episodes to the durable task record — evidence, never an enforcement authority",
+    "the task timeline is a derived replayable view of the durable observation log — never a second source of truth",
+    "no self-approval: the task runtime never certifies completion; the independent verification record gates the COMPLETED transition",
+    "zero new external dependencies (workspace:* + the existing toolchain only); pnpm-lock.yaml and pnpm-workspace.yaml unchanged; offline determinism outside the documented apps/task-runner composition boundary"
+  ],
+  "boundary_changes": [
+    "packages/autonomy-runtime: new leaf workspace member importing only @sos-2/action-gateway, @sos-2/live-store and @sos-2/semantic-spine (all merged at base); consumed only by packages/task-runtime, apps/task-runner and tests/autonomy",
+    "packages/task-runtime: new workspace member importing @sos-2/autonomy-runtime (P12-owned) plus the merged @sos-2/execution-fabric, @sos-2/task-graph, @sos-2/worker-runtime, @sos-2/live-store and @sos-2/semantic-spine",
+    "apps/task-runner: new composition-root app importing only P12-owned members and merged core members; nothing at this base consumes it",
+    "tests/autonomy: new acceptance suite importing only P12-owned members, merged core members and vitest"
+  ]
+}

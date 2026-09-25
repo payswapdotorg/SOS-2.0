@@ -1,0 +1,45 @@
+{
+  "name": "@sos-2/autonomy-contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Continuous Autonomy Acceptance Suites (Work Order P12): the pinned proof that killing a body does not lose the task (lease LOST -> replacement inherits identity + checkpoint), that a task resumed from a verified checkpoint produces completion evidence identical to uninterrupted execution, that expired/revoked authority stops execution (fail closed, typed denial), that provider outages become truthful uncertainty/unavailability (SUSPECTED vs LOST; no fabricated liveness; bounded backoff then ASK), that body replacement preserves task/artifact identity with in-flight side effects reconciled, that cancellation survives body replacement, that cost accounting appends typed episodes per episode and the timeline replays exactly as the observation log, and the structural pins: zero new external dependencies (lockfile unchanged against base), offline determinism (no Date.now/Math.random/fetch/process.env/ambient timers in owned package sources outside the documented apps/task-runner composition boundary), fixed vitest seed, only merged + P12-owned workspace imports (unmerged siblings never referenced).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/autonomy-runtime": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/task-runtime": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
