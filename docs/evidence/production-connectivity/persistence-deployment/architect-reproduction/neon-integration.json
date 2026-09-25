@@ -1,0 +1,94 @@
+{
+  "schema": "sos-2/p17a/neon-integration",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T23:08:22.838Z",
+  "evidence_kind": "provider-connectivity",
+  "provider": "neon",
+  "provider_states": [
+    {
+      "state": "UNAVAILABLE",
+      "provider_id": "neon",
+      "probed_at": "2026-09-25T23:08:22.836Z",
+      "credential_env": "DATABASE_URL",
+      "api_revision": null,
+      "last_error": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+      "probes": [
+        {
+          "provider": "neon",
+          "probeId": "neon:management-whoami",
+          "endpoint": "GET /api/v2/users/me",
+          "at": "2026-09-25T23:08:22.836Z",
+          "status": null,
+          "ok": false,
+          "failure": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+          "apiRevision": null
+        }
+      ],
+      "note": "last real probe at 2026-09-25T23:08:22.836Z failed at the transport level: transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed"
+    }
+  ],
+  "credential_envs": [
+    "NEON_API_KEY",
+    "NEON_API_KEY_SECONDARY",
+    "DATABASE_URL"
+  ],
+  "management_api": "https://api.neon.tech/api/v2",
+  "sql_protocol": "neon http-sql (POST /sql, Neon-Connection-String header)",
+  "provisioning": {
+    "project_name": "sos-2-0-persistence",
+    "tier_naming_contract": {
+      "branch": "main",
+      "database": "sos"
+    },
+    "derived_database_url": false,
+    "project_deleted": false
+  },
+  "transcript": [],
+  "management_request_log": [],
+  "steps": [
+    {
+      "step": "management-probe",
+      "ok": false,
+      "at": "2026-09-25T23:08:22.836Z",
+      "detail": {
+        "attempted": true,
+        "failure": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+        "outcome": "UNAVAILABLE \u2014 the real failure recorded verbatim (never a fabricated success)"
+      }
+    },
+    {
+      "step": "provision",
+      "ok": false,
+      "at": "2026-09-25T23:08:22.837Z",
+      "detail": {
+        "attempted": false,
+        "reason": "management API UNAVAILABLE (the recorded real failure)"
+      }
+    },
+    {
+      "step": "sql-roundtrip",
+      "ok": false,
+      "at": "2026-09-25T23:08:22.837Z",
+      "detail": {
+        "attempted": false,
+        "reason": "the ambient DATABASE_URL is not shaped like a Neon postgres connection URL (the P3 postgres-url shape) \u2014 honestly not a Neon credential; the Neon adapter stays unattached"
+      }
+    },
+    {
+      "step": "cleanup",
+      "ok": false,
+      "at": "2026-09-25T23:08:22.838Z",
+      "detail": {
+        "attempted": false,
+        "reason": "nothing provisioned this run (management API UNAVAILABLE or already-clean)"
+      }
+    }
+  ],
+  "honest_notes": [
+    "The pooled connection string (DATABASE_URL) is SECRET: derived via the management API and injected into the SQL client only \u2014 env NAMES in evidence, never values.",
+    "A provider outage is recorded as UNAVAILABLE evidence with the real failure verbatim \u2014 never a silent skip, never a fabricated success.",
+    "The adapter health() surface (frozen P2 port) maps probed outcomes to AVAILABLE/UNAVAILABLE/UNKNOWN; the P17-A surface carries CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED with full probe evidence."
+  ],
+  "redacted_pattern_ids": [],
+  "architect_reproduction": "ARCHITECT GATE REPRODUCTION (2026-09-25 ~23:07-23:09 UTC, machine egress, run by the architect on the P17-A head 1b5ea91 after the worker's WAITING_FOR_ARCHITECT delivery and the gate-fix commit): independent re-execution of the RUN_REAL=1 journeys. Vercel CONNECTED (fresh deployment dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B from exact head, READY, preview HTTP 200); R2 CONNECTED (real write-once roundtrip, byte-exact read-back, honest 404, retention-path delete); Neon UNAVAILABLE (api.neon.tech NODATA \u2014 no A/AAAA from public resolvers); Upstash UNAVAILABLE (meet-ewe-145933.upstash.io NXDOMAIN \u2014 the provided REST host does not exist in public DNS)."
+}

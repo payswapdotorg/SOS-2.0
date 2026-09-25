@@ -1,0 +1,559 @@
+{
+  "schema": "sos-2/p17a/r2-integration",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T23:09:14.842Z",
+  "evidence_kind": "provider-connectivity",
+  "provider": "r2",
+  "provider_states": [
+    {
+      "state": "CONNECTED",
+      "provider_id": "r2",
+      "probed_at": "2026-09-25T23:09:09.488Z",
+      "credential_env": "R2_SECRET_ACCESS_KEY",
+      "api_revision": "s3.2006-03-01",
+      "last_error": null,
+      "probes": [
+        {
+          "provider": "r2",
+          "probeId": "r2:head-bucket",
+          "endpoint": "/sos20-evidence-prod (HEAD)",
+          "at": "2026-09-25T23:09:09.488Z",
+          "status": 200,
+          "ok": true,
+          "failure": null,
+          "apiRevision": "s3.2006-03-01"
+        }
+      ],
+      "note": "last real probe at 2026-09-25T23:09:09.488Z answered 200 on /sos20-evidence-prod (HEAD)"
+    }
+  ],
+  "credential_envs": [
+    "R2_ACCOUNT_ID",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+    "R2_S3_ENDPOINT",
+    "R2_BUCKET_NAME"
+  ],
+  "s3_endpoint": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com",
+  "signing": "AWS SigV4 (node:crypto; region auto; UNSIGNED payload hash replaced by the real body hash)",
+  "bucket": "sos20-evidence-prod",
+  "key_layout": "production/evidence/<sha256-hex> (the P3 tier prefix + purpose + content anchor)",
+  "adapter_attached": true,
+  "transcript": [
+    {
+      "at": "2026-09-25T23:09:09.756Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230909Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1e69ee77155-HKG",
+          "date": "Fri, 25 Sep 2026 23:09:09 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:10.031Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230909Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "cf-ray": "a40db1e82f625dd6-HKG",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:10 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:10.945Z",
+      "provider": "r2",
+      "request": {
+        "method": "PUT",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230909Z",
+          "x-amz-content-sha256": "[REDACTED]",
+          "content-length": "1"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1e9e997098c-HKG",
+          "content-length": "0",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:10 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:11.272Z",
+      "provider": "r2",
+      "request": {
+        "method": "GET",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230910Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1ef99a820ef-HKG",
+          "content-length": "1",
+          "date": "Fri, 25 Sep 2026 23:09:11 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 1,
+        "snippet": "*"
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:11.542Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230911Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1f1aeb55168-HKG",
+          "content-length": "1",
+          "date": "Fri, 25 Sep 2026 23:09:11 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:11.799Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230911Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1f34bf9882e-HKG",
+          "content-length": "1",
+          "date": "Fri, 25 Sep 2026 23:09:11 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:12.077Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230911Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "cf-ray": "a40db1f4ec860994-HKG",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:12 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:13.000Z",
+      "provider": "r2",
+      "request": {
+        "method": "PUT",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230911Z",
+          "x-amz-content-sha256": "[REDACTED]",
+          "content-length": "212"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1f6aefa0982-HKG",
+          "content-length": "0",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:12 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:13.442Z",
+      "provider": "r2",
+      "request": {
+        "method": "GET",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230913Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "cf-ray": "a40db1fc6866b178-HKG",
+          "content-length": "212",
+          "date": "Fri, 25 Sep 2026 23:09:13 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 212,
+        "snippet": "{\n  \"work_order\": \"P17-A\",\n  \"lane\": \"persistence-deployment\",\n  \"written_at\": \"2026-09-25T23:09:11.800Z\",\n  \"note\": \"SOS 2.0 P17-A real R2 write-once evidence bundle through the frozen ObjectStoreAdapter port\"\n}"
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:13.688Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230913Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "cf-ray": "a40db1ff2f072b12-HKG",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:13 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:13.934Z",
+      "provider": "r2",
+      "request": {
+        "method": "GET",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230913Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "cf-ray": "a40db200bdb0e2f6-HKG",
+          "content-type": "application/xml",
+          "date": "Fri, 25 Sep 2026 23:09:13 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 127,
+        "snippet": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><Error><Code>NoSuchKey</Code><Message>The specified key does not exist.</Message></Error>"
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:14.576Z",
+      "provider": "r2",
+      "request": {
+        "method": "DELETE",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230913Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 204,
+        "headers": {
+          "cf-ray": "a40db2024cfb85dd-HKG",
+          "date": "Fri, 25 Sep 2026 23:09:14 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    },
+    {
+      "at": "2026-09-25T23:09:14.842Z",
+      "provider": "r2",
+      "request": {
+        "method": "HEAD",
+        "url": "https://7e333607c4ceeef5d092be1bb94108bf.r2.cloudflarestorage.com/sos20-evidence-prod/production/evidence/[REDACTED]",
+        "headers": {
+          "authorization": "[REDACTED:env-name:R2_SECRET_ACCESS_KEY]",
+          "x-amz-date": "20260925T230914Z",
+          "x-amz-content-sha256": "[REDACTED]"
+        }
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "cf-ray": "a40db2064c7a079e-HKG",
+          "content-type": "text/plain;charset=UTF-8",
+          "date": "Fri, 25 Sep 2026 23:09:14 GMT",
+          "server": "cloudflare"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 0,
+        "snippet": ""
+      },
+      "redactedPatternIds": [
+        "authorization-header",
+        "r2-secret-access-key"
+      ]
+    }
+  ],
+  "request_log": [
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod",
+      "status": 200
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 404
+    },
+    {
+      "method": "PUT",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 404
+    },
+    {
+      "method": "PUT",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 200
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 404
+    },
+    {
+      "method": "GET",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 404
+    },
+    {
+      "method": "DELETE",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 204
+    },
+    {
+      "method": "HEAD",
+      "path": "/sos20-evidence-prod/production/evidence/[REDACTED]",
+      "status": 404
+    }
+  ],
+  "steps": [
+    {
+      "step": "head-bucket-probe",
+      "ok": true,
+      "at": "2026-09-25T23:09:09.757Z",
+      "detail": {
+        "state": "CONNECTED",
+        "bucket": "sos20-evidence-prod",
+        "api_revision": "s3.2006-03-01"
+      }
+    },
+    {
+      "step": "one-byte-object",
+      "ok": true,
+      "at": "2026-09-25T23:09:11.800Z",
+      "detail": {
+        "content_hash": "[REDACTED]",
+        "object_ref": "r2://[REDACTED]",
+        "size_bytes": 1,
+        "byte_exact_read_back": true,
+        "idempotent_re_put": true,
+        "key": "production/evidence/[REDACTED]"
+      }
+    },
+    {
+      "step": "evidence-bundle-object",
+      "ok": true,
+      "at": "2026-09-25T23:09:13.444Z",
+      "detail": {
+        "content_hash": "[REDACTED]",
+        "object_ref": "r2://[REDACTED]",
+        "size_bytes": 212,
+        "byte_exact_read_back": true,
+        "key": "production/evidence/[REDACTED]"
+      }
+    },
+    {
+      "step": "absent-object-failure-path",
+      "ok": true,
+      "at": "2026-09-25T23:09:13.934Z",
+      "detail": {
+        "content_hash": "[REDACTED]",
+        "has_object": false,
+        "get_object": null,
+        "note": "a REAL 404 round-trip \u2014 absence is an honest null, never fabricated existence"
+      }
+    },
+    {
+      "step": "retention-path-delete",
+      "ok": true,
+      "at": "2026-09-25T23:09:14.842Z",
+      "detail": {
+        "deleted": [
+          "[REDACTED]"
+        ],
+        "retained": "the evidence-bundle object (write-once durable evidence in the tier prefix)",
+        "note": "deletion happened ONLY through the documented retention path (outside the frozen port \u2014 the P3 immutability contract)"
+      }
+    }
+  ],
+  "honest_notes": [
+    "Objects are write-once immutable: identical bytes produce the identical content-addressed ref (idempotent re-puts, never duplicates).",
+    "Deletion happens only through the documented retention path \u2014 deliberately OUTSIDE the frozen ObjectStoreAdapter port (the P3 immutability contract).",
+    "A failing provider probe is VALID evidence: the honest state machine records the real outcome verbatim."
+  ],
+  "redacted_pattern_ids": [
+    "r2-secret-access-key"
+  ],
+  "architect_reproduction": "ARCHITECT GATE REPRODUCTION (2026-09-25 ~23:07-23:09 UTC, machine egress, run by the architect on the P17-A head 1b5ea91 after the worker's WAITING_FOR_ARCHITECT delivery and the gate-fix commit): independent re-execution of the RUN_REAL=1 journeys. Vercel CONNECTED (fresh deployment dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B from exact head, READY, preview HTTP 200); R2 CONNECTED (real write-once roundtrip, byte-exact read-back, honest 404, retention-path delete); Neon UNAVAILABLE (api.neon.tech NODATA \u2014 no A/AAAA from public resolvers); Upstash UNAVAILABLE (meet-ewe-145933.upstash.io NXDOMAIN \u2014 the provided REST host does not exist in public DNS)."
+}

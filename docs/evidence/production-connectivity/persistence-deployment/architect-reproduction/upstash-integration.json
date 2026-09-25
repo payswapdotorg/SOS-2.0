@@ -1,0 +1,108 @@
+{
+  "schema": "sos-2/p17a/upstash-integration",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T23:08:23.316Z",
+  "evidence_kind": "provider-connectivity",
+  "provider": "upstash",
+  "provider_states": [
+    {
+      "state": "UNAVAILABLE",
+      "provider_id": "upstash",
+      "probed_at": "2026-09-25T23:08:23.314Z",
+      "credential_env": "UPSTASH_REDIS_REST_TOKEN",
+      "api_revision": null,
+      "last_error": "transport failure: transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed",
+      "probes": [
+        {
+          "provider": "upstash",
+          "probeId": "upstash:ping",
+          "endpoint": "/ping",
+          "at": "2026-09-25T23:08:23.314Z",
+          "status": null,
+          "ok": false,
+          "failure": "transport failure: transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed",
+          "apiRevision": null
+        }
+      ],
+      "note": "last real probe at 2026-09-25T23:08:23.314Z failed at the transport level: transport failure: transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed"
+    }
+  ],
+  "credential_envs": [
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN"
+  ],
+  "rest_protocol": "POST https://<db>.upstash.io/<command>/<args> (Authorization: Bearer)",
+  "namespace_contract": "sos:production:* (the P3 tier prefix \u2014 the isolation seam)",
+  "never_canonical_contract": "coordination ONLY \u2014 cache/idempotency/leases; flushing loses ONLY acceleration",
+  "adapter_attached": true,
+  "transcript": [
+    {
+      "at": "2026-09-25T23:08:23.313Z",
+      "provider": "upstash",
+      "request": {
+        "method": "POST",
+        "url": "https://meet-ewe-145933.upstash.io/ping",
+        "headers": {
+          "authorization": "[REDACTED:env-name:UPSTASH_REDIS_REST_TOKEN]"
+        }
+      },
+      "response": {
+        "status": null,
+        "headers": {
+          "transport-error": "transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed"
+        },
+        "bodyHash": null,
+        "bodyLength": null,
+        "snippet": null
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    }
+  ],
+  "request_log": [
+    {
+      "method": "POST",
+      "path": "/ping",
+      "status": 0
+    }
+  ],
+  "steps": [
+    {
+      "step": "ping-probe",
+      "ok": false,
+      "at": "2026-09-25T23:08:23.314Z",
+      "detail": {
+        "state": "UNAVAILABLE",
+        "failure": "transport failure: transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed",
+        "api_revision": null
+      }
+    },
+    {
+      "step": "coordination-roundtrip",
+      "ok": false,
+      "at": "2026-09-25T23:08:23.315Z",
+      "detail": {
+        "attempted": false,
+        "reason": "provider UNAVAILABLE (the recorded real failure) \u2014 operations honestly not attempted"
+      }
+    },
+    {
+      "step": "never-canonical-proof",
+      "ok": false,
+      "at": "2026-09-25T23:08:23.316Z",
+      "detail": {
+        "attempted": false,
+        "reason": "Upstash UNAVAILABLE (the recorded real failure) \u2014 the proof honestly not executed against the real Redis; the reference-mode suite pins the invariant deterministically",
+        "durable_side": "real-neon-adapter"
+      }
+    }
+  ],
+  "honest_notes": [
+    "A provider outage is recorded as UNAVAILABLE evidence with the real failure verbatim \u2014 never a silent skip, never a fabricated success.",
+    "The never-canonical proof runs against the real Upstash whenever it is reachable; the durable side is the REAL Neon adapter when DATABASE_URL is configured this run (recorded honestly otherwise).",
+    "The frozen port health() surface maps probed outcomes to AVAILABLE/UNAVAILABLE/UNKNOWN; the P17-A surface carries CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED with full probe evidence."
+  ],
+  "redacted_pattern_ids": [],
+  "architect_reproduction": "ARCHITECT GATE REPRODUCTION (2026-09-25 ~23:07-23:09 UTC, machine egress, run by the architect on the P17-A head 1b5ea91 after the worker's WAITING_FOR_ARCHITECT delivery and the gate-fix commit): independent re-execution of the RUN_REAL=1 journeys. Vercel CONNECTED (fresh deployment dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B from exact head, READY, preview HTTP 200); R2 CONNECTED (real write-once roundtrip, byte-exact read-back, honest 404, retention-path delete); Neon UNAVAILABLE (api.neon.tech NODATA \u2014 no A/AAAA from public resolvers); Upstash UNAVAILABLE (meet-ewe-145933.upstash.io NXDOMAIN \u2014 the provided REST host does not exist in public DNS)."
+}
