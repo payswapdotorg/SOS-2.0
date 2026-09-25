@@ -1,0 +1,919 @@
+{
+  "schema": "sos-2/p17a/vercel-deployment",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T22:08:08.322Z",
+  "evidence_kind": "deployment-connectivity",
+  "provider": "vercel",
+  "provider_states": [
+    {
+      "state": "CONNECTED",
+      "provider_id": "vercel",
+      "probed_at": "2026-09-25T22:06:43.316Z",
+      "credential_env": "VERCEL_TOKEN",
+      "api_revision": "vercel.v2",
+      "last_error": null,
+      "probes": [
+        {
+          "provider": "vercel",
+          "probeId": "vercel:user-probe",
+          "endpoint": "GET /v2/user",
+          "at": "2026-09-25T22:06:43.316Z",
+          "status": 200,
+          "ok": true,
+          "failure": null,
+          "apiRevision": "vercel.v2"
+        }
+      ],
+      "note": "last real probe at 2026-09-25T22:06:43.316Z answered 200 on GET /v2/user"
+    }
+  ],
+  "credential_envs": [
+    "VERCEL_TOKEN",
+    "VERCEL_PROJECT_ID",
+    "VERCEL_ORG_ID"
+  ],
+  "api": "https://api.vercel.com (v2 user/teams, v9/v10 projects, v13 deployments, v6 deployments list)",
+  "git_source_protocol": "gitSource {type:'github', repoId:<number>, ref:<40-hex sha>} — verified against the real API (the response echoes gitSource.sha)",
+  "project": {
+    "name": "sos-2-0",
+    "git_repository": "payswapdotorg/SOS-2.0",
+    "root_directory": "apps/web",
+    "framework": "nextjs"
+  },
+  "connectivity_profile": {
+    "build_command": "pnpm --filter @sos-2/web^... run build && pnpm run build (the monorepo dependency closure — verified against the real API)",
+    "sso_protection": "disabled (public preview URLs — verified: PATCH ssoProtection: null)"
+  },
+  "deployment": {
+    "deployment_revision_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+    "url": "https://sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+    "preview_http_ok": true,
+    "ready_state": "READY",
+    "source_revision_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+    "observed_commit_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+    "binding_verified": true,
+    "poll_attempts": 12,
+    "waited_ms": 82862
+  },
+  "deployment_record": {
+    "record_id": "sos://[REDACTED]",
+    "deployment_id": "vercel-preview-b5938ea46541",
+    "environment": "production",
+    "artifact_revision": {
+      "kind": "git-sha",
+      "value": "b5938ea4654144df287ce3e907389fc1f911ccf6"
+    },
+    "target_runtime": {
+      "runtime_id": "vercel:prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "runtime_kind": "vercel-serverless",
+      "runtime_version": "24.x"
+    },
+    "configuration": {
+      "vercel_deployment_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "deployment_url": "sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+      "team_id": null,
+      "project_id": "prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "project_name": "sos-2-0",
+      "target": "preview",
+      "region": "iad1",
+      "framework": "nextjs",
+      "root_directory": "apps/web",
+      "git_repo_id": 1377439399,
+      "ready_state": "READY",
+      "commit_sha_bound": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+      "binding_verified": true
+    },
+    "rollback": {
+      "mechanism": {
+        "kind": "ROLLBACK_DEPLOYMENT",
+        "to_deployment_id": "dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU"
+      },
+      "trigger": {
+        "kind": "MANUAL",
+        "authority_ref": "sos://AuthorityGrant/31c38c4dc0b8a1672c8ddc1d6e420c2e"
+      },
+      "authority_ref": "sos://AuthorityGrant/31c38c4dc0b8a1672c8ddc1d6e420c2e",
+      "exception": null
+    },
+    "outcome": {
+      "deployment_ref": "sos://[REDACTED]",
+      "availability": "SUCCESS",
+      "detail": {
+        "vercel_deployment_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "url": "sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+        "ready_state": "READY",
+        "requested_source_revision_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+        "observed_commit_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+        "binding_verified": true,
+        "poll_attempts": 12,
+        "waited_ms": 82862
+      },
+      "window": null,
+      "producer": {
+        "tool": "@sos-2/deployment-providers",
+        "tool_version": "1.0.0",
+        "model": null,
+        "model_version": null,
+        "command": "RUN_REAL=1 pnpm --filter @sos-2/tests-real-persistence test",
+        "environment": "real:vercel"
+      },
+      "simulated": false
+    }
+  },
+  "transcript": [
+    {
+      "at": "2026-09-25T22:06:43.314Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v2/user",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:43 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374064",
+          "x-vercel-id": "sfo1::qqj4b-1790374003211-b647481b78fc"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 1411,
+        "snippet": "{\"user\":{\"id\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"email\":\"ekonplacide@gmail.com\",\"name\":null,\"username\":\"ekonplacide-5312\",\"avatar\":null,\"defaultTeamId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"version\":\"northstar\",\"createdAt\":1690467334991,\"billing\":{\"plan\":\"hobby\",\"period\":null,\"trial\":null,\"cancelation\":null,\"email\":null,\"tax\":null,\"language\":null,\"address\":null,\"name\":null,\"currency\":\"usd\",\"status\":\"active\"},\"resourceConfig\":{\"concurrentBuilds\":1},\"softBlock\":null,\"stagingPrefix\":\"ekonplacide-gmailcom\",\"importFlowGitProvider\":\"github\",\"importFlowGitNamespaceId\":43850052,\"preferredScopesAndGitNamespaces\":[{\"scopeId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"gitNamespaceId\":43850052},{\"scopeId\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"gitNamespaceId\":43850052}],\"dismissedToasts\":[{\"name\":\"firewall-ga\",\"dismissals\":[{\"scopeId\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"createdAt\":1730124769495}]},{\"name\":\"northstar-migration-completed-wmDQWzu9ZrQBNLFphlMoQhH4\",\"dismissals\":[{\"scopeId\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"createdAt\":1727597029748}]}],\"activeDashboardViews\":[{\"scopeId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"viewPreference\":\"list\"}],\"hasTrialAvailable\":false,\"remoteCaching\":{\"enabled\":true},\"dataCache\":{\"excessBillingEnabled\":false},\"featureBlocks\":{},\"northstarMigration\":{\"teamId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"projects\":9,\"stores\":0,\"integrationClients\":0,\"integrationConfigurations\":0,\"startTime\":1707789274946,\"endTime\":1710782280570}}}"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:43.516Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v2/teams",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:43 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "600",
+          "x-ratelimit-remaining": "599",
+          "x-ratelimit-reset": "1790374064",
+          "x-vercel-id": "sfo1::l5j65-1790374003396-a546324eeae4"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 3016,
+        "snippet": "{\"teams\":[{\"id\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"slug\":\"ekonplacidegmailcoms-projects\",\"name\":\"ekonplacidegmailcom's projects\",\"avatar\":null,\"createdAt\":1710782113367,\"created\":\"2024-03-18T17:15:13.367Z\",\"membership\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"teamId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"role\":\"OWNER\",\"created\":1710782114536,\"createdAt\":1710782114536,\"updatedAt\":1781881531704,\"confirmed\":true},\"dataSharingConsent\":{\"consent\":\"granted\",\"updatedAt\":1779664135313,\"via\":\"explicit\"},\"enableImageOptimizationNewPrice\":true,\"enablePreviewFeedback\":null,\"enableProductionFeedback\":null,\"sensitiveEnvironmentVariablePolicy\":\"default\",\"isMigratingToSensitiveEnvVars\":false,\"creatorId\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"updatedAt\":1788698189720,\"platformVersion\":null,\"billing\":{\"address\":null,\"cancelation\":null,\"email\":\"ekonplacide@gmail.com\",\"language\":null,\"name\":\"ekonplacidegmailcom's projects\",\"platform\":\"stripe\",\"period\":null,\"plan\":\"hobby\",\"tax\":null,\"currency\":\"usd\",\"trial\":null,\"invoiceItems\":null,\"status\":\"active\",\"planIteration\":\"legacy\",\"billingVersion\":2,\"plusMigrationEnabled\":true},\"description\":null,\"profiles\":[],\"stagingPrefix\":\"ekonplacidegmailcoms-projects\",\"resourceConfig\":{\"concurrentBuilds\":1,\"elasticConcurrencyEnabled\":false},\"previewDeploymentSuffix\":null,\"softBlock\":null,\"blocked\":null,\"remoteCaching\":{\"enabled\":true},\"enabledInvoiceItems\":{\"vercelMarketplace\":{\"enabled\":true}},\"featureBlocks\":{},\"spaces\":{\"enabled\":false},\"createdDirectToHobby\":true,\"northstarMigration\":{\"userId\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"startTime\":1707789274946,\"endTime\":1710782280570}},{\"id\":\"team_1u4lGvQcgPhzGRBm0G0Qstrj\",\"slug\":\"tepa\",\"name\":\"tepa\",\"avatar\":null,\"createdAt\":1690467381609,\"created\":\"2023-07-27T14:16:21.609Z\",\"membership\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"teamId\":\"team_1u4lGvQcgPhzGRBm0G0Qstrj\",\"role\":\"OWNER\",\"created\":1690467382052,\"createdAt\":1690467382052,\"updatedAt\":1781746052662,\"confirmed\":true},\"dataSharingConsent\":{\"consent\":\"granted\",\"updatedAt\":1787445832269,\"v"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:43.724Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v9/projects/sos-2-0",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:43 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "300",
+          "x-ratelimit-remaining": "299",
+          "x-ratelimit-reset": "1790374064",
+          "x-vercel-id": "sfo1::slqk2-1790374003596-c9803071881a"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 13876,
+        "snippet": "{\"accountId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"creator\":{\"type\":\"user\",\"user\":{\"id\":\"wmDQWzu9ZrQBNLFphlMoQhH4\"},\"via\":null},\"alias\":[],\"speedInsights\":{\"id\":\"xLZxAviKFYLSYqNdxRTeMfmv2VC\",\"hasData\":false},\"autoExposeSystemEnvs\":true,\"autoAssignCustomDomains\":true,\"autoAssignCustomDomainsUpdatedBy\":\"system\",\"buildCommand\":\"pnpm --filter @sos-2/web^... run build && pnpm run build\",\"createdAt\":1790368551236,\"deploymentExpiration\":{\"expirationDays\":30,\"expirationDaysProduction\":30,\"expirationDaysCanceled\":30,\"expirationDaysErrored\":30,\"deploymentsToKeep\":10},\"devCommand\":null,\"directoryListing\":false,\"framework\":\"nextjs\",\"gitForkProtection\":true,\"gitLFS\":false,\"id\":\"prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ\",\"installCommand\":null,\"lastRollbackTarget\":null,\"lastAliasRequest\":null,\"name\":\"sos-2-0\",\"nodeVersion\":\"24.x\",\"outputDirectory\":null,\"sandbox\":{\"failoverRegions\":[],\"region\":\"iad1\"},\"productionDeploymentsFastLane\":true,\"defaultResourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"functionDefaultTimeout\":300,\"functionDefaultMemoryType\":\"standard\",\"functionZeroConfigFailover\":false,\"elasticConcurrencyEnabled\":false},\"resourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"buildMachineType\":\"basic\",\"buildMachineSelection\":\"fixed\"},\"rootDirectory\":\"apps/web\",\"serverlessFunctionRegion\":\"iad1\",\"sourceFilesOutsideRootDirectory\":true,\"ssoProtection\":null,\"updatedAt\":1790373860703,\"live\":false,\"enableExternalRewriteCaching\":true,\"gitComments\":{\"onCommit\":false,\"onPullRequest\":true},\"gitProviderOptions\":{\"createDeployments\":\"enabled\"},\"webAnalytics\":{\"id\":\"AkMShjNCwWTyQF7tq0527HMgA\"},\"oidcTokenConfig\":{\"enabled\":true,\"issuerMode\":\"team\"},\"hasDeployments\":true,\"link\":{\"type\":\"github\",\"repo\":\"SOS-2.0\",\"repoId\":1377439399,\"org\":\"payswapdotorg\",\"repoOwnerId\":150378018,\"gitCredentialId\":\"cred_26dd4440955572cb0d9001d5c5e8ab23bc5281cb\",\"productionBranch\":\"main\",\"createdAt\":1790368551085,\"updatedAt\":1790368551085,\"deployHooks\":[]},\"latestDeployments\":[{\"alias\":[\"sos-2-0-git-"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:43.997Z",
+      "request": {
+        "method": "PATCH",
+        "url": "https://api.vercel.com/v9/projects/prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]",
+          "content-type": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:43 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "120",
+          "x-ratelimit-remaining": "119",
+          "x-ratelimit-reset": "1790374064",
+          "x-vercel-id": "sfo1::4hbjh-1790374003808-5b2b4aa0fc37"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 2053,
+        "snippet": "{\"accountId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"creator\":{\"type\":\"user\",\"user\":{\"id\":\"wmDQWzu9ZrQBNLFphlMoQhH4\"},\"via\":null},\"alias\":[],\"speedInsights\":{\"id\":\"xLZxAviKFYLSYqNdxRTeMfmv2VC\",\"hasData\":false},\"autoExposeSystemEnvs\":true,\"autoAssignCustomDomains\":true,\"autoAssignCustomDomainsUpdatedBy\":\"system\",\"buildCommand\":\"pnpm --filter @sos-2/web^... run build && pnpm run build\",\"createdAt\":1790368551236,\"deploymentExpiration\":{\"expirationDays\":30,\"expirationDaysProduction\":30,\"expirationDaysCanceled\":30,\"expirationDaysErrored\":30,\"deploymentsToKeep\":10},\"devCommand\":null,\"directoryListing\":false,\"framework\":\"nextjs\",\"gitForkProtection\":true,\"gitLFS\":false,\"id\":\"prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ\",\"installCommand\":null,\"lastRollbackTarget\":null,\"lastAliasRequest\":null,\"name\":\"sos-2-0\",\"nodeVersion\":\"24.x\",\"outputDirectory\":null,\"sandbox\":{\"failoverRegions\":[],\"region\":\"iad1\"},\"productionDeploymentsFastLane\":true,\"defaultResourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"functionDefaultTimeout\":300,\"functionDefaultMemoryType\":\"standard\",\"functionZeroConfigFailover\":false,\"elasticConcurrencyEnabled\":false},\"resourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"buildMachineType\":\"basic\",\"buildMachineSelection\":\"fixed\"},\"rootDirectory\":\"apps/web\",\"serverlessFunctionRegion\":\"iad1\",\"sourceFilesOutsideRootDirectory\":true,\"ssoProtection\":null,\"updatedAt\":1790374003884,\"live\":false,\"enableExternalRewriteCaching\":true,\"gitComments\":{\"onCommit\":false,\"onPullRequest\":true},\"gitProviderOptions\":{\"createDeployments\":\"enabled\"},\"webAnalytics\":{\"id\":\"AkMShjNCwWTyQF7tq0527HMgA\"},\"oidcTokenConfig\":{\"enabled\":true,\"issuerMode\":\"team\"},\"hasDeployments\":true,\"link\":{\"type\":\"github\",\"repo\":\"SOS-2.0\",\"repoId\":1377439399,\"org\":\"payswapdotorg\",\"repoOwnerId\":150378018,\"gitCredentialId\":\"cred_26dd4440955572cb0d9001d5c5e8ab23bc5281cb\",\"productionBranch\":\"main\",\"createdAt\":1790368551085,\"updatedAt\":1790368551085,\"deployHooks\":[]},\"latestDeployments\":[],\"targets\":{},\"feature"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:44.205Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v9/projects/sos-2-0",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:44 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "300",
+          "x-ratelimit-remaining": "299",
+          "x-ratelimit-reset": "1790374065",
+          "x-vercel-id": "sfo1::bkg7c-1790374004078-af2ec9a6b8db"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 13876,
+        "snippet": "{\"accountId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"creator\":{\"type\":\"user\",\"user\":{\"id\":\"wmDQWzu9ZrQBNLFphlMoQhH4\"},\"via\":null},\"alias\":[],\"speedInsights\":{\"id\":\"xLZxAviKFYLSYqNdxRTeMfmv2VC\",\"hasData\":false},\"autoExposeSystemEnvs\":true,\"autoAssignCustomDomains\":true,\"autoAssignCustomDomainsUpdatedBy\":\"system\",\"buildCommand\":\"pnpm --filter @sos-2/web^... run build && pnpm run build\",\"createdAt\":1790368551236,\"deploymentExpiration\":{\"expirationDays\":30,\"expirationDaysProduction\":30,\"expirationDaysCanceled\":30,\"expirationDaysErrored\":30,\"deploymentsToKeep\":10},\"devCommand\":null,\"directoryListing\":false,\"framework\":\"nextjs\",\"gitForkProtection\":true,\"gitLFS\":false,\"id\":\"prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ\",\"installCommand\":null,\"lastRollbackTarget\":null,\"lastAliasRequest\":null,\"name\":\"sos-2-0\",\"nodeVersion\":\"24.x\",\"outputDirectory\":null,\"sandbox\":{\"failoverRegions\":[],\"region\":\"iad1\"},\"productionDeploymentsFastLane\":true,\"defaultResourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"functionDefaultTimeout\":300,\"functionDefaultMemoryType\":\"standard\",\"functionZeroConfigFailover\":false,\"elasticConcurrencyEnabled\":false},\"resourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"buildMachineType\":\"basic\",\"buildMachineSelection\":\"fixed\"},\"rootDirectory\":\"apps/web\",\"serverlessFunctionRegion\":\"iad1\",\"sourceFilesOutsideRootDirectory\":true,\"ssoProtection\":null,\"updatedAt\":1790374003884,\"live\":false,\"enableExternalRewriteCaching\":true,\"gitComments\":{\"onCommit\":false,\"onPullRequest\":true},\"gitProviderOptions\":{\"createDeployments\":\"enabled\"},\"webAnalytics\":{\"id\":\"AkMShjNCwWTyQF7tq0527HMgA\"},\"oidcTokenConfig\":{\"enabled\":true,\"issuerMode\":\"team\"},\"hasDeployments\":true,\"link\":{\"type\":\"github\",\"repo\":\"SOS-2.0\",\"repoId\":1377439399,\"org\":\"payswapdotorg\",\"repoOwnerId\":150378018,\"gitCredentialId\":\"cred_26dd4440955572cb0d9001d5c5e8ab23bc5281cb\",\"productionBranch\":\"main\",\"createdAt\":1790368551085,\"updatedAt\":1790368551085,\"deployHooks\":[]},\"latestDeployments\":[{\"alias\":[\"sos-2-0-git-"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:44.428Z",
+      "request": {
+        "method": "PATCH",
+        "url": "https://api.vercel.com/v9/projects/prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]",
+          "content-type": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:44 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "120",
+          "x-ratelimit-remaining": "119",
+          "x-ratelimit-reset": "1790374065",
+          "x-vercel-id": "sfo1::5rrrp-1790374004286-ec13cae9e0ae"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 2053,
+        "snippet": "{\"accountId\":\"team_4KOoA5CgtYaOF85yFXPeMXLt\",\"creator\":{\"type\":\"user\",\"user\":{\"id\":\"wmDQWzu9ZrQBNLFphlMoQhH4\"},\"via\":null},\"alias\":[],\"speedInsights\":{\"id\":\"xLZxAviKFYLSYqNdxRTeMfmv2VC\",\"hasData\":false},\"autoExposeSystemEnvs\":true,\"autoAssignCustomDomains\":true,\"autoAssignCustomDomainsUpdatedBy\":\"system\",\"buildCommand\":\"pnpm --filter @sos-2/web^... run build && pnpm run build\",\"createdAt\":1790368551236,\"deploymentExpiration\":{\"expirationDays\":30,\"expirationDaysProduction\":30,\"expirationDaysCanceled\":30,\"expirationDaysErrored\":30,\"deploymentsToKeep\":10},\"devCommand\":null,\"directoryListing\":false,\"framework\":\"nextjs\",\"gitForkProtection\":true,\"gitLFS\":false,\"id\":\"prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ\",\"installCommand\":null,\"lastRollbackTarget\":null,\"lastAliasRequest\":null,\"name\":\"sos-2-0\",\"nodeVersion\":\"24.x\",\"outputDirectory\":null,\"sandbox\":{\"failoverRegions\":[],\"region\":\"iad1\"},\"productionDeploymentsFastLane\":true,\"defaultResourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"functionDefaultTimeout\":300,\"functionDefaultMemoryType\":\"standard\",\"functionZeroConfigFailover\":false,\"elasticConcurrencyEnabled\":false},\"resourceConfig\":{\"fluid\":true,\"functionDefaultRegions\":[\"iad1\"],\"buildMachineType\":\"basic\",\"buildMachineSelection\":\"fixed\"},\"rootDirectory\":\"apps/web\",\"serverlessFunctionRegion\":\"iad1\",\"sourceFilesOutsideRootDirectory\":true,\"ssoProtection\":null,\"updatedAt\":1790374004316,\"live\":false,\"enableExternalRewriteCaching\":true,\"gitComments\":{\"onCommit\":false,\"onPullRequest\":true},\"gitProviderOptions\":{\"createDeployments\":\"enabled\"},\"webAnalytics\":{\"id\":\"AkMShjNCwWTyQF7tq0527HMgA\"},\"oidcTokenConfig\":{\"enabled\":true,\"issuerMode\":\"team\"},\"hasDeployments\":true,\"link\":{\"type\":\"github\",\"repo\":\"SOS-2.0\",\"repoId\":1377439399,\"org\":\"payswapdotorg\",\"repoOwnerId\":150378018,\"gitCredentialId\":\"cred_26dd4440955572cb0d9001d5c5e8ab23bc5281cb\",\"productionBranch\":\"main\",\"createdAt\":1790368551085,\"updatedAt\":1790368551085,\"deployHooks\":[]},\"latestDeployments\":[],\"targets\":{},\"feature"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:44.634Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v6/deployments?limit=20&projectId=prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:44 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "1000",
+          "x-ratelimit-remaining": "999",
+          "x-ratelimit-reset": "1790374065",
+          "x-vercel-id": "sfo1::74mwt-1790374004508-daefb47d7a6b"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 10656,
+        "snippet": "{\"deployments\":[{\"uid\":\"dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU\",\"name\":\"sos-2-0\",\"projectId\":\"prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ\",\"url\":\"sos-2-0-2woj9nf8y-ekonplacidegmailcoms-projects.vercel.app\",\"created\":1790373863002,\"state\":\"READY\",\"readyState\":\"READY\",\"readySubstate\":\"STAGED\",\"type\":\"LAMBDAS\",\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"email\":\"ekonplacide@gmail.com\",\"username\":\"ekonplacide-5312\"},\"inspectorUrl\":\"https://vercel.com/ekonplacidegmailcoms-projects/sos-2-0/7WGZGQC27VVX6xgy4FDSmJJYBuWU\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubDeployment\":\"1\",\"githubOrg\":\"payswapdotorg\",\"githubRepo\":\"SOS-2.0\",\"githubRepoOwnerType\":\"User\",\"githubCommitRepoId\":\"1377439399\",\"githubRepoId\":\"1377439399\",\""
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:46.995Z",
+      "request": {
+        "method": "POST",
+        "url": "https://api.vercel.com/v13/deployments?skipAutoDetectionConfirmation=1",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]",
+          "content-type": "application/json"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:46 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "60",
+          "x-ratelimit-remaining": "59",
+          "x-ratelimit-reset": "1790374306",
+          "x-vercel-id": "sfo1::fgdwp-1790374004721-4137e72a1725"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4754,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374006755,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"duration\":{},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubDeployment\":\"1\",\"githubOrg\":\"payswapdotorg\",\"githubRepo\":\"SO"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:06:53.817Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:06:53 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374074",
+          "x-vercel-id": "sfo1::xdbf4-1790374013400-3cd9c7558596"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:00.507Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:00 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374081",
+          "x-vercel-id": "sfo1::595p5-1790374020222-b3be1b10cae5"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:07.208Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:07 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374087",
+          "x-vercel-id": "sfo1::2k4rt-1790374026920-5341614512c9"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:13.919Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:13 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374094",
+          "x-vercel-id": "sfo1::ncn69-1790374033615-efd55c4e156d"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:20.621Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:20 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374101",
+          "x-vercel-id": "sfo1::ncn69-1790374040321-ea8a8bdbeac2"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:27.305Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:27 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374108",
+          "x-vercel-id": "sfo1::62ms2-1790374047026-0e76a1ea599c"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:33.980Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:33 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374114",
+          "x-vercel-id": "sfo1::bkm5k-1790374053704-c6267a7c4396"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:40.679Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:40 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374121",
+          "x-vercel-id": "sfo1::j2dxs-1790374060399-a9a912e0163a"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:47.384Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:47 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374128",
+          "x-vercel-id": "sfo1::ncn69-1790374067080-648dabdf5fb8"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:07:54.079Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:07:53 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374134",
+          "x-vercel-id": "sfo1::4np5v-1790374073781-47e26a41761b"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:08:00.779Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:08:00 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374141",
+          "x-vercel-id": "sfo1::fq7qn-1790374080483-769bcc6bed05"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 4879,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":false,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":0},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374008446,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5938ea4654144df287ce3e"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    },
+    {
+      "at": "2026-09-25T22:08:07.497Z",
+      "request": {
+        "method": "GET",
+        "url": "https://api.vercel.com/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "headers": {
+          "accept": "application/json",
+          "authorization": "[REDACTED:env-name:VERCEL_TOKEN]"
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "content-type": "application/json; charset=utf-8",
+          "date": "Fri, 25 Sep 2026 22:08:07 GMT",
+          "server": "Vercel",
+          "x-ratelimit-limit": "500",
+          "x-ratelimit-remaining": "499",
+          "x-ratelimit-reset": "1790374148",
+          "x-vercel-id": "sfo1::z7jpw-1790374087180-4cee16e8c4e2"
+        },
+        "bodyHash": "[REDACTED]",
+        "bodyLength": 14352,
+        "snippet": "{\"alias\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"aliasAssigned\":true,\"aliasError\":null,\"automaticAliases\":[\"sos-2-0-git-b5938ea4654144-264a3d-ekonplacidegmailcoms-projects.vercel.app\"],\"bootedAt\":1790374006755,\"buildingAt\":1790374008446,\"buildSkipped\":false,\"createdAt\":1790374006755,\"creator\":{\"uid\":\"wmDQWzu9ZrQBNLFphlMoQhH4\",\"username\":\"ekonplacide-5312\"},\"deletedAt\":null,\"duration\":{\"startTime\":1790374008446,\"timeToReady\":74987},\"gitSource\":{\"type\":\"github\",\"repoId\":1377439399,\"ref\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"sha\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\"},\"id\":\"dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q\",\"initReadyAt\":1790374083433,\"name\":\"sos-2-0\",\"meta\":{\"githubCommitAuthorName\":\"P17-A Worker\",\"githubCommitAuthorEmail\":\"p17a-worker@sos-2.0\",\"githubCommitMessage\":\"P17-A Real Persistence + Deployment: the real free-tier provider adapters behind the frozen contracts\\n\\n- packages/real-persistence (@sos-2/real-persistence): Neon Postgres (management API + HTTPS SQL proxy) behind the frozen PostgresStoreAdapter (sole canonical store); Upstash Redis (REST) behind the frozen RedisCoordinationAdapter (coordination ONLY — never canonical; tier-prefixed namespaces, bounded TTLs, namespaced flushAll); Cloudflare R2 (S3-compatible API, AWS SigV4 on node:crypto — ZERO external dependencies) behind the frozen ObjectStoreAdapter (write-once content-addressed objects under P3 tier-prefixed keys; retention-path delete outside the port). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) from REAL probes only + the documented frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN — never fabricated). One injectable FetchPort seam; env-only credentials (P3 registry names; names only in every output); redacted transcripts (env-name references); the P3 contracts carried struc\",\"githubCommitOrg\":\"payswapdotorg\",\"githubCommitRef\":\"b5938ea4654144df287ce3e907389fc1f911ccf6\",\"githubCommitRepo\":\"SOS-2.0\",\"githubCommitSha\":\"b5"
+      },
+      "redactedPatternIds": [
+        "authorization-header"
+      ]
+    }
+  ],
+  "request_log": [
+    {
+      "method": "GET",
+      "path": "/v2/user",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v2/teams",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v9/projects/sos-2-0",
+      "status": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/v9/projects/prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v9/projects/sos-2-0",
+      "status": 200
+    },
+    {
+      "method": "PATCH",
+      "path": "/v9/projects/prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v6/deployments?limit=20&projectId=prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "path": "/v13/deployments?skipAutoDetectionConfirmation=1",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "path": "/v13/deployments/dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+      "status": 200
+    }
+  ],
+  "steps": [
+    {
+      "step": "user-probe",
+      "ok": true,
+      "at": "2026-09-25T22:06:43.316Z",
+      "detail": {
+        "username": "ekonplacide-5312",
+        "user_id": "wmDQWzu9ZrQBNLFphlMoQhH4",
+        "default_team_id": "team_4KOoA5CgtYaOF85yFXPeMXLt",
+        "billing_plan": "hobby",
+        "api_revision": "vercel.v2"
+      }
+    },
+    {
+      "step": "team-discovery",
+      "ok": true,
+      "at": "2026-09-25T22:06:43.517Z",
+      "detail": {
+        "teams": [
+          {
+            "id": "team_4KOoA5CgtYaOF85yFXPeMXLt",
+            "name": "ekonplacidegmailcom's projects",
+            "slug": "ekonplacidegmailcoms-projects"
+          },
+          {
+            "id": "team_1u4lGvQcgPhzGRBm0G0Qstrj",
+            "name": "tepa",
+            "slug": "tepa"
+          }
+        ]
+      }
+    },
+    {
+      "step": "ensure-project",
+      "ok": true,
+      "at": "2026-09-25T22:06:43.997Z",
+      "detail": {
+        "project_id": "prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+        "name": "sos-2-0",
+        "framework": "nextjs",
+        "root_directory": "apps/web",
+        "node_version": "24.x",
+        "git_repository": {
+          "type": "github",
+          "org": "payswapdotorg",
+          "repo": "SOS-2.0",
+          "repoId": 1377439399
+        }
+      }
+    },
+    {
+      "step": "deployment",
+      "ok": true,
+      "at": "2026-09-25T22:08:07.499Z",
+      "detail": {
+        "deployment_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+        "url": "sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+        "ready_state": "READY",
+        "requested_source_revision_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+        "observed_commit_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+        "binding_verified": true,
+        "poll_attempts": 12,
+        "duration_ms": 82864
+      }
+    },
+    {
+      "step": "preview-url-fetch",
+      "ok": true,
+      "at": "2026-09-25T22:08:08.318Z",
+      "detail": {
+        "url": "https://sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+        "http_status": 200,
+        "html_served": true
+      }
+    },
+    {
+      "step": "deployment-records",
+      "ok": true,
+      "at": "2026-09-25T22:08:08.322Z",
+      "detail": {
+        "deployment_record_id": "sos://[REDACTED]",
+        "lifecycle": "PLANNED -> DEPLOYED (envelope DRAFT -> ACTIVE)",
+        "status_of": "SUCCESS",
+        "revision_record": {
+          "environment": "production",
+          "provider": "vercel",
+          "region": "iad1",
+          "source_revision_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6",
+          "deployment_revision_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+          "registered_at": "2026-09-25T22:06:44.635Z",
+          "rollback_pointer": {
+            "previous_deployment_revision_id": "dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU"
+          }
+        },
+        "rollback_pointer": {
+          "previous_deployment_revision_id": "dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU"
+        }
+      }
+    }
+  ],
+  "honest_notes": [
+    "The deployment record carries the EXACT source_revision_sha of the deployed head; the provider VERIFIES the response commit sha equals it (a mismatch is a FAILURE outcome — never a fabricated binding).",
+    "A working preview URL bound to the exact head is the connectivity proof (HTTP 200 with the served HTML).",
+    "The frozen DeploymentStore lifecycle ran: PLANNED -> DEPLOYED with the truthful outcome recorded (statusOf = SUCCESS)."
+  ],
+  "redacted_pattern_ids": [
+    "r2-secret-access-key",
+    "upstash-rest-token"
+  ]
+}

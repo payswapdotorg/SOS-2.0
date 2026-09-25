@@ -1,0 +1,48 @@
+{
+  "schema": "sos-2/p17a/provider-states",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T22:11:26.036Z",
+  "providers": [
+    {
+      "provider": "neon",
+      "state": "UNAVAILABLE",
+      "probed_at": "2026-09-25T22:08:12.522Z",
+      "credential_env": null,
+      "api_revision": null,
+      "last_error": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+      "probes": 1,
+      "evidence_file": "neon-integration.json"
+    },
+    {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "probed_at": "2026-09-25T22:08:12.954Z",
+      "credential_env": "UPSTASH_REDIS_REST_TOKEN",
+      "api_revision": null,
+      "last_error": "transport failure: transport failure for POST https://meet-ewe-145933.upstash.io/ping: fetch failed",
+      "probes": 1,
+      "evidence_file": "upstash-integration.json"
+    },
+    {
+      "provider": "r2",
+      "state": "CONNECTED",
+      "probed_at": "2026-09-25T22:08:08.803Z",
+      "credential_env": "R2_SECRET_ACCESS_KEY",
+      "api_revision": "s3.2006-03-01",
+      "last_error": null,
+      "probes": 1,
+      "evidence_file": "r2-integration.json"
+    },
+    {
+      "provider": "vercel",
+      "state": "CONNECTED",
+      "probed_at": "2026-09-25T22:06:43.316Z",
+      "credential_env": "VERCEL_TOKEN",
+      "api_revision": "vercel.v2",
+      "last_error": null,
+      "probes": 1,
+      "evidence_file": "vercel-deployment.json"
+    }
+  ],
+  "aggregate_note": "Honest states from REAL probes only: UNAVAILABLE / UNAVAILABLE / CONNECTED / CONNECTED. the worst probed provider state is UNAVAILABLE (neon): transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed — recorded verbatim, never a silent skip, never a fabricated success."
+}

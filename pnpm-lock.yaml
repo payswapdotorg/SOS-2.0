@@ -475,6 +475,28 @@ importers:
 
   infra/deployment: {}
 
+  infra/production-connectivity:
+    dependencies:
+      '@sos-2/deployment-providers':
+        specifier: workspace:*
+        version: link:../../packages/deployment-providers
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/real-persistence':
+        specifier: workspace:*
+        version: link:../../packages/real-persistence
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/action-gateway:
     devDependencies:
       '@types/node':
@@ -1001,6 +1023,37 @@ importers:
       fast-check:
         specifier: ^3.23.0
         version: 3.23.2
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/deployment-providers:
+    dependencies:
+      '@sos-2/deployment':
+        specifier: workspace:*
+        version: link:../deployment
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/recovery-control':
+        specifier: workspace:*
+        version: link:../recovery-control
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/system-state':
+        specifier: workspace:*
+        version: link:../system-state
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
       typescript:
         specifier: ^5.5.0
         version: 5.9.3
@@ -1897,6 +1950,25 @@ importers:
       '@sos-2/telemetry-runtime':
         specifier: workspace:*
         version: link:../telemetry-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/real-persistence:
+    dependencies:
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
     devDependencies:
       '@types/node':
         specifier: ^22.10.0
@@ -3490,6 +3562,37 @@ importers:
       '@sos-2/telemetry-runtime':
         specifier: workspace:*
         version: link:../../packages/telemetry-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/real-persistence:
+    dependencies:
+      '@sos-2/deployment':
+        specifier: workspace:*
+        version: link:../../packages/deployment
+      '@sos-2/deployment-providers':
+        specifier: workspace:*
+        version: link:../../packages/deployment-providers
+      '@sos-2/infra-production-connectivity':
+        specifier: workspace:*
+        version: link:../../infra/production-connectivity
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/real-persistence':
+        specifier: workspace:*
+        version: link:../../packages/real-persistence
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
     devDependencies:
       '@types/node':
         specifier: ^22.10.0

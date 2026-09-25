@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/infra-production-connectivity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Production-Connectivity Wiring Harness (Work Order P17-A, persistence/deployment lane): the wiring harness/scripts per the infra/deployment precedent \u2014 the composition layer that assembles the REAL free-tier persistence + deployment stack from the environment at the process boundary (P3 registry variable names; credentials env-only, injected once at this boundary and never echoed), runs the REAL startup probes (honest states \u2014 UNKNOWN before a probe, CONNECTED/UNAVAILABLE/DEGRADED after; never fabricated), and emits the machine-readable evidence records (connectivity transcripts, provider states, deployment revision records) consumed by docs/evidence/production-connectivity/persistence-deployment. Includes the secrets-audit harness (scan owned paths for secret-shaped values; findings carry pattern ids only) and the zero-external-dependency + import-boundary checks (the P3 check-zero-deps discipline, continued). Deterministic reference-mode: the wiring logic runs offline against scripted seams (injected clocks; no ambient env in src); network happens only in the env-gated integration suite (RUN_REAL=1, tests/real-persistence).",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run",
+    "verify:zero-deps": "node scripts/check-zero-deps.mjs",
+    "verify:secrets": "node scripts/secret-scan.mjs",
+    "verify:contracts": "node scripts/check-zero-deps.mjs && node scripts/secret-scan.mjs && pnpm run typecheck && pnpm run test"
+  },
+  "dependencies": {
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*",
+    "@sos-2/live-store": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

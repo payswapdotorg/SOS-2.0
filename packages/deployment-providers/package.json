@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/deployment-providers",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real Deployment Providers (Work Order P17-A, persistence/deployment lane): the real Vercel deployment provider surface wired through the existing deployment contracts (the frozen @sos-2/deployment surface). RealVercelDeploymentProvider performs REAL Vercel API operations (team discovery, project discovery/creation with the git repository link and the apps/web rootDirectory per the P3 vercel contract, deployments from an EXACT git ref) through ONE injectable FetchPort seam (zero ambient network in package src). Every deployment mints a DeploymentRecord through the frozen createDeployment (artifact_revision = ExactRevision kind git-sha bound to the EXACT source_revision_sha of the deployed head), registers a DeploymentRevisionRecord through the P3 registrar contract shape (rollback pointers) and records truthful DeploymentOutcome records (the frozen 6 truth states; READY -> SUCCESS, ERROR -> FAILURE — never fabricated). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) come from REAL probes only; credentials are env-only (VERCEL_TOKEN per the P3 registry name), injected at the composition boundary, never echoed — transcripts are redacted (Authorization -> env-name reference). Deterministic reference-mode: the provider logic runs offline against a scripted FetchPort (injected clocks); network happens only in the env-gated integration suite (RUN_REAL=1, tests/real-persistence). ZERO external dependencies.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/deployment": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/recovery-control": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
