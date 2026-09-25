@@ -1,0 +1,30 @@
+{
+  "scenario_id": "negative-body-crash",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "f9d409ad57ed69ad8c4b11741d7f9784496b27e9",
+  "test_file": "tests/accessibility/test/09-body-crash.test.ts",
+  "test_names": [
+    "DETECTED: the kill leaves the durable record intact (identity, checkpoints, authority — the task is never lost)",
+    "DETECTED (truthful UNKNOWN): withheld beats are SUSPECTED, never LOST; only a VERIFIED failure transitions to LOST",
+    "VISIBLE: the crash is visible as typed durable events the user can replay (the task timeline)",
+    "CONTAINED: the recovery plan retains what only the replacement can re-verify (uncertainty retained, never dropped)",
+    "NO FABRICATED COMPLETION: the crashed task stays un-completed until the replacement runs AND an independent verification exists"
+  ],
+  "terminal_state": "CONTAINED: the task record survives the kill (RUNNING with checkpoints + authority); the lease goes SUSPECTED (truthful UNKNOWN) then LOST only on the verified failure; no fabricated completion",
+  "detection_containment": [
+    "the crash is visible as typed durable events (autonomy-lease-watch lease.suspected / lease.lost) replayable through the TaskTimeline",
+    "death is never inferred from silence: the LOST transition requires the verified failure observation id",
+    "the durable record keeps status RUNNING with final_verification null (never a fabricated completion)"
+  ],
+  "retained_uncertainty": [
+    "the recovery plan retains unknown_until_reverified (the in-flight side effects only the replacement body can re-verify)",
+    "a missing beat stays honest UNKNOWN (the body may be alive)"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

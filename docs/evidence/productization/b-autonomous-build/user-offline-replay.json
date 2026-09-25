@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "lane": "B",
+  "work_order": "P15",
+  "journey_id": "p15b-user-offline-replay",
+  "journey": "user computer offline during cloud execution (the P12 §7 device model: cloud ticks continue while the user tick is absent; the disconnected-user timeline replays on return)",
+  "scenario": {
+    "package": "@sos-2/tests-autonomous-build",
+    "test_file": "tests/autonomous-build/test/user-offline.test.ts",
+    "test_name": "on return, the disconnected-user timeline replays with EXACT revisions and retained uncertainty"
+  },
+  "revisions": {
+    "base": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+    "implementation_head": "7e5d2ae4bbc9a00d3951b1d60f5261f4edba9800",
+    "head_note": "implementation_head is the lane-branch commit containing the suite sources and these evidence records; the finalization follow-up commit (evidence-only) records it. The architect gate binds to the branch head."
+  },
+  "terminal_state": {
+    "journey_completed_offline": true,
+    "every_tick_user_offline": true,
+    "replay_on_return_identical": true,
+    "presence_inert": true
+  },
+  "evidence_graph_links": [
+    "every cloud tick of the journey records userDeviceOnline === false (presence is RECORDED, never consulted for progress); every observation event payload carries the offline marker",
+    "on return the timeline + evidence timeline + completion report replay IDENTICALLY (the recorded history did not change, and the recorded events still honestly say the user was offline when they happened)",
+    "EXACT REVISIONS on replay: workspaceHead === gatewayWorld.heads.get('workspace'); the single push carries the exact head sha to github.com/acme/p15b-empty-repo on ref sos/mission-flagship-p15b-01; the deployment is ACTIVE at sourceSha === head; every evaluation verdictRef targets the head",
+    "an online user device changes NOTHING: the same journey with presence online yields the identical completionId, tasks and sourceRevisions (the presence flag leaks into no decision)"
+  ],
+  "retained_uncertainty": [
+    "the journey's reference-mode uncertainty is retained verbatim on replay (remainingUncertainty with SIMULATED markers; honest provider statuses ride along on the completion report) — nothing was resolved by the user coming back",
+    "all surfaces remain reference/simulated (github adapter, git host, deployment target, bodies, probes) — this is the offline dogfood of the §7 device model, not a real deployment"
+  ],
+  "simulated_windows": {
+    "outage_windows": [],
+    "interruptions": [],
+    "user_offline": true
+  },
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-autonomous-build test",
+    "runs_identical": true
+  }
+}

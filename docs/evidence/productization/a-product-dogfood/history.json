@@ -1,0 +1,31 @@
+{
+  "journey_id": "history",
+  "test_id": "tests/product-dogfood/test/history.test.ts::P15 Lane A — history: the full evidence/decision timeline stays queryable end-to-end",
+  "base_sha": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "head_sha": "a7c090bc76cbd0dbb730850bca82e20cd8e7994e",
+  "terminal_state": "TIMELINE_QUERYABLE_END_TO_END (decision -> action -> evidence -> state, including after rollback)",
+  "evidence_graph_links": [
+    "journey timeline (the §11 stage events in contract order — 13 stages)",
+    "evidence timeline (graph + fabric observation events — durable, replayable)",
+    "action event log (5 entries: commit + deployment + rollback, in chronological order, action.succeeded)",
+    "evidence sink (every action's evidence record queryable by evidenceId)",
+    "rollback verification record (verdict VERIFIED | UNKNOWN, expectedSourceSha = v1Sha)",
+    "rollback verification evidence in the evidence sink (evidenceType includes 'rollback')",
+    "v1 source sha (the flagship journey's completion workspace head — content-addressed)",
+    "v2 source sha (the regressed commit — content-addressed)",
+    "v2 production deployment (ROLLED_BACK, sourceSha = v2Sha)",
+    "restored production deployment (ACTIVE, sourceSha = v1Sha — the activeByEnvironment index reflects the latest state)",
+    "GREENFIELD_JOURNEY_STAGES constant (the §11 contract — frozen, 13 stages)"
+  ],
+  "retained_uncertainty": [
+    "remaining uncertainty: the rollback verification verdict is VERIFIED or UNKNOWN (honest — never fabricated)",
+    "remaining uncertainty: every observation event carries its provenance + occurredAt (the replayable shape — never hidden)",
+    "remaining uncertainty: the action event timestamps are monotonically non-decreasing (chronological order — never reordered)"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-product-dogfood exec vitest run test/history.test.ts",
+    "deterministic": true,
+    "bit_exact_reproduction": true
+  }
+}

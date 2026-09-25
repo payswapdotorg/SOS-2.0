@@ -1,0 +1,42 @@
+{
+  "name": "@sos-2/tests-autonomous-build",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Autonomous-Build Dogfood Suites (Work Order P15, lane B): the journeys where the system works WITHOUT the user babysitting it, driven end-to-end over the merged public surfaces only (reference adapters/bodies/executors; no new product code). Pinned journeys: the §11 flagship greenfield journey driven to evidence-backed completion with NO user-online tick after kick-off (completion granted ONLY by the independent evaluation suite — the acting body's self-certification is a typed INDEPENDENCE_DENIED, pinned); continuous observation while NO body is active (events still ingest, stale/UNKNOWN stays truthful, nothing fabricates progress); anomaly -> summoned body through the action surface -> evidence-gated repair; body interruption -> replacement -> resume from durable checkpoints WITHOUT losing semantic identity; provider outage -> honest UNAVAILABLE/UNKNOWN with no fabricated progress -> re-plan on capacity return -> completion, the outage window visible in the timeline and the evidence-only cost ledger; user computer offline during cloud execution (cloud ticks advance; the disconnected-user timeline replays on return with exact revisions and retained uncertainty). Structural pins: zero new external dependencies (workspace:* + the existing toolchain only), offline determinism (no ambient time/randomness/network/process/timers in owned sources), fixed vitest seed 424242, only merged + P15-lane-B-relevant workspace imports, evidence records + Architecture Delta validated in-test against the frozen schema.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy-runtime": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/event-ingestion": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/greenfield-runtime": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/observation": "workspace:*",
+    "@sos-2/observation-host": "workspace:*",
+    "@sos-2/project-realization": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/task-runner": "workspace:*",
+    "@sos-2/task-runtime": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
