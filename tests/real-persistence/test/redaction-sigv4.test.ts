@@ -24,7 +24,7 @@ import { R2S3Client } from '@sos-2/real-persistence';
 import { ScriptedHttpWorld, R2_ACCOUNT, R2_KEY, R2_SECRET, R2_BUCKET } from './world.js';
 
 const NEON_KEY = 'napi_abcdefghijklmnopqrstuvwxyz0123456789';
-const UPSTASH_TOKEN = 'gQAAAAAAAjoNAAIgcDE4YWM4ZmQzZWY3N2I0NWQ2OWQ1YzIwM2M4NGQxZjc0Mg';
+const UPSTASH_TOKEN = 'gQAAAAAAAjoNAAIgSYNTHETICTOKENSYNTHETICTOKENSYNTHETICTOKENSYNT'; // synthetic same-shape (62 chars — the real credential's length/shape class); the real value never lands in source
 const VERCEL_TOKEN = 'vcp_1ScriptedScriptedScriptedScripted1234';
 const GITHUB_PAT = 'ghp_1ScriptedScriptedScriptedScriptedScrip';
 const SIGV4_AUTH =

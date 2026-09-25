@@ -189,7 +189,7 @@ describe('@sos-2/infra-production-connectivity wiring (deterministic)', () => {
     const serialized = serializeEvidenceRecord(record);
     expect(serialized.includes('vcp_exampletoken123456789012345')).toBe(false);
     expect(() => assertEvidenceIsRedacted(serialized)).not.toThrow();
-    expect(() => assertEvidenceIsRedacted('{"note":"Bearer gQAAAAAAAjoNAAIgcDE4YWM4ZmQzZWY3N2I0NWQ2OWQ1YzIwM2M4NGQxZjc0Mg"}')).toThrow();
+    expect(() => assertEvidenceIsRedacted('{"note":"Bearer gQAAAAAAAjoNAAIgSYNTHETICTOKENSYNTHETICTOKENSYNTHETICTOKENSYNT"}')).toThrow();
   });
 
   it('audits files with pattern ids + positions only (synthetic fixture detection)', () => {
