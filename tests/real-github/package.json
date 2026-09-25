@@ -1,0 +1,34 @@
+{
+  "name": "@sos-2/tests-real-github",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Real GitHub Connectivity Suites (Work Order P17-B): TWO strictly separated suites. (1) The DETERMINISTIC reference-mode suite \u2014 offline (a scripted GitHubRequestPort and a scripted fetch \u2014 no network, fixed vitest seed 424242, run-to-run identical): the field-for-field alignment of @sos-2/real-github's structural github vocabulary with the REAL frozen P4 package sources (non-literal dynamic imports \u2014 the P8 pinning precedent), the frozen GitHubPort contract compliance of the real provider (typed outcomes, honest connection discipline \u2014 CONNECTED only after the PAT-backed real handshake probe, the implemented OAuth surface), REST request/response mapping (discovery, branches, snapshot + empty-repository detection, webhook, branch creation, the Git Data API single-commit path, the contents-API initial commit on an empty repository, PR operations), honest error mapping (404/401/403-rate-limit/5xx/network \u2192 typed UNSUPPORTED carrying the truthful status; GH rate limits surface as DEGRADED with REAL reset data \u2014 never a fake success), and the secret redaction discipline (the credential never appears in outcomes, notes, provider-state reports, telemetry or request logs \u2014 env NAMES only). (2) The env-gated REAL-provider integration suite (RUN_REAL=1, default OFF): REAL authenticated operations against the private scratch repository payswapdotorg/sos-connectivity-scratch \u2014 create, discover, import (exact SHA), branch, commit, open PR, read PR state, close PR, delete \u2014 recording REAL outcomes as machine-readable JSON evidence with exact API revisions, timestamps and URLs.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node scripts/run-tests.mjs"
+  },
+  "dependencies": {
+    "@sos-2/real-github": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

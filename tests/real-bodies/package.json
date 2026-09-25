@@ -1,0 +1,44 @@
+{
+  "name": "@sos-2/tests-real-bodies",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Real Execution Body Suites (Work Order P17-B): TWO strictly separated suites. (1) The DETERMINISTIC reference-mode suite — offline (a scripted hosted-model port; no network, fixed vitest seed 424242, run-to-run identical): the frozen §9 HarnessContract compliance of the HostedCodingBody (binding advertisement, explicit UNSUPPORTED browser operations, sandbox-bounded workspace, the model-backed shell vocabulary, git typed records, artifacts/observations/events cursor), the model engine protocol (bounded parse, honest FAILED runs on provider failures / unparseable output / budget denials / traversal attempts — never fabricated successes), BODY REPLACEABILITY (the same dispatch script against the reference CloudCodingShellBody and the real hosted body yields identical contract behavior; the P5 broker replaces the body underneath an active lease while the durable task identity, checkpoints, artifacts and observations survive), the §10 self-certification ban (a body completion report never completes the task; the independent evaluator gates it — including the EVALUATION_INDEPENDENCE_VIOLATION denial), the §7 device-optional pin (placement cloud, no user-device handle, no device probe), and the async->sync REAL provider bridge over the P8 repository-operations seam (prepared real outcomes answer exactly; unprepared dispatches are typed UNSUPPORTED — never fabricated). (2) The env-gated REAL-provider integration suite (RUN_REAL=1, default OFF): the REAL OpenRouter-backed hosted body executes a small durable task end-to-end — lease, REAL model calls (model id + usage recorded), checkpoints, evidence emission through the fabric, body completion report (non-authoritative), INDEPENDENT runtime evaluation (the generated test actually executes under node and must pass), Spirit-side completion gated on the verdict — with the user's computer never required (asserted in evidence).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node scripts/run-tests.mjs"
+  },
+  "dependencies": {
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-bodies": "workspace:*",
+    "@sos-2/real-github": "workspace:*",
+    "@sos-2/sandbox": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

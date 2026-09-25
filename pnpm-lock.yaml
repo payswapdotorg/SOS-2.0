@@ -1831,6 +1831,49 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/real-bodies:
+    dependencies:
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../body-runtimes
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../harness
+      '@sos-2/real-github':
+        specifier: workspace:*
+        version: link:../real-github
+      '@sos-2/runtime-contracts':
+        specifier: workspace:*
+        version: link:../runtime-contracts
+      '@sos-2/sandbox':
+        specifier: workspace:*
+        version: link:../sandbox
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  packages/real-github:
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/reasoning-broker:
     dependencies:
       '@sos-2/live-store':
@@ -3315,6 +3358,68 @@ importers:
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
   tests/production-hardening: {}
+
+  tests/real-bodies:
+    dependencies:
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/body-broker':
+        specifier: workspace:*
+        version: link:../../packages/body-broker
+      '@sos-2/body-runtimes':
+        specifier: workspace:*
+        version: link:../../packages/body-runtimes
+      '@sos-2/evaluator':
+        specifier: workspace:*
+        version: link:../../packages/evaluator
+      '@sos-2/execution-fabric':
+        specifier: workspace:*
+        version: link:../../packages/execution-fabric
+      '@sos-2/harness':
+        specifier: workspace:*
+        version: link:../../packages/harness
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/real-bodies':
+        specifier: workspace:*
+        version: link:../../packages/real-bodies
+      '@sos-2/real-github':
+        specifier: workspace:*
+        version: link:../../packages/real-github
+      '@sos-2/sandbox':
+        specifier: workspace:*
+        version: link:../../packages/sandbox
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../packages/semantic-spine
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
+  tests/real-github:
+    dependencies:
+      '@sos-2/real-github':
+        specifier: workspace:*
+        version: link:../../packages/real-github
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
 packages:
 

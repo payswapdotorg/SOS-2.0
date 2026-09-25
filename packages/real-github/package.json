@@ -1,0 +1,32 @@
+{
+  "name": "@sos-2/real-github",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real GitHub Adapter (Work Order P17-B): the vendor-backed realization of the frozen @sos-2/github GitHubPort contract over the REAL GitHub REST API, attached through the injectable GitHubRequestPort HTTP seam (the exact attachment P4 designed). Repository discovery, branch/revision selection, empty-repository detection (real branches probe), snapshot/metadata import, webhook registration, branch creation, commit operations (Git Data API single-commit path; contents-API initial commit on an empty repository) and PR operations are REAL API calls. Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) come from REAL probes only: CONNECTED requires the PAT-backed real handshake (verifyToken probes GET /user); the OAuth app authorization surface is implemented while live operation is PAT-backed (recorded honestly); GitHub rate limits surface as DEGRADED with REAL reset epochs, never as fake successes. Credentials are env-only (the value injected at the composition boundary; outcomes, notes, telemetry and evidence carry env NAMES only \u2014 never values). Deterministic reference-mode: the provider logic runs offline against a scripted request port (no hidden clocks, no ambient process.env); network happens only in the env-gated integration suite (RUN_REAL=1). ZERO external dependencies: ZERO dependencies (the P4 github package is a frozen zero-dependency no-build package \u2014 its contract surface is carried STRUCTURALLY (github-vocabulary.ts, the P8 body-runtimes precedent) and the field-for-field alignment with the real P4 sources is pinned by test in tests/real-github).",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

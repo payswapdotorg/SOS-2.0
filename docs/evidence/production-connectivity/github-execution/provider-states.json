@@ -1,0 +1,28 @@
+{
+  "schema": "sos-2/p17b/provider-states",
+  "work_order": "P17-B",
+  "probed_at": "2026-09-25T15:20:00Z",
+  "providers": {
+    "github": {
+      "state": "CONNECTED",
+      "evidence": "docs/evidence/production-connectivity/github-execution/github-integration.json",
+      "detail": "The real GitHub adapter answered an authenticated probe (login payswapdotorg, API revision 2022-11-28, rate-limit observed live); the full scratch-repository journey (create -> discover -> empty-snapshot -> initial commit -> import at exact SHA -> branch -> Git Data API commit -> pull request -> read state -> close -> delete) executed through the frozen GitHubPort surface."
+    },
+    "hosted-harness-body": {
+      "state": "CONNECTED",
+      "evidence": "docs/evidence/production-connectivity/github-execution/real-body-execution.json",
+      "detail": "The hosted coding-harness body executed a durable task end-to-end by driving the REAL OpenRouter model API (qwen/qwen3-coder-flash; 296 prompt + 268 completion tokens recorded) behind the frozen §9 HarnessContract; the INDEPENDENT evaluator executed the generated test under node (exit 0, verdict PASS) and gated Spirit-side completion; the user's computer was never required (placement cloud, egress allowlist openrouter.ai only, zero device probes)."
+    },
+    "composio": {
+      "state": "UNAVAILABLE",
+      "evidence": "this record",
+      "detail": "The optional Composio harness stretch was NOT reached: the Composio API endpoints are network-unreachable from this execution environment (connection failure on https://api.composio.dev — recorded honestly as UNAVAILABLE, not CONNECTED and not UNKNOWN; the keys COMPOSIO_API_KEY / COMPOSIO_MCP_API_KEY were never exercised). No Composio surface was implemented — the optional stretch is honestly skipped rather than fabricated.",
+      "credentials_exercised": false
+    }
+  },
+  "model_selection_notes": [
+    "openai/gpt-5.1-codex-mini and anthropic/claude-haiku-4.5 answered HTTP 403 'This model is not available in your region' from the program's execution environment (a real provider routing fact — recorded, not worked around).",
+    "qwen/qwen3-coder-plus routes in-region but the provided account's remaining credit cannot cover a full work-program completion window (HTTP 402 'This request requires more credits' at max_tokens 2000 — recorded honestly).",
+    "qwen/qwen3-coder-flash (1M context, coding-specialized) routed, completed the real work program and was verified end-to-end — recorded as the operationally verified model."
+  ]
+}
