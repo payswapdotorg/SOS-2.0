@@ -37,6 +37,11 @@ import type { NeonProjectIdentity } from '@sos-2/real-persistence';
 
 const suite = RUN_REAL ? describe : describe.skip;
 
+/** Is the value shaped like a real Neon postgres connection URL (the P3 'postgres-url' shape)? */
+function isNeonPostgresUrl(value: string | undefined): value is string {
+  return typeof value === 'string' && /^postgres(?:ql)?:\/\//.test(value);
+}
+
 suite('REAL Neon integration (RUN_REAL=1): provisioning + real SQL through the frozen PostgresStoreAdapter', () => {
   const journey = new Journey();
   const source = ambientSource();
@@ -152,16 +157,35 @@ suite('REAL Neon integration (RUN_REAL=1): provisioning + real SQL through the f
   });
 
   it('runs the real SQL roundtrip through the frozen PostgresStoreAdapter port', async () => {
-    const databaseUrl = source['DATABASE_URL'] ?? derivedDatabaseUrl ?? undefined;
+    const configured = source['DATABASE_URL'];
+    const derived = derivedDatabaseUrl;
+    const databaseUrl = isNeonPostgresUrl(configured)
+      ? configured
+      : isNeonPostgresUrl(derived ?? undefined)
+        ? (derived as string)
+        : undefined;
     if (databaseUrl === undefined) {
       journey.record('sql-roundtrip', false, {
         attempted: false,
         reason:
-          'no DATABASE_URL configured and none derived (the management API provisioning path is UNAVAILABLE this run) — the adapter stays honestly unattached/UNKNOWN until a probe',
+          configured !== undefined
+            ? 'the ambient DATABASE_URL is not shaped like a Neon postgres connection URL (the P3 postgres-url shape) — honestly not a Neon credential; the Neon adapter stays unattached'
+            : 'no DATABASE_URL configured and none derived (the management API provisioning path is UNAVAILABLE this run) — the adapter stays honestly unattached/UNKNOWN until a probe',
       });
       return;
     }
     const adapter = composeNeonAdapter(databaseUrl, transcript, ledger, fetch, clock);
+    // PROBE FIRST (the startup probe): only a CONNECTED provider proceeds
+    // to the SQL journey — an UNAVAILABLE provider records the real failure.
+    const probed = await adapter.probe();
+    if (!probed) {
+      journey.record('sql-roundtrip', false, {
+        attempted: false,
+        reason: `the real Neon SQL probe failed (${adapter.providerState().last_error}) — the honest state is UNAVAILABLE, the SQL roundtrip is not attempted`,
+        provider_state: adapter.providerState().state,
+      });
+      return;
+    }
     await adapter.ensureSchema();
     journey.record('ensure-schema', true, { table: 'sos_rows' });
     const put = await adapter.putRow('p17a-probe', 'probe-row', { probe: 'neon', at: new Date().toISOString() } as never);

@@ -42,7 +42,7 @@ export const LANE_ADDITION_PATTERNS = [
   { id: 'aws4-authorization', description: 'a full AWS SigV4 Authorization header value', pattern: /\bAWS4-HMAC-SHA256 Credential=[^\s"]{20,}/g },
   { id: 'postgres-url-with-credentials', description: 'postgres URL with embedded credentials (Neon pooled strings included)', pattern: /\bpostgres(?:ql)?:\/\/[^\s:@/]+:[^\s@/]+@[^\s]+\b/g },
   { id: 'bearer-token-value', description: 'an Authorization Bearer token value', pattern: /\bBearer\s+[A-Za-z0-9+/=_-]{20,}\b/g },
-  { id: 'upstash-rest-token', description: 'Upstash REST token (unprefixed base64 blob — the broad catch-all, deliberately LAST)', pattern: /\b[A-Za-z0-9+/]{43}=|\b[A-Za-z0-9+/]{40,64}\b/g },
+  { id: 'upstash-rest-token', description: 'Upstash REST token (unprefixed ~64-char base64 blob — the broad catch-all, deliberately LAST; the range starts at 48 so 40-hex GIT SHAS — public exact-revision identities the deployment records must carry — survive)', pattern: /\b[A-Za-z0-9+/]{43}=|\b[A-Za-z0-9+/]{48,64}\b/g },
 ] as const;
 
 /** The merged corpus shapes this lane carries verbatim (ids aligned; pinned by the alignment test). */

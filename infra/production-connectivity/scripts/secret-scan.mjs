@@ -24,7 +24,7 @@
  * (from the repo root or the package directory).
  */
 
-import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { mkdirSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { scanTextWithLaneCorpora } from '../src/secrets-audit.ts';
@@ -84,6 +84,32 @@ const findings = [];
 for (const [label, path] of [...targets.entries()].sort(([a], [b]) => a.localeCompare(b))) {
   const text = readFileSync(path, 'utf8');
   findings.push(...scanTextWithLaneCorpora(label, text));
+}
+
+// The machine-readable audit record (the committed audit OUTPUT the
+// evidence package carries): scan scope, finding count and pattern ids
+// only — never matched text.
+const jsonOutIndex = process.argv.indexOf('--json-out');
+if (jsonOutIndex !== -1) {
+  const outPath = process.argv[jsonOutIndex + 1];
+  if (typeof outPath !== 'string' || outPath.length === 0) {
+    console.error('--json-out requires a path argument');
+    process.exit(2);
+  }
+  const audit = {
+    schema: 'sos-2/p17a/secrets-audit',
+    work_order: 'P17-A',
+    produced_at: new Date().toISOString(),
+    scanner: 'infra/production-connectivity/scripts/secret-scan.mjs (the combined lane source-scan corpus)',
+    scan_scope: [...targets.keys()].sort(),
+    files_scanned: targets.size,
+    findings: findings.map((finding) => ({ label: finding.label, line: finding.line, column: finding.column, patternId: finding.patternId })),
+    finding_count: findings.length,
+    pass: findings.length === 0,
+    note: 'Proves no credential VALUE appears in any committed file of the lane\'s owned paths (names only). Findings carry pattern ids + positions only — never matched text.',
+  };
+  mkdirSync(dirname(outPath), { recursive: true });
+  writeFileSync(outPath, `${JSON.stringify(audit, null, 2)}\n`);
 }
 
 if (findings.length > 0) {

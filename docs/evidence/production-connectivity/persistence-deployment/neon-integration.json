@@ -1,0 +1,93 @@
+{
+  "schema": "sos-2/p17a/neon-integration",
+  "work_order": "P17-A",
+  "produced_at": "2026-09-25T22:08:12.524Z",
+  "evidence_kind": "provider-connectivity",
+  "provider": "neon",
+  "provider_states": [
+    {
+      "state": "UNAVAILABLE",
+      "provider_id": "neon",
+      "probed_at": "2026-09-25T22:08:12.522Z",
+      "credential_env": null,
+      "api_revision": null,
+      "last_error": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+      "probes": [
+        {
+          "provider": "neon",
+          "probeId": "neon:management-whoami",
+          "endpoint": "GET /api/v2/users/me",
+          "at": "2026-09-25T22:08:12.522Z",
+          "status": null,
+          "ok": false,
+          "failure": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+          "apiRevision": null
+        }
+      ],
+      "note": "last real probe at 2026-09-25T22:08:12.522Z failed at the transport level: transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed"
+    }
+  ],
+  "credential_envs": [
+    "NEON_API_KEY",
+    "NEON_API_KEY_SECONDARY",
+    "DATABASE_URL"
+  ],
+  "management_api": "https://api.neon.tech/api/v2",
+  "sql_protocol": "neon http-sql (POST /sql, Neon-Connection-String header)",
+  "provisioning": {
+    "project_name": "sos-2-0-persistence",
+    "tier_naming_contract": {
+      "branch": "main",
+      "database": "sos"
+    },
+    "derived_database_url": false,
+    "project_deleted": false
+  },
+  "transcript": [],
+  "management_request_log": [],
+  "steps": [
+    {
+      "step": "management-probe",
+      "ok": false,
+      "at": "2026-09-25T22:08:12.522Z",
+      "detail": {
+        "attempted": true,
+        "failure": "transport failure for GET https://api.neon.tech/api/v2/users/me: fetch failed",
+        "outcome": "UNAVAILABLE — the real failure recorded verbatim (never a fabricated success)"
+      }
+    },
+    {
+      "step": "provision",
+      "ok": false,
+      "at": "2026-09-25T22:08:12.523Z",
+      "detail": {
+        "attempted": false,
+        "reason": "management API UNAVAILABLE (the recorded real failure)"
+      }
+    },
+    {
+      "step": "sql-roundtrip",
+      "ok": false,
+      "at": "2026-09-25T22:08:12.523Z",
+      "detail": {
+        "attempted": false,
+        "reason": "no DATABASE_URL configured and none derived (the management API provisioning path is UNAVAILABLE this run) — the adapter stays honestly unattached/UNKNOWN until a probe"
+      }
+    },
+    {
+      "step": "cleanup",
+      "ok": false,
+      "at": "2026-09-25T22:08:12.523Z",
+      "detail": {
+        "attempted": false,
+        "reason": "nothing provisioned this run (management API UNAVAILABLE or already-clean)"
+      }
+    }
+  ],
+  "honest_notes": [
+    "The pooled connection string (DATABASE_URL) is SECRET: derived via the management API and injected into the SQL client only — env NAMES in evidence, never values.",
+    "A provider outage is recorded as UNAVAILABLE evidence with the real failure verbatim — never a silent skip, never a fabricated success.",
+    "The adapter health() surface (frozen P2 port) maps probed outcomes to AVAILABLE/UNAVAILABLE/UNKNOWN; the P17-A surface carries CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED with full probe evidence."
+  ],
+  "redacted_pattern_ids": []
+}
