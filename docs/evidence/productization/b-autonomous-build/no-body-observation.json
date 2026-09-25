@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0",
+  "lane": "B",
+  "work_order": "P15",
+  "journey_id": "p15b-no-body-observation",
+  "journey": "continuous observation while NO body is active (the P7 no-body loop + the P12 runtime in one composition: events still ingest, state stays truthful, nothing fabricates progress)",
+  "scenario": {
+    "package": "@sos-2/tests-autonomous-build",
+    "test_file": "tests/autonomous-build/test/no-body-observation.test.ts",
+    "test_name": "observation events still ingest with ZERO bodies active (drain -> applied events, live projections)"
+  },
+  "revisions": {
+    "base": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+    "implementation_head": "0000000000000000000000000000000000000000",
+    "head_note": "implementation_head is the lane-branch commit containing the suite sources and these evidence records; the finalization follow-up commit (evidence-only) records it. The architect gate binds to the branch head."
+  },
+  "terminal_state": {
+    "observation_events_ingested": true,
+    "bodies_leased": 0,
+    "tasks_created": 0,
+    "fabricated_progress": false,
+    "stale_reads_STALE": true,
+    "unobserved_reads_UNVERIFIED": true
+  },
+  "evidence_graph_links": [
+    "the observation plane drain ingests github/CI/deployment/provider-health envelopes into the durable observation store (every stored event carries provenance; applied counts match the stored count)",
+    "the repository head projection is FRESH at the fixed world epoch and equals the observed head sha 86a6921631113167f071c2f9019dddd0c1ab6447",
+    "System State claims reconcile truthfully: @main ALIGNED, deploy:environment:production DIVERGED (honestly), the unobserved subject UNVERIFIED — never a fabricated success",
+    "after the freshness window the SAME truth reads STALE (never silently ALIGNED); empty polls change no state, emit no events, summon no body; webhook redelivery duplicates cleanly (applied 0, duplicates 1, store unchanged)"
+  ],
+  "retained_uncertainty": [
+    "all observation sources are deterministic scripted adapters with explicit simulated markers — real GitHub/CI/deployment/provider-health endpoints are NOT_YET_CONNECTED in the product and are simulated here",
+    "the unobserved claim subject stays UNVERIFIED for the whole journey (no source observes it; the system never resolves it by assumption)",
+    "stale projections retain the last observed fact (branch head) with an honest STALE freshness mark — the observation age, not the truth, is what decayed"
+  ],
+  "simulated_windows": {
+    "outage_windows": [],
+    "interruptions": [],
+    "user_offline": false
+  },
+  "reproducibility": {
+    "seed": 424242,
+    "command": "pnpm --filter @sos-2/tests-autonomous-build test",
+    "runs_identical": true
+  }
+}
