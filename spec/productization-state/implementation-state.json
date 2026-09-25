@@ -3,7 +3,7 @@
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
   "currentFrontier": [
-    "P15"
+    "P16"
   ],
   "tasks": {
     "P0": {
@@ -133,17 +133,17 @@
       "mergedAs": "bf78e5b6f317f624cd47a0c819be1e9b769727de"
     },
     "P15": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P10",
         "P12",
         "P13",
         "P14"
       ],
-      "mergedAs": null
+      "mergedAs": "55680b9bbb46b8433cb9d57b86eba20f32b3c69b"
     },
     "P16": {
-      "status": "BLOCKED",
+      "status": "READY",
       "dependencies": [
         "P15"
       ],
