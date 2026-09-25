@@ -1,0 +1,84 @@
+{
+  "schema": "sos-2/p17b/real-body-execution",
+  "work_order": "P17-B",
+  "body_id": "p17b-openrouter-hosted-coding",
+  "placement": "cloud",
+  "model_requested": "qwen/qwen3-coder-flash",
+  "credential_env": "OPENROUTER_API_KEY",
+  "credential_value_present": true,
+  "credential_redacted": true,
+  "task": {
+    "task_id": "task-p17b-real-20260925T15154",
+    "lease_id": "lease:task-p17b-real-20260925T15154:0001",
+    "status": "COMPLETED",
+    "completed_at": "2026-09-25T15:15:43.400Z"
+  },
+  "model_runs": [
+    {
+      "run_id": "task-p17b-real-20260925T15154:run-0001",
+      "task_ref": "task-p17b-real-20260925T15154",
+      "model": "qwen/qwen3-coder-flash",
+      "response_id": "gen-1790349340-cP1UZp9kMq6JK8GUmCCI",
+      "ok": true,
+      "files_applied": [
+        {
+          "path": "src/fibonacci.ts",
+          "bytes": 317
+        },
+        {
+          "path": "tests/fibonacci.test.ts",
+          "bytes": 207
+        }
+      ],
+      "summary": "Created fibonacci implementation with iterative approach and corresponding tests.",
+      "usage": {
+        "prompt_tokens": 296,
+        "completion_tokens": 268,
+        "total_tokens": 564
+      },
+      "error": null
+    }
+  ],
+  "body_completion_report": "NON-AUTHORITATIVE — the body reported, only the Spirit completed",
+  "independent_evaluation": {
+    "verdict": "PASS",
+    "verdict_id": "evaluation-verdict:32619f5a1b1abf17",
+    "evaluator": {
+      "evaluatorId": "independent-node-runtime-probe",
+      "boundActor": null
+    },
+    "exit_code": 0,
+    "stdout_excerpt": "All tests passed!\n",
+    "stderr_excerpt": "",
+    "checks": [
+      {
+        "check": "generated test executes and passes under node",
+        "passed": true,
+        "detail": "node tests/fibonacci.test.ts exited 0",
+        "expected": "exit code 0",
+        "actual": "exit code 0"
+      },
+      {
+        "check": "module exports an iterative fib",
+        "passed": true,
+        "detail": "the generated module must export fib without recursion",
+        "expected": "export function fib | export const fib",
+        "actual": "export function fib(n: number): number {"
+      }
+    ],
+    "uncertainty": [
+      "the runtime verification executed the model-generated test file under the host node runtime"
+    ]
+  },
+  "verdict_summary": "independent evaluation verdict: PASS (node exit 0)",
+  "user_computer_required": false,
+  "user_computer_not_required_evidence": [
+    "placement is 'cloud' and the task ran end-to-end through cloud API calls only",
+    "the sandbox egress allowlist carries only the model provider (openrouter.ai) — no user-device host exists",
+    "zero device probes: the §9 dispatch log names no device operation (createTask, git.status, workspace.read, artifacts.capture, events.subscribe)"
+  ],
+  "honest_notes": [
+    "The model API is a replaceable mechanism (never an authority): its output was parsed by a bounded protocol, applied inside a bounded sandbox, and gated by an INDEPENDENT evaluator that executed the generated test under node.",
+    "The engine is the provider-side async drive documented by the frozen P8 sync-seam composition (§9 stays synchronous; results flow back through events, files and artifacts)."
+  ]
+}

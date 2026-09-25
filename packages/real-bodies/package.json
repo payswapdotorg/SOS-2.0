@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/real-bodies",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real Cloud Execution Bodies (Work Order P17-B): real cloud/remote execution bodies behind the EXISTING frozen P5 \u00a79 HarnessContract \u2014 the body abstraction remains UNCHANGED and no vendor becomes part of SOS semantics. The HostedCodingBody is a hosted coding-harness body that executes a durable task's work program by driving a REAL coding-capable model API (OpenRouter through the injectable HostedModelPort) inside its bounded sandbox: the synchronous \u00a79 surface is the control/read plane (bounded workspace, the model-backed shell vocabulary, git typed records, artifacts, observations, the cursor event stream) and the documented async engine (runWorkProgram) is the operator-driven provider-side drive \u2014 the frozen P8 sync-seam composition discipline. Model outputs are parsed by a bounded protocol and applied inside the sandbox; they are NEVER authoritative (a body cannot self-certify \u2014 the independent evaluator gates completion, pinned by test). Placement 'cloud': the user's computer is NEVER required (no device handle; egress allowlist carries only the model provider \u2014 pinned by test and asserted in evidence). Bodies remain REPLACEABLE: the same task graph runs against the reference cloud body and this real body with identical contract behavior (pinned by test). The async->sync REAL provider session bridge (github-bridge.ts) attaches the real @sos-2/real-github provider behind the P8 repository-operations seam exactly as that frozen seam documented. Deterministic reference-mode: scripted model port, offline, fixed seed, no hidden clocks, no ambient environment access; network happens only in the env-gated integration suite (RUN_REAL=1). ZERO external dependencies: workspace:* + the existing toolchain only.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/real-github": "workspace:*",
+    "@sos-2/runtime-contracts": "workspace:*",
+    "@sos-2/sandbox": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

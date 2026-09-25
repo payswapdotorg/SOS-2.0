@@ -4,7 +4,6 @@
   "status": "READY",
   "currentFrontier": [
     "P17-A",
-    "P17-B",
     "P17-C"
   ],
   "tasks": {
@@ -158,10 +157,11 @@
       ]
     },
     "P17-B": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P16"
-      ]
+      ],
+      "mergedAs": "c0983a9affc2663763816ad0a97f0a196001e5e8"
     },
     "P17-C": {
       "status": "READY",
