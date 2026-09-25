@@ -1,0 +1,33 @@
+{
+  "scenario_id": "flagship-fresh-user",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "PENDING_EXACT_HEAD_SHA (filled by the evidence follow-up commit: the exact code-head sha the gates ran against; the follow-up adds only these evidence records)",
+  "test_file": "tests/accessibility/test/00-flagship-fresh-user.test.ts",
+  "test_names": [
+    "a fresh user completes the flagship journey from a plain-language mission (no developer knowledge required)",
+    "progress is visible as EVIDENCE, not transcripts: every stage transition has an observable record; the body's own report is non-authoritative",
+    "the resulting repository, runtime and deployment are linked to EXACT revisions in the user-visible record",
+    "all unresolved uncertainty is visible to the user in plain, non-developer-encoding terms",
+    "every consequential product-review question is answerable from the user-visible record (what/why/evidence/uncertainty/authority/next)",
+    "the completion record the user saw reproduces bit-exactly (deterministic, evidence-gated)",
+    "the optional P11 local-companion path: a fresh user's local work order queues while their device is offline and completes on reconnect (nothing lost, nothing duplicated)"
+  ],
+  "terminal_state": "COMPLETED (evidence-gated): stage COMPLETED, status COMPLETED, pendingAsk null; the companion leg ends COMPLETED + verified with NOT_YET_INSTALLED installation honesty",
+  "detection_containment": [
+    "the completion is gated by the independent certifier (certifiedUponRequestBy=system, producedBy=body, never equal) — the body report event task.body-completion-report stays non-authoritative",
+    "exact-revision links: sourceRevisions.workspaceHead/commits/push/pullRequest/deployment/importedBase, cross-checked against the reference git world heads/pushes",
+    "recomputeCompletionId + a second identical journey reproduce the record bit-exactly"
+  ],
+  "retained_uncertainty": [
+    "report.remainingUncertainty: plain-sentence entries including the SIMULATED reference-mode markers (\"never a real GitHub connection\")",
+    "all provider statuses remain REFERENCE (never live claims)",
+    "the companion surface retains the honest NOT_YET_INSTALLED installation status"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

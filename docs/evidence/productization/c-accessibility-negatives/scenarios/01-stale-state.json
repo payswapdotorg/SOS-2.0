@@ -1,0 +1,25 @@
+{
+  "scenario_id": "negative-stale-state",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "PENDING_EXACT_HEAD_SHA (filled by the evidence follow-up commit: the exact code-head sha the gates ran against; the follow-up adds only these evidence records)",
+  "test_file": "tests/accessibility/test/01-stale-state.test.ts",
+  "test_names": [
+    "DETECTED: the store marks the superseded revision not-latest while keeping it queryable",
+    "CONTAINED: the promotion gate REJECTS a candidate bound to the superseded revision (typed record, never a silent pass)",
+    "DETECTED: evidence bound to the superseded subject revision is classified SUPERSEDED (not fresh)",
+    "the trace chain stays queryable after the stale-rejection (and the rejection record carries provenance)"
+  ],
+  "terminal_state": "CONTAINED: superseded revision not-latest yet queryable; promotion decision REJECT; evidence freshness SUPERSEDED_SUBJECT_REVISION",
+  "detection_containment": [
+    "typed detection: store.isLatest=false + history [v1,v2]; promotion gate systemState.compatible=false with a revision reason; evaluateFreshness status SUPERSEDED_SUBJECT_REVISION",
+    "the trace chain (TraceLinkStore from/to queries) still answers after the rejection"
+  ],
+  "retained_uncertainty": [],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

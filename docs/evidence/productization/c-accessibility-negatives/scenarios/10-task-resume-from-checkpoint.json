@@ -1,0 +1,29 @@
+{
+  "scenario_id": "negative-task-resume-from-checkpoint",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "PENDING_EXACT_HEAD_SHA (filled by the evidence follow-up commit: the exact code-head sha the gates ran against; the follow-up adds only these evidence records)",
+  "test_file": "tests/accessibility/test/10-task-resume-from-checkpoint.test.ts",
+  "test_names": [
+    "CONTAINED: kill + checkpoint resume yields IDENTICAL completion evidence to the uninterrupted run (continuity, not restart)",
+    "VISIBLE: the resume shows as continuity in the user-visible timeline (checkpoint + body-replaced events)",
+    "UNCERTAINTY RETAINED: the work program's uncertainty statement survives the resume (never dropped)",
+    "CONTAINED (fail-closed): a corrupted checkpoint is the typed CHECKPOINT_INVALID denial — never silently re-derived, never resumed from",
+    "CONTAINED (fail-closed): resume of an unrecorded checkpoint id is a typed refusal (durable checkpoints only)"
+  ],
+  "terminal_state": "CONTAINED: the resumed run completes with IDENTICAL verification evidence to the uninterrupted run; corrupted/unrecorded checkpoints fail closed with typed denials",
+  "detection_containment": [
+    "the combined evidence (checkpointed prior + resumed segment) equals the uninterrupted run step-for-step; the completion records match on verified/evidence_refs/summary",
+    "the timeline shows continuity: checkpoint-category entries, recovery-category entries and the task.body-replaced event",
+    "checkpoint integrity: a tampered payload under a stored id fails verify (the original still verifies; an unknown id never verifies)"
+  ],
+  "retained_uncertainty": [
+    "the work program's uncertainty statement is executed and recorded during the resumed segment (outcome RECORDED)"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

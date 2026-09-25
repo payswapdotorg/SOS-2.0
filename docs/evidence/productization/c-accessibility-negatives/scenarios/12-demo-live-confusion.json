@@ -1,0 +1,27 @@
+{
+  "scenario_id": "negative-demo-live-confusion",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "PENDING_EXACT_HEAD_SHA (filled by the evidence follow-up commit: the exact code-head sha the gates ran against; the follow-up adds only these evidence records)",
+  "test_file": "tests/accessibility/test/12-demo-live-confusion.test.ts",
+  "test_names": [
+    "TYPED: the demo dataset is permanently typed — every demo evidence record carries the demo-fixture provenance marker",
+    "REJECTED: a demo data source with its marker DROPPED or ALTERED is a typed rejection (the badge is structural, not decoration)",
+    "REJECTED: a LIVE data source requires the exact durable-store field set (a live claim cannot be minted from demo shapes)",
+    "DETECTED: the demo fixture marker NEVER appears in the LIVE evidence graph of a completed flagship journey (zero leak)",
+    "the lane's own fixtures are live-typed test evidence, never demo fixtures (the fence holds in both directions)"
+  ],
+  "terminal_state": "REJECTED + DETECTED: every confusion attempt is a typed WebContractError or a zero-leak scan; the demo dataset stays permanently demo-typed",
+  "detection_containment": [
+    "the demo-fixture provenance marker is bound into the content-derived record identity (a marker-stripped twin is a DIFFERENT record id)",
+    "assertValidDataSource rejects forged labels, dropped markers and LIVE shapes carrying demo fields",
+    "the live evidence graph of a completed journey (gateway evidence + observation events + completion report) contains zero demo markers and zero demo ids"
+  ],
+  "retained_uncertainty": [],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@sos-2/security": ["../../packages/security/src/index.ts"],
+      "@sos-2/cost-policy": ["../../packages/cost-policy/src/index.ts"]
+    }
+  },
+  "include": ["test"]
+}
