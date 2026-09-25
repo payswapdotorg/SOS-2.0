@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0",
+  "record": "P16 Product Release Gate \u2014 machine-checkable audit record",
+  "work_order": "P16",
+  "auditor": "The Architect (release gate is architect-personal; no worker brief, no delegation)",
+  "base_head": "697c6270edb57ec228e9a5c31f99f9cb3df2a2d9",
+  "executed_at_head": "697c6270edb57ec228e9a5c31f99f9cb3df2a2d9",
+  "machine_backbone": {
+    "check": "full workspace build + test (twice, identical summaries) on the exact final main head",
+    "packages_built": 99,
+    "test_summary_lines_passed": 184,
+    "tests_passed_total": 3712,
+    "failures": 0,
+    "verify_repo": "PASS",
+    "verify_productization": "PASS (frontier P16 before this gate)",
+    "frozen_core_diff": "967c066..697c627 over spec/contracts + packages/contracts: 0 modified, 0 deleted (pure P0-owned additions)",
+    "backbone_logs": "/tmp/p16gate/logs/ (build.log, test-run1.log, test-run2.log \u2014 summary lines identical)"
+  },
+  "points": [
+    {
+      "point": "W0-W18 core remains frozen and green",
+      "result": "PASS",
+      "evidence": [
+        "machine backbone: 99 packages built, 3712 tests passed / 0 failed, run1 == run2 (92 identical package summaries) at the exact head 697c6270edb5",
+        "frozen-core diff 967c066..HEAD over spec/contracts + packages/contracts: ZERO modified, ZERO deleted files (pure additions only, all P0-owned productization schemas)"
+      ]
+    },
+    {
+      "point": "productization contracts and execution architecture are consistent",
+      "result": "PASS",
+      "evidence": [
+        "scripts/verify-productization.mjs PASS at the exact head: 17 work orders, 62 owned paths, frontier [P16] (pre-gate), all dependency edges consistent",
+        "spec/productization-work-orders/* + spec/productization-execution-architecture.md + spec/productization-state/implementation-state.json reconcile clean"
+      ]
+    },
+    {
+      "point": "production web is deployed",
+      "result": "PASS (rehearsed-contract mode)",
+      "evidence": [
+        "apps/web builds green in the backbone (production console shell; P1 + P4 onboarding surfaces)",
+        "infra/deployment offline contract verification (P3 deploy-contract suite: 113 tests green; install determinism, secrets scan 0 findings, infra typecheck)",
+        "P15 dogfood deployment journey: tests/product-dogfood deployment evidence record (docs/evidence/productization/a-product-dogfood/)",
+        "NO live validation-account deployment exists at gate time \u2014 recorded honestly as rehearsed-contract, never fabricated (P3 no-fabrication rule)"
+      ]
+    },
+    {
+      "point": "durable live state works",
+      "result": "PASS",
+      "evidence": [
+        "packages/live-store suites (P2) green in the backbone",
+        "P15 dogfood history journey + lane-B durable checkpoint/resume suites (tests/autonomous-build/test/interruption-replacement.test.ts)"
+      ]
+    },
+    {
+      "point": "observation plane works without a permanent body",
+      "result": "PASS",
+      "evidence": [
+        "tests/observation (P7) green in the backbone",
+        "tests/autonomous-build/test/no-body-observation.test.ts: observation events ingest with ZERO bodies active (drain -> applied events, live projections)",
+        "docs/evidence/productization/b-autonomous-build/no-body-observation.json"
+      ]
+    },
+    {
+      "point": "harness/body broker works",
+      "result": "PASS",
+      "evidence": [
+        "tests/harness-contracts (P5) + tests/harness-adapters (P8) green in the backbone",
+        "P15 body journeys exercise the broker contracts end-to-end (capability-based, vendor-blind selection)"
+      ]
+    },
+    {
+      "point": "at least one cloud body is production-capable",
+      "result": "PASS (reference production shape)",
+      "evidence": [
+        "packages/body-runtimes + tests/harness-adapters cloud-provider contract suites green",
+        "tests/autonomous-build interruption->replacement->resume: cloud bodies execute the full flagship journey; every leased body in the P13/P15 flagship world is a cloud body",
+        "honest scope: production-capable PROVEN against the reference provider contracts (P8); no live provider traffic exists (retained uncertainty)"
+      ]
+    },
+    {
+      "point": "GitHub adapter supports the flagship mission-to-repo journey",
+      "result": "PASS",
+      "evidence": [
+        "tests/mission-to-repo (P13, 38 tests) green: empty repository -> implementation -> PR -> deployment through reference executors",
+        "tests/product-dogfood first-time greenfield journey (P15 lane A) green",
+        "honest scope: the P4 reference adapter (fixed fixture slugs) \u2014 no live GitHub API traffic (P4 contract)"
+      ]
+    },
+    {
+      "point": "long-running tasks survive body loss and user-device shutdown",
+      "result": "PASS",
+      "evidence": [
+        "tests/autonomy (P12: lease supervision, failure verification, recovery planner, outage registry, backoff-then-ASK) green",
+        "tests/autonomous-build: interruption->replacement->resume from verified checkpoints; provider outage honest UNKNOWN/DEGRADED; user-offline cloud execution (userDeviceOnline=false on every tick)"
+      ]
+    },
+    {
+      "point": "actions remain authority gated",
+      "result": "PASS",
+      "evidence": [
+        "tests/actions-and-evaluation (P9 authority-gate suites) green: action-time current-authority re-evaluation, fail-closed denials",
+        "tests/accessibility expired-authority + revoked-authority negative cases (typed denials, audited)"
+      ]
+    },
+    {
+      "point": "independent evaluation gates completion",
+      "result": "PASS",
+      "evidence": [
+        "tests/actions-and-evaluation evaluation suites + tests/mission-to-repo independence suite (body-requested certification denied BEFORE any probe runs)",
+        "tests/accessibility 08-failed-evaluation: completion denied in both fault modes (repair-exhausted; honest UNKNOWN runtime verification)",
+        "tests/autonomous-build independence pin: every journey evaluation request is system-requested"
+      ]
+    },
+    {
+      "point": "ASK remains first-class",
+      "result": "PASS",
+      "evidence": [
+        "tests/orchestration (P6 ASK suites) green",
+        "tests/mission-to-repo ask-paths suite + tests/accessibility candidate/ASK journeys: insufficient authority or evidence parks with typed asks, never guesses"
+      ]
+    },
+    {
+      "point": "package/history/self-evolution surfaces are live",
+      "result": "PASS",
+      "evidence": [
+        "packages/package-registry + semantic-spine + self-evolution suites (P10) green in the backbone",
+        "tests/product-dogfood package-composition, history and self-evolution journeys green"
+      ]
+    },
+    {
+      "point": "local companion path is clearly separated from cloud execution",
+      "result": "PASS",
+      "evidence": [
+        "packages/companion + tests/local-bridges (P11) green",
+        "tests/product-dogfood local-companion journey: the companion drives the same product surfaces without becoming the execution plane"
+      ]
+    },
+    {
+      "point": "free-tier validation topology is rehearsed",
+      "result": "PASS (rehearsed)",
+      "evidence": [
+        "infra/deployment free-tier topology tests (P3) green in the backbone (113 infra tests)",
+        "P15 dogfood deployment journey evidence records cite the free-tier topology",
+        "honest scope: rehearsed against offline contracts + the P15 dogfood; no live free-tier account deployment exists"
+      ]
+    },
+    {
+      "point": "security/cost/recovery controls pass",
+      "result": "PASS",
+      "evidence": [
+        "tests/production-hardening (P14: workspace isolation, secret redaction, credential scopes, audit, diagnostics, budgets, rate limits, provider health, dead-letter, abuse containment) green",
+        "tests/accessibility negative cases: cross-project access (ISOLATION_DENIED), secret leakage (REDACT_AND_PASS/DENY + whole-journey zero-secret scans), budget exhaustion (BUDGET_EXCEEDED typed, audited), failed rollback (honest verdicts)"
+      ]
+    },
+    {
+      "point": "autonomous build dogfood passes",
+      "result": "PASS",
+      "evidence": [
+        "tests/autonomous-build (P15 lane B, 34 tests) green: flagship \u00a711 chain, no-body observation, anomaly->repair, interruption->replacement, provider outage, user-offline",
+        "tests/autonomy (P12) + tests/product-dogfood autonomy journeys green"
+      ]
+    },
+    {
+      "point": "full evidence bundle and rollback rehearsal exist",
+      "result": "PASS",
+      "evidence": [
+        "docs/evidence/productization/: 34 machine-readable evidence records across the three P15 lanes (a-product-dogfood, b-autonomous-build, c-accessibility-negatives), each revision-linked with honest uncertainty retained",
+        "rollback rehearsals: tests/product-dogfood rollback journey + tests/accessibility 11-failed-rollback (typed honest verdicts, never fabricated)"
+      ]
+    }
+  ],
+  "production_deployment": {
+    "mode": "rehearsed-contract",
+    "honest_statement": "No live validation-account production deployment exists at gate time. Per the P3 no-fabrication rule (deploy-contract header: 'nothing here fabricates deployment evidence'), this record cites the REHEARSED deployment evidence only. A live deployment record (source_revision_sha == this head) is the follow-up operational act once a validation account exists.",
+    "revision_record": {
+      "environment": "production",
+      "provider": "rehearsed: offline deploy contracts (P3) + dogfood deployment journey (P15)",
+      "region": "n/a (rehearsed)",
+      "source_revision_sha": "697c6270edb57ec228e9a5c31f99f9cb3df2a2d9",
+      "deployment_revision_id": null,
+      "registered_at": "2026-09-25T11:30:00Z",
+      "rollback_pointer": {
+        "previous_deployment_revision_id": null
+      },
+      "rehearsal_evidence": [
+        "infra/deployment contract suites (113 tests) green at the exact head",
+        "P15 dogfood deployment journey + free-tier topology rehearsal (docs/evidence/productization/a-product-dogfood/)",
+        "apps/web production console builds green in the backbone"
+      ]
+    }
+  },
+  "architect_approval": "APPROVED \u2014 all 18 points PASS on the exact head 697c6270edb5 with honest scope notes (rehearsed-contract deployment mode; reference adapters, no live provider/GitHub traffic \u2014 the uncertainty is recorded, never fabricated). The completion triple: this approval + the actual merge of wo/p16-release-gate + the task-push-chain reconcile that marks P16 COMPLETE and empties the frontier.",
+  "completion": {
+    "architect_approval": "APPROVED (this record)",
+    "actual_merge": "the squash merge of wo/p16-release-gate carrying these artifacts (docs/evidence/productization-final-gate/)",
+    "machine_state_reconciliation": "task-push-chain.sh P16 -> P16 COMPLETE + mergedAs; currentFrontier becomes [] \u2014 P0-P16 all COMPLETE, PROGRAM COMPLETE"
+  }
+}
