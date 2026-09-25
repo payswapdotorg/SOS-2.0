@@ -1,0 +1,39 @@
+{
+  "name": "@sos-2/tests-real-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real Persistence + Deployment Connectivity Suites (Work Order P17-A): TWO strictly separated suites. (1) The DETERMINISTIC reference-mode suite — offline (a scripted FetchPort for every provider seam — no network, fixed vitest seed 424242, run-to-run identical): the frozen P2 port contract compliance of the REAL adapters over scripted providers (durable row model with upsert/if_absent/compare-and-set, deterministic listRows, coordination cache/idempotency/leases with TTL discipline, the flushAll never-canonical proof, write-once content-addressed objects with idempotent re-puts and byte-exact read-back), the honest-state machine (UNKNOWN before any probe; CONNECTED after a 2xx probe; UNAVAILABLE on DNS/network/auth failures with the real reason recorded; DEGRADED on 429 — never fabricated), the frozen-port health bridge (AVAILABLE/UNAVAILABLE/UNKNOWN), the structural alignment of the P3 infra vocabulary mirror with the REAL frozen infra/deployment sources (non-literal dynamic imports — the P17-B pinning precedent), the P3 SigV4 signing shape, the redaction discipline (credential VALUES never in transcripts, provider-state reports, outcomes or evidence), the Vercel provider request/response mapping + deployment record minting (exact source_revision_sha, revision registrar records with rollback pointers, truthful outcome aggregation through the frozen @sos-2/deployment store), and the composition wiring (env-only resolution; unconfigured providers honestly UNKNOWN). (2) The env-gated REAL-provider integration suite (RUN_REAL=1, default OFF, separate vitest config): the real journeys — Neon provisioning + real SQL roundtrip (or the honest UNAVAILABLE transcript), the Upstash coordination roundtrip + the flush-loses-nothing canonical proof against the REAL durable store (or the honest UNAVAILABLE transcript), the R2 write-once object journey (bucket provisioning + 1-byte and multi-byte objects + byte-exact read-back + the retention-path delete), and the REAL Vercel deployment of apps/web bound to the exact branch head — each recording machine-readable JSON evidence (request/response summaries, ids, revisions, timestamps, durations) into docs/evidence/production-connectivity/persistence-deployment. A provider outage during the run is recorded as UNAVAILABLE evidence, never a silent skip.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node scripts/run-tests.mjs"
+  },
+  "dependencies": {
+    "@sos-2/deployment": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/infra-production-connectivity": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

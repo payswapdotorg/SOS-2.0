@@ -15,3 +15,12 @@ packages:
   # by tests + CI); the test toolchain is borrowed at run time from the
   # frozen W17 suites via `pnpm --filter @sos-2/adversarial exec ...`.
   - infra/deployment
+  # P17-A: the production-connectivity wiring harness is a workspace
+  # package so that `pnpm -r --if-present test` includes its deterministic
+  # wiring suites (work-order P17-A task packet, following the exact
+  # infra-deployment wiring precedent — the one explicit infra/ entry this
+  # lane adds; packages/* and tests/* already cover the lane's other new
+  # importers). The harness composes @sos-2/real-persistence and
+  # @sos-2/deployment-providers (workspace:* only — zero external
+  # dependencies; the lockfile change is importer addition only).
+  - infra/production-connectivity

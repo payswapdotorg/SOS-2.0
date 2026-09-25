@@ -1,0 +1,35 @@
+{
+  "name": "@sos-2/real-persistence",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real Persistence Adapters (Work Order P17-A, persistence/deployment lane): the vendor-backed realization of the frozen P2 live-store provider ports over the REAL free-tier stack of docs/deployment/free-tier-plan.md. Neon PostgreSQL (HTTP SQL proxy + management API) backs PostgresStoreAdapter as the SOLE CANONICAL durable store; Upstash Redis (REST) backs RedisCoordinationAdapter for cache/idempotency/leases ONLY — NEVER canonical (flushAll is the never-canonical proof operation and every key is tier-prefixed per the P3 namespace contract); Cloudflare R2 (S3-compatible API, AWS SigV4 implemented on node:crypto — ZERO external dependencies) backs ObjectStoreAdapter for write-once immutable content-addressed objects under tier-prefixed keys. Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) come from REAL probes only; the frozen port health() surface maps probed outcomes to AVAILABLE/UNAVAILABLE/UNKNOWN without ever fabricating success. Every network call goes through ONE injectable FetchPort seam (zero ambient network in package src); credentials are env-only, injected at the composition boundary, and outcomes/notes/telemetry/evidence carry env NAMES only — never values (transcripts are redacted through the lane corpus). Deterministic reference-mode: the adapter logic runs offline against a scripted FetchPort (injected clocks; no ambient env); network happens only in the env-gated integration suite (RUN_REAL=1, tests/real-persistence). The P3 infra/deployment configuration contracts are carried STRUCTURALLY (the frozen P8 body-runtimes precedent — that package is zero-dependency with no module entry point) and the field-for-field alignment is pinned by test in tests/real-persistence.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
