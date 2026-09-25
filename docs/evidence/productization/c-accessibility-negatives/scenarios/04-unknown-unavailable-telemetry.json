@@ -1,0 +1,30 @@
+{
+  "scenario_id": "negative-unknown-unavailable-telemetry",
+  "work_order": "P15",
+  "lane": "C",
+  "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
+  "verified_head_revision": "f9d409ad57ed69ad8c4b11741d7f9784496b27e9",
+  "test_file": "tests/accessibility/test/04-unknown-unavailable-telemetry.test.ts",
+  "test_names": [
+    "TRUTHFUL: an UNAVAILABLE telemetry capture survives observation ingestion bit-exact (never folded into success)",
+    "TRUTHFUL: provider health is UNKNOWN without observations and never fabricates recovery from silence",
+    "TRUTHFUL: an unprobed provider is honestly UNKNOWN — the unprobed record never claims health",
+    "TRUTHFUL: the health aggregate never upgrades mixed/absent evidence to HEALTHY",
+    "TRUTHFUL: an open outage window is the typed UNAVAILABLE (a fact about the window, never a guess)"
+  ],
+  "terminal_state": "TRUTHFUL: UNAVAILABLE/UNKNOWN statuses preserved bit-exact end-to-end; recovery only from NEW observations; outage windows typed",
+  "detection_containment": [
+    "typed truth states: ingest APPLIED + replay DUPLICATE (replay-protected); ProviderHealthTracker UNKNOWN→UNAVAILABLE→(silence keeps UNAVAILABLE)→HEALTHY only on a new probe",
+    "unprobedProviderHealth status UNKNOWN with null lastProbeAt; aggregateProviderHealth never upgrades mixed/empty pools",
+    "providerStatusOf: UNAVAILABLE inside the open window (with the window record), AVAILABLE outside with the never-claimed caveat"
+  ],
+  "retained_uncertainty": [
+    "silence is never interpreted as recovery (the last observed evidence stands)",
+    "the AVAILABLE verdict carries the honest caveat that internal provider health is never claimed"
+  ],
+  "reproducibility": {
+    "seed": 424242,
+    "command": "corepack pnpm install --prefer-offline && pnpm --filter @sos-2/tests-accessibility test"
+  },
+  "notes": "The suites ran twice at the verified head (identical results) and re-ran green at the delivery head (the evidence-only follow-up commit that fills verified_head_revision with the exact code-head sha and adds only these records). Fixed vitest seed 424242; fully offline (every clock, store, seam and probe injected)."
+}

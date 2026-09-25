@@ -1,0 +1,48 @@
+{
+  "name": "@sos-2/tests-accessibility",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Accessibility + Negative-Case Dogfood Suites (Work Order P15, lane C): the fresh-user product proof + every P15 negative case, driven through USER-REACHABLE surfaces only. Fresh-user acceptance: the flagship §11 journey completes through the composed product surfaces (the P13-style composition over the merged public exports + the P11 local-companion reference runtime) — progress is visible as typed records with evidence (never raw agent transcripts), completion is evidence-gated (independent certification; the body never certifies itself), exact source/deployment revisions are linked, and all unresolved uncertainty is retained in plain terms. Negative cases (one suite per Work-Order bullet, the W17 discipline — each fault CONSTRUCTED, DETECTED/CONTAINED with a typed record, never a silent pass, never a crash, and the evidence graph stays queryable and truthful afterward): stale state, missing evidence, contradictory evidence, unknown/unavailable telemetry, expired authority, revoked authority, unsafe candidate, failed evaluation, body crash, task resume from checkpoint, failed rollback, demo/live-state confusion, cross-project access attempt, secret leakage attempt, budget exhaustion. Structural pins: zero external dependencies (workspace:* + the existing toolchain only), offline determinism (no ambient time/randomness/network/processes/timers in the owned sources outside the documented composition boundary), the repository's fixed vitest seed, run-to-run-identical results, and the lane Architecture Delta record validating against the frozen schema.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/assurance": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy-runtime": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/companion": "workspace:*",
+    "@sos-2/deployment": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/greenfield-runtime": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/promotion": "workspace:*",
+    "@sos-2/project-realization": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/system-state": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/task-runtime": "workspace:*",
+    "@sos-2/web-contracts": "workspace:*",
+    "@sos-2/worker-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
