@@ -1,0 +1,46 @@
+{
+  "name": "@sos-2/greenfield-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Greenfield Runtime (Work Order P13): the \u00a711 flagship journey engine \u2014 a typed state machine driving 'user mission -> connect GitHub repo -> formalize mission -> architecture/capability plan -> candidate + assurance -> worker task graph -> summon cloud body -> implementation -> independent evaluation -> repair/retry or ASK -> commit/PR/push -> deployment -> runtime verification -> evidence-backed completion report' over the MERGED surfaces, composed never re-implemented: the P6 @sos-2/task-graph is THE durable graph (mission + authority refs pinned, typed transitions, disjoint scopes); body selection/assignment through the P5 BodyBroker contracts (capability-based, cloud placement \u2014 the journey continues while the user's computer is off, driven purely by cloud tick sources); body-side work through the P8 HarnessContract seam; repository realization through @sos-2/project-realization (P9 gateway only); completion gated ONLY by the independent P9 evaluation suite (evaluator + evaluation-orchestration RepairLoop discipline: bounded repair attempts, then typed ASK; the pipeline NEVER certifies its own output \u2014 a completion request from the acting body is a typed independence violation); the GitHub connection through the P4 GitHubPort adapter surface (honest SIMULATED reference states); every stage transition emits a P7-discipline observation event into the durable P2 store (the replayable timeline a disconnected user returns to). The completion report carries exact source revisions, evaluation results with retained uncertainty, remaining uncertainty and a reproducible content-addressed completion record. Determinism: no Date.now/Math.random/fetch/process.env/ambient timers/child_process in src \u2014 clocks, stores, seams and tick sources are injected; the composition root (tests/mission-to-repo) is the impure boundary.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/harness": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/project-realization": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
