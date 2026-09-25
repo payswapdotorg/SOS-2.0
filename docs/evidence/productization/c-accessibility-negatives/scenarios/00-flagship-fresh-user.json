@@ -3,7 +3,7 @@
   "work_order": "P15",
   "lane": "C",
   "base_revision": "711cfd60b7eb90b338a8ce17cadcafb72a0d1e6e",
-  "verified_head_revision": "PENDING_EXACT_HEAD_SHA (filled by the evidence follow-up commit: the exact code-head sha the gates ran against; the follow-up adds only these evidence records)",
+  "verified_head_revision": "f9d409ad57ed69ad8c4b11741d7f9784496b27e9",
   "test_file": "tests/accessibility/test/00-flagship-fresh-user.test.ts",
   "test_names": [
     "a fresh user completes the flagship journey from a plain-language mission (no developer knowledge required)",
