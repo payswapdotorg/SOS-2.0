@@ -1,0 +1,54 @@
+{
+  "name": "@sos-2/tests-product-dogfood",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Product Dogfood (Work Order P15, Lane A — product journeys): the full product-journey suite that drives SOS as a REAL PRODUCT through its public composed surfaces — first-time greenfield mission, brownfield repository onboarding, candidate/assurance/experiment/ASK, promotion, rollback, package composition, history, self-evolution, and the optional local-companion/IDE/browser path. Every journey runs behind deterministic reference adapters/bodies/executors (no real GitHub APIs, no real providers, no real deployment targets, no network, no ambient time/random); every journey asserts the P15 acceptance shape: the resulting repository, runtime, deployment and evidence graph are linked to exact revisions and ALL unresolved uncertainty is visible (never fabricated completion). Promotion + rollback assert revision-level state transitions with evidence per action via the merged action/state surfaces (never by mutating state directly). Package composition + self-evolution assert the ecology surfaces update as DATA (learned records), never by writing package internals. History asserts the full timeline is queryable end-to-end (decision -> action -> evidence -> state), including after rollback. The local-companion journey asserts the same flagship flow is reachable through the P11 surfaces. Plus the pinned discipline: zero new external dependencies (workspace:* + the existing toolchain only), offline determinism, fixed vitest seed 424242, lockfile byte-identical on the branch, honest statuses throughout.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/autonomy-runtime": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/cost-policy": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/greenfield-runtime": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/mission": "workspace:*",
+    "@sos-2/project-realization": "workspace:*",
+    "@sos-2/security": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/task-runtime": "workspace:*",
+    "@sos-2/task-runner": "workspace:*",
+    "@sos-2/companion": "workspace:*",
+    "@sos-2/local-companion": "workspace:*",
+    "@sos-2/browser-bridge": "workspace:*",
+    "@sos-2/ide-bridge": "workspace:*",
+    "@sos-2/ecology": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/meta-evolution": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/experiments": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/promotion": "workspace:*",
+    "@sos-2/brownfield": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

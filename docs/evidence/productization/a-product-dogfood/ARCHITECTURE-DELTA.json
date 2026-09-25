@@ -1,0 +1,53 @@
+{
+  "affected_artifacts": [
+    "tests/product-dogfood",
+    "docs/evidence/productization/a-product-dogfood"
+  ],
+  "added": [
+    "tests/product-dogfood/package.json",
+    "tests/product-dogfood/tsconfig.json",
+    "tests/product-dogfood/vitest.config.ts",
+    "tests/product-dogfood/test/world.ts",
+    "tests/product-dogfood/test/greenfield-mission.test.ts",
+    "tests/product-dogfood/test/brownfield-onboarding.test.ts",
+    "tests/product-dogfood/test/decision-discipline.test.ts",
+    "tests/product-dogfood/test/promotion.test.ts",
+    "tests/product-dogfood/test/rollback.test.ts",
+    "tests/product-dogfood/test/package-composition.test.ts",
+    "tests/product-dogfood/test/history.test.ts",
+    "tests/product-dogfood/test/self-evolution.test.ts",
+    "tests/product-dogfood/test/local-companion.test.ts",
+    "tests/product-dogfood/test/structural.test.ts",
+    "docs/evidence/productization/a-product-dogfood/greenfield-mission.json",
+    "docs/evidence/productization/a-product-dogfood/brownfield-onboarding.json",
+    "docs/evidence/productization/a-product-dogfood/decision-discipline.json",
+    "docs/evidence/productization/a-product-dogfood/promotion.json",
+    "docs/evidence/productization/a-product-dogfood/rollback.json",
+    "docs/evidence/productization/a-product-dogfood/package-composition.json",
+    "docs/evidence/productization/a-product-dogfood/history.json",
+    "docs/evidence/productization/a-product-dogfood/self-evolution.json",
+    "docs/evidence/productization/a-product-dogfood/local-companion.json",
+    "docs/evidence/productization/a-product-dogfood/ARCHITECTURE-DELTA.json"
+  ],
+  "removed": [],
+  "modified": [],
+  "preserved_invariants": [
+    "the frozen W0-W18 core remains authoritative; the merged product packages (P0-P14) are consumed read-only through their public exports only — no internal package mutation",
+    "every product journey is driven through merged public exports behind deterministic reference adapters/bodies/executors (no real GitHub APIs, no real providers, no real deployment targets, no network, no ambient time/random)",
+    "zero external dependencies: workspace:* + the existing toolchain only (typescript ^5.5.0, vitest ^3.0.0, @types/node ^22.10.0 — the P6/P9/P13 carve-out); pnpm-lock.yaml is byte-identical on the branch (workspace deps carry no registry resolution)",
+    "exact-revision evidence links: every consequential artifact (source revision, decision record, evaluation result, deployment record) carries an exact content-addressed revision link — no fabricated HEALTHY/COMPLETE",
+    "uncertainty visible: every journey's terminal record surfaces retained uncertainty (SIMULATED markers, reference-mode notes, QUALITATIVE + UNQUANTIFIED applicability, NOT_YET_CONNECTED provider statuses, R19 penalty demonstrated)",
+    "the §7 device-optional pin: the flagship journey completes WITHOUT any user-online tick after kick-off (cloud ticks only); cloud work orders never consult device presence",
+    "the §10 completion discipline: a worker/body may report completion but cannot certify mission success by itself (independent evaluation is the only completion gate)",
+    "the §12 brownfield discipline: competing architecture hypotheses never collapse to a single winner; ambiguity is retained honestly",
+    "the §13 non-negotiable boundaries: harnesses cannot redefine SOS semantics; bodies cannot grant themselves authority; LLM output is never authoritative evidence or authorization; the broker cannot silently escalate authority; Redis/queues cannot become semantic authorities; provider outages remain UNKNOWN/UNAVAILABLE where appropriate; demo fixtures are never production state",
+    "ASK is first-class: candidate + assurance + experiment + ASK is a typed decision discipline (ACT / ROLLBACK / ASK / REJECT) — never silent gating",
+    "promotion + rollback assert revision-level state transitions with evidence per action via the merged action/state surfaces (never by mutating state directly)",
+    "package composition + self-evolution assert the ecology surfaces update as DATA (learned records), never by writing package internals",
+    "history asserts the full timeline is queryable end-to-end (decision -> action -> evidence -> state), including after rollback",
+    "the local-companion/IDE/browser journey asserts the same flagship flow is reachable through the P11 surfaces (reference bridges)"
+  ],
+  "boundary_changes": [],
+  "rationale_ref": "spec/productization-work-orders/P15-product-dogfood.md",
+  "work_order": "P15"
+}
