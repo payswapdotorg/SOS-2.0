@@ -1831,6 +1831,40 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  packages/real-observation:
+    dependencies:
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../event-ingestion
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../live-store
+      '@sos-2/observation':
+        specifier: workspace:*
+        version: link:../observation
+      '@sos-2/provenance':
+        specifier: workspace:*
+        version: link:../provenance
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../semantic-spine
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../telemetry
+      '@sos-2/telemetry-runtime':
+        specifier: workspace:*
+        version: link:../telemetry-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   packages/reasoning-broker:
     dependencies:
       '@sos-2/live-store':
@@ -3315,6 +3349,52 @@ importers:
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
   tests/production-hardening: {}
+
+  tests/real-observation:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../../packages/action-gateway
+      '@sos-2/ask':
+        specifier: workspace:*
+        version: link:../../packages/ask
+      '@sos-2/authority':
+        specifier: workspace:*
+        version: link:../../packages/authority
+      '@sos-2/decision':
+        specifier: workspace:*
+        version: link:../../packages/decision
+      '@sos-2/event-ingestion':
+        specifier: workspace:*
+        version: link:../../packages/event-ingestion
+      '@sos-2/evidence':
+        specifier: workspace:*
+        version: link:../../packages/evidence
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/observation':
+        specifier: workspace:*
+        version: link:../../packages/observation
+      '@sos-2/real-observation':
+        specifier: workspace:*
+        version: link:../../packages/real-observation
+      '@sos-2/telemetry':
+        specifier: workspace:*
+        version: link:../../packages/telemetry
+      '@sos-2/telemetry-runtime':
+        specifier: workspace:*
+        version: link:../../packages/telemetry-runtime
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
 packages:
 

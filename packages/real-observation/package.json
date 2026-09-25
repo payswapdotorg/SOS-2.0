@@ -1,0 +1,40 @@
+{
+  "name": "@sos-2/real-observation",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SOS 2.0 Real Observation Sources (Work Order P17-C, observation/UX lane): REAL provider adapters feeding the merged P7 Observation Plane. GitHub repository events (webhook-shaped receiver with HMAC validation + REST events-API polling fallback), CI results (GitHub Actions runs per commit), deployment events (Vercel deployments API read directly — no sibling-lane dependency), runtime telemetry (merged W3 TelemetrySource adapters over real HTTP endpoints), scheduled probes (clocked health/quality probes behind the P7 ProbeScheduler) and provider health (real per-provider probes with aggregate honest state). Every source is an EventSourcePort over an INJECTED FetchPort seam — zero ambient network in package src (global fetch binds only at the process boundary); every source reports honest connectivity states (CONNECTED / UNKNOWN / UNAVAILABLE / DEGRADED) from REAL probes, with unprobed sources UNKNOWN and source-down UNAVAILABLE with the real error recorded (never fabricated). All events flow through the merged @sos-2/event-ingestion replay-protected pipeline into the merged @sos-2/observation projections, reconciliation and detection — the plane runs WITHOUT a permanent body (§5). Transcripts are redacted through the merged @sos-2/security secret-shape corpus (names/pattern ids only, never values).",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run && pnpm --filter @sos-2/web exec vitest run --config live-mission/vitest.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/event-ingestion": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/observation": "workspace:*",
+    "@sos-2/provenance": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/telemetry": "workspace:*",
+    "@sos-2/telemetry-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
