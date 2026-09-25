@@ -1,0 +1,29 @@
+{
+  "name": "@sos-2/task-runner",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SOS 2.0 Task Runner host (Work Order P12): the plain Node + TypeScript composition root of the autonomy and task runtimes. The composition root is the SINGLE impure boundary (injected clock/beat source/event sinks — the no-ambient-timer discipline following the apps/actions precedent): it assembles the in-memory durable stores, the body broker with reference cloud bodies, the execution fabric, the durable task graph, the P9 action gateway (authority-gated body-lifecycle lease actions), the lease supervisor, the recovery planner, the outage registry with bounded backoff, the cost ledger and the task timeline — everything injected, deterministic and offline. Provider statuses are reported HONESTLY: the in-memory seams are REFERENCE, real endpoints are NOT_YET_CONNECTED (no fabricated liveness).",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --passWithNoTests",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/autonomy-runtime": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/body-runtimes": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/task-graph": "workspace:*",
+    "@sos-2/task-runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
