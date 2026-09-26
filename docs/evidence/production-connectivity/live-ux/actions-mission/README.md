@@ -109,3 +109,16 @@ The deployed runtime binding is env-only on the Vercel project
 `SOS_LIVE_MISSION_VERCEL_*` — encrypted for credentials; the lane-scoped
 `SOS_LIVE_MISSION_VERCEL_TOKEN`/`_PROJECT_ID` names are preferred by the
 deployed host after the `VERCEL_TOKEN` name-collision observation).
+
+## Delivery addendum (the PR gate)
+
+- PR: payswapdotorg/SOS-2.0#41 (branch `wo/p18b-live-actions-mission-ux`, base `3717b6c`).
+- The repository-contract check (`SOS repository verification` — verify.yml,
+  `node scripts/verify-repo.mjs && node scripts/verify-productization.mjs`)
+  passes on this head locally (recorded above). The parallel-lane PR carries
+  the expected lockfile/workspace conflicts with main (P18-A/P18-C landed in
+  parallel on disjoint owned paths; the architect's A→B→C integration
+  reconciles them — no worker merges upstream).
+- `deploy-contract.yml` fails REPO-WIDE, including on the base commit
+  `3717b6c` itself and on main (verified through the Actions API at
+  delivery time) — a pre-existing condition, not a regression of this lane.
