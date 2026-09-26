@@ -1,0 +1,273 @@
+{
+  "work_order": "P18-B",
+  "evidence_kind": "journey-log",
+  "produced_at": "2026-09-26T15:55:20.373Z",
+  "repo_head": "3c38800e111583034af9807bb1e7995103d09092",
+  "schema": "sos-2/p18b/journey-steps",
+  "body": {
+    "steps": [
+      {
+        "step": "vercel-probe",
+        "ok": true,
+        "at": "2026-09-26T15:55:20.946Z",
+        "detail": {
+          "status": 200,
+          "username": "ekonplacide-5312"
+        }
+      },
+      {
+        "step": "vercel-project",
+        "ok": true,
+        "at": "2026-09-26T15:55:21.205Z",
+        "detail": {
+          "name": "sos-2-0",
+          "rootDirectory": "apps/web",
+          "repoId": 1377439399,
+          "buildCommand": "pnpm --filter @sos-2/web^... run build && pnpm run build"
+        }
+      },
+      {
+        "step": "github-revision-binding",
+        "ok": true,
+        "at": "2026-09-26T15:55:21.655Z",
+        "detail": {
+          "status": 200,
+          "sha": "3c38800e111583034af9807bb1e7995103d09092"
+        }
+      },
+      {
+        "step": "openrouter-probe",
+        "ok": true,
+        "at": "2026-09-26T15:55:21.723Z",
+        "detail": {
+          "status": 200,
+          "model": "meta-llama/llama-3.3-70b-instruct"
+        }
+      },
+      {
+        "step": "project-env-binding",
+        "ok": true,
+        "at": "2026-09-26T15:55:23.885Z",
+        "detail": {
+          "entries": [
+            {
+              "key": "VERCEL_TOKEN",
+              "status": 201
+            },
+            {
+              "key": "GITHUB_ACCESS_TOKEN",
+              "status": 201
+            },
+            {
+              "key": "BODY_PROVIDER_API_KEY",
+              "status": 201
+            },
+            {
+              "key": "SOS_LIVE_MISSION_GRANTS",
+              "status": 201
+            },
+            {
+              "key": "SOS_LIVE_MISSION_BODY_MODEL",
+              "status": 201
+            },
+            {
+              "key": "SOS_LIVE_MISSION_VERCEL_REPO_ID",
+              "status": 201
+            },
+            {
+              "key": "SOS_LIVE_MISSION_VERCEL_TARGET",
+              "status": 201
+            }
+          ],
+          "note": "values env-only; never committed; encrypted for credentials"
+        }
+      },
+      {
+        "step": "deployment",
+        "ok": true,
+        "at": "2026-09-26T15:55:24.105Z",
+        "detail": {
+          "skipped_new_deployment": true,
+          "reason": "LIVE_MISSION_BASE_URL provided — the existing deployment of this branch is used (the account deployment quota is exhausted for today; the reset is recorded in the evidence)",
+          "base_url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app",
+          "suite_head": "3c38800e111583034af9807bb1e7995103d09092",
+          "acted_on_revision": "1dab86017cbb4f5d6274a891a998129443a31f56",
+          "existing_deployment": {
+            "deployment_id": "dpl_BFvUARnpuK9otSSCwsEBSdpXR9Xd",
+            "url": "sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app",
+            "ready_state": "READY",
+            "source_revision_sha": "1dab86017cbb4f5d6274a891a998129443a31f56",
+            "deployed_commit_is_branch_ancestor": true,
+            "binding_verified": true
+          }
+        }
+      },
+      {
+        "step": "deployed-mission-surface",
+        "ok": true,
+        "at": "2026-09-26T15:55:25.505Z",
+        "detail": {
+          "status": 200,
+          "markers": {
+            "liveTitle": true,
+            "entryPoints": true,
+            "actionForms": true,
+            "honestEmpty": true
+          }
+        }
+      },
+      {
+        "step": "deployed-endpoint-contract",
+        "ok": true,
+        "at": "2026-09-26T15:55:26.406Z",
+        "detail": {
+          "status": 405,
+          "note": "GET answers 405 — the endpoint is POST-only (the typed action submission surface)"
+        }
+      },
+      {
+        "step": "prior-production",
+        "ok": true,
+        "at": "2026-09-26T15:55:27.128Z",
+        "detail": {
+          "deployment_id": "dpl_4ajdk7WFtpJ69xzgUw7wea47g1Xj",
+          "sha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+          "url": "sos-2-0-4d4dz7qh4-ekonplacidegmailcoms-projects.vercel.app"
+        }
+      },
+      {
+        "step": "body-summon",
+        "ok": true,
+        "at": "2026-09-26T15:55:28.304Z",
+        "detail": {
+          "http_status": 200,
+          "receipt_status": "SUCCEEDED",
+          "authority": "GRANTED",
+          "output": {
+            "bodyId": "cloud-sandbox-1",
+            "state": "RUNNING",
+            "provider": "openrouter",
+            "apiRevision": "openrouter.v1",
+            "model": "meta-llama/llama-3.3-70b-instruct",
+            "providerState": "CONNECTED",
+            "commitUrl": "https://github.com/payswapdotorg/SOS-2.0/commit/1dab86017cbb4f5d6274a891a998129443a31f56",
+            "leaseScope": "in-process"
+          },
+          "evidence_ids": [
+            "action-evidence:6c0eec1ade5df476"
+          ],
+          "idempotency_key": "live-action-idempotency:932673820e410140"
+        }
+      },
+      {
+        "step": "body-summon-receipt-page",
+        "ok": true,
+        "at": "2026-09-26T15:55:28.570Z",
+        "detail": {
+          "status": 200,
+          "markers": {
+            "actionReceipt": true,
+            "liveBadge": false,
+            "evidenceLink": true,
+            "rationaleLink": false,
+            "sixQuestions": false
+          },
+          "outcome": "the honest not-in-this-process state rendered (cold serverless instance; the in-process ledger is instance-local — the receipt round-trip cookie lands with the next deployment)",
+          "honest_either_way": true
+        }
+      },
+      {
+        "step": "idempotent-replay",
+        "ok": true,
+        "at": "2026-09-26T15:55:29.056Z",
+        "detail": {
+          "first_outcome": "replayed",
+          "second_outcome": "replayed",
+          "same_action_id": true,
+          "same_idempotency_key": true,
+          "note": "the deployed instance answered REPLAY — the recorded original receipt returned, the provider was not invoked again"
+        }
+      },
+      {
+        "step": "denied-action",
+        "ok": true,
+        "at": "2026-09-26T15:55:29.290Z",
+        "detail": {
+          "http_status": 200,
+          "receipt_status": "DENIED",
+          "authority_reason": "GRANT_NEVER_HELD",
+          "denial_detail": "no currently-live env-configured grant for console-observer|body-lifecycle|cloud-sandbox-1 (SOS_LIVE_MISSION_GRANTS) — the action fails CLOSED",
+          "executor_invoked": false,
+          "evidence_ids": [
+            "action-evidence:7a9c403d22fcfea5"
+          ]
+        }
+      },
+      {
+        "step": "promotion",
+        "ok": false,
+        "at": "2026-09-26T15:55:29.906Z",
+        "detail": {
+          "http_status": 200,
+          "receipt_status": "FAILED",
+          "authority": "GRANTED",
+          "deployment": null,
+          "failure": {
+            "operation": "promotion.apply",
+            "errorType": "DEPLOYMENT_PROVIDER_FAILURE",
+            "message": "Vercel POST /v13/deployments answered HTTP 403 — the real provider failure is the honest record",
+            "retryable": true
+          },
+          "evidence_ids": [
+            "action-evidence:27f55292bc13bb2d"
+          ]
+        }
+      },
+      {
+        "step": "rollback",
+        "ok": false,
+        "at": "2026-09-26T15:55:30.228Z",
+        "detail": {
+          "http_status": 200,
+          "receipt_status": "FAILED",
+          "authority": "GRANTED",
+          "output": null,
+          "failure": {
+            "operation": "rollback.apply",
+            "errorType": "DEPLOYMENT_PROVIDER_FAILURE",
+            "message": "Vercel GET /v6/deployments answered HTTP 403 — cannot resolve the rollback target honestly",
+            "retryable": true
+          },
+          "rollback_verification_at_action_time": null,
+          "evidence_ids": [
+            "action-evidence:7c171a57d8218315"
+          ]
+        }
+      },
+      {
+        "step": "ask-resolution-deployed",
+        "ok": true,
+        "at": "2026-09-26T15:55:30.461Z",
+        "detail": {
+          "http_status": 200,
+          "status": "FAILED",
+          "error_code": "ASK_ENTRY_UNKNOWN",
+          "error_detail": "unknown ask queue entry: \"ask-p18b-real-probe\"",
+          "honesty": "the ask plane is not wired on this branch — an unknown entry is a typed honest failure, never a fabricated resolution"
+        }
+      },
+      {
+        "step": "ask-resolution-contract",
+        "ok": true,
+        "at": "2026-09-26T15:55:30.467Z",
+        "detail": {
+          "entry_id": "sos://AskRequest/0837ad2cd759499458a1f0c848831fb0",
+          "status": "RESOLVED",
+          "decision_ref": "sos://Decision/1a982a3a4a04ad5a81b259d76f210595",
+          "resolved_by": "console-user",
+          "note": "the merged AskQueue mints the Decision record bound to the origin ask input digest — human resolution authority (the same envelope shape the deployed endpoint accepts)"
+        }
+      }
+    ]
+  }
+}

@@ -14,6 +14,8 @@
     "test": "NEXT_TELEMETRY_DISABLED=1 vitest run --config shell/vitest.config.ts && NEXT_TELEMETRY_DISABLED=1 vitest run --config ecology/vitest.config.ts"
   },
   "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
     "@sos-2/evidence": "workspace:*",
     "@sos-2/semantic-spine": "workspace:*",
     "@sos-2/ui-contracts": "workspace:*",

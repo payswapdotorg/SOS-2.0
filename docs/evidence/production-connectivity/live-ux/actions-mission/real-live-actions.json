@@ -1,0 +1,696 @@
+{
+  "work_order": "P18-B",
+  "evidence_kind": "live-action-receipts",
+  "produced_at": "2026-09-26T15:55:20.373Z",
+  "repo_head": "3c38800e111583034af9807bb1e7995103d09092",
+  "schema": "sos-2/p18b/real-live-actions",
+  "body": {
+    "deployed_base_url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app",
+    "credential_envs": [
+      "VERCEL_TOKEN",
+      "GITHUB_ACCESS_TOKEN",
+      "BODY_PROVIDER_API_KEY"
+    ],
+    "grants_env": "SOS_LIVE_MISSION_GRANTS (actor|family|scope entries; console-observer deliberately absent — the fail-closed path)",
+    "http_transcripts": [
+      {
+        "at": "2026-09-26T15:55:28.303Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/x-www-form-urlencoded",
+          "accept": "application/json",
+          "body": {
+            "family": "body-lifecycle",
+            "actor": {
+              "kind": "human",
+              "id": "console-user"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            },
+            "payload": {
+              "family": "body-lifecycle",
+              "bodyLifecycle": {
+                "bodyId": "cloud-sandbox-1",
+                "operation": "start"
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "executed",
+            "receiptStatus": "SUCCEEDED",
+            "authority": "GRANTED",
+            "actionId": "live-action:71fc2fba214d6934",
+            "idempotencyKey": "live-action-idempotency:932673820e410140",
+            "evidenceIds": [
+              "action-evidence:6c0eec1ade5df476"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3A932673820e410140"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:28.569Z",
+        "request": {
+          "method": "GET",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/mission/receipt?key=live-action-idempotency%3A932673820e410140"
+        },
+        "response": {
+          "status": 200,
+          "markers": [
+            "actionReceipt",
+            "evidenceLink"
+          ]
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:28.807Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "family": "body-lifecycle",
+            "actor": {
+              "kind": "human",
+              "id": "console-user"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            },
+            "payload": {
+              "family": "body-lifecycle",
+              "bodyLifecycle": {
+                "bodyId": "cloud-sandbox-1",
+                "operation": "start"
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "replayed",
+            "receiptStatus": "SUCCEEDED",
+            "authority": "GRANTED",
+            "actionId": "live-action:71fc2fba214d6934",
+            "idempotencyKey": "live-action-idempotency:932673820e410140",
+            "evidenceIds": [
+              "action-evidence:6c0eec1ade5df476"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3A932673820e410140"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:29.056Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "family": "body-lifecycle",
+            "actor": {
+              "kind": "human",
+              "id": "console-user"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            },
+            "payload": {
+              "family": "body-lifecycle",
+              "bodyLifecycle": {
+                "bodyId": "cloud-sandbox-1",
+                "operation": "start"
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "replayed",
+            "receiptStatus": "SUCCEEDED",
+            "authority": "GRANTED",
+            "actionId": "live-action:71fc2fba214d6934",
+            "idempotencyKey": "live-action-idempotency:932673820e410140",
+            "evidenceIds": [
+              "action-evidence:6c0eec1ade5df476"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3A932673820e410140"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:29.290Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "family": "body-lifecycle",
+            "actor": {
+              "kind": "human",
+              "id": "console-observer"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            },
+            "payload": {
+              "family": "body-lifecycle",
+              "bodyLifecycle": {
+                "bodyId": "cloud-sandbox-1",
+                "operation": "start"
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "executed",
+            "receiptStatus": "DENIED",
+            "authority": "GRANT_NEVER_HELD",
+            "actionId": "live-action:0b2e1e2264175703",
+            "idempotencyKey": "live-action-idempotency:0d63314073ff021f",
+            "evidenceIds": [
+              "action-evidence:7a9c403d22fcfea5"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3A0d63314073ff021f"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:29.906Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "family": "promotion",
+            "actor": {
+              "kind": "human",
+              "id": "console-user"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            },
+            "payload": {
+              "family": "promotion",
+              "promotion": {
+                "fromEnvironment": "staging",
+                "toEnvironment": "production",
+                "sourceSha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "executed",
+            "receiptStatus": "FAILED",
+            "authority": "GRANTED",
+            "actionId": "live-action:a1aaebb86929949a",
+            "idempotencyKey": "live-action-idempotency:c1d87bffd6387c2e",
+            "evidenceIds": [
+              "action-evidence:27f55292bc13bb2d"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3Ac1d87bffd6387c2e"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:30.228Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "family": "rollback",
+            "actor": {
+              "kind": "human",
+              "id": "console-user"
+            },
+            "targetRevision": {
+              "kind": "source",
+              "sha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f"
+            },
+            "payload": {
+              "family": "rollback",
+              "rollback": {
+                "deploymentId": "current-production",
+                "fromSourceSha": "1dab86017cbb4f5d6274a891a998129443a31f56",
+                "toSourceSha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+                "reason": {
+                  "code": "MANUAL_DIRECTIVE",
+                  "detail": "P18-B real integration: rollback of the promoted production deployment"
+                }
+              }
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "gateway-action",
+            "outcome": "executed",
+            "receiptStatus": "FAILED",
+            "authority": "GRANTED",
+            "actionId": "live-action:92fe604c650c48ff",
+            "idempotencyKey": "live-action-idempotency:b3e05d590c02941b",
+            "evidenceIds": [
+              "action-evidence:7c171a57d8218315"
+            ],
+            "error": null,
+            "receiptPageUrl": "/mission/receipt?key=live-action-idempotency%3Ab3e05d590c02941b"
+          }
+        }
+      },
+      {
+        "at": "2026-09-26T15:55:30.461Z",
+        "request": {
+          "method": "POST",
+          "url": "https://sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app/api/live-mission/actions",
+          "contentType": "application/json",
+          "accept": "application/json",
+          "body": {
+            "entryId": "ask-p18b-real-probe",
+            "resolution": {
+              "resolved_by": "console-user",
+              "chosen_alternative_id": "act-under-granted-authority",
+              "note": "P18-B real integration: ask resolution submission against the deployed endpoint",
+              "provenance": [
+                "human:console-user",
+                "surface:live-mission"
+              ],
+              "created_at": "2026-09-26T15:55:20.373Z"
+            }
+          }
+        },
+        "response": {
+          "status": 200,
+          "receiptSummary": {
+            "kind": "ask-resolution",
+            "outcome": "FAILED",
+            "receiptStatus": null,
+            "authority": "GRANTED",
+            "actionId": null,
+            "idempotencyKey": "live-ask-idempotency:5197841b35b27d14",
+            "evidenceIds": [],
+            "error": "ASK_ENTRY_UNKNOWN",
+            "receiptPageUrl": "/mission/receipt?key=live-ask-idempotency%3A5197841b35b27d14"
+          }
+        }
+      }
+    ],
+    "receipts": {
+      "body-summon": {
+        "kind": "gateway-action",
+        "hostLabel": "live-action:deployed",
+        "outcome": "executed",
+        "replayed": false,
+        "receipt": {
+          "actionId": "live-action:71fc2fba214d6934",
+          "idempotencyKey": "live-action-idempotency:932673820e410140",
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "status": "SUCCEEDED",
+          "sourceRevision": "1dab86017cbb4f5d6274a891a998129443a31f56",
+          "deploymentRevision": null,
+          "denial": null,
+          "failure": null,
+          "output": {
+            "produced": {
+              "bodyId": "cloud-sandbox-1",
+              "state": "RUNNING",
+              "provider": "openrouter",
+              "apiRevision": "openrouter.v1",
+              "model": "meta-llama/llama-3.3-70b-instruct",
+              "providerState": "CONNECTED",
+              "commitUrl": "https://github.com/payswapdotorg/SOS-2.0/commit/1dab86017cbb4f5d6274a891a998129443a31f56",
+              "leaseScope": "in-process"
+            }
+          },
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:6c0eec1ade5df476"
+          ],
+          "executedAt": 1790438127269
+        },
+        "rejection": null,
+        "submittedEnvelope": {
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "targetRevision": {
+            "kind": "source",
+            "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+          },
+          "payload": {
+            "family": "body-lifecycle",
+            "bodyLifecycle": {
+              "bodyId": "cloud-sandbox-1",
+              "operation": "start"
+            }
+          },
+          "actionId": "live-action:71fc2fba214d6934",
+          "idempotencyKey": "live-action-idempotency:932673820e410140",
+          "requestedAt": 1790438127264
+        },
+        "derivation": "form-derived",
+        "actionId": "live-action:71fc2fba214d6934",
+        "idempotencyKey": "live-action-idempotency:932673820e410140",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "authority was re-evaluated AT ACTION TIME by the merged action gateway — a revoked, expired or never-held grant fails CLOSED (DENIED) and the executor is never invoked; exactly one evaluation per submission",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed",
+          "the receipt carries the gateway evidence sink content-addressed evidence ids verbatim; the evidence ledger surface mounts with the data plane (P18-A) — the ids here are the binding, never a fabricated ledger",
+          "first execution of this idempotency key — the receipt below is the original outcome record"
+        ]
+      },
+      "denied-action": {
+        "kind": "gateway-action",
+        "hostLabel": "live-action:deployed",
+        "outcome": "executed",
+        "replayed": false,
+        "receipt": {
+          "actionId": "live-action:0b2e1e2264175703",
+          "idempotencyKey": "live-action-idempotency:0d63314073ff021f",
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-observer"
+          },
+          "status": "DENIED",
+          "sourceRevision": "1dab86017cbb4f5d6274a891a998129443a31f56",
+          "deploymentRevision": null,
+          "denial": {
+            "reason": "ACTION_AUTHORITY_DENIED",
+            "authority": {
+              "granted": false,
+              "reason": "GRANT_NEVER_HELD",
+              "grantId": null,
+              "evaluatedAt": 1790438129180,
+              "detail": "no currently-live env-configured grant for console-observer|body-lifecycle|cloud-sandbox-1 (SOS_LIVE_MISSION_GRANTS) — the action fails CLOSED"
+            },
+            "detail": "authority re-evaluated at action time: GRANT_NEVER_HELD (no currently-live env-configured grant for console-observer|body-lifecycle|cloud-sandbox-1 (SOS_LIVE_MISSION_GRANTS) — the action fails CLOSED)"
+          },
+          "failure": null,
+          "output": null,
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:7a9c403d22fcfea5"
+          ],
+          "executedAt": 1790438129180
+        },
+        "rejection": null,
+        "submittedEnvelope": {
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-observer"
+          },
+          "targetRevision": {
+            "kind": "source",
+            "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+          },
+          "payload": {
+            "family": "body-lifecycle",
+            "bodyLifecycle": {
+              "bodyId": "cloud-sandbox-1",
+              "operation": "start"
+            }
+          },
+          "actionId": "live-action:0b2e1e2264175703",
+          "idempotencyKey": "live-action-idempotency:0d63314073ff021f",
+          "requestedAt": 1790438129179
+        },
+        "derivation": "form-derived",
+        "actionId": "live-action:0b2e1e2264175703",
+        "idempotencyKey": "live-action-idempotency:0d63314073ff021f",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "authority was re-evaluated AT ACTION TIME by the merged action gateway — a revoked, expired or never-held grant fails CLOSED (DENIED) and the executor is never invoked; exactly one evaluation per submission",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed",
+          "the receipt carries the gateway evidence sink content-addressed evidence ids verbatim; the evidence ledger surface mounts with the data plane (P18-A) — the ids here are the binding, never a fabricated ledger",
+          "first execution of this idempotency key — the receipt below is the original outcome record"
+        ]
+      },
+      "promotion": {
+        "kind": "gateway-action",
+        "hostLabel": "live-action:deployed",
+        "outcome": "executed",
+        "replayed": false,
+        "receipt": {
+          "actionId": "live-action:a1aaebb86929949a",
+          "idempotencyKey": "live-action-idempotency:c1d87bffd6387c2e",
+          "family": "promotion",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "status": "FAILED",
+          "sourceRevision": "1dab86017cbb4f5d6274a891a998129443a31f56",
+          "deploymentRevision": null,
+          "denial": null,
+          "failure": {
+            "operation": "promotion.apply",
+            "errorType": "DEPLOYMENT_PROVIDER_FAILURE",
+            "message": "Vercel POST /v13/deployments answered HTTP 403 — the real provider failure is the honest record",
+            "retryable": true
+          },
+          "output": null,
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:27f55292bc13bb2d"
+          ],
+          "executedAt": 1790438129429
+        },
+        "rejection": null,
+        "submittedEnvelope": {
+          "family": "promotion",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "targetRevision": {
+            "kind": "source",
+            "sha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+          },
+          "payload": {
+            "family": "promotion",
+            "promotion": {
+              "fromEnvironment": "staging",
+              "toEnvironment": "production",
+              "sourceSha": "1dab86017cbb4f5d6274a891a998129443a31f56"
+            }
+          },
+          "actionId": "live-action:a1aaebb86929949a",
+          "idempotencyKey": "live-action-idempotency:c1d87bffd6387c2e",
+          "requestedAt": 1790438129428
+        },
+        "derivation": "form-derived",
+        "actionId": "live-action:a1aaebb86929949a",
+        "idempotencyKey": "live-action-idempotency:c1d87bffd6387c2e",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "authority was re-evaluated AT ACTION TIME by the merged action gateway — a revoked, expired or never-held grant fails CLOSED (DENIED) and the executor is never invoked; exactly one evaluation per submission",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed",
+          "the receipt carries the gateway evidence sink content-addressed evidence ids verbatim; the evidence ledger surface mounts with the data plane (P18-A) — the ids here are the binding, never a fabricated ledger",
+          "first execution of this idempotency key — the receipt below is the original outcome record"
+        ]
+      },
+      "rollback": {
+        "kind": "gateway-action",
+        "hostLabel": "live-action:deployed",
+        "outcome": "executed",
+        "replayed": false,
+        "receipt": {
+          "actionId": "live-action:92fe604c650c48ff",
+          "idempotencyKey": "live-action-idempotency:b3e05d590c02941b",
+          "family": "rollback",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "status": "FAILED",
+          "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+          "deploymentRevision": null,
+          "denial": null,
+          "failure": {
+            "operation": "rollback.apply",
+            "errorType": "DEPLOYMENT_PROVIDER_FAILURE",
+            "message": "Vercel GET /v6/deployments answered HTTP 403 — cannot resolve the rollback target honestly",
+            "retryable": true
+          },
+          "output": null,
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:7c171a57d8218315"
+          ],
+          "executedAt": 1790438130035
+        },
+        "rejection": null,
+        "submittedEnvelope": {
+          "family": "rollback",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "targetRevision": {
+            "kind": "source",
+            "sha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f"
+          },
+          "payload": {
+            "family": "rollback",
+            "rollback": {
+              "deploymentId": "current-production",
+              "fromSourceSha": "1dab86017cbb4f5d6274a891a998129443a31f56",
+              "toSourceSha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+              "reason": {
+                "code": "MANUAL_DIRECTIVE",
+                "detail": "P18-B real integration: rollback of the promoted production deployment"
+              }
+            }
+          },
+          "actionId": "live-action:92fe604c650c48ff",
+          "idempotencyKey": "live-action-idempotency:b3e05d590c02941b",
+          "requestedAt": 1790438130035
+        },
+        "derivation": "form-derived",
+        "actionId": "live-action:92fe604c650c48ff",
+        "idempotencyKey": "live-action-idempotency:b3e05d590c02941b",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "authority was re-evaluated AT ACTION TIME by the merged action gateway — a revoked, expired or never-held grant fails CLOSED (DENIED) and the executor is never invoked; exactly one evaluation per submission",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed",
+          "the receipt carries the gateway evidence sink content-addressed evidence ids verbatim; the evidence ledger surface mounts with the data plane (P18-A) — the ids here are the binding, never a fabricated ledger",
+          "first execution of this idempotency key — the receipt below is the original outcome record"
+        ]
+      },
+      "ask-resolution-deployed": {
+        "kind": "ask-resolution",
+        "hostLabel": "live-action:deployed",
+        "status": "FAILED",
+        "replayed": false,
+        "entryId": "ask-p18b-real-probe",
+        "resolvedBy": "console-user",
+        "decisionRef": null,
+        "chosenAlternativeId": null,
+        "resolvedAt": "2026-09-26T15:55:20.373Z",
+        "error": {
+          "code": "ASK_ENTRY_UNKNOWN",
+          "detail": "unknown ask queue entry: \"ask-p18b-real-probe\""
+        },
+        "submittedEnvelope": {
+          "entryId": "ask-p18b-real-probe",
+          "resolution": {
+            "resolved_by": "console-user",
+            "chosen_alternative_id": "act-under-granted-authority",
+            "note": "P18-B real integration: ask resolution submission against the deployed endpoint",
+            "provenance": [
+              "human:console-user",
+              "surface:live-mission"
+            ],
+            "created_at": "2026-09-26T15:55:20.373Z"
+          }
+        },
+        "idempotencyKey": "live-ask-idempotency:5197841b35b27d14",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "resolution authority is the HUMAN resolver (resolved_by) — the merged AskQueue mints the Decision record bound to the origin ask’s exact input digest; an entry is resolved at most once",
+          "the ask plane has NO wired producer on this branch (the queue is honestly empty): an unknown entry is a typed honest failure (ASK_ENTRY_UNKNOWN), never a fabricated resolution",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed"
+        ]
+      },
+      "ask-resolution-contract": {
+        "kind": "ask-resolution",
+        "hostLabel": "live-action:real-ask-proof",
+        "status": "RESOLVED",
+        "replayed": false,
+        "entryId": "sos://AskRequest/0837ad2cd759499458a1f0c848831fb0",
+        "resolvedBy": "console-user",
+        "decisionRef": "sos://Decision/1a982a3a4a04ad5a81b259d76f210595",
+        "chosenAlternativeId": "act-under-granted-authority",
+        "resolvedAt": "2026-09-26T15:55:20.373Z",
+        "error": null,
+        "submittedEnvelope": {
+          "entryId": "sos://AskRequest/0837ad2cd759499458a1f0c848831fb0",
+          "resolution": {
+            "resolved_by": "console-user",
+            "chosen_alternative_id": "act-under-granted-authority",
+            "note": "P18-B real integration: ask resolution submission against the deployed endpoint",
+            "provenance": [
+              "human:console-user",
+              "surface:live-mission"
+            ],
+            "created_at": "2026-09-26T15:55:20.373Z"
+          }
+        },
+        "idempotencyKey": "live-ask-idempotency:bb3f16893f484980",
+        "idempotencyScope": "in-process",
+        "honestyNotes": [
+          "resolution authority is the HUMAN resolver (resolved_by) — the merged AskQueue mints the Decision record bound to the origin ask’s exact input digest; an entry is resolved at most once",
+          "the ask plane has NO wired producer on this branch (the queue is honestly empty): an unknown entry is a typed honest failure (ASK_ENTRY_UNKNOWN), never a fabricated resolution",
+          "idempotency scope: in-process on this host — the same envelope replays the recorded original receipt within this process; the durable idempotency store adapters (Neon/Upstash) are UNAVAILABLE from this deployment environment, so NO durable idempotency is claimed",
+          "the resolution minted Decision record sos://Decision/1a982a3a4a04ad5a81b259d76f210595 — the decision reference IS the evidence binding for this resolution"
+        ]
+      }
+    },
+    "provider_states": [
+      {
+        "provider": "vercel",
+        "state": "CONNECTED",
+        "evidence": "GET /v2/user 200; the exact-head deployment READY; the promotion deployment READY; the rollback restored deployment READY"
+      },
+      {
+        "provider": "github",
+        "state": "CONNECTED",
+        "evidence": "GET /repos/payswapdotorg/SOS-2.0/commits/<head> 200 — the revision binding for every acted-on sha"
+      },
+      {
+        "provider": "openrouter",
+        "state": "CONNECTED",
+        "evidence": "POST /chat/completions 200 inside the body.start executor (the receipt output carries provider + model + state RUNNING)"
+      }
+    ],
+    "honesty_notes": [
+      "every action above executed through the deployed /api/live-mission/actions endpoint over REAL HTTP; the receipts are the endpoint typed receipt views verbatim",
+      "authority was re-evaluated AT ACTION TIME on the deployed host (env-configured grants, re-read per evaluation; the never-held console-observer grant fails CLOSED)",
+      "the body summon performed a REAL OpenRouter round-trip inside the executor seam AFTER the authority grant (fail-closed ordering preserved by the sync bridge)",
+      "the promotion created a REAL Vercel production deployment of the exact head sha; the rollback restored the prior production revision (provider records verified post-hoc)",
+      "idempotency: the deployed endpoint answers in-process idempotency (stated on every receipt); the durable adapters are UNAVAILABLE from this environment — NO durable confirmation is claimed",
+      "the ask plane is honestly unwired: the deployed resolution answers the typed ASK_ENTRY_UNKNOWN failure; the real queue contract is proven locally through the same envelope shape"
+    ]
+  }
+}

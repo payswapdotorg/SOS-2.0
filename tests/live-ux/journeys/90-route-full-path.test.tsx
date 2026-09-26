@@ -88,7 +88,13 @@ async function postEnvelope(POST: (request: Request) => Promise<Response>, envel
   const response = await POST(
     new Request('http://localhost/api/live-mission/actions', {
       method: 'POST',
-      headers: { 'content-type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+        // the programmatic contract (B's route header doc): Accept: application/json
+        // answers the typed receipt JSON; a browser-form Accept answers the 303 PRG
+        // hop — these journey tests assert the programmatic receipt contract.
+        accept: 'application/json',
+      },
       body: new URLSearchParams({ action: JSON.stringify(envelope) }).toString(),
     }),
   );

@@ -37,3 +37,8 @@ packages:
   #     RUN_REAL=1 real integration).
   - apps/web/live-data
   - tests/live-ux/data-plane
+  # P18-B: the live actions + mission UX suites are a workspace package
+  # so the app-pulled sources resolve their workspace deps under pnpm's
+  # isolated node_modules (the W17/P17-A/P18-A importer precedent; the
+  # lockfile change is importer addition only).
+  - tests/live-ux/actions
