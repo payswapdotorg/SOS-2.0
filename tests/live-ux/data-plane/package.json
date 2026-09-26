@@ -1,0 +1,41 @@
+{
+  "name": "@sos-2/tests-live-ux-data-plane",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Live UX Data-Plane Suites (Work Order P18-A, live data lane): TWO strictly separated suites. (1) The DETERMINISTIC reference-mode suite — offline (a scripted router FetchPort for every provider seam — no network, fixed vitest seed 424242, run-to-run identical): the live data plane against scripted providers — the CONNECTED store (canonical Neon probe answered; the snapshot persists to the canonical store and reads back at the exact storage version; every DTO field carries provenance), the UNAVAILABLE store (Neon DNS failure — honest UNAVAILABLE with the exact fact; the explicit reference-store marker; NOTHING persisted; reference mode never masquerades as production durable state), STALE observations (freshness windows expired — STALE never folds into aligned), PARTIAL providers (GitHub connected while CI/Vercel/Upstash fail — per-field honest states), the NO-DATA state (sources answered with zero events — NO_DATA everywhere, never fabricated), and REPLAY/reconciliation (replayed events deduplicate through the replay-protected pipeline; the durable previous-snapshot claim reconciles ALIGNED/DIVERGED; the deployment claim drives the deployment/source-SHA binding verdicts VERIFIED/DIVERGED). (2) The env-gated REAL-provider integration suite (RUN_REAL=1, default OFF, separate vitest config): the data plane against the REAL providers — the real observation drain (GitHub repo/CI observation with the PAT, Vercel deployment events), real R2 connectivity, the real Vercel deployment-state read (records + source_revision_sha), Neon/Upstash probed with honest UNAVAILABLE outcomes recorded as valid evidence. Credentials are referenced by environment-variable NAMES only (the P3 typed registry); evidence records are redacted through the merged P17-A/P17-C corpora (fail-closed) into docs/evidence/production-connectivity/live-ux/data-plane. The suite also orchestrates the packages/web-contracts/live subpackage suite + the @sos-2/web-live-data typecheck (the packages/github -> web-contracts/onboarding precedent).",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node scripts/run-tests.mjs",
+    "test:reference": "pnpm run build && pnpm --filter @sos-2/web-live-data run typecheck && vitest run && vitest run --config ../../../packages/web-contracts/live/vitest.config.ts",
+    "test:real": "pnpm run build && vitest run --config vitest.real.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/infra-production-connectivity": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*",
+    "@sos-2/web-live-data": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
