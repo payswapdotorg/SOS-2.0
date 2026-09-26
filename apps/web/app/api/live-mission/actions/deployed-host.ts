@@ -77,8 +77,13 @@ export function deployedHostConfigFromEnv(source: Record<string, string | undefi
           timeoutMs: DEFAULT_TIMEOUT_MS,
         }
       : null;
-  const vercelToken = source['VERCEL_TOKEN'];
-  const vercelProjectId = source['VERCEL_PROJECT_ID'];
+  // Prefer the lane-scoped, non-reserved name: the VERCEL_TOKEN env NAME is
+  // Vercel-runtime territory and may collide with runtime-injected values
+  // (observed as 403 from the function context in the P18-B real run while
+  // the same value answers 200/402 locally — recorded honestly in the
+  // evidence; SOS_LIVE_MISSION_VERCEL_TOKEN is the unambiguous binding).
+  const vercelToken = source['SOS_LIVE_MISSION_VERCEL_TOKEN'] ?? source['VERCEL_TOKEN'];
+  const vercelProjectId = source['SOS_LIVE_MISSION_VERCEL_PROJECT_ID'] ?? source['VERCEL_PROJECT_ID'];
   const vercel =
     vercelToken !== undefined && vercelToken.length > 0 && vercelProjectId !== undefined && vercelProjectId.length > 0
       ? {

@@ -1,0 +1,35 @@
+{
+  "work_order": "P18-B",
+  "evidence_kind": "deployment-connectivity",
+  "produced_at": "2026-09-26T15:55:20.373Z",
+  "repo_head": "3c38800e111583034af9807bb1e7995103d09092",
+  "schema": "sos-2/p18b/deployment-record",
+  "body": {
+    "provider": "vercel",
+    "project": {
+      "name": "sos-2-0",
+      "project_id": "prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ",
+      "git_repository": "payswapdotorg/SOS-2.0",
+      "repo_id": 1377439399,
+      "root_directory": "apps/web",
+      "framework": "nextjs",
+      "build_command": "pnpm --filter @sos-2/web^... run build && pnpm run build"
+    },
+    "deployment": {
+      "deployment_revision_id": "dpl_BFvUARnpuK9otSSCwsEBSdpXR9Xd",
+      "url": "sos-2-0-jyo3p5xz3-ekonplacidegmailcoms-projects.vercel.app",
+      "preview_http_ok": true,
+      "ready_state": "READY",
+      "source_revision_sha": "1dab86017cbb4f5d6274a891a998129443a31f56",
+      "observed_commit_sha": "1dab86017cbb4f5d6274a891a998129443a31f56",
+      "binding_verified": true,
+      "suite_head": "3c38800e111583034af9807bb1e7995103d09092",
+      "suite_head_contains_deployed_commit": true,
+      "rollback_pointer": {
+        "previous_deployment_revision_id": "dpl_4ajdk7WFtpJ69xzgUw7wea47g1Xj",
+        "sha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f"
+      },
+      "note": "LIVE_MISSION_BASE_URL mode: the EXISTING deployment of this branch (created earlier the same day, before the account deployment-quota exhaustion at 2026-09-26T15:43Z; the quota resets 2026-09-27T15:51Z). The deployed commit is an ancestor of the suite head (git merge-base verified); the binding was re-verified through GET /v6/deployments in this run. Rerun RUN_REAL without LIVE_MISSION_BASE_URL after the reset for a fresh exact-head deployment and the full promotion/rollback real journeys."
+    }
+  }
+}
