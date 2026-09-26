@@ -1,0 +1,24 @@
+{
+  "name": "@sos-2/web-live-data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Live Data Plane (Work Order P18-A, live data lane): the SERVER-ONLY composition that makes live Mission state come from the real persistence/observation/deployment stack without weakening provider neutrality. Per request it (1) resolves the production environment from the injected source (P3 typed-registry names — GITHUB_ACCESS_TOKEN, VERCEL_TOKEN, VERCEL_PROJECT_ID, DATABASE_URL, NEON_API_KEY, UPSTASH_REDIS_REST_*, R2_*), (2) selects the durable store behind the frozen P17-A adapters — REAL probes of the canonical Neon adapter and the coordination-only Upstash adapter (NEVER canonical; the frozen provider-ports rule), (3) drains the REAL observation plane (the merged @sos-2/real-observation createRealObservationPlane: GitHub repo/CI observation, Vercel deployment events, runtime telemetry, scheduled probes, provider health — no body lease, §5), (4) reads the REAL Vercel deployment state (records + the EXACT source_revision_sha — the deployment/source-SHA binding), (5) persists the observation snapshot to the canonical durable store when (and only when) it answered a real probe, and (6) emits the live-mission DTO plus the data-plane provenance view (every field: which store/plane produced it, at which revision, with which honest state — machine-checkable reference-mode separation: a non-CONNECTED canonical store NEVER masquerades as production durable state). Exports createLiveMissionDataProducer() — the architect's live-mission data seam producer (apps/web/app/live-mission/data-seam.ts swaps its body to this producer; the signature matches the seam exactly). Source-only module (the apps/web/live-mission precedent): consumed as TypeScript source by the app route and the data-plane suites; no build/dist, typecheck-only.",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/infra-production-connectivity": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0"
+  }
+}
