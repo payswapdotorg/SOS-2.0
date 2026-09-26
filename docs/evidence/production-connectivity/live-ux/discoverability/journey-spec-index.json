@@ -1,0 +1,42 @@
+{
+  "evidence_kind": "journey-spec-index",
+  "work_order": "P18-C",
+  "base": "3717b6c",
+  "suite_package": "tests/live-ux (@sos-2/tests-live-ux — runs in `pnpm -r --if-present test` through the tests/* workspace glob; pnpm-workspace.yaml untouched, pnpm-lock.yaml carries the mechanical importer addition)",
+  "run_command": "pnpm --filter @sos-2/tests-live-ux test",
+  "on_branch_result": "15 test files: 119 passed | 6 skipped (125 total); the 6 skipped are the route-level full-path suites below, each skipped with the EXPLICIT reason requires-p18b-mount (vitest describe.skipIf over the filesystem capability probe; the always-run capability probe reports the gate state in the suite output)",
+  "specs": [
+    { "file": "journeys/00-root-page-discoverability.test.tsx", "runs": "on-branch", "covers": "the accomplish question; onboarding + mission entry discovery; the five first-run understandings (progressive disclosure); links-to-real-routes machine check; server-rendered-only + thin-wrapper pins; a11y landmarks; deterministic output", "gated": false },
+    { "file": "journeys/01-onboarding-discoverability.test.tsx", "runs": "on-branch", "covers": "the first-user path followed click-by-click: root -> onboarding hub -> greenfield wizard first step / brownfield import first step; the honest connection state; the followed path has no dead leg", "gated": false },
+    { "file": "journeys/10-journey-fresh-user.test.tsx", "runs": "on-branch", "covers": "fresh user: honest empty states, onboarding first-class, all three entries, disabled actions with honest reasons, six review questions", "gated": false },
+    { "file": "journeys/11-journey-greenfield.test.tsx", "runs": "on-branch", "covers": "greenfield: the start entry, the primary affordance, resumable missions (ACTIVE + DRAFT), the wizard hand-off", "gated": false },
+    { "file": "journeys/12-journey-brownfield.test.tsx", "runs": "on-branch", "covers": "brownfield: the import entry, the repository import step, the honest scan contract, where the imported system is watched", "gated": false },
+    { "file": "journeys/13-journey-ask.test.tsx", "runs": "on-branch", "covers": "ASK: the root understanding + /ask link, the surface's human-authority resolution contract, the AskPage inbox, the merged AskQueue resolution minting the terminal Decision record", "gated": false },
+    { "file": "journeys/14-journey-body-summon.test.tsx", "runs": "on-branch", "covers": "body summon: the enabled/disabled affordance with honest reasons, the envelope bound to the exact observed head, the authority gate, and the real-gateway authority/idempotency/smuggling outcomes", "gated": false },
+    { "file": "journeys/15-journey-cloud-execution.test.tsx", "runs": "on-branch", "covers": "laptop off / cloud execution: the root understanding, the watching note, the no-body drain line, cloud-only sources, the history return affordance", "gated": false },
+    { "file": "journeys/16-journey-body-replacement.test.tsx", "runs": "on-branch", "covers": "body interruption/replacement: the replacement contract copy, and the full gateway lifecycle start -> pause -> resume -> replace -> fresh start (evidence-bound, authority-gated)", "gated": false },
+    { "file": "journeys/17-journey-promotion.test.tsx", "runs": "on-branch", "covers": "promotion: the affordance naming the exact head + deployed revision, the DIVERGED finding, the exact envelope, and the real-gateway outcomes", "gated": false },
+    { "file": "journeys/18-journey-rollback.test.tsx", "runs": "on-branch", "covers": "rollback: the affordance naming the exact deployment, the verifier contract, the exact envelope, the promote->rollback evidence chain, the decision context links", "gated": false },
+    { "file": "journeys/19-journey-observation-without-body.test.tsx", "runs": "on-branch", "covers": "observation without a body: both watching states, the no-body drain, observation content with zero body presence, the four-state source vocabulary with the real recorded error", "gated": false },
+    { "file": "journeys/20-journey-history.test.tsx", "runs": "on-branch", "covers": "history: the root return affordance, the rail entry on every page, the timeline with rationale deep-links, the honest DEMO labelling", "gated": false },
+    { "file": "journeys/21-journey-package-learning.test.tsx", "runs": "on-branch", "covers": "package learning: the honest no-action-family link to /packages, the rail entry, the packages page, the overview learning cards", "gated": false },
+    { "file": "journeys/90-route-full-path.test.tsx", "runs": "capability-gated", "covers": "the full P18 path against the P18-B mounts: mission route -> live observed state -> consequential action -> receipt -> evidence", "gated": true, "skip_reason": "requires-p18b-mount", "enabled_suites": [
+      { "suite": "the mounted mission route renders the P17-C live mission surface (its guaranteed markers)", "asserts": "Mission — live heading; What is happening?; New here? Start with onboarding; Start mission / Import system / Resume an existing mission; data-live-badge; the review questions" },
+      { "suite": "the route renders honest state (drained live observation OR the honest UNKNOWN empty state — no third state exists)", "asserts": "'No live observation drain has run yet' OR 'The real observation plane'" },
+      { "suite": "the route's consequential forms POST to the mounted action endpoint", "asserts": "action=/api/live-mission/actions on all three data-action-form forms; 'the UI never mutates state directly'" },
+      { "suite": "the action endpoint answers the surface's envelope with a typed, evidence-bound outcome (never a silent 5xx)", "asserts": "status < 500; a serialized gateway outcome (SUCCEEDED/DENIED/executed/replayed/rejected); a SUCCEEDED receipt carries non-empty evidence ids" },
+      { "suite": "the endpoint is idempotent for the replayed envelope", "asserts": "the same idempotency key answers the recorded outcome (no FAILED after a SUCCEEDED first answer)" },
+      { "suite": "a smuggled authority field is typed-rejected", "asserts": "status >= 400 OR AUTHORITY_FIELD_SMUGGLED in the body; never a SUCCEEDED execution" }
+    ] }
+  ],
+  "capability_probe": {
+    "implementation": "journeys/helpers.ts p18bMountState(): filesystem + source inspection — apps/web/app/live-mission/page.tsx exists OR apps/web/app/mission/page.tsx renders LiveMissionPage (MOUNTING.md step 1), AND apps/web/app/api/live-mission/actions/route.ts exists (MOUNTING.md step 2)",
+    "gate_semantics": "describe.skipIf(!mounted) on every route-level suite; the always-run probe test prints the explicit gate state line '[P18-C route-level specs] ... => SKIPPED (requires-p18b-mount)' and asserts the loader records agree with the filesystem probe",
+    "lazy_loading": "import.meta.glob registers ONLY existing files, so absent mounts never break collection; when present, the route modules load through the Vite transform (server components are awaited before static rendering)"
+  },
+  "integration_contract": {
+    "for_p18b": "mount exactly what MOUNTING.md documents: (1) apps/web/app/live-mission/page.tsx rendering LiveMissionPage (the data plane wired per MOUNTING.md step 3 or the honest emptyLiveObservation), optionally pointing apps/web/app/mission/page.tsx at LiveMissionPage; (2) the POST handler at apps/web/app/api/live-mission/actions that validates + executes the form-encoded `action` envelope (the same ActionRequest JSON the forms post) through the merged ActionGateway and returns the serialized gateway outcome (receipt with status + evidenceIds, or the typed rejection) — never a silent 5xx",
+    "for_the_architect": "after A -> B -> C integration, run `pnpm --filter @sos-2/tests-live-ux test` on the integrated head: ALL 125 tests must be enabled and green (0 skipped) before P18 can complete; a red or still-skipped suite is an honest integration finding, never fabricatable",
+    "never_fabricated": "the route-level suites assert nothing about the mounts while absent; their pass states exist only when the mounts exist and behave per the documented contract"
+  }
+}
