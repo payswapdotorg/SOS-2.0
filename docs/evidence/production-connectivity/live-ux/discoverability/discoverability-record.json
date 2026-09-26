@@ -1,0 +1,208 @@
+{
+  "evidence_kind": "ux-discoverability-record",
+  "work_order": "P18-C",
+  "base": "3717b6c",
+  "produced_by": "tests/live-ux (@sos-2/tests-live-ux) — server-rendered markup assertions (renderToStaticMarkup) over the real product surfaces",
+  "method": "every CAN entry below is a rendered-string/link-target/honest-state assertion that passed on this branch (see journeys/*.test.tsx); every GAP is an honest finding about what a fresh user cannot discover today — gaps are findings for the architect's integration pass, never fabricated as done",
+  "root_surface": {
+    "surface": "apps/web/app/page.tsx (thin route wrapper) + apps/web/app/start-surface.tsx (the colocated discovery module)",
+    "headline": "What are you trying to accomplish?",
+    "entries": [
+      { "label": "Start mission", "href": "/onboarding/greenfield", "marker": "data-accomplishment-entry=start (primary)" },
+      { "label": "Import system", "href": "/onboarding/brownfield", "marker": "data-accomplishment-entry=import" },
+      { "label": "Go to the mission surface", "href": "/mission", "marker": "data-accomplishment-entry=resume" },
+      { "label": "Open onboarding", "href": "/onboarding", "marker": "data-onboarding-entry=true (New here? Start with onboarding)" }
+    ],
+    "five_first_run_understandings": [
+      { "id": "watches-continuously", "headline": "SOS watches continuously", "links": ["/mission", "/evidence"] },
+      { "id": "summons-bodies", "headline": "SOS can summon bodies to do the work", "links": ["/mission"] },
+      { "id": "computer-optional", "headline": "Your computer is optional", "links": ["/mission", "/history"] },
+      { "id": "asks-when-unsure", "headline": "SOS asks when authority or evidence is insufficient", "links": ["/ask"] },
+      { "id": "independent-verification", "headline": "Completion requires independent verification", "links": ["/evidence", "/experiments"] }
+    ],
+    "discipline": [
+      "server-rendered only: no 'use client', no client fetches, no <script> in the output (pinned structurally; the Next build prerenders / as static content, 16/16 pages)",
+      "progressive disclosure via native details/summary (the shell's own disclosure pattern, zero client JavaScript); full text stays in the server-rendered markup",
+      "every interactive element keeps the 44px touch target; landmarks and aria labels preserved (Skip to main content, aria-label=Primary/Bottom, aria-labelledby on every section)",
+      "links to real routes only — machine-checked against apps/web/app by suite 00",
+      "the discovery surface makes no live/connected data claims of its own (no LIVE badge, no CONNECTED claims) — provenance belongs to the linked surfaces",
+      "the P1 overview composition is kept below the discovery surface (hero, below-hero cards, active autonomous work — the returning-user surface is intact)"
+    ]
+  },
+  "journeys": [
+    {
+      "journey": "fresh user",
+      "verified_at_level": "component (LiveMissionPage with emptyLiveObservation) + root page render",
+      "can_discover": [
+        "the honest no-drain state: 'No live observation drain has run yet — this surface shows honest UNKNOWN states until the real sources are probed (never fabricated live state)'",
+        "onboarding as the visible next step: 'New here? Start with onboarding' -> /onboarding",
+        "all three mission entries: Start mission -> /onboarding/greenfield, Import system -> /onboarding/brownfield, Resume an existing mission",
+        "the honest empty resume state: 'No mission exists yet — this is honestly empty ... nothing is fabricated here'",
+        "every consequential action disabled with its honest reason (no observed head / no observed deployment)",
+        "every live projection honestly empty (sources/branch heads/CI/deployments/findings)",
+        "the six product review questions answered from first contact",
+        "LIVE badges on every surface card (>= 5), never DEMO on this surface's own cards"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "greenfield",
+      "verified_at_level": "component (LiveMissionPage + GreenfieldWizard renders) + root page render",
+      "can_discover": [
+        "the root accomplishment card 'Start something new' -> /onboarding/greenfield",
+        "the mission surface's primary entry (data-mission-entry=primary) -> /onboarding/greenfield with the honest journey description (purpose -> outcomes -> stakeholders -> measures -> constraints -> your authority confirmation -> the GitHub connection; 'including starting from an empty repository')",
+        "missions in flight listed as resumable with status + updated stamps ('Ship the production connectivity wave', ACTIVE; the DRAFT mission equally resumable)",
+        "the hand-off lands on a usable first step: the wizard's purpose form (native GET form, resumable by URL)",
+        "the wizard shows the whole journey ahead (stage progress: Purpose ... Review, Authority, GitHub connection)"
+      ],
+      "gaps": [
+        "resume entries link through /onboarding/greenfield for every mission (P17-C design: 'Resuming links through the onboarding journeys, which resume progressive formalization from the recorded state') — a mission originally imported brownfield resumes through the same greenfield journey surface"
+      ]
+    },
+    {
+      "journey": "brownfield",
+      "verified_at_level": "component (LiveMissionPage + BrownfieldFlow renders) + root page render",
+      "can_discover": [
+        "the root accomplishment card 'Bring an existing system' -> /onboarding/brownfield",
+        "the mission surface's 'Import a system' entry with the honest description (observe, recover competing architecture readings, ask the user to confirm one)",
+        "the hand-off lands on the repository import step: native GET form, the fixture discovery list under the DEMO badge, with the honest fixture/live distinction stated",
+        "the honest scan contract visible ahead of time ('scan the evidence honestly', 'the set is never collapsed for you', the six review questions, 'honestly empty at this step, never fabricated')",
+        "where the imported system is then watched: the live surface's Repository/CI/Deployments/Reconciliation sections"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "ASK",
+      "verified_at_level": "component (LiveMissionPage + AskPage renders; the merged AskQueue resolution driven through the surface's own envelope)",
+      "can_discover": [
+        "the root understanding 'SOS asks when authority or evidence is insufficient' -> /ask ('Open the ASK queue')",
+        "the live mission surface's ASK resolution contract: 'Resolve a pending ASK ... resolved by HUMAN authority through the merged ASK queue', 'human resolver', 'Decision record (minted by the queue)'",
+        "the ASK queue page as the actionable inbox ('Questions waiting for a human decision', 'ASK is a success state')",
+        "the resolution itself: the surface's envelope resolves a pending ask through the merged queue, minting an ACT Decision record bound to the resolver; resolution is terminal (a second resolution is a typed error)",
+        "the envelope carries no authority fields of its own"
+      ],
+      "gaps": [
+        "the live mission surface's ASK section explains the resolution contract but does not LINK /ask directly (the queue is reachable via the shell nav — mobile bottom bar + More index — and via the root surface); a one-line link addition belongs to the surface owner (P18-B integration)"
+      ]
+    },
+    {
+      "journey": "body summon",
+      "verified_at_level": "component (LiveMissionPage renders; the SAME envelope the form POSTs driven through the real merged ActionGateway)",
+      "can_discover": [
+        "the root understanding 'SOS can summon bodies to do the work' (leased worker under granted authority; task/checkpoints/evidence outlive any single body)",
+        "the summon affordance on the live surface: enabled with an observed head ('Lease a body for the current work on main'), DISABLED without one ('No observed repository head yet — the envelope needs the exact source revision to act on (never fabricated)')",
+        "the summon form bound to the EXACT observed head (the envelope's targetRevision is the observed sha), POSTing to /api/live-mission/actions",
+        "the visible authority gate ('Authority-gated: ... fails CLOSED')",
+        "'the UI never mutates state directly' stated on the action panel",
+        "through the real gateway: a held grant summons with an evidence-bound SUCCEEDED receipt; a revoked grant fails CLOSED (DENIED, executor never invoked); replay is idempotent; a smuggled authority field is typed-rejected (AUTHORITY_FIELD_SMUGGLED)"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "laptop off / cloud execution",
+      "verified_at_level": "component (LiveMissionPage with drained state) + root page render",
+      "can_discover": [
+        "the root understanding 'Your computer is optional' ('work runs in the cloud', 'You can close your laptop', 'recorded for you to read when you return') with /history as the return affordance",
+        "the watching note separating continuous observation from body work ('SOS is watching — observation is continuous and does not use a working body; a body is summoned only when active inspection or change is required')",
+        "the drained hero: 'The real observation plane last drained at ... SOS is watching without a body.'",
+        "every observation source in the drained state is a cloud endpoint (github/ci/deploy/telemetry) — no user-device dependency rendered anywhere",
+        "the observation carries its evidence and provenance (drained-at, store, evidence ids, 'What evidence supports it?')",
+        "the deeper mechanic (every cloud tick ran with the user device offline) is already pinned by the P15 flagship suite in tests/accessibility; this lane pinned its DISCOVERABILITY"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "body interruption / replacement",
+      "verified_at_level": "component (LiveMissionPage render; the full lifecycle driven through the real merged ActionGateway with the exported envelope type)",
+      "can_discover": [
+        "the root understanding: bodies are 'ephemeral and replaceable; the task, its checkpoints and its evidence outlive any single body'",
+        "the summon affordance's copy at the point of action: 'The lease is ephemeral; the task, checkpoints and evidence survive body replacement.'",
+        "through the real gateway: start -> pause (interruption) -> resume -> replace (REPLACED) -> a fresh start (RUNNING) — every distinct transition an evidence-bound SUCCEEDED receipt with a typed event",
+        "replacement obeys the same authority gate (a revoked grant fails CLOSED; the body is untouched by the denied action)"
+      ],
+      "gaps": [
+        "the action panel renders only the 'start' operation: pause/resume/cancel/replace are supported by the exported envelope TYPE and by the gateway but have NO UI affordance — interruption/replacement is communicated by copy, not actionable from the surface (a P18-B/integration candidate)"
+      ]
+    },
+    {
+      "journey": "promotion",
+      "verified_at_level": "component (LiveMissionPage with drained state; the promotion envelope driven through the real merged ActionGateway)",
+      "can_discover": [
+        "the promote affordance naming the exact observed head and the currently-deployed revision ('Promote the verified revision', '(currently deployed: ...)')",
+        "the DIVERGED finding staying visible (production behind the observed head; 'stale and unverified stay visible, never folded into success')",
+        "the promotion envelope carrying the exact staging->production transition bound to the observed head",
+        "the authority gate visible on the form; the affordance disabled with its honest reason when no head is observed",
+        "through the real gateway: a held grant promotes with an evidence-bound deployment revision; a never-held grant fails CLOSED with the environment untouched"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "rollback",
+      "verified_at_level": "component (LiveMissionPage with drained state; promote->rollback driven through the real merged ActionGateway)",
+      "can_discover": [
+        "the rollback affordance naming the exact currently-deployed revision ('Roll the production environment back to the last known-good revision', '(currently ...)')",
+        "the verifier contract: 'rollback verifier records what it actually observed — UNKNOWN stays UNKNOWN'",
+        "the rollback envelope carrying the exact deployment id and BOTH revisions (from the observed deployment, to the observed head; reason MANUAL_DIRECTIVE)",
+        "the affordance disabled with its honest reason when no deployment is observed",
+        "through the real gateway: promote then roll back produces rollback.outcome + rollback.verification evidence and restores the environment",
+        "the decision context a human needs is one click away on every page (the shell rail: /changes, /evidence, /history)"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "observation without a body",
+      "verified_at_level": "component (LiveMissionPage with both watching states) + root page render",
+      "can_discover": [
+        "the root understanding 'SOS watches continuously' ('Watching is not something you start — it is how SOS holds state')",
+        "the watching note in BOTH states: data-watching-without-body=true ('no body lease is active right now') and false ('a body lease is active — shown separately, never merged with watching')",
+        "the drained hero line: 'SOS is watching without a body.'",
+        "observation content with ZERO body presence: branch heads with evidence event ids, CI statuses verbatim, deployments, ALIGNED/DIVERGED findings — all LIVE-provenanced",
+        "the honest four-state source vocabulary rendering with the real recorded error ('HTTP 401: authentication failed' — never silence)",
+        "the shell overview keeps the same separation for returning users (Observation status shown separately from Body leases)"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "history",
+      "verified_at_level": "component (HistoryPage render; the shell rail rendered by every page) + root page render",
+      "can_discover": [
+        "the root understanding #3 links /history as the return affordance ('The full history')",
+        "every page the user sits on carries the History section in the shell rail (44px target, stable description 'Revision timeline: what superseded what, and when')",
+        "the history page renders the revision timeline (supersedes relationships, versions, statuses, dates) with a rationale deep-link per entry",
+        "the history surface is honest about its data source (DEMO-badged fixture timeline — never a live claim)"
+      ],
+      "gaps": []
+    },
+    {
+      "journey": "package learning",
+      "verified_at_level": "component (PackagesPage + OverviewBody renders; the live mission surface render) + root page render",
+      "can_discover": [
+        "the live mission surface links the Packages workspace HONESTLY: 'Package composition has no action-gateway family in the merged contracts — rather than fabricate an action, this surface links the existing Packages workspace' -> /packages",
+        "the shell rail carries the Packages section on every page ('Validated, reusable capabilities with retained limitations')",
+        "the packages page renders the reusable capabilities (DEMO-badged)",
+        "the overview keeps learning visible as a first-class outcome ('Recent learning', 'Package reuse' cards)",
+        "the independent-verification understanding names the gate package reuse depends on"
+      ],
+      "gaps": []
+    }
+  ],
+  "cross_cutting_gaps": [
+    {
+      "gap": "the live mission surface (P17-C LiveMissionPage) has NO ROUTE on this branch — it is a self-mounting component (MOUNTING.md documents the architect's one-file mount); /mission currently renders the READ-ONLY shell MissionPage (a real, honest route)",
+      "consequence_for_users": "the root's 'Go to the mission surface' entry lands on the read-only mission view at base; the actionable surface (start/import/resume + live observation + gated actions) is not reachable by URL until the P18-B mount",
+      "integration_step": "mount apps/web/app/live-mission/page.tsx and point apps/web/app/mission/page.tsx at LiveMissionPage (MOUNTING.md step 1 — P18-B owns the call); the root's existing /mission link then becomes the live surface automatically; OPTIONALLY add /live-mission to the root entries (a one-line change in apps/web/app/start-surface.tsx at integration)",
+      "gating": "all route-level full-path suites skip with the explicit reason requires-p18b-mount until this lands (see journey-spec-index.json)"
+    },
+    {
+      "gap": "the frozen navigation model (packages/web-contracts) has no onboarding or live-mission rail item",
+      "consequence_for_users": "onboarding and the live mission surface are NOT reachable from the desktop rail / mobile bottom nav",
+      "mitigation_in_place": "per the work order, discoverability comes from the ROOT surface and in-page entries, not from nav-item changes — the root now carries both; ASK is reachable from the mobile bottom nav and the More index per the frozen contract",
+      "architecture_note": "adding rail items is an architect-level frozen-contract change (packages/web-contracts is byte-frozen for workers); recorded as an OPEN QUESTION, not actioned"
+    },
+    {
+      "gap": "the root page renders the discovery surface above a DEMO-fixture overview (the P1 shell surface)",
+      "consequence_for_users": "a fresh user sees the honest DEMO badges on the overview below the discovery surface before any real data plane is wired",
+      "mitigation_in_place": "the discovery surface itself makes NO data claims and carries no DEMO/LIVE badge (it is static guidance + links); the overview keeps its own honest DEMO badges; the A-lane data plane + integration replace the overview's fixture views in a later pass (not this lane's surface)"
+    }
+  ]
+}

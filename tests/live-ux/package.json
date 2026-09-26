@@ -1,0 +1,31 @@
+{
+  "name": "@sos-2/tests-live-ux",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 UX Discoverability + End-to-End Journey Instrumentation suites (Work Order P18-C, lane UX discoverability). Three strictly-scoped suites. (1) ROOT-PAGE + ONBOARDING DISCOVERABILITY SPECS (run on this branch): a fresh user landing on / sees the accomplish question, discovers onboarding as a first-class entry, discovers the mission entry points, and the five first-run understandings are present through progressive disclosure — all verified on the SERVER-RENDERED markup (renderToStaticMarkup, next/link stubbed to an anchor) with the a11y labels preserved and every link pointing at a REAL app route (machine-checked against the app directory). (2) COMPONENT-LEVEL JOURNEY SPECS (run on this branch): the P17-C LiveMissionPage rendered with scripted HONEST DTO states (built through the DTO producer helpers — emptyLiveObservation / liveObservationFromDrain) through every P18 journey — fresh user, greenfield, brownfield, ASK, body summon, laptop-off/cloud execution, body interruption/replacement, promotion, rollback, observation-without-body, history, package learning — verifying the user can FOLLOW each journey through the UI (visible entry points, next affordances, evidence/rationale links, honest states), never merely that a component exists; consequential journeys additionally drive the SAME envelopes the forms POST through the real merged @sos-2/action-gateway (authority gates, idempotent replay, evidence-bound receipts) and ASK resolution through the merged @sos-2/ask queue. (3) ROUTE-LEVEL FULL-PATH SPECS (capability-gated): mission route -> live observed state -> consequential action -> receipt -> evidence against the P18-B mounts (apps/web/app/live-mission/page.tsx + the /api/live-mission/actions endpoint); while the mount is absent on this branch every suite skips with the EXPLICIT reason requires-p18b-mount (vitest describe.skipIf + an always-run capability probe that reports the gate state honestly); at the architect's integration pass they MUST all be enabled and green before P18 completes — pass states are never fabricated. Structural pins: zero external dependencies beyond the existing toolchain (workspace:* + react/react-dom already used by apps/web), offline determinism (fixed vitest seed 424242, no ambient network/time), run-to-run-identical results.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/web-contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

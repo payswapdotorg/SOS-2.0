@@ -1,0 +1,47 @@
+/**
+ * The tests-live-ux tsconfig (Work Order P18-C): typechecks the journey
+ * suites. The app surfaces under test (the rewritten root page, the P4
+ * onboarding components, the P17-C live-mission components) are imported
+ * through TEST-TIME PATH ALIASES (the tests/real-ocation precedent) so
+ * their types resolve from their real locations — apps/web's own tsconfig
+ * settings (strict, react-jsx) are mirrored here so the followed sources
+ * typecheck identically.
+ */
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@web-app/root-page": ["../../apps/web/app/page.tsx"],
+      "@live-mission/page": ["../../apps/web/live-mission/src/components/live-mission-page.tsx"],
+      "@live-mission/dto": ["../../apps/web/live-mission/src/view-state/live-mission-dto.ts"],
+      "@live-mission/view": ["../../apps/web/live-mission/src/view-state/live-mission-view.ts"],
+      "@live-mission/envelopes": ["../../apps/web/live-mission/src/actions/envelopes.ts"],
+      "@web-onboarding/hub": ["../../apps/web/onboarding/src/components/onboarding-hub.tsx"],
+      "@web-onboarding/greenfield": ["../../apps/web/onboarding/src/components/greenfield-wizard.tsx"],
+      "@web-onboarding/brownfield": ["../../apps/web/onboarding/src/components/brownfield-flow.tsx"],
+      "@web-onboarding/views": ["../../apps/web/onboarding/src/view-state/onboarding-views.ts"],
+      "@web-shell/history-page": ["../../apps/web/shell/components/pages/history-page.tsx"],
+      "@web-shell/packages-page": ["../../apps/web/shell/components/pages/packages-page.tsx"],
+      "@web-shell/overview-page": ["../../apps/web/shell/components/pages/overview-page.tsx"],
+      "@web-shell/ask-page": ["../../apps/web/shell/components/pages/ask-page.tsx"]
+    }
+  },
+  "include": ["journeys"]
+}
