@@ -23,7 +23,7 @@
  *   - malformed submissions -> 400 with the typed rejection.
  */
 
-import { receiptUrlFor, submitLiveAction } from './live-action-core';
+import { compactReceiptForCookie, receiptUrlFor, submitLiveAction } from './live-action-core';
 import type { LiveActionReceiptView } from './live-action-core';
 import { deployedHostConfigFromEnv, ensureDeployedHost } from './deployed-host';
 
@@ -62,10 +62,16 @@ export async function POST(request: Request): Promise<Response> {
     });
   }
   if (receiptPageUrl !== null) {
-    return new Response(null, {
-      status: 303,
-      headers: { location: receiptPageUrl, 'cache-control': 'no-store' },
-    });
+    // the browser PRG hop: the receipt page renders inside the app shell.
+    // The receipt also round-trips through a server-minted, key-validated
+    // cookie so the page renders on ANY serverless instance (the in-process
+    // ledger alone is instance-local — the honest multi-instance reality).
+    const compact = compactReceiptForCookie(result.view);
+    const headers: Record<string, string> = { location: receiptPageUrl, 'cache-control': 'no-store' };
+    if (compact !== null) {
+      headers['set-cookie'] = `live-action-receipt=${encodeURIComponent(compact)}; Path=/mission/receipt; HttpOnly; SameSite=Lax; Max-Age=600`;
+    }
+    return new Response(null, { status: 303, headers });
   }
   // malformed submissions have no idempotency key to key a receipt page —
   // answer with the typed rejection as a JSON body (the honest 400).

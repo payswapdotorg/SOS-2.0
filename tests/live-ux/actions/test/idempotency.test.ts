@@ -19,7 +19,7 @@
 
 import { describe, expect, it } from 'vitest';
 import { InMemoryAuthority } from '@sos-2/action-gateway';
-import { createLiveActionHost, receiptUrlFor, submitLiveAction } from '@live-action/core';
+import { createLiveActionHost, compactReceiptForCookie, parseReceiptCookie, receiptUrlFor, submitLiveAction } from '@live-action/core';
 import { summonBodyEnvelope } from '@live-mission/envelopes';
 
 const T0 = 1_797_123_600_000;
@@ -129,6 +129,43 @@ describe('the in-process receipt ledger + the receipt page URL', () => {
     expect(url).toContain('/mission/receipt?key=');
     expect(url!.length).toBeGreaterThan('/mission/receipt?key='.length);
     expect(receiptUrlFor({ kind: 'malformed', detail: 'x' })).toBeNull();
+  });
+});
+
+describe('the receipt cookie (the cross-instance PRG hop)', () => {
+  it('compacts the receipt view (envelope dropped, key + authority + evidence + notes kept) and round-trips key-validated', () => {
+    const host = grantedHost();
+    const result = submitLiveAction({ body: JSON.stringify(SUMMON_FORM), contentType: 'application/json', host, now: T0 });
+    const compact = compactReceiptForCookie(result.view);
+    expect(compact).not.toBeNull();
+    const key = result.view.kind === 'gateway-action' ? result.view.idempotencyKey : null;
+    const parsed = parseReceiptCookie(compact!, key!);
+    expect(parsed).not.toBeNull();
+    if (parsed !== null && result.view.kind === 'gateway-action' && parsed.kind === 'gateway-action') {
+      expect(parsed.receipt).toEqual(result.view.receipt);
+      expect(parsed.idempotencyKey).toBe(result.view.idempotencyKey);
+      expect(parsed.honestyNotes).toEqual(result.view.honestyNotes);
+      expect(parsed.submittedEnvelope).toBeUndefined();
+    }
+  });
+
+  it('rejects a cookie candidate whose key does not match the URL key (never an injection surface)', () => {
+    const host = grantedHost();
+    const result = submitLiveAction({ body: JSON.stringify(SUMMON_FORM), contentType: 'application/json', host, now: T0 });
+    const compact = compactReceiptForCookie(result.view)!;
+    expect(parseReceiptCookie(compact, 'some-other-key')).toBeNull();
+    expect(parseReceiptCookie('not json', 'k')).toBeNull();
+    expect(parseReceiptCookie('{"kind":"gateway-action","idempotencyKey":"k"}', 'k')).not.toBeNull();
+    expect(parseReceiptCookie('{"kind":"other","idempotencyKey":"k"}', 'k')).toBeNull();
+    expect(parseReceiptCookie('{"kind":"malformed","idempotencyKey":"k"}', 'k')).toBeNull();
+  });
+
+  it('malformed views and oversized receipts do not produce a cookie (the page falls back honestly)', () => {
+    expect(compactReceiptForCookie({ kind: 'malformed', detail: 'x' })).toBeNull();
+    const host = grantedHost();
+    const view = submitLiveAction({ body: JSON.stringify(SUMMON_FORM), contentType: 'application/json', host, now: T0 }).view;
+    const compact = compactReceiptForCookie(view);
+    expect(compact === null || compact.length <= 3_600).toBe(true);
   });
 });
 

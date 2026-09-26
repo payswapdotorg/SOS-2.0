@@ -97,6 +97,12 @@ async function timedFetch(url, init, timeoutMs) {
     return { status: response.status, ok: response.ok, body, headers: Object.fromEntries(response.headers) };
   } finally { clearTimeout(timer); }
 }
+function errorSnippet(body) {
+  if (body === null || typeof body !== 'object') return '';
+  const error = body.error;
+  if (error === null || typeof error !== 'object') return '';
+  return ' provider said: ' + JSON.stringify(error).slice(0, 220);
+}
 async function githubCommitUrl(sha) {
   if (config.github === null) return null;
   const g = config.github;
@@ -139,7 +145,7 @@ async function executeOperation(operation, context) {
       headers: { Authorization: 'Bearer ' + v.token, 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: 'sos-2-0', project: v.projectId, gitSource: { type: 'github', repoId: v.repoId, ref: sourceSha }, target: target }),
     }, v.timeoutMs);
-    if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel POST /v13/deployments answered HTTP ' + response.status + ' — the real provider failure is the honest record', retryable: true };
+    if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel POST /v13/deployments answered HTTP ' + response.status + ' — the real provider failure is the honest record' + errorSnippet(response.body), retryable: true };
     const deployment = response.body;
     return { status: 'ok', output: { produced: { deploymentId: deployment.id, url: deployment.url, readyState: deployment.readyState, target: target, environment: environment, sourceSha: sourceSha, provider: 'vercel', apiRevision: 'vercel.v13', commitUrl: commitUrl === null ? 'unverified' : commitUrl, note: 'deployment created (readiness not awaited inline — the deployment id is the real provider record)' } } };
   }
@@ -157,7 +163,7 @@ async function executeOperation(operation, context) {
         headers: { Authorization: 'Bearer ' + v.token, 'Content-Type': 'application/json' },
         body: JSON.stringify({}),
       }, v.timeoutMs);
-      if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel POST /v13/deployments/' + restore.id + '/rollback answered HTTP ' + response.status, retryable: true };
+      if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel POST /v13/deployments/' + restore.id + '/rollback answered HTTP ' + response.status + ' — the real provider failure is the honest record' + errorSnippet(response.body), retryable: true };
       return { status: 'ok', output: { produced: { deploymentId: restore.id, url: restore.url, readyState: 'READY', strategy: 'vercel-instant-rollback', fromSourceSha: operation.fromSourceSha, toSourceSha: operation.toSourceSha, provider: 'vercel', apiRevision: 'vercel.v13', note: 'rolled back to the prior READY production deployment serving ' + operation.toSourceSha } } };
     }
     if (v.repoId === null) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'no READY production deployment serves ' + operation.toSourceSha + ' and the project carries no repoId for a restore deployment', retryable: false };
@@ -166,7 +172,7 @@ async function executeOperation(operation, context) {
       headers: { Authorization: 'Bearer ' + v.token, 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: 'sos-2-0', project: v.projectId, gitSource: { type: 'github', repoId: v.repoId, ref: operation.toSourceSha }, target: 'production' }),
     }, v.timeoutMs);
-    if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel restore-deployment answered HTTP ' + response.status, retryable: true };
+    if (!response.ok) return { status: 'error', errorType: 'DEPLOYMENT_PROVIDER_FAILURE', message: 'Vercel restore-deployment answered HTTP ' + response.status + ' — the real provider failure is the honest record' + errorSnippet(response.body), retryable: true };
     return { status: 'ok', output: { produced: { deploymentId: response.body.id, url: response.body.url, readyState: response.body.readyState, strategy: 'git-restore-deployment', fromSourceSha: operation.fromSourceSha, toSourceSha: operation.toSourceSha, provider: 'vercel', apiRevision: 'vercel.v13', note: 'no READY production deployment served ' + operation.toSourceSha + ' — a git restore deployment was created instead (recorded honestly)' } } };
   }
   return { status: 'error', errorType: 'PROVIDER_OPERATION_UNSUPPORTED', message: 'no real provider is bound for operation ' + op + ' on the live-mission endpoint', retryable: false };

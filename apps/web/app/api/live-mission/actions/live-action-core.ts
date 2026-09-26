@@ -543,6 +543,61 @@ export function receiptUrlFor(view: LiveActionReceiptView): string | null {
   return `/mission/receipt?key=${encodeURIComponent(key)}`;
 }
 
+// ---------------------------------------------------------------------------
+// The receipt cookie (the cross-instance PRG hop)
+// ---------------------------------------------------------------------------
+
+/** The cookie name carrying the submission's own receipt (server-minted, key-validated). */
+export const LIVE_ACTION_RECEIPT_COOKIE = 'live-action-receipt';
+
+/** The cookie payload cap (compact view without the submitted envelope; cookies are ~4KB). */
+const RECEIPT_COOKIE_MAX_CHARS = 3_600;
+
+interface ViewWithEnvelope extends Record<string, unknown> {
+  submittedEnvelope?: unknown;
+}
+
+/**
+ * Compact the receipt view for the PRG cookie: the submitted envelope is
+ * dropped (it is never rendered); everything else (status, authority,
+ * evidence ids, idempotency scope, honesty notes) round-trips so the
+ * receipt page renders on ANY serverless instance. Returns null when the
+ * view carries no key or exceeds the cookie budget (the page then falls
+ * back to the in-process ledger / the honest empty state — never a
+ * fabricated receipt).
+ */
+export function compactReceiptForCookie(view: LiveActionReceiptView): string | null {
+  if (view.kind === 'malformed') return null;
+  const key = view.idempotencyKey;
+  if (key === null || key === undefined || key.length === 0) return null;
+  const { submittedEnvelope: _dropped, ...rest } = view as unknown as ViewWithEnvelope;
+  const serialized = JSON.stringify(rest);
+  if (serialized.length > RECEIPT_COOKIE_MAX_CHARS) return null;
+  return serialized;
+}
+
+/**
+ * Parse + validate a receipt cookie candidate against the requested key:
+ * only a view whose idempotency key MATCHES the URL key is accepted (the
+ * cookie is the submission's own server-minted round-trip, never an
+ * injection vector for someone else's receipt). Returns null on any
+ * mismatch or malformed payload.
+ */
+export function parseReceiptCookie(raw: string, key: string): LiveActionReceiptView | null {
+  if (key.length === 0) return null;
+  try {
+    const parsed = JSON.parse(raw) as unknown;
+    if (typeof parsed !== 'object' || parsed === null) return null;
+    const view = parsed as Record<string, unknown>;
+    if (view['kind'] !== 'gateway-action' && view['kind'] !== 'ask-resolution') return null;
+    const carriedKey = view['idempotencyKey'];
+    if (carriedKey !== key) return null;
+    return parsed as LiveActionReceiptView;
+  } catch {
+    return null;
+  }
+}
+
 const RECEIPT_LEDGER_CAP = 256;
 
 function recordReceipt(host: LiveActionHost, view: LiveActionReceiptView): void {
