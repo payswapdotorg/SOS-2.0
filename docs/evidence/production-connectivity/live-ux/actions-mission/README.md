@@ -122,3 +122,18 @@ deployed host after the `VERCEL_TOKEN` name-collision observation).
 - `deploy-contract.yml` fails REPO-WIDE, including on the base commit
   `3717b6c` itself and on main (verified through the Actions API at
   delivery time) — a pre-existing condition, not a regression of this lane.
+
+### Why the `repository-contract` check is not visible on the PR yet
+
+The `SOS repository verification` workflow (verify.yml) triggers on
+`pull_request` events, which check out `refs/pull/<n>/merge`. A parallel-lane
+PR with the expected lockfile/pnpm-workspace conflicts (P18-A and P18-C
+landed on main after this lane's base, on disjoint owned paths) has NO merge
+ref, so GitHub cannot start the pull_request-triggered run — verified
+empirically (pushes, PR open/reopen and synchronize events fired the
+push-event workflows and the Vercel check, never verify.yml, while the
+sibling PRs #39/#40 — conflict-free at their heads — show
+`repository-contract -> success`). The contract itself
+(`verify-repo` + `verify-productization`) passes on this lane's head locally
+(exit 0, recorded above) and will run green on the PR at the architect's
+A→B→C integration once the merge ref exists.
