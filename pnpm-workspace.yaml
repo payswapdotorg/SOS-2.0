@@ -24,3 +24,16 @@ packages:
   # @sos-2/deployment-providers (workspace:* only — zero external
   # dependencies; the lockfile change is importer addition only).
   - infra/production-connectivity
+  # P18-A: the live data plane + its data-plane suites are workspace
+  # packages so their module boundaries resolve the merged P17 packages
+  # (workspace:* only — zero external dependencies; the lockfile change
+  # is importer addition only, the W17/P17-A precedent).
+  #   - apps/web/live-data is the source-only server module (the P17-C
+  #     app-module precedent — no build/dist of its own); the importer
+  #     entry exists so its node_modules carries the real
+  #     persistence/observation/deployment packages its sources import.
+  #   - tests/live-ux/data-plane is the lane's two strictly separated
+  #     suites (deterministic reference-mode default; env-gated
+  #     RUN_REAL=1 real integration).
+  - apps/web/live-data
+  - tests/live-ux/data-plane
