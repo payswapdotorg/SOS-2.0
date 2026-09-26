@@ -3175,9 +3175,21 @@ importers:
       '@sos-2/deployment-providers':
         specifier: workspace:*
         version: link:../../../packages/deployment-providers
+      '@sos-2/evidence':
+        specifier: workspace:*
+        version: link:../../../packages/evidence
       '@sos-2/real-observation':
         specifier: workspace:*
         version: link:../../../packages/real-observation
+      '@sos-2/semantic-spine':
+        specifier: workspace:*
+        version: link:../../../packages/semantic-spine
+      '@sos-2/ui-contracts':
+        specifier: workspace:*
+        version: link:../../../packages/ui-contracts
+      '@sos-2/web-contracts':
+        specifier: workspace:*
+        version: link:../../../packages/web-contracts
     devDependencies:
       '@types/node':
         specifier: ^22.10.0
