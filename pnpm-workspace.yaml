@@ -24,3 +24,11 @@ packages:
   # @sos-2/deployment-providers (workspace:* only — zero external
   # dependencies; the lockfile change is importer addition only).
   - infra/production-connectivity
+  # P18-B: the live actions + mission UX suites are a workspace package
+  # so that `pnpm -r --if-present test` includes its deterministic
+  # reference-mode suite (work-order P18-B task packet, following the
+  # P17 lane test-wiring precedent — test-only wiring; deps are
+  # workspace:* + the toolchain only; the lockfile change is importer
+  # addition only, mechanical). The env-gated RUN_REAL=1 real-integration
+  # suite in the same package stays OFF by default.
+  - tests/live-ux/actions

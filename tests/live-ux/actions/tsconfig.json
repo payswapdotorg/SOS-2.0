@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "types": ["node"],
+    "paths": {
+      "@live-action/core": ["../../../apps/web/app/api/live-mission/actions/live-action-core.ts"],
+      "@live-action/deployed-host": ["../../../apps/web/app/api/live-mission/actions/deployed-host.ts"],
+      "@live-action/bridge": ["../../../apps/web/app/api/live-mission/actions/real-executor-bridge.ts"],
+      "@live-action/seam": ["../../../apps/web/app/live-mission/data-seam.ts"],
+      "@live-action/mission-page": ["../../../apps/web/app/mission/page.tsx"],
+      "@live-action/mission-route": ["../../../apps/web/app/mission/page.tsx"],
+      "@live-action/live-mission-route": ["../../../apps/web/app/live-mission/page.tsx"],
+      "@live-action/receipt-view": ["../../../apps/web/live-mission/src/components/action-receipt-view.tsx"],
+      "@live-action/receipt-page": ["../../../apps/web/app/mission/receipt/page.tsx"],
+      "@live-mission/envelopes": ["../../../apps/web/live-mission/src/actions/envelopes.ts"],
+      "@live-mission/dto": ["../../../apps/web/live-mission/src/view-state/live-mission-dto.ts"]
+    }
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist", "test/real"]
+}

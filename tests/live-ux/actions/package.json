@@ -1,0 +1,45 @@
+{
+  "name": "@sos-2/tests-live-ux-actions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Live Actions + Mission UX acceptance suites (Work Order P18-B, lane live actions). TWO suites, strictly separated. (1) DETERMINISTIC REFERENCE-MODE SUITE (default; offline; scripted adapters; fixed vitest seed 424242; run-to-run identical): the live action endpoint core — envelope validation and typed rejections (smuggled authority fields named), deterministic completion of the mounted forms' partial envelopes (same form -> same derived idempotency key), authority-at-action-time enforcement through the REAL merged action-gateway (held grant executes with evidence; revoked/expired/never-held grants fail CLOSED with the executor never invoked; exactly one evaluation), idempotency (double-submit returns the recorded original receipt, exactly one world transition), ASK resolution through the merged AskQueue (human authority; terminal entries; unknown entries are typed honest failures; endpoint-level ASK replay), receipt rendering (status, authority decision, evidence ids + evidence/rationale links, idempotency scope, safe failure and denied-action UX), the mount seams (the data seam returns the honest 'unwired' state; the /mission and /live-mission routes render the live experience server-side with the forms POSTing to /api/live-mission/actions), and redaction (no credential values in receipts or evidence; env NAMES only). (2) ENV-GATED REAL INTEGRATION SUITE (RUN_REAL=1, default OFF): deploys the exact branch head to the Vercel project (gitSource ref = head sha), then submits REAL action envelopes against the DEPLOYED preview URL over real HTTP — real body summon (OpenRouter-backed body provider), real promotion/rollback through the deployment provider (Vercel records), real denied-action receipt (fail-closed authority), the honest ask-plane failure, and the real ASK resolution contract through the merged queue — recording HTTP transcripts, typed receipts, honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) and the deployment record (revision id, exact source_revision_sha, URL, rollback pointer) into docs/evidence/production-connectivity/live-ux/actions-mission/.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run && node scripts/run-real-if-env.mjs",
+    "test:reference": "pnpm run build && vitest run",
+    "test:real": "pnpm run build && vitest run --config vitest.real.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/real-observation": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
