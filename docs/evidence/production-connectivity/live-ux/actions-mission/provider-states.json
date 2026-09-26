@@ -1,0 +1,16 @@
+{
+  "schema": "sos-2/p18b/live-actions-provider-states",
+  "produced_at": "2026-09-26T19:36:46.585Z",
+  "providerStates": {
+    "summonBody": [
+      {
+        "provider": "openrouter (the body’s hosted model provider)",
+        "state": "CONNECTED",
+        "detail": "the body's hosted model provider answered (response gen-1790451404-bTBhEtsxKvsSfVAMi9Na, served model qwen/qwen3-coder-flash, 38 tokens)",
+        "lastError": null,
+        "apiRevision": "openrouter.v1",
+        "credentialEnv": "BODY_PROVIDER_API_KEY"
+      }
+    ]
+  }
+}

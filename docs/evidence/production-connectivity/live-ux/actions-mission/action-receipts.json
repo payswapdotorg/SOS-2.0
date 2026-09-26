@@ -1,0 +1,383 @@
+{
+  "schema": "sos-2/p18b/live-actions-real",
+  "produced_at": "2026-09-26T19:36:46.585Z",
+  "base_url": "http://localhost:3100",
+  "run_id": "20260926193643",
+  "receipts": {
+    "mountedRoutes": {
+      "root": {
+        "status": 200
+      },
+      "mission": {
+        "status": 200,
+        "rendersLiveExperience": true
+      }
+    },
+    "endpointContract": {
+      "endpoint": "/api/live-mission/actions",
+      "methods": {
+        "POST": "typed action submissions: the form field \"action\" (the gateway envelope JSON) | \"ask\" (the ASK resolution JSON) | the discrete ask fields (askEntryId, askAlternative, askNote, askResolvedBy); JSON bodies {\"action\": …} / {\"ask\": …} are accepted equally; Accept: text/html answers with the server-rendered receipt page",
+        "GET": "this typed contract (honest discovery — never a fabricated capability)"
+      },
+      "consequences": [
+        "body-lifecycle (summon body) — through the merged action gateway; a real OpenRouter-backed body session when the provider env is attached",
+        "promotion — through the merged action gateway; bound to the real Vercel deployment records (exact source_revision_sha) when the provider envs are attached",
+        "rollback — through the merged action gateway; the rollback verification answers from the real records read at action time",
+        "ASK resolution — through the merged @sos-2/ask AskQueue.resolve(); the queue mints the Decision record"
+      ],
+      "authority": {
+        "model": "re-evaluated at action time through the merged ActionGateway, fail-closed",
+        "operatorDeclaration": "LIVE_MISSION_GRANTS",
+        "note": "unset or empty declaration denies every action (GRANT_NEVER_HELD); a provider credential is never authority by itself"
+      },
+      "idempotency": "the same envelope replays the recorded original receipt (content-derived identity for the frozen forms; caller-supplied identity is used as-is)",
+      "providers": {
+        "bodyModel": {
+          "credentialEnv": "BODY_PROVIDER_API_KEY",
+          "modelEnv": "BODY_PROVIDER_MODEL"
+        },
+        "deploymentRecords": {
+          "credentialEnvs": [
+            "VERCEL_TOKEN",
+            "VERCEL_PROJECT_ID",
+            "VERCEL_ORG_ID"
+          ]
+        }
+      },
+      "honestScope": [
+        "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation."
+      ]
+    },
+    "summonBody": {
+      "kind": "executed",
+      "replayed": false,
+      "receipt": {
+        "actionId": "p18b-real-summon-20260926193643",
+        "idempotencyKey": "p18b-real-summon-idem-20260926193643",
+        "family": "body-lifecycle",
+        "actor": {
+          "kind": "human",
+          "id": "console-user"
+        },
+        "status": "SUCCEEDED",
+        "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+        "deploymentRevision": null,
+        "denial": null,
+        "failure": null,
+        "output": {
+          "produced": {
+            "bodyId": "p18b-real-openrouter-body",
+            "state": "RUNNING",
+            "provider": "openrouter",
+            "modelResponseId": "gen-1790451404-bTBhEtsxKvsSfVAMi9Na",
+            "servedModel": "qwen/qwen3-coder-flash",
+            "usageTotalTokens": "38"
+          }
+        },
+        "rollbackVerification": null,
+        "evidenceIds": [
+          "action-evidence:f7ad0361ad679a4c"
+        ],
+        "executedAt": 1790451405485
+      },
+      "execution": {
+        "at": "2026-09-26T19:36:44.415Z",
+        "family": "body-lifecycle",
+        "mode": "real",
+        "providers": [
+          {
+            "provider": "openrouter (the body’s hosted model provider)",
+            "state": "CONNECTED",
+            "detail": "the body's hosted model provider answered (response gen-1790451404-bTBhEtsxKvsSfVAMi9Na, served model qwen/qwen3-coder-flash, 38 tokens)",
+            "lastError": null,
+            "apiRevision": "openrouter.v1",
+            "credentialEnv": "BODY_PROVIDER_API_KEY"
+          }
+        ],
+        "requests": [],
+        "facts": {
+          "bodyModelResponseId": "gen-1790451404-bTBhEtsxKvsSfVAMi9Na",
+          "bodyServedModel": "qwen/qwen3-coder-flash",
+          "bodyFinishReason": "stop",
+          "bodyUsageTotalTokens": "38",
+          "bodyId": "p18b-real-openrouter-body",
+          "state": "RUNNING",
+          "provider": "openrouter",
+          "modelResponseId": "gen-1790451404-bTBhEtsxKvsSfVAMi9Na",
+          "servedModel": "qwen/qwen3-coder-flash",
+          "usageTotalTokens": "38"
+        }
+      },
+      "limitations": [
+        "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation."
+      ],
+      "at": "2026-09-26T19:36:44.415Z"
+    },
+    "idempotentReplay": {
+      "first": {
+        "kind": "executed",
+        "replayed": false,
+        "receipt": {
+          "actionId": "p18b-real-replay-20260926193643",
+          "idempotencyKey": "p18b-real-replay-idem-20260926193643",
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "status": "SUCCEEDED",
+          "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+          "deploymentRevision": null,
+          "denial": null,
+          "failure": null,
+          "output": {
+            "produced": {
+              "bodyId": "p18b-real-replay-body",
+              "state": "RUNNING",
+              "provider": "openrouter",
+              "modelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+              "servedModel": "qwen/qwen3-coder-flash",
+              "usageTotalTokens": "38"
+            }
+          },
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:2a0dc8b03ec42f12"
+          ],
+          "executedAt": 1790451406451
+        },
+        "execution": {
+          "at": "2026-09-26T19:36:45.578Z",
+          "family": "body-lifecycle",
+          "mode": "real",
+          "providers": [
+            {
+              "provider": "openrouter (the body’s hosted model provider)",
+              "state": "CONNECTED",
+              "detail": "the body's hosted model provider answered (response gen-1790451405-CLQcHOTl6iSdg0IplYh6, served model qwen/qwen3-coder-flash, 38 tokens)",
+              "lastError": null,
+              "apiRevision": "openrouter.v1",
+              "credentialEnv": "BODY_PROVIDER_API_KEY"
+            }
+          ],
+          "requests": [],
+          "facts": {
+            "bodyModelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+            "bodyServedModel": "qwen/qwen3-coder-flash",
+            "bodyFinishReason": "stop",
+            "bodyUsageTotalTokens": "38",
+            "bodyId": "p18b-real-replay-body",
+            "state": "RUNNING",
+            "provider": "openrouter",
+            "modelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+            "servedModel": "qwen/qwen3-coder-flash",
+            "usageTotalTokens": "38"
+          }
+        },
+        "limitations": [
+          "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation."
+        ],
+        "at": "2026-09-26T19:36:45.578Z"
+      },
+      "second": {
+        "kind": "replayed",
+        "replayed": true,
+        "receipt": {
+          "actionId": "p18b-real-replay-20260926193643",
+          "idempotencyKey": "p18b-real-replay-idem-20260926193643",
+          "family": "body-lifecycle",
+          "actor": {
+            "kind": "human",
+            "id": "console-user"
+          },
+          "status": "SUCCEEDED",
+          "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+          "deploymentRevision": null,
+          "denial": null,
+          "failure": null,
+          "output": {
+            "produced": {
+              "bodyId": "p18b-real-replay-body",
+              "state": "RUNNING",
+              "provider": "openrouter",
+              "modelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+              "servedModel": "qwen/qwen3-coder-flash",
+              "usageTotalTokens": "38"
+            }
+          },
+          "rollbackVerification": null,
+          "evidenceIds": [
+            "action-evidence:2a0dc8b03ec42f12"
+          ],
+          "executedAt": 1790451406451
+        },
+        "execution": {
+          "at": "2026-09-26T19:36:45.578Z",
+          "family": "body-lifecycle",
+          "mode": "real",
+          "providers": [
+            {
+              "provider": "openrouter (the body’s hosted model provider)",
+              "state": "CONNECTED",
+              "detail": "the body's hosted model provider answered (response gen-1790451405-CLQcHOTl6iSdg0IplYh6, served model qwen/qwen3-coder-flash, 38 tokens)",
+              "lastError": null,
+              "apiRevision": "openrouter.v1",
+              "credentialEnv": "BODY_PROVIDER_API_KEY"
+            }
+          ],
+          "requests": [],
+          "facts": {
+            "bodyModelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+            "bodyServedModel": "qwen/qwen3-coder-flash",
+            "bodyFinishReason": "stop",
+            "bodyUsageTotalTokens": "38",
+            "bodyId": "p18b-real-replay-body",
+            "state": "RUNNING",
+            "provider": "openrouter",
+            "modelResponseId": "gen-1790451405-CLQcHOTl6iSdg0IplYh6",
+            "servedModel": "qwen/qwen3-coder-flash",
+            "usageTotalTokens": "38"
+          }
+        },
+        "limitations": [
+          "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation."
+        ],
+        "at": "2026-09-26T19:36:46.462Z"
+      }
+    },
+    "promotion": {
+      "kind": "executed",
+      "replayed": false,
+      "receipt": {
+        "actionId": "p18b-real-promote-20260926193643",
+        "idempotencyKey": "p18b-real-promote-idem-20260926193643",
+        "family": "promotion",
+        "actor": {
+          "kind": "human",
+          "id": "console-user"
+        },
+        "status": "SUCCEEDED",
+        "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+        "deploymentRevision": "deployment:492c3f729c9b5647",
+        "denial": null,
+        "failure": null,
+        "output": {
+          "produced": {
+            "deploymentId": "deployment:492c3f729c9b5647",
+            "sourceSha": "3717b6ccac7ab4816a2f33581bf9e9814f21250f"
+          }
+        },
+        "rollbackVerification": null,
+        "evidenceIds": [
+          "action-evidence:895ad8ece10891c5"
+        ],
+        "executedAt": 1790451406472
+      },
+      "execution": null,
+      "limitations": [
+        "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation.",
+        "Reference mode: the deterministic reference executor (the buildHost precedent) answered — the provider env BODY_PROVIDER_API_KEY, VERCEL_TOKEN / VERCEL_PROJECT_ID are not attached (env NAMES only, never values)."
+      ],
+      "at": "2026-09-26T19:36:46.471Z"
+    },
+    "vercelCredentialFact": "the real Vercel records read answered 403 (the credential env VERCEL_TOKEN was rejected at the run instant — recorded verbatim, never a fabricated success)",
+    "rollback": {
+      "kind": "executed",
+      "replayed": false,
+      "receipt": {
+        "actionId": "p18b-real-rollback-20260926193643",
+        "idempotencyKey": "p18b-real-rollback-idem-20260926193643",
+        "family": "rollback",
+        "actor": {
+          "kind": "human",
+          "id": "console-user"
+        },
+        "status": "FAILED",
+        "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+        "deploymentRevision": null,
+        "denial": null,
+        "failure": {
+          "operation": "rollback.apply",
+          "errorType": "UNKNOWN_DEPLOYMENT",
+          "message": "deployment current-production is unknown",
+          "retryable": false
+        },
+        "output": null,
+        "rollbackVerification": null,
+        "evidenceIds": [
+          "action-evidence:dd7761c3f22aab38"
+        ],
+        "executedAt": 1790451406492
+      },
+      "execution": null,
+      "limitations": [
+        "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation.",
+        "Reference mode: the deterministic reference executor (the buildHost precedent) answered — the provider env BODY_PROVIDER_API_KEY, VERCEL_TOKEN / VERCEL_PROJECT_ID are not attached (env NAMES only, never values)."
+      ],
+      "at": "2026-09-26T19:36:46.492Z"
+    },
+    "askResolution": {
+      "kind": "ask-resolved",
+      "resolution": {
+        "entryId": "sos://AskRequest/a6241e0e61b689ac530924dcfc96a109",
+        "decisionRef": "sos://Decision/f48d1edcb16e9ffb333ebe82330cc2bd",
+        "action": "ACT",
+        "resolvedBy": "console-user",
+        "chosenAlternativeId": "act-under-granted-authority",
+        "note": "P18-B RUN_REAL ask resolution 20260926193643 — the human resolver answering the console's seeded ask over the deployed endpoint",
+        "createdAt": "2026-09-26T19:36:46.499Z",
+        "provenance": [
+          "human:console-user",
+          "surface:live-mission",
+          "run:20260926193643"
+        ],
+        "queue": {
+          "pending": 0,
+          "total": 1,
+          "scopeNote": "This queue is process-local: the durable ask store is not attached (Neon/Upstash are UNAVAILABLE — the recorded DNS facts). Resolutions mint real Decision records bound to the ask’s exact input digest, but the queue itself does not survive a server restart."
+        },
+        "at": "2026-09-26T19:36:46.518Z"
+      }
+    },
+    "denial": {
+      "kind": "executed",
+      "replayed": false,
+      "receipt": {
+        "actionId": "p18b-real-deny-20260926193643",
+        "idempotencyKey": "p18b-real-deny-idem-20260926193643",
+        "family": "configuration",
+        "actor": {
+          "kind": "human",
+          "id": "console-user"
+        },
+        "status": "DENIED",
+        "sourceRevision": "3717b6ccac7ab4816a2f33581bf9e9814f21250f",
+        "deploymentRevision": null,
+        "denial": {
+          "reason": "ACTION_AUTHORITY_DENIED",
+          "authority": {
+            "granted": false,
+            "reason": "GRANT_NEVER_HELD",
+            "grantId": null,
+            "evaluatedAt": 1790451406566,
+            "detail": "no currently-live grant for console-user|configuration|live-ux-probe: the operator grant declaration (LIVE_MISSION_GRANTS) carries no matching entry (fail-closed)"
+          },
+          "detail": "authority re-evaluated at action time: GRANT_NEVER_HELD (no currently-live grant for console-user|configuration|live-ux-probe: the operator grant declaration (LIVE_MISSION_GRANTS) carries no matching entry (fail-closed))"
+        },
+        "failure": null,
+        "output": null,
+        "rollbackVerification": null,
+        "evidenceIds": [
+          "action-evidence:9306890453a41ebc"
+        ],
+        "executedAt": 1790451406566
+      },
+      "execution": null,
+      "limitations": [
+        "The idempotency store, event log, evidence sink and ask queue are process-local: the canonical durable stores are UNAVAILABLE (Neon/Upstash DNS-unreachable — the P18-A recorded facts). A replay on a warm instance returns the recorded receipt; there is no cross-instance durable confirmation.",
+        "Reference mode: the deterministic reference executor (the buildHost precedent) answered — the provider env BODY_PROVIDER_API_KEY, VERCEL_TOKEN / VERCEL_PROJECT_ID are not attached (env NAMES only, never values)."
+      ],
+      "at": "2026-09-26T19:36:46.564Z"
+    }
+  }
+}

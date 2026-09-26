@@ -1,0 +1,18 @@
+{
+  "name": "@sos-2/web-live-actions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Live Actions composition seams (Work Order P18-B, live actions + mission UX lane): the app-module wiring behind the /api/live-mission/actions endpoint and the live mission surface. COLOCATED under the mission route directory (the P18-C start-surface colocation precedent \u2014 only page.tsx files are routes; this module is plain source in the module graph). Contains: the live action host (the merged @sos-2/action-gateway composed with authority re-evaluated at action time, fail-closed; ASK envelopes through the merged @sos-2/ask AskQueue.resolve(); idempotent typed submissions with content-derived identity for the frozen P17-C forms), the console authority port (the operator's env-declared grant set \u2014 LIVE_MISSION_GRANTS \u2014 read per action, fail-closed when unset), the console's ask queue (one deterministic reference ask seeded through the real @sos-2/decision machinery), the composition-boundary provider adapters (the merged @sos-2/deployment-providers Vercel REST records client + the merged @sos-2/real-bodies OpenRouter client behind the frozen seams \u2014 env-only credentials, injectable ports, typed outcomes, redacted transcripts), and the receipt rendering (the typed receipt document with evidence/rationale links and safe-failure/denied-action UX). Source-only module (the apps/web live-data precedent): consumed as TypeScript source by the endpoint route and the tests/live-ux/actions suites; no build/dist of its own. The importer entry exists so this directory's node_modules carries the merged packages its sources import by name \u2014 the P17-C module at apps/web/live-mission stays byte-identical to its base (its frozen structure suite pins it as a pure ambient-free UI module with restricted imports; the merged @sos-2/web build closure does not include these packages, and apps/web/package.json is outside this lane's owned surface \u2014 see the lane README's architecture note).",
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/real-bodies": "workspace:*"
+  }
+}

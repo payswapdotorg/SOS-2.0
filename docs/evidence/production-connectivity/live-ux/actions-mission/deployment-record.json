@@ -1,0 +1,57 @@
+{
+  "schema": "sos-2/p18b/vercel-deployment",
+  "work_order": "P18-B",
+  "produced_at": "2026-09-26T19:36:00.000Z",
+  "evidence_kind": "deployment-record",
+  "deployment_status": "NOT_DEPLOYED_CREDENTIAL_REJECTED",
+  "the_honest_facts": {
+    "what_happened": "The lane's deploy step (tests/live-ux/actions/scripts/deploy-p18b.mjs — the P17-A deployment-journey protocol: gitSource bound to the exact 40-hex branch head, the per-deployment projectSettings.buildCommand override extending the frozen closure pattern) could NOT execute: the provided VERCEL_TOKEN answered 403 invalidToken on the authenticated GET /v2/user probe (probed at 2026-09-26T19:23Z and again before the run). The GitHub credential is valid (admin on payswapdotorg/SOS-2.0, repoId 1377439399 — the branch was pushed and the PR opened with it); the OpenRouter credential is valid (the REAL body summon receipts in action-receipts.json carry its real provider facts); the Vercel credential is revoked or rotated.",
+    "env_names_only": ["VERCEL_TOKEN (rejected — 403 invalidToken)", "VERCEL_PROJECT_ID (prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ — the sos-2-0 project, git-linked)", "VERCEL_ORG_ID (undiscoverable without a valid token; the P18-A lane recorded team_4KOoA5CgtYaOF85yFXPeMXLt for this project)"],
+    "what_was_run_instead": "The RUN_REAL action suite executed against the lane's PRODUCTION BUILD (pnpm exec next start on the branch head — the exact artifact the deploy would serve): 9/9 real tests green — the real OpenRouter-backed body summon, the idempotent replay over the wire, the promotion/rollback in the honest reference mode (the deployment-records binding degrades honestly when the records read cannot authenticate — no fake confirmations), the real ASK resolution (a real Decision record minted through the merged queue) and the fail-closed denial. See action-receipts.json (base_url records where the run executed).",
+    "reproduction_when_a_valid_vercel_token_exists": [
+      "node tests/live-ux/actions/scripts/set-project-env.mjs   # env-only: LIVE_MISSION_GRANTS, BODY_PROVIDER_API_KEY, BODY_PROVIDER_MODEL, VERCEL_TOKEN, VERCEL_PROJECT_ID on the project",
+      "node tests/live-ux/actions/scripts/deploy-p18b.mjs       # deploys THIS branch head (gitSource bound to the exact sha) with the per-deployment build-command override; records vercel-deployment + vercel-org evidence",
+      "RUN_REAL=1 LIVE_MISSION_BASE_URL=https://<the-deployed-preview-url> VERCEL_TOKEN=... VERCEL_PROJECT_ID=... pnpm --filter @sos-2/tests-live-ux-actions test:real"
+    ]
+  },
+  "the_build_command_disclosure": {
+    "frozen_project_command": "pnpm --filter @sos-2/web^... run build && pnpm run build",
+    "the_gap": "The @sos-2/web dependency closure does not include @sos-2/action-gateway, @sos-2/deployment-providers or @sos-2/real-bodies (the packages the live action endpoint consumes), and apps/web/package.json is outside this lane's owned surface — a build with the frozen command alone cannot resolve the endpoint's imports (verified locally: module-not-found until the closure is built).",
+    "the_per_deployment_override_the_deploy_script_uses": "pnpm --filter @sos-2/web^... run build && pnpm --filter @sos-2/web-live-actions^... run build && pnpm run build",
+    "note": "The override EXTENDS the frozen closure pattern with this lane's module closure; the PROJECT's build command is not modified (the deploy script verifies it post-run). Folding the three packages into apps/web/package.json (the architect's one-line integration) retires the override — see the lane README's architecture note."
+  },
+  "the_source_revision_the_deploy_would_bind": {
+    "note": "The deploy script binds gitSource to the exact 40-hex head of wo/p18b-live-actions-mission-ux at execution time. The head is recorded in the PR body and the completion-report commit message.",
+    "branch": "wo/p18b-live-actions-mission-ux",
+    "base": "3717b6c"
+  },
+  "provider_states": [
+    {
+      "state": "UNAVAILABLE",
+      "provider_id": "vercel",
+      "probed_at": "2026-09-26T19:23:00Z",
+      "credential_env": "VERCEL_TOKEN",
+      "api_revision": null,
+      "last_error": "403 invalidToken on GET /v2/user (the provided credential is revoked or rotated — recorded verbatim, never a fabricated success)",
+      "note": "The deployment, the project env setup and the deployment-records binding all require a valid credential. Everything is scripted and ready (tests/live-ux/actions/scripts/deploy-p18b.mjs + set-project-env.mjs)."
+    },
+    {
+      "state": "CONNECTED",
+      "provider_id": "openrouter (the body's hosted model provider)",
+      "probed_at": "2026-09-26T19:36:43Z",
+      "credential_env": "BODY_PROVIDER_API_KEY",
+      "api_revision": "openrouter.v1",
+      "last_error": null,
+      "note": "The REAL body summon executed against the live provider (see action-receipts.json — the real response id, the served model and the token usage)."
+    },
+    {
+      "state": "CONNECTED",
+      "provider_id": "github",
+      "probed_at": "2026-09-26T19:23:00Z",
+      "credential_env": "GITHUB_ACCESS_TOKEN",
+      "api_revision": "github.v3",
+      "last_error": null,
+      "note": "Admin on payswapdotorg/SOS-2.0 (repoId 1377439399) — the branch push and the PR use this credential."
+    }
+  ]
+}

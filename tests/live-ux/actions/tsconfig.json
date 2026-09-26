@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@web-app/live-mission-route": ["../../../apps/web/app/live-mission/page.tsx"],
+      "@web-app/mission-route": ["../../../apps/web/app/mission/page.tsx"],
+      "@web-app/data-seam": ["../../../apps/web/app/live-mission/data-seam.ts"],
+      "@web-app/action-endpoint": ["../../../apps/web/app/api/live-mission/actions/route.ts"],
+      "@live-mission/host": ["../../../apps/web/app/mission/live-actions/host.ts"],
+      "@live-mission/console-ask-queue": ["../../../apps/web/app/mission/live-actions/console-ask-queue.ts"],
+      "@live-mission/console-authority": ["../../../apps/web/app/mission/live-actions/console-authority.ts"],
+      "@live-mission/live-executors": ["../../../apps/web/app/mission/live-actions/live-executors.ts"],
+      "@live-mission/submission": ["../../../apps/web/app/mission/live-actions/submission.ts"],
+      "@live-mission/openrouter-probe": ["../../../apps/web/app/mission/live-actions/adapters/openrouter-probe.ts"],
+      "@live-mission/vercel-records": ["../../../apps/web/app/mission/live-actions/adapters/vercel-records.ts"],
+      "@live-mission/receipt-html": ["../../../apps/web/app/mission/live-actions/receipts/receipt-html.ts"],
+      "@live-mission/receipt-view": ["../../../apps/web/app/mission/live-actions/receipt-view.ts"],
+      "@live-mission/envelopes": ["../../../apps/web/live-mission/src/actions/envelopes.ts"],
+      "@live-mission/dto": ["../../../apps/web/live-mission/src/view-state/live-mission-dto.ts"]
+    }
+  },
+  "include": ["test", "scripts"]
+}

@@ -24,3 +24,26 @@ packages:
   # @sos-2/deployment-providers (workspace:* only — zero external
   # dependencies; the lockfile change is importer addition only).
   - infra/production-connectivity
+  # P18-B: the live-actions composition seams + the live-ux actions suites
+  # are workspace packages (work-order P18-B task packet, following the
+  # exact P18-A apps/web/live-data importer precedent):
+  #   - apps/web/app/mission is the source-only server module directory
+  #     (the colocated non-route module beside the mission route — the
+  #     P18-C start-surface colocation precedent); the importer entry
+  #     exists so its node_modules carries the merged packages its
+  #     sources import by name (@sos-2/action-gateway, @sos-2/ask,
+  #     @sos-2/decision, @sos-2/authority, @sos-2/deployment-providers,
+  #     @sos-2/real-bodies — none of which are inside the @sos-2/web
+  #     build closure, and apps/web/package.json is outside this lane's
+  #     owned surface). The P17-C UI module under apps/web (the mounted
+  #     surface library) stays byte-identical to its base — its frozen
+  #     structure suite pins it as a pure ambient-free UI module with
+  #     restricted imports (see the lane README's architecture note).
+  #   - tests/live-ux/actions is the lane's two strictly separated suites
+  #     (deterministic reference-mode default; env-gated RUN_REAL=1 real
+  #     integration), nested beside the sibling lanes' suites under
+  #     tests/live-ux/ (the P18-A tests/live-ux/data-plane precedent).
+  # workspace:* only — zero external registry dependencies; the lockfile
+  # change is importer addition only.
+  - apps/web/app/mission
+  - tests/live-ux/actions

@@ -1,0 +1,33 @@
+{
+  "name": "@sos-2/tests-live-ux-actions",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Live Actions + Mission UX acceptance suites (Work Order P18-B, lane B of 3). TWO suites, strictly separated (the P17 lane discipline). (1) DETERMINISTIC REFERENCE-MODE SUITE (default; offline; fixed vitest seed 424242): the live action endpoint contract (typed submissions form-encoded and JSON, identity completion for the frozen UI envelopes, idempotent double-submit -> the recorded receipt, typed rejections \u2014 AUTHORITY_FIELD_SMUGGLED and ENVELOPE_MALFORMED \u2014 never a silent 5xx), authority-at-action-time enforcement through the endpoint's own host (fail-closed on revoked/expired/never-held grants; the executor never invoked on denial), ASK resolution through the merged @sos-2/ask queue (the console's seeded ask, terminal single resolution, typed failures for unknown entries), receipt rendering (the typed receipt view with evidence/rationale links, safe-failure and denied-action UX carrying the authority reason, the replay note), the mount seams (the mission routes render the P17-C live experience over the honest 'unwired' seam; the forms POST to /api/live-mission/actions), and redaction (env NAMES only \u2014 never credential values). (2) ENV-GATED REAL INTEGRATION SUITE (RUN_REAL=1, default OFF; strictly separate vitest config): real action submissions over real HTTP against the DEPLOYED preview URL \u2014 real body summon through the OpenRouter-backed probe, real promotion/rollback bound to the real Vercel deployment records (exact source_revision_sha), real ASK resolution, idempotent replay over the wire \u2014 every step recording HTTP transcripts, receipts, provider states and honest limitations into docs/evidence/production-connectivity/live-ux/actions-mission/. workspace:* dependencies only.",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run typecheck && vitest run && node scripts/run-real-if-env.mjs",
+    "test:reference": "pnpm run typecheck && vitest run",
+    "test:real": "pnpm run typecheck && vitest run --config vitest.real.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/real-bodies": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0"
+  }
+}

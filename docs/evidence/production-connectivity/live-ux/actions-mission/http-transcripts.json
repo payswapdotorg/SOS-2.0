@@ -1,0 +1,84 @@
+{
+  "schema": "sos-2/p18b/live-actions-transcripts",
+  "produced_at": "2026-09-26T19:36:46.585Z",
+  "base_url": "http://localhost:3100",
+  "transcripts": [
+    {
+      "step": "vercel records read",
+      "method": "GET",
+      "url": "https://api.vercel.com/v6/deployments?projectId=prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ&limit=20&target=production",
+      "status": 403,
+      "ms": 582
+    },
+    {
+      "step": "GET /",
+      "method": "GET",
+      "url": "http://localhost:3100",
+      "status": 200,
+      "ms": 120
+    },
+    {
+      "step": "GET /mission",
+      "method": "GET",
+      "url": "http://localhost:3100/mission",
+      "status": 200,
+      "ms": 494
+    },
+    {
+      "step": "GET endpoint contract",
+      "method": "GET",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 15
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 1122
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 946
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 10
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 7
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 22
+    },
+    {
+      "step": "POST ask",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 54
+    },
+    {
+      "step": "POST action",
+      "method": "POST",
+      "url": "http://localhost:3100/api/live-mission/actions",
+      "status": 200,
+      "ms": 32
+    }
+  ]
+}
