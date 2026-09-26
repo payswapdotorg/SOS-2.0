@@ -3,7 +3,7 @@
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
   "currentFrontier": [
-    "P18"
+    "P18-INT"
   ],
   "tasks": {
     "P0": {
@@ -170,18 +170,10 @@
       ],
       "mergedAs": "f284b7b5c93164e9200306fcbbfb9440c533c46d"
     },
-    "P18": {
-      "status": "READY",
-      "dependencies": [
-        "P17-A",
-        "P17-B",
-        "P17-C"
-      ]
-    },
     "P19": {
       "status": "BLOCKED",
       "dependencies": [
-        "P18"
+        "P18-INT"
       ]
     },
     "P20": {
@@ -189,6 +181,41 @@
       "dependencies": [
         "P19"
       ]
+    },
+    "P18-A": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "P17-A",
+        "P17-B",
+        "P17-C"
+      ],
+      "mergedAs": "780b75e86e95f7d421f7846053f6861a68e1d8dc",
+      "notes": "Live data plane (producer, live projections, production connectivity, live-store adapter wiring). Lane A of the 3-lane P18 program (PR #39)."
+    },
+    "P18-B": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "P18-A"
+      ],
+      "mergedAs": "e7219da01d92ec9a9db929765a3b0a6d9f9b856e",
+      "notes": "Live actions + mission UX (route mounts, /api/live-mission/actions endpoint, receipts PRG+cookie+JSON, real executors, env-grants at action time; RUN_REAL 11/11 vs deployed preview). Lane B (PR #41). Architect gate: mechanical fixes (4 workspace deps, Accept seam adjustment) + merge-main."
+    },
+    "P18-C": {
+      "status": "COMPLETE",
+      "dependencies": [
+        "P18-A"
+      ],
+      "mergedAs": "65a25627a0e48a07a1e7e94ba1e8a3d1f8b0c65a",
+      "notes": "UX discoverability + journey instrumentation (root start surface, 16 journey spec files, 125 tests). Lane C (PR #40)."
+    },
+    "P18-INT": {
+      "status": "READY",
+      "dependencies": [
+        "P18-A",
+        "P18-B",
+        "P18-C"
+      ],
+      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration."
     }
   }
 }
