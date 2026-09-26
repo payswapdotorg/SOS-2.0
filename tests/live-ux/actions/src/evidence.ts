@@ -24,7 +24,7 @@ import { redactObservationSecrets } from '@sos-2/real-observation';
 
 const EVIDENCE_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
-  '../../../docs/evidence/production-connectivity/live-ux/actions-mission',
+  '../../../../docs/evidence/production-connectivity/live-ux/actions-mission',
 );
 
 /** The evidence record header every P18-B record carries. */

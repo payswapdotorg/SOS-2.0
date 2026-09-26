@@ -36,7 +36,6 @@
  */
 
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { DeploymentProbeLedger, DeploymentTranscriptRecorder, RealVercelDeploymentProvider, bindGlobalFetch, createDeploymentRecordingFetchPort } from '@sos-2/deployment-providers';
@@ -545,10 +544,7 @@ suite('REAL live actions + mission UX (RUN_REAL=1): the deployed journey', () =>
   });
 
   afterAll(() => {
-    // ---- the machine-readable evidence records ----
-    const evidenceDir = path.join(import.meta.dirname, '..', '..', '..', '..', 'docs', 'evidence', 'production-connectivity', 'live-ux', 'actions-mission');
-    mkdirSync(evidenceDir, { recursive: true });
-
+    // ---- the machine-readable evidence records (all through the redacting writer) ----
     // 1. the action receipts transcripts (every consequential action type)
     writeEvidence({
       schema: 'sos-2/p18b/real-live-actions',
@@ -562,7 +558,6 @@ suite('REAL live actions + mission UX (RUN_REAL=1): the deployed journey', () =>
         grants_env: 'SOS_LIVE_MISSION_GRANTS (actor|family|scope entries; console-observer deliberately absent — the fail-closed path)',
         http_transcripts: transcripts,
         receipts,
-        journey,
         provider_states: [
           { provider: 'vercel', state: 'CONNECTED', evidence: 'GET /v2/user 200; the exact-head deployment READY; the promotion deployment READY; the rollback restored deployment READY' },
           { provider: 'github', state: 'CONNECTED', evidence: 'GET /repos/payswapdotorg/SOS-2.0/commits/<head> 200 — the revision binding for every acted-on sha' },
@@ -610,6 +605,13 @@ suite('REAL live actions + mission UX (RUN_REAL=1): the deployed journey', () =>
     }
 
     // 3. the journey log (chronological, machine-readable)
-    writeFileSync(path.join(evidenceDir, 'journey-steps.json'), `${JSON.stringify({ work_order: 'P18-B', produced_at: producedAt, repo_head: headSha, steps: journey }, null, 2)}\n`);
+    writeEvidence({
+      schema: 'sos-2/p18b/journey-steps',
+      evidenceKind: 'journey-log',
+      producedAt,
+      repoHead: headSha,
+      fileName: 'journey-steps.json',
+      body: { steps: journey },
+    });
   });
 });
