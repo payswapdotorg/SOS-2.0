@@ -47,7 +47,7 @@ export interface DeployedHostConfig {
   readonly github: RealProviderConfig['github'];
 }
 
-const DEFAULT_BODY_MODEL = 'openai/gpt-4o-mini';
+const DEFAULT_BODY_MODEL = 'meta-llama/llama-3.3-70b-instruct';
 const DEFAULT_VERCEL_API_BASE = 'https://api.vercel.com';
 const DEFAULT_OPENROUTER_API_BASE = 'https://openrouter.ai/api/v1';
 const DEFAULT_GITHUB_API_BASE = 'https://api.github.com';

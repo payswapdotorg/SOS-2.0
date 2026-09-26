@@ -170,7 +170,7 @@ describe('the env-configured authority binding (the deployed host)', () => {
       GITHUB_ACCESS_TOKEN: 'synthetic-github-key-value',
     });
     expect(config.grants).toEqual(['console-user|body-lifecycle|cloud-sandbox-1']);
-    expect(config.openRouter?.model).toBe('openai/gpt-4o-mini');
+    expect(config.openRouter?.model).toBe('meta-llama/llama-3.3-70b-instruct');
     expect(config.vercel?.projectId).toBe('prj_test');
     expect(config.github?.owner).toBe('payswapdotorg');
     const serialized = JSON.stringify(deployedHostConfigFromEnv({}));

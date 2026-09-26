@@ -30,5 +30,5 @@
     }
   },
   "include": ["src", "test"],
-  "exclude": ["node_modules", "dist", "test/real"]
+  "exclude": ["node_modules", "dist"]
 }
