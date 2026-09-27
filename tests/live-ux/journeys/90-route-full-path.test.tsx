@@ -1,5 +1,6 @@
 /**
- * ROUTE-LEVEL FULL-PATH SPECS — CAPABILITY-GATED (Work Order P18-C).
+ * ROUTE-LEVEL FULL-PATH SPECS (Work Order P18-C; UNGATED by the P18-INT
+ * architect integration pass).
  *
  * The full P18 path is: mission route → live observed state →
  * consequential action → receipt → evidence, against the P18-B mounts
@@ -7,14 +8,12 @@
  * endpoint — exactly what apps/web/live-mission/MOUNTING.md documents as
  * the architect's integration steps).
  *
- * PARALLEL-LANE REALITY (binding): those mounts DO NOT exist on this
- * branch — lane B builds them in parallel. These suites therefore gate on
- * an honest filesystem capability probe: while the mount is absent every
- * suite skips with the EXPLICIT reason `requires-p18b-mount`, and an
- * always-run probe test reports the gate state (never a fabricated pass).
- * At the architect's integration pass (A → B → C) the mounts exist, the
- * gate opens, and ALL of these suites MUST run green before P18 can
- * complete.
+ * The P18-C capability gate (the filesystem probe + describe.skipIf + the
+ * explicit `requires-p18b-mount` skip reason) was REMOVED by the P18-INT
+ * pass: the P18-B mounts are merged on main, the gate is permanently
+ * open, and every suite below runs unconditionally — pass states are
+ * never fabricated. Every assertion is byte-identical to the P18-C
+ * delivery.
  *
  * The integration contract these specs assert (mirrors MOUNTING.md, which
  * lane B implements):
@@ -44,15 +43,13 @@ vi.mock('next/link', () => ({
 
 import { summonBodyEnvelope } from '@live-mission/envelopes';
 import type { ActionRequestEnvelope } from '@live-mission/envelopes';
-import { P18B_SKIP_REASON, h, p18bMountState, render } from './helpers';
-
-/** The honest capability probe (filesystem + source inspection — deterministic, offline). */
-const MOUNT = p18bMountState();
+import { h, render } from './helpers';
 
 /**
  * Lazy loaders for the P18-B mounts. import.meta.glob only registers files
- * that EXIST — absent files are simply not in the record, so the record and
- * the filesystem probe agree by construction.
+ * that EXIST — absent files are simply not in the record. (P18-INT: the
+ * mounts exist on main; the loaders are kept so an accidentally-removed
+ * mount surfaces as a loadability failure, never a silent skip.)
  */
 const liveMissionRouteLoaders = import.meta.glob<{ default: unknown }>('../../../apps/web/app/live-mission/page.tsx');
 const missionRouteLoaders = import.meta.glob<{ default: unknown }>('../../../apps/web/app/mission/page.tsx');
@@ -102,24 +99,7 @@ async function postEnvelope(POST: (request: Request) => Promise<Response>, envel
   return { status: response.status, body };
 }
 
-describe('route-level capability probe (always runs — the honest gate state)', () => {
-  it(`reports the P18-B mount state honestly (while absent: every full-path suite skips with the reason ${P18B_SKIP_REASON})`, () => {
-    // The explicit, machine-readable gate state. This line is the visible
-    // skip reason in the suite output — a skipped suite is a reported fact,
-    // never a fabricated pass.
-    console.info(
-      `[P18-C route-level specs] liveMissionRoute=${String(MOUNT.liveMissionRoute)} missionRouteRendersLive=${String(MOUNT.missionRouteRendersLive)} actionEndpoint=${String(MOUNT.actionEndpoint)} => ${MOUNT.mounted ? 'ENABLED (running the full-path suites)' : `SKIPPED (${P18B_SKIP_REASON})`}`,
-    );
-    // the loader records agree with the filesystem probe by construction
-    expect(Object.hasOwn(liveMissionRouteLoaders, LIVE_MISSION_ROUTE_KEY)).toBe(MOUNT.liveMissionRoute);
-    expect(Object.hasOwn(actionEndpointLoaders, ACTION_ENDPOINT_KEY)).toBe(MOUNT.actionEndpoint);
-    // the mount is complete exactly when both halves exist
-    expect(MOUNT.mounted).toBe(MOUNT.actionEndpoint && (MOUNT.liveMissionRoute || MOUNT.missionRouteRendersLive));
-    expect(MOUNT.skipReason === null).toBe(MOUNT.mounted);
-  });
-});
-
-describe.skipIf(!MOUNT.mounted)(`route-level full path: mission route -> live observed state -> consequential action -> receipt -> evidence [gate: ${P18B_SKIP_REASON}]`, () => {
+describe('route-level full path: mission route -> live observed state -> consequential action -> receipt -> evidence', () => {
   it('the mounted mission route renders the P17-C live mission surface (its guaranteed markers)', async () => {
     const Page = await loadMissionRoute();
     const element = await Page(); // handles sync and async server components
