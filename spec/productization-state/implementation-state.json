@@ -3,7 +3,7 @@
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
   "currentFrontier": [
-    "P18-INT"
+    "P19"
   ],
   "tasks": {
     "P0": {
@@ -209,13 +209,14 @@
       "notes": "UX discoverability + journey instrumentation (root start surface, 16 journey spec files, 125 tests). Lane C (PR #40)."
     },
     "P18-INT": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P18-A",
         "P18-B",
         "P18-C"
       ],
-      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration."
+      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A\u2192B\u2192C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
+      "mergedAs": "1b130ad8a82a2bf68856c67d38c485d9cac23c70"
     }
   }
 }
