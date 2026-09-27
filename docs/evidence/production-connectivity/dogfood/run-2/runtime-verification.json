@@ -1,0 +1,15 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-runtime-verification",
+  "produced_at": "2026-09-27T14:39:00.021Z",
+  "repo_head": "ce22ef531872be392aa27c28073b89f8d4dbee0f",
+  "schema": "sos-2/p19/run-2/runtime-verification",
+  "runtime_verification": {
+    "rootStatus": 404,
+    "rootBodyExcerpt": "The page could not be found\n\nNOT_FOUND\n\nhkg1::djf89-1790519939040-3a49d2d7fce1\n",
+    "manifestStatus": 200,
+    "manifestByteExact": true,
+    "deployedRevision": "767c474c3e22c0d807bb44883df6ae7c63139f3f",
+    "fetchedAt": "2026-09-27T14:38:59.909Z"
+  }
+}
