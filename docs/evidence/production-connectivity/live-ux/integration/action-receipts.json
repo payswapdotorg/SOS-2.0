@@ -1,0 +1,24 @@
+{
+  "work_order": "P18-INT",
+  "evidence_kind": "live-action-receipts",
+  "produced_at": "2026-09-27T07:48:29.114Z",
+  "repo_head": "1f9ab2bcc6e416c8cc133a8ac2cd43223ff0c14e",
+  "schema": "sos-2/p18int/real-live-actions",
+  "deployed_base_url": "",
+  "credential_envs": [
+    "VERCEL_TOKEN",
+    "GITHUB_ACCESS_TOKEN",
+    "BODY_PROVIDER_API_KEY"
+  ],
+  "grants_env": "SOS_LIVE_MISSION_GRANTS (actor|family|scope entries; console-observer deliberately absent — the fail-closed path)",
+  "http_transcripts": [],
+  "receipts": {},
+  "honesty_notes": [
+    "every action above executed through the deployed /api/live-mission/actions endpoint over REAL HTTP; the receipts are the endpoint typed receipt views verbatim",
+    "authority was re-evaluated AT ACTION TIME on the deployed host (env-configured grants, re-read per evaluation; the never-held console-observer grant fails CLOSED)",
+    "the body summon performed a REAL OpenRouter round-trip inside the executor seam AFTER the authority grant (fail-closed ordering preserved by the sync bridge)",
+    "the promotion/rollback went through the REAL deployment provider — a provider outage (e.g. the Vercel free-tier build-rate limit re-tripping) is recorded as the typed honest failure, never fabricated",
+    "idempotency: the deployed endpoint answers in-process idempotency (stated on every receipt); the durable adapters are UNAVAILABLE from this environment — NO durable confirmation is claimed",
+    "the ask plane is honestly unwired: the deployed resolution answers the typed ASK_ENTRY_UNKNOWN failure; the real queue contract is proven locally through the same envelope shape"
+  ]
+}

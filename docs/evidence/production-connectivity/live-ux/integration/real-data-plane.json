@@ -1,0 +1,308 @@
+{
+  "work_order": "P18-INT",
+  "evidence_kind": "real-data-plane",
+  "produced_at": "2026-09-27T07:48:29.114Z",
+  "repo_head": "1f9ab2bcc6e416c8cc133a8ac2cd43223ff0c14e",
+  "schema": "sos-2/p18int/real-data-plane",
+  "seam": "apps/web/app/live-mission/data-seam.ts -> apps/web/live-data/src/producer.ts (createLiveMissionDataProducer; NO injection)",
+  "missing_env": [
+    "GITHUB_ACCESS_TOKEN",
+    "VERCEL_TOKEN",
+    "UPSTASH_REDIS_REST_URL",
+    "UPSTASH_REDIS_REST_TOKEN",
+    "NEON_API_KEY",
+    "VERCEL_PROJECT_ID",
+    "VERCEL_ORG_ID",
+    "NEON_DATABASE_NAME",
+    "NEON_BRANCH_NAME",
+    "R2_ACCOUNT_ID",
+    "R2_ACCESS_KEY_ID",
+    "R2_SECRET_ACCESS_KEY",
+    "R2_BUCKET_NAME"
+  ],
+  "unwired": true,
+  "store_selection": {
+    "mode": "REFERENCE_FALLBACK",
+    "canonical": {
+      "provider": "neon",
+      "state": "UNAVAILABLE",
+      "detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed",
+      "lastError": "transport failure: transport failure for POST https:///sql: fetch failed",
+      "probedAt": "2026-09-27T07:48:29.152Z",
+      "apiRevision": null,
+      "credentialEnvName": "DATABASE_URL"
+    },
+    "coordination": {
+      "provider": "upstash",
+      "state": "UNKNOWN",
+      "detail": "no UPSTASH_REDIS_REST_URL / UPSTASH_REDIS_REST_TOKEN configured in the injected source; coordination only — never canonical",
+      "lastError": null,
+      "probedAt": null,
+      "apiRevision": null,
+      "credentialEnvName": null,
+      "neverCanonicalNote": "Upstash Redis is coordination only (cache, idempotency, leases) — never the canonical store; the durable Postgres store (Neon) is the sole canonical store."
+    },
+    "canonical_store_ref": "neon:postgres:sos@main",
+    "store_ref": "reference:in-memory-observation-store",
+    "note": "the canonical store neon is UNAVAILABLE (transport failure: transport failure for POST https:///sql: fetch failed) — live mission data is served from the reference in-memory observation store, explicitly NOT production durable state (selection probed at 2026-09-27T07:48:29.134Z)"
+  },
+  "deployment_read": {
+    "state": "UNKNOWN",
+    "records": [],
+    "latest_by_target": {},
+    "last_error": null,
+    "note": "no VERCEL_TOKEN configured in the injected source — the deployment state is honestly UNKNOWN (never fabricated)"
+  },
+  "provider_health": [
+    {
+      "provider": "neon",
+      "role": "durable-canonical-state",
+      "state": "UNAVAILABLE",
+      "detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed",
+      "credentialEnvName": "DATABASE_URL",
+      "apiRevision": null,
+      "lastError": "transport failure: transport failure for POST https:///sql: fetch failed",
+      "probedAt": "2026-09-27T07:48:29.152Z"
+    },
+    {
+      "provider": "r2",
+      "role": "large-immutable-artifacts",
+      "state": "UNKNOWN",
+      "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+      "credentialEnvName": null,
+      "apiRevision": null,
+      "lastError": null,
+      "probedAt": null
+    },
+    {
+      "provider": "upstash",
+      "role": "coordination-only-never-canonical",
+      "state": "UNKNOWN",
+      "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+      "credentialEnvName": null,
+      "apiRevision": null,
+      "lastError": null,
+      "probedAt": null
+    },
+    {
+      "provider": "vercel",
+      "role": "deployment",
+      "state": "UNKNOWN",
+      "detail": "no VERCEL_TOKEN configured in the injected source (the honest state is UNKNOWN — never fabricated)",
+      "credentialEnvName": null,
+      "apiRevision": null,
+      "lastError": null,
+      "probedAt": null
+    }
+  ],
+  "durability": {
+    "persisted": false,
+    "namespace": null,
+    "storageVersion": null,
+    "note": "the observation environment is incomplete — no drain ran, nothing persisted (never fabricated)"
+  },
+  "data_plane_view": {
+    "as_of": "2026-09-27T07:48:29.153Z",
+    "store": {
+      "mode": "REFERENCE_FALLBACK",
+      "store_ref": "reference:in-memory-observation-store",
+      "reference_mode": true,
+      "canonical_provider": "neon",
+      "canonical_state": "UNAVAILABLE",
+      "canonical_store_ref": "neon:postgres:sos@main",
+      "canonical_detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed",
+      "coordination_provider": "upstash",
+      "coordination_state": "UNKNOWN",
+      "coordination_note": "Upstash Redis is coordination only (cache, idempotency, leases) — never the canonical store; the durable Postgres store (Neon) is the sole canonical store.",
+      "degradation_note": "the canonical store neon is UNAVAILABLE (transport failure: transport failure for POST https:///sql: fetch failed) — live mission data is served from the reference in-memory observation store, explicitly NOT production durable state"
+    },
+    "providers": [
+      {
+        "provider": "neon",
+        "role": "durable-canonical-state",
+        "state": "UNAVAILABLE",
+        "detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed",
+        "credential_env": "DATABASE_URL",
+        "api_revision": null,
+        "last_error": "transport failure: transport failure for POST https:///sql: fetch failed",
+        "probed_at": "2026-09-27T07:48:29.152Z"
+      },
+      {
+        "provider": "r2",
+        "role": "large-immutable-artifacts",
+        "state": "UNKNOWN",
+        "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+        "credential_env": null,
+        "api_revision": null,
+        "last_error": null,
+        "probed_at": null
+      },
+      {
+        "provider": "upstash",
+        "role": "coordination-only-never-canonical",
+        "state": "UNKNOWN",
+        "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+        "credential_env": null,
+        "api_revision": null,
+        "last_error": null,
+        "probed_at": null
+      },
+      {
+        "provider": "vercel",
+        "role": "deployment",
+        "state": "UNKNOWN",
+        "detail": "no VERCEL_TOKEN configured in the injected source (the honest state is UNKNOWN — never fabricated)",
+        "credential_env": null,
+        "api_revision": null,
+        "last_error": null,
+        "probed_at": null
+      }
+    ],
+    "provenance": [
+      {
+        "field": "storeRef",
+        "produced_by": "durable-store-selection",
+        "store_kind": "REFERENCE_IN_MEMORY",
+        "revision": "reference:in-memory-observation-store",
+        "state": "UNAVAILABLE",
+        "freshness": "NOT_APPLICABLE",
+        "note": "served from the reference in-memory store — the canonical store is UNAVAILABLE (transport failure: transport failure for POST https:///sql: fetch failed) (explicitly NOT production durable state)"
+      },
+      {
+        "field": "asOf",
+        "produced_by": "data-plane-clock",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": "2026-09-27T07:48:29.153Z",
+        "state": "CONNECTED",
+        "freshness": "NOT_APPLICABLE",
+        "note": "the caller-supplied snapshot instant (never a hidden clock)"
+      },
+      {
+        "field": "drainedAt",
+        "produced_by": "observation-plane-drain",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NOT_APPLICABLE",
+        "note": "no drain has run — nothing is fabricated"
+      },
+      {
+        "field": "sources",
+        "produced_by": "observation-connectivity-tracker",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NOT_APPLICABLE",
+        "note": "per-source honest states from REAL probe records (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED)"
+      },
+      {
+        "field": "eventsInWindow",
+        "produced_by": "observation-plane-drain",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NOT_APPLICABLE",
+        "note": "0 event(s) applied by this drain (replay-protected ingestion)"
+      },
+      {
+        "field": "repository.branchHeads",
+        "produced_by": "unwired",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NO_DATA",
+        "note": "the observed branch heads (github.push events folded by the projection) — NO_DATA: absence of observation is never success"
+      },
+      {
+        "field": "repository.openPullRequests",
+        "produced_by": "unwired",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NO_DATA",
+        "note": "the open pull requests observed by the repository sources — NO_DATA: absence of observation is never success"
+      },
+      {
+        "field": "ci.latestByPipeline",
+        "produced_by": "unwired",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NO_DATA",
+        "note": "the latest CI run per pipeline, status carried verbatim from the provider — NO_DATA: absence of observation is never success"
+      },
+      {
+        "field": "deployments.byEnvironment",
+        "produced_by": "unwired",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NO_DATA",
+        "note": "the deployed revision per environment (deployment.change events) — NO_DATA: absence of observation is never success"
+      },
+      {
+        "field": "providerHealth",
+        "produced_by": "unwired",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NO_DATA",
+        "note": "the last health signal per provider (provider-health probes) — NO_DATA: absence of observation is never success"
+      },
+      {
+        "field": "findings",
+        "produced_by": "observation-reconciliation",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NOT_APPLICABLE",
+        "note": "0 reconciliation finding(s) — claims vs observed revisions (ALIGNED/DIVERGED/UNVERIFIED/STALE)"
+      },
+      {
+        "field": "detections",
+        "produced_by": "observation-detection",
+        "store_kind": "OBSERVATION_PLANE",
+        "revision": null,
+        "state": "UNKNOWN",
+        "freshness": "NOT_APPLICABLE",
+        "note": "0 detection(s) — shortfalls/opportunities, non-authoritative inputs"
+      }
+    ],
+    "deployment_binding": null,
+    "snapshot_durability": {
+      "persisted": false,
+      "namespace": null,
+      "storage_version": null,
+      "note": "the observation environment is incomplete (missing env names: GITHUB_ACCESS_TOKEN, VERCEL_TOKEN, UPSTASH_REDIS_REST_URL, UPSTASH_REDIS_REST_TOKEN, NEON_API_KEY, VERCEL_PROJECT_ID, VERCEL_ORG_ID, NEON_DATABASE_NAME, NEON_BRANCH_NAME, R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET_NAME) — no drain ran, nothing persisted (never fabricated)"
+    }
+  },
+  "dto_summary": {
+    "store_ref": "reference:in-memory-observation-store",
+    "as_of": "2026-09-27T07:48:29.153Z",
+    "drained_at": null,
+    "sources": [],
+    "events_in_window": 0,
+    "repository": {
+      "subject": "github:repo:payswapdotorg/SOS-2.0",
+      "branchHeads": [],
+      "openPullRequests": [],
+      "freshness": "NO_DATA"
+    },
+    "ci": {
+      "latestByPipeline": [],
+      "freshness": "NO_DATA"
+    },
+    "deployments": {
+      "byEnvironment": [],
+      "freshness": "NO_DATA"
+    },
+    "findings": [],
+    "detections": []
+  },
+  "honesty_notes": [
+    "one bounded honest data-plane pass through the real producer — the same function the swapped seam composes",
+    "every provider state derives from REAL probes only; a state not probed this run is UNKNOWN; a failed provider is UNAVAILABLE with the real reason carried verbatim",
+    "Neon/Upstash unreachability degrades to the explicit reference-store marker — reference state NEVER masquerades as production durable state",
+    "in reference mode NOTHING is persisted (the durability record states it)"
+  ]
+}

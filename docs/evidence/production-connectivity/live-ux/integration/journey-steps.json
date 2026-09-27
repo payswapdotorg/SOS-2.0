@@ -1,0 +1,221 @@
+{
+  "work_order": "P18-INT",
+  "evidence_kind": "journey-log",
+  "produced_at": "2026-09-27T07:48:29.114Z",
+  "repo_head": "1f9ab2bcc6e416c8cc133a8ac2cd43223ff0c14e",
+  "schema": "sos-2/p18int/journey-steps",
+  "steps": [
+    {
+      "step": "provider-composition",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.126Z",
+      "detail": {
+        "note": "VERCEL_TOKEN absent — the deployment provider is not composed (fail-closed on empty credentials, the frozen P17-A discipline); the credential-free seam steps still run"
+      }
+    },
+    {
+      "step": "real-data-plane",
+      "ok": true,
+      "at": "2026-09-27T07:48:29.160Z",
+      "detail": {
+        "unwired": true,
+        "missing_env": [
+          "GITHUB_ACCESS_TOKEN",
+          "VERCEL_TOKEN",
+          "UPSTASH_REDIS_REST_URL",
+          "UPSTASH_REDIS_REST_TOKEN",
+          "NEON_API_KEY",
+          "VERCEL_PROJECT_ID",
+          "VERCEL_ORG_ID",
+          "NEON_DATABASE_NAME",
+          "NEON_BRANCH_NAME",
+          "R2_ACCOUNT_ID",
+          "R2_ACCESS_KEY_ID",
+          "R2_SECRET_ACCESS_KEY",
+          "R2_BUCKET_NAME"
+        ],
+        "store_selection": {
+          "mode": "REFERENCE_FALLBACK",
+          "canonical": {
+            "provider": "neon",
+            "state": "UNAVAILABLE",
+            "detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed"
+          },
+          "coordination": {
+            "provider": "upstash",
+            "state": "UNKNOWN"
+          },
+          "store_ref": "reference:in-memory-observation-store",
+          "note": "the canonical store neon is UNAVAILABLE (transport failure: transport failure for POST https:///sql: fetch failed) — live mission data is served from the reference in-memory observation store, explicitly NOT production durable state (selection probed at 2026-09-27T07:48:29.134Z)"
+        },
+        "deployment_read": {
+          "state": "UNKNOWN",
+          "records": 0,
+          "latest_production": null
+        },
+        "provider_states": [
+          {
+            "provider": "neon",
+            "role": "durable-canonical-state",
+            "state": "UNAVAILABLE",
+            "detail": "last real probe at 2026-09-27T07:48:29.152Z failed at the transport level: transport failure: transport failure for POST https:///sql: fetch failed",
+            "lastError": "transport failure: transport failure for POST https:///sql: fetch failed"
+          },
+          {
+            "provider": "r2",
+            "role": "large-immutable-artifacts",
+            "state": "UNKNOWN",
+            "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+            "lastError": null
+          },
+          {
+            "provider": "upstash",
+            "role": "coordination-only-never-canonical",
+            "state": "UNKNOWN",
+            "detail": "never probed — no real connection evidence exists (UNKNOWN is not health)",
+            "lastError": null
+          },
+          {
+            "provider": "vercel",
+            "role": "deployment",
+            "state": "UNKNOWN",
+            "detail": "no VERCEL_TOKEN configured in the injected source (the honest state is UNKNOWN — never fabricated)",
+            "lastError": null
+          }
+        ],
+        "durability": {
+          "persisted": false,
+          "namespace": null,
+          "storageVersion": null,
+          "note": "the observation environment is incomplete — no drain ran, nothing persisted (never fabricated)"
+        },
+        "drained": null,
+        "dto_summary": {
+          "store_ref": "reference:in-memory-observation-store",
+          "as_of": "2026-09-27T07:48:29.153Z",
+          "drained_at": null,
+          "sources": [],
+          "events_in_window": 0,
+          "branch_heads": []
+        }
+      }
+    },
+    {
+      "step": "real-seam-contract",
+      "ok": true,
+      "at": "2026-09-27T07:48:29.166Z",
+      "detail": {
+        "seam_store_ref": "reference:in-memory-observation-store",
+        "selection_store_ref": "reference:in-memory-observation-store",
+        "subject": "github:repo:payswapdotorg/SOS-2.0",
+        "drained_at": null,
+        "sources": [],
+        "watching_without_body": true
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.168Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.168Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.168Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.169Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.169Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.169Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.170Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    },
+    {
+      "step": "credentials-required",
+      "ok": false,
+      "at": "2026-09-27T07:48:29.170Z",
+      "detail": {
+        "missing_env_names": [
+          "VERCEL_TOKEN",
+          "GITHUB_ACCESS_TOKEN",
+          "BODY_PROVIDER_API_KEY"
+        ],
+        "note": "the deployed-journey steps require the operator credential set (env-only; names never values); the credential-free steps (the real data-plane pass + the real seam contract) ran and are recorded in this same journey log"
+      }
+    }
+  ]
+}
