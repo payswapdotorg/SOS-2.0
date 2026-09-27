@@ -1,0 +1,76 @@
+{
+  "schema": "sos-2/p18int/journey-results",
+  "work_order": "P18-INT",
+  "evidence_kind": "journey-results",
+  "repo_head": "b8c906ecd4546007285c031d1afe25d2a7fd22cd",
+  "contract": "every journey verified at ROUTE level: mission route -> live observed state -> consequential action -> receipt -> evidence, with the six-question contract (What/Why/Evidence/Uncertainty/Authority/Next) asserted on the receipt surfaces (ActionReceiptView renders the LiveReviewBlock + the /evidence and /rationale deep links)",
+  "suites": {
+    "deterministic_integrated": "tests/live-ux/integration (35 tests: seam 8 + journeys 15 + invariants 12 — offline, seed 424242, the seam scripted through a producer mock at the module boundary; the endpoint pipeline driven through the real submitLiveAction over the merged ActionGateway with the reference executors)",
+    "ungated_route_journeys": "tests/live-ux/journeys (124 tests incl. the ungated 90-route-full-path suites — the requires-p18b-mount gates removed)",
+    "lane_b_actions": "tests/live-ux/actions (88 tests — incl. the three flagged re-pins)",
+    "real_integration": "tests/live-ux/integration test/real (RUN_REAL=1, 12 tests — executed honestly in the credential-less delivery environment: the 2 credential-free seam steps passed and are recorded; the 10 credential steps failed fast with their honest reasons)"
+  },
+  "journeys": [
+    {
+      "journey": "greenfield",
+      "level_verified": "route level (the /mission + /live-mission renders over the scripted drained observation; the first consequential action through the real endpoint pipeline)",
+      "deterministic": "PASS (journeys-eight 1/8: the greenfield entry -> /onboarding/greenfield over the live observation; the body-lifecycle summon executes SUCCEEDED with evidence ids; the receipt surface answers the six questions)",
+      "real": "NOT EXECUTED in the delivery environment (no provider credentials — the suite + commands are delivered; the credentialed re-run drives the deployed endpoint)",
+      "gaps": "the real leg requires BODY_PROVIDER_API_KEY (the OpenRouter-backed body) + the deployed preview URL"
+    },
+    {
+      "journey": "brownfield",
+      "level_verified": "route level (the import entry + acting on the imported system's observed state)",
+      "deterministic": "PASS (journeys-eight 2/8: the brownfield entry -> /onboarding/brownfield; the promotion of the verified observed revision executes SUCCEEDED with the six-question receipt)",
+      "real": "NOT EXECUTED in the delivery environment",
+      "gaps": "the real leg requires VERCEL_TOKEN (the promotion through the deployment provider)"
+    },
+    {
+      "journey": "ASK resolution",
+      "level_verified": "route level + endpoint pipeline (the ASK envelope -> the merged queue -> the Decision record -> the receipt)",
+      "deterministic": "PASS (journeys-eight 3/8: a pending ask composed through the REAL decision engine + AskQueue resolves through the endpoint pipeline — RESOLVED with the sos:// Decision reference + the six questions; invariants: the deployed empty queue answers the honest ASK_ENTRY_UNKNOWN)",
+      "real": "NOT EXECUTED against a deployment in this environment (the deployed ask plane is honestly unwired — the typed ASK_ENTRY_UNKNOWN is the expected honest outcome; the local queue contract is proven deterministically)",
+      "gaps": "none for the deterministic contract; the deployed submission requires the credential set"
+    },
+    {
+      "journey": "cloud execution with the user's machine OFF",
+      "level_verified": "route level (the server-rendered observation is machine-independent; a cloud body acts)",
+      "deterministic": "PASS (journeys-eight 4/8: no client fetches anywhere in the markup; the observation is server-produced; the cloud body summon executes with the six-question receipt; watchingWithoutBody stays true)",
+      "real": "NOT EXECUTED in the delivery environment",
+      "gaps": "the real leg requires BODY_PROVIDER_API_KEY"
+    },
+    {
+      "journey": "body interruption / replacement (checkpoint recovery)",
+      "level_verified": "route level + endpoint pipeline (body-lifecycle start -> replace -> successor start, world-state asserted)",
+      "deterministic": "PASS (journeys-eight 5/8: the surface states the lease-ephemeral/checkpoint-survival contract; the replace executes with evidence binding the transition; the old body REPLACED, the successor RUNNING — asserted through the reference world)",
+      "real": "NOT EXECUTED in the delivery environment",
+      "gaps": "the real leg requires BODY_PROVIDER_API_KEY"
+    },
+    {
+      "journey": "observation without a body",
+      "level_verified": "route level (the §5 rule: continuous observation needs no body lease)",
+      "deterministic": "PASS (journeys-eight 6/8: the full live observation renders while watchingWithoutBody is true — data-watching-without-body markers, no body lease claimed; an action without authority fails CLOSED — the honest record)",
+      "real": "PARTIALLY EXECUTED: the real data-plane pass ran WITHOUT a body (credential-less, honest unwired outcome recorded in real-data-plane.json) — the observation plane never uses a body by construction",
+      "gaps": "the credentialed re-run records the drained observation-without-body state"
+    },
+    {
+      "journey": "promotion",
+      "level_verified": "route level (the promotion form bound to the EXACT observed head + the executed receipt with the deployment revision)",
+      "deterministic": "PASS (journeys-eight 7/8: the route's promotion form carries the observed head and POSTs to the mounted endpoint; the promotion executes SUCCEEDED with the deployment revision recorded + evidence ids + the six questions)",
+      "real": "NOT EXECUTED in the delivery environment",
+      "gaps": "the real leg requires VERCEL_TOKEN (a REAL production deployment of the exact head — the honest provider-outage path is asserted in the suite)"
+    },
+    {
+      "journey": "rollback",
+      "level_verified": "route level (the rollback form naming the observed production deployment + the executed receipt with the rollback-verification verdict)",
+      "deterministic": "PASS (journeys-eight 8/8: the route's rollback form names the observed production revision and the verifier honesty rule ('UNKNOWN stays UNKNOWN'); the rollback of the promotion-created deployment executes SUCCEEDED with the rollback verification + the six questions)",
+      "real": "NOT EXECUTED in the delivery environment",
+      "gaps": "the real leg requires VERCEL_TOKEN (the REAL provider restore — native instant rollback or a git restore deployment)"
+    }
+  ],
+  "honest_summary": {
+    "deterministic_journeys": "8/8 PASS at route level (35 integrated tests + 124 ungated journey tests + 88 actions tests, all green at the delivery head)",
+    "real_journeys": "0/8 executed against real providers in the delivery environment (NO provider credentials were available — env NAMES only: GITHUB_ACCESS_TOKEN, VERCEL_TOKEN, VERCEL_PROJECT_ID, BODY_PROVIDER_API_KEY, NEON_API_KEY, UPSTASH_*, R2_*); the seam-level real contract WAS executed and recorded (the real data-plane pass + the real seam contract, honest unwired outcome); the full real journey is one RUN_REAL=1 execution away with the operator credential set",
+    "never_fabricated": "no real-level journey outcome was invented; the gaps are recorded as gaps"
+  }
+}
