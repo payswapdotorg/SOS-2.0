@@ -105,10 +105,11 @@ export interface StagedDeploymentFacts {
 export interface StagedRuntimeFacts {
   readonly rootStatus: number | null;
   readonly rootBodyExcerpt: string | null;
-  readonly readmeStatus: number | null;
-  readonly readmeBody: string | null;
-  /** The README content at the EXACT deployed revision (fetched from the repository — the binding basis). */
-  readonly readmeAtRevision: string | null;
+  /** The served-artifact status: REAL Vercel never serves the file NAMED README.md on a zero-config static deployment (verified empirically: notes.md/data.json/plain.txt/page.html all serve 200, README.md 404 — repository metadata is excluded); the root-level planned artifact sos-manifest.json IS served byte-exact, so IT is the runtime binding basis. */
+  readonly manifestStatus: number | null;
+  readonly manifestBody: string | null;
+  /** The sos-manifest.json content at the EXACT deployed revision (fetched from the repository — the binding basis). */
+  readonly manifestAtRevision: string | null;
   readonly deploymentUrl: string;
   readonly deployedRevision: string;
   readonly fetchedAt: string;

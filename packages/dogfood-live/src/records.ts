@@ -112,9 +112,10 @@ export interface DogfoodDeploymentRecord {
 export interface DogfoodRuntimeVerificationRecord {
   readonly rootStatus: number | null;
   readonly rootBodyExcerpt: string | null;
-  readonly readmeStatus: number | null;
-  /** True when the served README body is byte-identical to the repository content at the exact deployed revision. */
-  readonly readmeByteExact: boolean;
+  /** The HTTP status of GET <deployment-url>/sos-manifest.json — the root-level planned artifact REAL Vercel serves (the file named README.md is repository metadata and is NEVER served on a zero-config static deployment — verified empirically; recorded as a documented limitation). */
+  readonly manifestStatus: number | null;
+  /** True when the served manifest body is byte-identical to the repository content at the exact deployed revision. */
+  readonly manifestByteExact: boolean;
   readonly deployedRevision: string;
   readonly fetchedAt: string;
 }

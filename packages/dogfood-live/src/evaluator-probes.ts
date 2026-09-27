@@ -16,9 +16,12 @@
  *     source revision under evaluation (the binding is verified against
  *     the provider's own answer, never assumed);
  *   - runtime-verification (runtime-HTTP): a REAL HTTP GET of the
- *     deployed URL serves the README with a body byte-identical to the
- *     repository content at the EXACT deployed revision (the root GET
- *     is recorded honestly as a limitation — the frozen reference
+ *     deployed URL serves the root-level planned artifact
+ *     sos-manifest.json with a body byte-identical to the repository
+ *     content at the EXACT deployed revision (REAL Vercel never serves
+ *     the file NAMED README.md on a zero-config static deployment —
+ *     verified empirically: repository metadata is excluded; the root
+ *     GET is recorded honestly as a limitation — the frozen reference
  *     planner provisions no root index.html);
  *   - security-checks (security-scan of realized contents): every file
  *     at the EXACT revision passes through BOTH merged redaction
@@ -340,23 +343,23 @@ export function createDogfoodEvaluatorProbes(input: {
       if (facts === null) {
         return noEvidence(['the real runtime-verification facts were not staged at the composition boundary — the honest answer is NO evidence, never a fabricated verdict']);
       }
-      const byteExact = facts.readmeBody !== null && facts.readmeAtRevision !== null && facts.readmeBody === facts.readmeAtRevision;
-      const served = facts.readmeStatus === 200;
+      const byteExact = facts.manifestBody !== null && facts.manifestAtRevision !== null && facts.manifestBody === facts.manifestAtRevision;
+      const served = facts.manifestStatus === 200;
       const checks = [
         {
-          check: 'runtime-verification:deployed-url-serves-readme',
+          check: 'runtime-verification:deployed-url-serves-manifest',
           passed: served,
-          detail: `HTTP GET ${facts.deploymentUrl}/README.md answered ${String(facts.readmeStatus ?? 0)}`,
+          detail: `HTTP GET ${facts.deploymentUrl}/sos-manifest.json answered ${String(facts.manifestStatus ?? 0)}`,
           expected: 'HTTP 200',
-          actual: `HTTP ${String(facts.readmeStatus ?? 0)}`,
+          actual: `HTTP ${String(facts.manifestStatus ?? 0)}`,
         },
         {
           check: 'runtime-verification:served-content-byte-exact-at-revision',
           passed: byteExact,
           detail: byteExact
-            ? `the served README body is byte-identical to the repository content at the exact deployed revision ${facts.deployedRevision.slice(0, 16)}`
-            : 'the served README body differs from the repository content at the exact deployed revision (or one of them was absent) — the runtime binding is byte-exact or it is not verified',
-          expected: 'byte-identical README content',
+            ? `the served sos-manifest.json body is byte-identical to the repository content at the exact deployed revision ${facts.deployedRevision.slice(0, 16)}`
+            : 'the served sos-manifest.json body differs from the repository content at the exact deployed revision (or one of them was absent) — the runtime binding is byte-exact or it is not verified',
+          expected: 'byte-identical sos-manifest.json content',
           actual: byteExact ? 'byte-identical' : 'differs or absent',
         },
       ];
@@ -364,11 +367,12 @@ export function createDogfoodEvaluatorProbes(input: {
         status: 'EVIDENCE_COLLECTED',
         limitations: [
           `the root URL GET answered HTTP ${String(facts.rootStatus ?? 0)} and is recorded honestly without gating (the frozen reference planner plans no root index.html; a static deployment may honestly answer 404 at the root)`,
+          'REAL Vercel never serves the file NAMED README.md on a zero-config static deployment (verified empirically: repository metadata is excluded while notes.md/data.json/plain.txt/page.html serve 200) — the runtime binding basis is therefore the root-level planned artifact sos-manifest.json, which serves byte-exact',
           'the runtime verification fetched the deployed URL over real HTTP at the composition boundary',
         ],
         evidence: {
           evidenceType: 'runtime-verification',
-          summary: `runtime-HTTP verified against ${facts.deploymentUrl} (README byte-exact at the deployed revision)`,
+          summary: `runtime-HTTP verified against ${facts.deploymentUrl} (sos-manifest.json byte-exact at the deployed revision)`,
           checks,
           artifactDigest: contentAddress({ url: facts.deploymentUrl, revision: facts.deployedRevision, byteExact }, 'p19-dogfood-runtime'),
         },

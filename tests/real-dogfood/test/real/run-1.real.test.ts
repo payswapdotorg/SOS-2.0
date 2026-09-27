@@ -156,8 +156,8 @@ suite('REAL dogfood RUN 1 (RUN_REAL=1): the flagship journey on payswapdotorg/so
 
   it('the runtime verification: the deployed URL answered 200 with the exact-revision content', () => {
     expect(record!.runtimeVerification).not.toBeNull();
-    expect(record!.runtimeVerification!.readmeStatus).toBe(200);
-    expect(record!.runtimeVerification!.readmeByteExact).toBe(true);
+    expect(record!.runtimeVerification!.manifestStatus).toBe(200);
+    expect(record!.runtimeVerification!.manifestByteExact).toBe(true);
     expect(record!.runtimeVerification!.deployedRevision).toBe(record!.deployment!.commitSha);
   });
 

@@ -87,11 +87,14 @@ describe('P19 scripted dogfood: the full §11 journey to COMPLETED (offline, det
     expect(record.deployment!.commitSha).toBe(implHead);
     expect(record.deployment!.url).toContain('sos-dogfood-r1');
 
-    // The runtime verification: the deployed URL serves the README byte-exact
-    // at the deployed revision; the root 404 is recorded honestly (no index.html).
+    // The runtime verification: the deployed URL serves the root-level
+    // planned artifact sos-manifest.json byte-exact at the deployed revision
+    // (REAL Vercel never serves the file NAMED README.md — repository
+    // metadata; the scripted runtime mirrors that real behavior); the root
+    // 404 is recorded honestly (no index.html).
     expect(record.runtimeVerification).not.toBeNull();
-    expect(record.runtimeVerification!.readmeStatus).toBe(200);
-    expect(record.runtimeVerification!.readmeByteExact).toBe(true);
+    expect(record.runtimeVerification!.manifestStatus).toBe(200);
+    expect(record.runtimeVerification!.manifestByteExact).toBe(true);
     expect(record.runtimeVerification!.deployedRevision).toBe(implHead);
     expect(record.runtimeVerification!.rootStatus).toBe(404);
 

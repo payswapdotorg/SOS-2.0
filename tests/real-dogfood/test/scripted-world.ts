@@ -710,7 +710,11 @@ export function createScriptedDogfoodWorld(options: ScriptedDogfoodWorldOptions)
   const runtimeFetch: DogfoodRuntimeFetch = (url: string): Promise<{ status: number | null; body: string | null }> => {
     // The scripted deployed runtime: the root answers 404 (no index.html —
     // the honest static-deployment fact); a file path serves the repository
-    // content AT THE DEPLOYED REVISION.
+    // content AT THE DEPLOYED REVISION — EXCEPT the file NAMED README.md,
+    // which REAL Vercel never serves on a zero-config static deployment
+    // (repository metadata is excluded — verified empirically; the runtime
+    // binding basis is sos-manifest.json, which the scripted world serves
+    // byte-exact like the real provider).
     const parsed = new URL(url);
     const deployment = vercel.deploymentForUrl(parsed.host);
     if (deployment === undefined) {
@@ -720,6 +724,9 @@ export function createScriptedDogfoodWorld(options: ScriptedDogfoodWorldOptions)
       return Promise.resolve({ status: 404, body: 'NOT_FOUND (scripted static deployment — no root index.html)' });
     }
     const filePath = decodeURIComponent(parsed.pathname.slice(1));
+    if (filePath === 'README.md') {
+      return Promise.resolve({ status: 404, body: 'NOT_FOUND (scripted static deployment — the file NAMED README.md is repository metadata and is never served, the real-Vercel behavior)' });
+    }
     const contents = vercel.readRepoFile?.(filePath, deployment.ref) ?? null;
     if (contents === null) {
       return Promise.resolve({ status: 404, body: `file not served: ${filePath}` });

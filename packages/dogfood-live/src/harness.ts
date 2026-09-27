@@ -1079,21 +1079,25 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     await stageRuntimeFactsAt(head, current);
   }
 
-  /** Stage the fresh runtime-verification facts (real HTTP GETs + the README at the exact revision). */
+  /** Stage the fresh runtime-verification facts (real HTTP GETs + the planned root artifact at the exact revision). */
   async function stageRuntimeFactsAt(deployedRevision: string, deployment: { id: string; url: string | null }): Promise<void> {
     const client = vercelClient!;
     const facts = staging.deploymentFactsSnapshot();
     const current = await client.getDeployment(deployment.id);
     const url = normalizeUrl(current.url ?? deployment.url ?? '');
     const root = await runtimeFetch(url);
-    const readme = await runtimeFetch(`${url}/README.md`);
-    const readmeAtRevision = await repoReader.contentAt('README.md', deployedRevision);
+    // The runtime binding basis is the root-level planned artifact sos-manifest.json:
+    // REAL Vercel never serves the file NAMED README.md on a zero-config static
+    // deployment (verified empirically — repository metadata is excluded), while
+    // the manifest serves byte-exact. The README behavior is a documented limitation.
+    const manifest = await runtimeFetch(`${url}/sos-manifest.json`);
+    const manifestAtRevision = await repoReader.contentAt('sos-manifest.json', deployedRevision);
     staging.stageRuntimeFacts({
       rootStatus: root.status,
       rootBodyExcerpt: root.body === null ? null : root.body.slice(0, 200),
-      readmeStatus: readme.status,
-      readmeBody: readme.body,
-      readmeAtRevision,
+      manifestStatus: manifest.status,
+      manifestBody: manifest.body,
+      manifestAtRevision,
       deploymentUrl: url,
       deployedRevision,
       fetchedAt: now(),
@@ -1570,8 +1574,8 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       : {
           rootStatus: runtimeFacts.rootStatus,
           rootBodyExcerpt: runtimeFacts.rootBodyExcerpt,
-          readmeStatus: runtimeFacts.readmeStatus,
-          readmeByteExact: runtimeFacts.readmeBody !== null && runtimeFacts.readmeAtRevision !== null && runtimeFacts.readmeBody === runtimeFacts.readmeAtRevision,
+          manifestStatus: runtimeFacts.manifestStatus,
+          manifestByteExact: runtimeFacts.manifestBody !== null && runtimeFacts.manifestAtRevision !== null && runtimeFacts.manifestBody === runtimeFacts.manifestAtRevision,
           deployedRevision: runtimeFacts.deployedRevision,
           fetchedAt: runtimeFacts.fetchedAt,
         };

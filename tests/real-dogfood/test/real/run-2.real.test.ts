@@ -64,8 +64,8 @@ suite('REAL dogfood RUN 2 (RUN_REAL=1): the fresh-harness reproducibility on pay
     expect(record.pullRequest!.url).toContain('github.com/payswapdotorg/sos-dogfood-r2/pull/');
     expect(record.deployment!.readyState).toBe('READY');
     expect(record.deployment!.commitSha).toBe(record.completion!.sourceRevisions.workspaceHead);
-    expect(record.runtimeVerification!.readmeStatus).toBe(200);
-    expect(record.runtimeVerification!.readmeByteExact).toBe(true);
+    expect(record.runtimeVerification!.manifestStatus).toBe(200);
+    expect(record.runtimeVerification!.manifestByteExact).toBe(true);
     for (const tick of record.ticks) {
       expect(tick.userDeviceOnline).toBe(false);
     }
