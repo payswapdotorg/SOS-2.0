@@ -392,9 +392,24 @@ importers:
       '@sos-2/ask':
         specifier: workspace:*
         version: link:../../packages/ask
+      '@sos-2/deployment-providers':
+        specifier: workspace:*
+        version: link:../../packages/deployment-providers
       '@sos-2/evidence':
         specifier: workspace:*
         version: link:../../packages/evidence
+      '@sos-2/infra-production-connectivity':
+        specifier: workspace:*
+        version: link:../../infra/production-connectivity
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/real-observation':
+        specifier: workspace:*
+        version: link:../../packages/real-observation
+      '@sos-2/real-persistence':
+        specifier: workspace:*
+        version: link:../../packages/real-persistence
       '@sos-2/semantic-spine':
         specifier: workspace:*
         version: link:../../packages/semantic-spine
@@ -404,6 +419,9 @@ importers:
       '@sos-2/web-contracts':
         specifier: workspace:*
         version: link:../../packages/web-contracts
+      '@sos-2/web-live-data':
+        specifier: workspace:*
+        version: link:live-data
       next:
         specifier: 16.3.5
         version: 16.3.5(@types/node@22.20.4)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
