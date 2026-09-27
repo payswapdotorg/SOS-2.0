@@ -1,0 +1,38 @@
+{
+  "name": "@sos-2/tests-live-ux-integration",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 P18-INT Integration Suites (Work Order P18-INT — the architect integration pass, the A→B→C seam). TWO strictly separated suites that turn the three merged P18 lanes into ONE coherent live product. (1) DETERMINISTIC INTEGRATED SUITE (default; offline; the seam SCRIPTED through a producer mock injected at the module boundary — the app files themselves are never touched; fixed vitest seed 424242; run-to-run identical): the integrated full path mission route -> live observed state -> consequential action -> receipt -> evidence driven END-TO-END — the real data seam composing the scripted producer (module-scope composition pinned: ONE composition, delegation per call), both mounted mission routes rendering the scripted honest observation through the real seam, the eight mandatory P18 journeys at ROUTE level (greenfield, brownfield, ASK resolution, cloud execution with the user's machine off, body interruption/replacement checkpoint recovery, observation without a body, promotion, rollback) each asserting the six-question contract (What/Why/Evidence/Uncertainty/Authority/Next) on the receipt surfaces, envelope -> authority-at-action-time -> receipt -> evidence links through the real merged action gateway, idempotency (double-submit replays the recorded receipt, exactly one world transition), fail-closed paths (never-held/revoked grants DENY with the executor never invoked; smuggled authority fields typed-rejected at the mounted route handler), ASK envelope -> queue resolution through the real merged AskQueue (human authority; the honest ASK_ENTRY_UNKNOWN for the deployed empty queue), and honest degraded states (the reference-store marker; UNAVAILABLE/DEGRADED sources rendered honestly, never fabricated). (2) ENV-GATED REAL INTEGRATION SUITE (RUN_REAL=1, default OFF, selected by scripts/run-real-if-env.mjs): the REAL seam with NO injection — one real data-plane pass against the real providers (GitHub observation drain; the real Vercel deployment-state read with source_revision_sha; the R2 signed probe; Neon/Upstash probed with honest UNAVAILABLE outcomes recorded as valid evidence), the seam contract against the real pass, and real consequential actions through the mounted endpoint (body summon via the OpenRouter-backed body, promotion/rollback through the deployment provider, ASK resolution) against the deployed preview URL — each step recording redacted HTTP transcripts + typed receipts + honest runtime provider states into docs/evidence/production-connectivity/live-ux/integration. Credentials are referenced by environment-variable NAMES only (the P3 typed registry); evidence records pass fail-closed through both merged redaction corpora.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run && node scripts/run-real-if-env.mjs",
+    "test:reference": "pnpm run build && vitest run",
+    "test:real": "pnpm run build && vitest run --config vitest.real.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/ask": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/decision": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/ui-contracts": "workspace:*",
+    "@sos-2/web-contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}

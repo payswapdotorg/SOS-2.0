@@ -2,10 +2,25 @@
  * P18-B deterministic reference-mode suite (6/7): THE MOUNT SEAMS.
  * Pins the structural fix and the honest wiring:
  *
- *   - the data seam (apps/web/app/live-mission/data-seam.ts) returns the
- *     HONEST unwired state (storeRef 'unwired', asOf 'never', the
- *     repository subject) — the architect's lane-A producer swaps the
- *     body later; every mission surface consumes ONLY the seam;
+ *   - the data seam (apps/web/app/live-mission/data-seam.ts) delegates to
+ *     the lane-A producer (the P18-INT A→B→C seam swap): with an
+ *     INCOMPLETE observation environment (this suite runs offline, no
+ *     provider credentials) the producer returns the honest empty
+ *     observation — the EXPLICIT reference-store marker (a selection DID
+ *     run; reference state never masquerades as production durable
+ *     state), the real probe instant, no drain — never fabricated live
+ *     state; every mission surface consumes ONLY the seam;
+ *
+ * P18-INT FLAGGED DEVIATION (cross-owned-path; architect ruling
+ * requested — see the P18-INT evidence README + completion report): the
+ * work order mandates the seam swap (§1) AND a green full suite (§3);
+ * the swap necessarily obsoletes three of this file's original pins on
+ * the PRE-swap body ('unwired'/'never'/byte-equal calls). Those three
+ * assertions were updated here to pin the POST-swap honest states with
+ * equal strength — the work order's owned surface does not include this
+ * file; the architect may revert/re-pin in one commit. Every other
+ * assertion in this file is byte-identical to the P18-B delivery.
+ *
  *   - the /mission route (REPLACED — the operator's structural fix)
  *     renders the live Mission experience server-side: the actionable
  *     entry points (Start mission / Import system / Resume existing
@@ -54,10 +69,18 @@ const missionHtml = await renderPage(MissionPage);
 const liveMissionHtml = await renderPage(LiveMissionRoute);
 
 describe('the data seam (the architect-defined binding)', () => {
-  it('returns the honest unwired empty observation (never fabricated live state)', async () => {
+  it('returns the honest producer-backed empty observation for an incomplete environment (never fabricated live state)', async () => {
     const data = await getLiveMissionData();
-    expect(data.storeRef).toBe('unwired');
-    expect(data.asOf).toBe('never');
+    // P18-INT swap: the seam delegates to the lane-A producer. This suite
+    // runs offline with no provider credentials, so the producer takes its
+    // honest incomplete-environment path: no observation env -> no drain
+    // (drainedAt null), no durable store answered a real probe -> the
+    // EXPLICIT reference marker (never 'unwired': a real selection probe
+    // DID run; never production durable state), asOf = the real selection
+    // instant. (P18-INT flagged deviation: this pin was updated from the
+    // pre-swap 'unwired'/'never' values — see the file header.)
+    expect(data.storeRef).toBe('reference:in-memory-observation-store');
+    expect(data.asOf).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$/);
     expect(data.drainedAt).toBeNull();
     expect(data.repository.subject).toBe(LIVE_MISSION_REPOSITORY_SUBJECT);
     expect(data.repository.subject).toBe('github:repo:payswapdotorg/SOS-2.0');
@@ -69,10 +92,18 @@ describe('the data seam (the architect-defined binding)', () => {
     expect(data.watchingWithoutBody).toBe(true);
   });
 
-  it('is deterministic (the same honest answer every call)', async () => {
+  it('is structurally deterministic (the same honest shape every call; only the observation instant moves with the real clock)', async () => {
     const first = await getLiveMissionData();
     const second = await getLiveMissionData();
-    expect(first).toEqual(second);
+    // (P18-INT flagged deviation: the pre-swap body was byte-identical per
+    // call; live observation is per-request by design — each call is ONE
+    // bounded data-plane pass at the real clock. The SHAPE is pinned
+    // deterministically: everything except asOf is equal, and asOf never
+    // regresses.)
+    const { asOf: firstAsOf, ...firstShape } = first;
+    const { asOf: secondAsOf, ...secondShape } = second;
+    expect(firstShape).toEqual(secondShape);
+    expect(secondAsOf >= firstAsOf).toBe(true);
   });
 });
 
@@ -111,9 +142,12 @@ describe('the REPLACED /mission route mounts the live Mission experience', () =>
     expect(html).toContain('SOS is watching');
   });
 
-  it('labels the surface LIVE (the honest provenance badge, storeRef unwired)', () => {
+  it('labels the surface LIVE (the honest provenance badge, the explicit reference-store marker)', () => {
+    // (P18-INT flagged deviation: pinned 'unwired' pre-swap; post-swap the
+    // badge carries the producer's honest store identity — the explicit
+    // reference marker while the canonical store is unattached.)
     expect(html).toContain('data-live-badge="true"');
-    expect(html).toContain('unwired');
+    expect(html).toContain('reference:in-memory-observation-store');
   });
 
   it('renders the consequential action panel with the forms POSTing to the live action endpoint', () => {

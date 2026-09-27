@@ -1,0 +1,101 @@
+{
+  "schema": "sos-2/p18int/provenance-matrix",
+  "work_order": "P18-INT",
+  "evidence_kind": "provenance-matrix",
+  "produced_at": "2026-09-27T07:50:00Z",
+  "repo_head": "b8c906ecd4546007285c031d1afe25d2a7fd22cd",
+  "seam": "apps/web/app/live-mission/data-seam.ts:getLiveMissionData -> apps/web/live-data/src/producer.ts:createLiveMissionDataProducer (composed ONCE at module scope) -> apps/web/live-data/src/data-plane.ts:runLiveDataPlane (ONE bounded honest pass per call)",
+  "note_on_repo_head": "the matrix is semantic (the field->source binding), not a run artifact; the RUN artifacts are real-data-plane.json / journey-steps.json bound to their producing heads",
+  "fields": [
+    {
+      "dto_field": "storeRef",
+      "source": "the durable-store selection (runLiveDataPlane step 2): REAL probes of the canonical Neon adapter and the coordination-only Upstash adapter behind the frozen P17-A adapters",
+      "production": "neon:postgres:<databaseName>@<branchName> — ONLY when the canonical store answered a real probe (selection.mode === PRODUCTION_DURABLE, canonical.state === CONNECTED)",
+      "reference": "reference:in-memory-observation-store — the EXPLICIT reference marker whenever the canonical store is any honest state other than CONNECTED (UNKNOWN / UNAVAILABLE / DEGRADED). Reference state NEVER masquerades as production durable state; the marker is machine-checkable in the data-plane view (store.reference_mode) and the selection note",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "asOf",
+      "source": "the pass clock at the selection/projection instant (the app's impure time boundary: the real system clock via the producer defaults; injectable in the deterministic suites)",
+      "production": "the real current RFC3339 instant of the pass",
+      "reference": "the real current RFC3339 instant of the pass (identical semantics — time is never fabricated on either side)",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "drainedAt",
+      "source": "the observation plane's drain report (runLiveDataPlane step 5 — createRealObservationPlane.drain, WITHOUT a body)",
+      "production": "the drain instant when the observation environment is complete (GITHUB_ACCESS_TOKEN present)",
+      "reference": "null on the honest unwired path (no observation config -> NO drain ran -> drainedAt stays null; the surface renders 'No live observation drain has run yet')",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "sources[]",
+      "source": "the plane's connectivity snapshot (every §5 family: github / ci / deployment / telemetry / provider-health / scheduled-probe), each state derived from REAL probes only",
+      "production": "CONNECTED / DEGRADED / UNAVAILABLE per real probe outcomes with the real transport facts and api revisions",
+      "reference": "UNKNOWN when never probed (a state not probed this run is UNKNOWN — 'UNKNOWN is not health'); [] when the observation env is incomplete",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "eventsInWindow",
+      "source": "the drain report's applied events total (sourceSummaries)",
+      "production": "the real count of observation events applied in the freshness window",
+      "reference": "0 on the honest unwired path",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "repository.branchHeads / repository.openPullRequests / repository.freshness",
+      "source": "the GitHub REST events observation (the P17-C plane's repository snapshot family)",
+      "production": "the real branch heads (e.g. main@<sha>), open pull requests, and the freshness verdict within the window",
+      "reference": "empty / NO_DATA when no GitHub observation ran",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "ci.latestByPipeline / ci.freshness",
+      "source": "the GitHub Actions CI observation (the plane's ci family)",
+      "production": "the real latest run per pipeline with its capture-level status carried verbatim (SUCCESS / FAILURE / IN_PROGRESS — never folded)",
+      "reference": "empty / NO_DATA when no CI observation ran",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "deployments.byEnvironment / deployments.freshness",
+      "source": "the Vercel deployment-events observation (the plane's deployment family) + the real Vercel deployment-state read (runLiveDataPlane step 3 — /v6/deployments with the EXACT source_revision_sha)",
+      "production": "the real deployed revision per environment with since-instants; the deployment/source-SHA binding verdict (VERIFIED / DIVERGED / NO_DEPLOYMENT / UNAVAILABLE) is projected in the data-plane view",
+      "reference": "empty / NO_DATA when no Vercel observation ran; the deployment read state is UNKNOWN with the reason when no VERCEL_TOKEN exists",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "providerHealth[]",
+      "source": "the plane's provider-health family (real probes of every provider)",
+      "production": "the real per-provider last signals",
+      "reference": "[] when no provider-health probes ran",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "findings[]",
+      "source": "the reconciliation (the claims port — the production deployment claim from the REAL Vercel read + the durable previous-snapshot claim from the canonical store — reconciled against the observed state)",
+      "production": "ALIGNED / DIVERGED / UNVERIFIED / STALE with the evidence event ids; the durable claim exists only when the canonical store is CONNECTED",
+      "reference": "[] when no reconciliation input exists",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "detections[]",
+      "source": "the plane's detections (e.g. CI_FAILING_ON_HEAD — carried verbatim, never folded into a finding)",
+      "production": "the real detections of the pass",
+      "reference": "[] when no drain ran",
+      "carried_verbatim": true
+    },
+    {
+      "dto_field": "watchingWithoutBody",
+      "source": "the §5 rule: the observation plane runs WITHOUT a body — observation never depends on a body lease",
+      "production": "true (the live mission observation is body-independent by construction)",
+      "reference": "true (identical semantics — the honest empty state also watches without a body)",
+      "carried_verbatim": true
+    }
+  ],
+  "never_fabricated": [
+    "an incomplete observation environment returns the honest empty state (UNKNOWN/NO_DATA + missingEnv on the data-plane result) — never a synthetic snapshot",
+    "Neon/Upstash unreachability degrades to the explicit reference-store marker with the real transport fact carried verbatim — reference state never masquerades as production durable state",
+    "in reference mode NOTHING is persisted (the durability record states persisted:false with the reason; machine-checkable)",
+    "a state not probed this run is UNKNOWN (never health); a failed provider is UNAVAILABLE with the real reason"
+  ]
+}

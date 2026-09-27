@@ -218,46 +218,19 @@ export function gatewayWith(authority: InMemoryAuthority): JourneyGateway {
 }
 
 // ---------------------------------------------------------------------------
-// 3. The capability probe for the P18-B route mounts (route-level specs)
+// 3. (P18-INT) THE CAPABILITY GATES ARE REMOVED — the mounts exist
 // ---------------------------------------------------------------------------
 
-/** The single explicit skip reason the route-level suites carry while the P18-B mount is absent. */
-export const P18B_SKIP_REASON = 'requires-p18b-mount';
+// The P18-C capability gate (P18B_SKIP_REASON 'requires-p18b-mount' +
+// p18bMountState() + describe.skipIf) was removed by the P18-INT
+// architect integration pass: the P18-B mounts
+// (apps/web/app/live-mission/page.tsx + /api/live-mission/actions) are
+// merged on main, the gate opened, and every route-level full-path suite
+// now runs unconditionally. The shared helper sections retained below are
+// the render helper, the scripted honest DTO states, the gateway
+// composition, the real-app-route scanner and the markup assertions.
 
 const REPO_ROOT = path.resolve(fileURLToPath(new URL('.', import.meta.url)), '..', '..', '..');
-
-export interface P18bMountState {
-  /** apps/web/app/live-mission/page.tsx exists (the MOUNTING.md step-1 route). */
-  readonly liveMissionRoute: boolean;
-  /** apps/web/app/mission/page.tsx renders LiveMissionPage (the MOUNTING.md optional /mission pointing). */
-  readonly missionRouteRendersLive: boolean;
-  /** apps/web/app/api/live-mission/actions/route.ts exists (the MOUNTING.md step-2 action endpoint). */
-  readonly actionEndpoint: boolean;
-  /** True only when the FULL path (mission route + action endpoint) is mounted. */
-  readonly mounted: boolean;
-  /** The explicit skip reason while not mounted; null once mounted. */
-  readonly skipReason: string | null;
-}
-
-/**
- * The honest filesystem capability probe. Route-level full-path specs gate
- * on this; while `mounted` is false every one of them skips with the
- * EXPLICIT reason `requires-p18b-mount`. At the architect's integration
- * pass the mounts exist, the gate opens and every suite must run green —
- * pass states are never fabricated on this branch.
- */
-export function p18bMountState(): P18bMountState {
-  const liveMissionRoute = fs.existsSync(path.join(REPO_ROOT, 'apps/web/app/live-mission/page.tsx'));
-  let missionRouteRendersLive = false;
-  try {
-    missionRouteRendersLive = fs.readFileSync(path.join(REPO_ROOT, 'apps/web/app/mission/page.tsx'), 'utf8').includes('LiveMissionPage');
-  } catch {
-    missionRouteRendersLive = false; // honest: the route file is unreadable — treat as not mounted
-  }
-  const actionEndpoint = fs.existsSync(path.join(REPO_ROOT, 'apps/web/app/api/live-mission/actions/route.ts'));
-  const mounted = actionEndpoint && (liveMissionRoute || missionRouteRendersLive);
-  return { liveMissionRoute, missionRouteRendersLive, actionEndpoint, mounted, skipReason: mounted ? null : P18B_SKIP_REASON };
-}
 
 // ---------------------------------------------------------------------------
 // 4. The real-app-route scanner (links-to-real-routes-only verification)

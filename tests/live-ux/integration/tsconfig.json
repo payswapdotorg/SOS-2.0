@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "declaration": false,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": ["node"],
+    "paths": {
+      "@integration/producer": ["../../../apps/web/live-data/src/producer.ts"],
+      "@integration/data-plane": ["../../../apps/web/live-data/src/data-plane.ts"],
+      "@integration/seam": ["../../../apps/web/app/live-mission/data-seam.ts"],
+      "@integration/live-mission-route": ["../../../apps/web/app/live-mission/page.tsx"],
+      "@integration/mission-route": ["../../../apps/web/app/mission/page.tsx"],
+      "@integration/action-endpoint": ["../../../apps/web/app/api/live-mission/actions/route.ts"],
+      "@integration/live-action-core": ["../../../apps/web/app/api/live-mission/actions/live-action-core.ts"],
+      "@integration/deployed-host": ["../../../apps/web/app/api/live-mission/actions/deployed-host.ts"],
+      "@integration/real-executor-bridge": ["../../../apps/web/app/api/live-mission/actions/real-executor-bridge.ts"],
+      "@integration/receipt-page": ["../../../apps/web/app/mission/receipt/page.tsx"],
+      "@live-mission/envelopes": ["../../../apps/web/live-mission/src/actions/envelopes.ts"],
+      "@live-mission/dto": ["../../../apps/web/live-mission/src/view-state/live-mission-dto.ts"],
+      "@live-mission/receipt-view": ["../../../apps/web/live-mission/src/components/action-receipt-view.tsx"]
+    }
+  },
+  "include": ["src", "test"],
+  "exclude": ["node_modules", "dist"]
+}

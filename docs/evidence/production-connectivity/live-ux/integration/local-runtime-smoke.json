@@ -1,0 +1,32 @@
+{
+  "schema": "sos-2/p18int/local-runtime-smoke",
+  "work_order": "P18-INT",
+  "evidence_kind": "local-runtime-smoke",
+  "repo_head": "8597532e1c25e88ba19eb1b2dd0f2ad7bcda4e91",
+  "produced_at": "2026-09-27T07:55:00Z",
+  "what": "the ACTUAL Next.js production server (next build && next start) serving the integrated product at the delivery head — the real seam (no injection) in the real runtime",
+  "steps": [
+    {
+      "step": "GET /mission (the production mission route through the swapped seam)",
+      "result": "200 in 0.15s",
+      "markers": {
+        "title": "Mission — live (4 occurrences)",
+        "live_badge": "data-live-badge=\"true\" (9)",
+        "store_ref": "reference:in-memory-observation-store (20 — the explicit reference marker; no credential set in this environment)",
+        "honest_empty": "No live observation drain has run yet (6)",
+        "watching": "SOS is watching (2)",
+        "action_forms": "action=\"/api/live-mission/actions\" (3 — summon-body, promotion, rollback)"
+      }
+    },
+    {
+      "step": "POST /api/live-mission/actions (a well-formed body-lifecycle envelope, form-encoded, Accept: application/json)",
+      "result": "the typed gateway outcome: kind=gateway-action, outcome=executed, receipt status=DENIED, denial reason=ACTION_AUTHORITY_DENIED, receiptPageUrl=/mission/receipt?key=smoke-idem-1",
+      "note": "fail-closed is the DESIGNED behavior with no SOS_LIVE_MISSION_GRANTS configured — the honest denial, never a fabricated execution"
+    },
+    {
+      "step": "GET /api/live-mission/actions",
+      "result": "405 (the endpoint is POST-only — the typed action submission surface)"
+    }
+  ],
+  "reproduction": "pnpm --filter @sos-2/web run build && (cd apps/web && pnpm exec next start -p 3123) — then GET /mission and POST the typed envelope to /api/live-mission/actions"
+}

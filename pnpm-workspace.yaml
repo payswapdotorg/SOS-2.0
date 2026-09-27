@@ -42,3 +42,9 @@ packages:
   # isolated node_modules (the W17/P17-A/P18-A importer precedent; the
   # lockfile change is importer addition only).
   - tests/live-ux/actions
+  # P18-INT: the integration suites are a workspace package so the
+  # app-pulled sources (the seam, the routes, the endpoint core) resolve
+  # their workspace deps under pnpm's isolated node_modules (the
+  # W17/P17-A/P18-A/P18-B importer precedent; the lockfile change is
+  # importer addition only).
+  - tests/live-ux/integration

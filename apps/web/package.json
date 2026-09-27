@@ -2,7 +2,7 @@
   "name": "@sos-2/web",
   "version": "0.1.0",
   "private": true,
-  "description": "SOS 2.0 Production Web Console (Work Order P1): the ShareNet-inspired product shell — desktop left navigation rail with a persistent status strip, mobile compact header + bottom navigation, the dominant mission/system/shortfall/next-action hero, the below-hero cards (current change, evidence quality, experiment status, package reuse, recent learning), the active autonomous work surface (tasks, body leases, observation status with SOS-is-watching shown separately from body work), first-class loading/empty/unknown/unavailable/partial/error state blocks, rationale deep-links answering the six product review questions, and full keyboard/accessibility support. Fully server-rendered from the @sos-2/web-contracts view models over the clearly-labelled DEMO fixture dataset — no client fetches, no remote fonts, no images, no hidden clocks.",
+  "description": "SOS 2.0 Production Web Console (Work Order P1): the ShareNet-inspired product shell \u2014 desktop left navigation rail with a persistent status strip, mobile compact header + bottom navigation, the dominant mission/system/shortfall/next-action hero, the below-hero cards (current change, evidence quality, experiment status, package reuse, recent learning), the active autonomous work surface (tasks, body leases, observation status with SOS-is-watching shown separately from body work), first-class loading/empty/unknown/unavailable/partial/error state blocks, rationale deep-links answering the six product review questions, and full keyboard/accessibility support. Fully server-rendered from the @sos-2/web-contracts view models over the clearly-labelled DEMO fixture dataset \u2014 no client fetches, no remote fonts, no images, no hidden clocks.",
   "type": "module",
   "engines": {
     "node": ">=20"
@@ -16,10 +16,16 @@
   "dependencies": {
     "@sos-2/action-gateway": "workspace:*",
     "@sos-2/ask": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
     "@sos-2/evidence": "workspace:*",
+    "@sos-2/infra-production-connectivity": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*",
     "@sos-2/semantic-spine": "workspace:*",
     "@sos-2/ui-contracts": "workspace:*",
     "@sos-2/web-contracts": "workspace:*",
+    "@sos-2/web-live-data": "workspace:*",
     "next": "16.3.5",
     "react": "19.3.0",
     "react-dom": "19.3.0"
