@@ -1,0 +1,55 @@
+{
+  "name": "@sos-2/dogfood-live",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real-World Dogfood Harness (Work Order P19): the real-system composition that drives the P13 flagship journey engine (packages/greenfield-runtime, consumed NEVER modified) through REAL external systems. The harness COMPOSES the merged surfaces — RealGitHubProvider (@sos-2/real-github) behind the journey's JourneyGitHubPort (the P4 structural binding), a dogfood-scoped Vercel REST client (the §0b-verified shapes: POST /v9/projects with gitRepository, PATCH ssoProtection null, POST /v13/deployments with gitSource {repoId, ref}), the HostedCodingBody (@sos-2/real-bodies) behind the journey's TaskImplementationPort (REAL OpenRouter completions, default model qwen/qwen3-coder-flash, override env SOS_DOGFOOD_BODY_MODEL), and REAL gateway executors (commit/push/pull-request/deployment) behind the frozen ActionExecutor seam through the documented P8 staged-outcome composition boundary (the async REAL API calls are driven by the harness operator; the sync gateway seam answers exactly the staged real outcomes — never a fabricated success, never a silent pass-through). Real evaluator probes (repo-contents-at-revision, deployment-state, runtime-HTTP, security-scan of realized contents + REAL node execution of the generated test) return typed verdicts with evidence; the body never certifies itself (§10). Honest provider states (CONNECTED/UNKNOWN/UNAVAILABLE/DEGRADED) derive from REAL probes only; the store selection probes Neon/Upstash honestly and degrades to the reference in-memory live store with the EXPLICIT marker (the live-data-plane precedent). Post-journey package learning records data-only learned artifacts through @sos-2/packages + @sos-2/composition + @sos-2/ecology carrying the REAL evidence refs (PR sha, deployment URL, evaluator records). Determinism discipline: no ambient env/network/time in src — every credential arrives from an injected source record (env NAMES only in every output), every network seam (GitHub request port, Vercel FetchPort, model port, runtime fetch, DNS lookup) and the clock/sleep are INJECTABLE so the deterministic suites script them offline (fixed seed 424242); the process boundary binds the real fetch/clock only in the env-gated RUN_REAL suite (default OFF).",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/authority": "workspace:*",
+    "@sos-2/body-broker": "workspace:*",
+    "@sos-2/composition": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/ecology": "workspace:*",
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/evaluation-orchestration": "workspace:*",
+    "@sos-2/evaluator": "workspace:*",
+    "@sos-2/execution-fabric": "workspace:*",
+    "@sos-2/greenfield-runtime": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/packages": "workspace:*",
+    "@sos-2/project-realization": "workspace:*",
+    "@sos-2/real-bodies": "workspace:*",
+    "@sos-2/real-github": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/real-persistence": "workspace:*",
+    "@sos-2/sandbox": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/task-graph": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
