@@ -147,6 +147,8 @@ export interface DogfoodRunRecord {
   readonly modelCalls: readonly DogfoodModelCallRecord[];
   readonly repairs: readonly DogfoodRepairRecord[];
   readonly asks: readonly { readonly askId: string; readonly stage: string; readonly reasonCode: string; readonly detail: string }[];
+  /** The EXACT real commit shas in realization order (the first is the workspace-provisioning revision). */
+  readonly realizedCommitShas: readonly string[];
   readonly stages: readonly DogfoodStageRecord[];
   readonly ticks: readonly CloudTickRecord[];
   readonly pullRequest: DogfoodPullRequestRecord | null;

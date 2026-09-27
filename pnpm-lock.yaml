@@ -3820,6 +3820,46 @@ importers:
         specifier: ^3.0.0
         version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
 
+  tests/real-dogfood:
+    dependencies:
+      '@sos-2/action-gateway':
+        specifier: workspace:*
+        version: link:../../packages/action-gateway
+      '@sos-2/deployment-providers':
+        specifier: workspace:*
+        version: link:../../packages/deployment-providers
+      '@sos-2/dogfood-live':
+        specifier: workspace:*
+        version: link:../../packages/dogfood-live
+      '@sos-2/greenfield-runtime':
+        specifier: workspace:*
+        version: link:../../packages/greenfield-runtime
+      '@sos-2/implementation-orchestrator':
+        specifier: workspace:*
+        version: link:../../packages/implementation-orchestrator
+      '@sos-2/live-store':
+        specifier: workspace:*
+        version: link:../../packages/live-store
+      '@sos-2/real-bodies':
+        specifier: workspace:*
+        version: link:../../packages/real-bodies
+      '@sos-2/real-github':
+        specifier: workspace:*
+        version: link:../../packages/real-github
+      '@sos-2/real-observation':
+        specifier: workspace:*
+        version: link:../../packages/real-observation
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.0
+        version: 22.20.4
+      typescript:
+        specifier: ^5.5.0
+        version: 5.9.3
+      vitest:
+        specifier: ^3.0.0
+        version: 3.2.7(@types/node@22.20.4)(jiti@2.7.0)(lightningcss@1.32.0)
+
   tests/real-github:
     dependencies:
       '@sos-2/real-github':

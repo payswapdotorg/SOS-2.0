@@ -34,7 +34,7 @@
  */
 
 import { ActionGateway, InMemoryAuthority, InMemoryEventLog, InMemoryEvidenceSink, InMemoryIdempotencyStore } from '@sos-2/action-gateway';
-import type { ActionFamily, ActorRef, Clock as GatewayClock } from '@sos-2/action-gateway';
+import type { ActionFamily, ActorRef, Clock as GatewayClock, GatewayDeps, GatewayOutcome, PlanningRef } from '@sos-2/action-gateway';
 import { createGrant } from '@sos-2/authority';
 import type { AuthorityGrantArtifact } from '@sos-2/authority';
 import { BodyBroker } from '@sos-2/body-broker';
@@ -78,7 +78,6 @@ import type { StagedBodyRun } from './staging.js';
 import { createRealGitHubGatewayExecutor, createRealVercelGatewayExecutor } from './gateway-executors.js';
 import { createRealHostedBodyTaskImplementation, goalForNode, readStagedRunFiles } from './body-binding.js';
 import { createDogfoodNodeRepairExecutor } from './repair-binding.js';
-import type { DogfoodNodeRepairExecutor } from './repair-binding.js';
 import { createDogfoodEvaluatorProbes } from './evaluator-probes.js';
 import type { DogfoodNodeRunner } from './evaluator-probes.js';
 import { outcomeClassesOf, summarizeReceipt } from './records.js';
@@ -194,9 +193,19 @@ export interface RealDogfoodHarness {
   readonly asks: readonly { readonly askId: string; readonly stage: string; readonly reasonCode: string; readonly detail: string }[];
   readonly realizedCommitShas: readonly string[];
   readonly pullRequest: DogfoodPullRequestRecord | null;
+  /** The action-time grant ids the approval minted (revocation fixtures revoke these). */
+  readonly grantedGrantIds: readonly string[];
   readonly deployment: DogfoodDeploymentRecord | null;
   /** The recorded preflight (provider probes + repo/project creation facts). */
   preflight(): Promise<void>;
+  /**
+   * The async composition-boundary staging of the NEXT ready node (the
+   * model run + the gated real commit + the repo facts) — the exact step
+   * the drive loop runs before each implementation tick. Exposed for the
+   * MANUAL-DRIVE fixtures (e.g. the authority fail-closed suite): the
+   * journey's own ticks stay untouched.
+   */
+  stageNextNode(): Promise<void>;
   /** Drive the full journey (the user-present phase + the staged cloud-tick loop) and return the honest run record. */
   run(): Promise<DogfoodRunRecord>;
 }
@@ -206,6 +215,31 @@ export function dogfoodRealSleep(ms: number): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
+}
+
+/**
+ * THE RECEIPT-RECORDING GATEWAY (the P19 audit surface) — a thin subclass
+ * of the FROZEN P9 gateway that delegates EVERY execute verbatim and
+ * records each freshly-minted receipt (SUCCEEDED, FAILED and DENIED
+ * alike) into the staging store: the receipts are the run's evidence
+ * trail (replays return the recorded original and are not double-
+ * counted; envelope rejections mint no receipt).
+ */
+class RecordingActionGateway extends ActionGateway {
+  private readonly receiptSink: DogfoodStaging;
+
+  constructor(deps: GatewayDeps, receiptSink: DogfoodStaging) {
+    super(deps);
+    this.receiptSink = receiptSink;
+  }
+
+  override execute(raw: unknown, planning?: PlanningRef): GatewayOutcome {
+    const outcome = super.execute(raw, planning);
+    if (outcome.kind === 'executed') {
+      this.receiptSink.observeReceipt(outcome.receipt);
+    }
+    return outcome;
+  }
 }
 
 /** The harness's real repository reader — the composition-boundary REST reads the evaluator facts need. */
@@ -375,6 +409,9 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     get asks(): readonly { askId: string; stage: string; reasonCode: string; detail: string }[] {
       return asks;
     },
+    get grantedGrantIds(): readonly string[] {
+      return grantedGrantIdsRef ?? [];
+    },
     get realizedCommitShas(): readonly string[] {
       return realizedCommitShas;
     },
@@ -385,6 +422,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       return deploymentRecord;
     },
     preflight,
+    stageNextNode,
     run,
   };
 
@@ -397,9 +435,8 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
   let graphRef: TaskGraph | null = null;
   let realizerRef: RepositoryRealizer | null = null;
   let journeyRef: GreenfieldJourney | null = null;
-  let grantArtifact: AuthorityGrantArtifact | null = null;
-  let bodyExecutorRef: ReturnType<typeof createRealHostedBodyTaskImplementation> | null = null;
-  let repairRef: DogfoodNodeRepairExecutor | null = null;
+  let grantedGrantIdsRef: string[] | null = null;
+  let authorityPreflightRef: ((family: 'commit' | 'push' | 'pull-request' | 'deployment', scope: string) => boolean) | null = null;
   let preflightDone = false;
 
   async function preflight(): Promise<void> {
@@ -511,7 +548,23 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     // 5. Compose the world (the merged surfaces, everything injected).
     const authority = new InMemoryAuthority();
     authorityRef = authority;
+    /**
+     * The composition-boundary authority PRE-CHECK (advisory; the gateway
+     * remains the SOLE authority evaluator at action time): when the current
+     * grant snapshot is absent, the harness SKIPS the real provider call —
+     * a revoked/expired grant therefore produces the typed gateway denial
+     * with NO executor invocation AND no real side effect outside the
+     * gateway (fail-closed end-to-end).
+     */
+    const authorityPreflight = (family: 'commit' | 'push' | 'pull-request' | 'deployment', scope: string): boolean => {
+      const snapshot = authority.evaluateCurrent({ actor: actingBody, family, scope }, gatewayClock.now());
+      if (!snapshot.granted) {
+        honestNotes.push(`the composition-boundary authority pre-check for ${family}:${scope} answered ${snapshot.reason} — the real provider call was SKIPPED (the gateway denies at action time; fail-closed end-to-end)`);
+      }
+      return snapshot.granted;
+    };
     const grantedGrantIds: string[] = [];
+    grantedGrantIdsRef = grantedGrantIds;
     const grantingAuthority: GrantingAuthorityPort = {
       grantFor: (actorId: string, family: ActionFamily, scope: string, grantOptions?: { grantId?: string }) => {
         const grantId = authority.grant(actorId, family, scope, grantOptions);
@@ -563,7 +616,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     const graph = new TaskGraph({ tasks: store.tasks, observationEvents: store.observationEvents, clock });
     graphRef = graph;
 
-    const gateway = new ActionGateway({
+    const gateway = new RecordingActionGateway({
       clock: gatewayClock,
       authority,
       executors: [
@@ -574,12 +627,15 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       events: new InMemoryEventLog(),
       evidence: new InMemoryEvidenceSink(),
       rollbackVerifier: null,
-    });
+    }, staging);
     gatewayRef = gateway;
 
     const actingBody: ActorRef = { kind: 'body', id: `p13-acting-body:${options.journeyId}` };
     const realizer = new RepositoryRealizer({ gateway, actor: actingBody, clock: gatewayClock, workspaceBaseSha: DOGFOOD_EMPTY_REPOSITORY_BASE });
     realizerRef = realizer;
+    // Bind the composition-boundary authority pre-check (defined above; the
+    // closure reads actingBody lazily — assigned here so the gate is LIVE).
+    authorityPreflightRef = authorityPreflight;
 
     const registry = new EvaluatorRegistry();
     for (const probe of createDogfoodEvaluatorProbes({ staging, ...(options.nodeRunner !== undefined ? { nodeRunner: options.nodeRunner } : {}) })) {
@@ -590,7 +646,6 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     const certifier = new CompletionCertifier({ orchestration, clock: gatewayClock });
 
     const bodyExecutor = createRealHostedBodyTaskImplementation({ staging, broker });
-    bodyExecutorRef = bodyExecutor;
 
     const stageRepoFacts = async (revision: string, plannedPaths: readonly string[], componentId: string | null): Promise<void> => {
       const paths = await repoReader.treeAt(revision);
@@ -621,7 +676,6 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       realizer,
       stageRepoFacts,
     });
-    repairRef = repair;
     const nodeRepair: NodeRepairExecutor = {
       repair: (input) => {
         const startedAt = now();
@@ -711,11 +765,10 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     journeyRef = journey;
 
     preflightDone = true;
-
-    // Stash the harness-scoped pieces the drive loop needs.
-    (harness as unknown as { grantedGrantIds: readonly string[] }).grantedGrantIds = grantedGrantIds;
     stageRepoFactsRef = stageRepoFacts;
   }
+
+  // Stash refs for the harness getters + the drive loop (assigned during preflight).
 
   let stageRepoFactsRef: ((revision: string, plannedPaths: readonly string[], componentId: string | null) => Promise<void>) | null = null;
 
@@ -836,7 +889,12 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     };
     staging.stageBodyRun(ready.task_id, attempt, stagedRun);
 
-    // 3. The REAL commit on the implementation branch (staged for the sync gateway).
+    // 3. The REAL commit on the implementation branch (staged for the sync
+    //    gateway) — gated by the advisory authority pre-check (fail-closed
+    //    end-to-end: no real provider call when the grant is absent).
+    if (authorityPreflightRef !== null && !authorityPreflightRef('commit', 'workspace')) {
+      return;
+    }
     const message = `Implement: ${ready.title} (attempt ${attempt})`;
     const baseSha = realizer.currentHead();
     const committed = await provider.commitFiles({ repository, branch, message, files: stagedRun.files.map((file) => ({ path: file.path, contents: file.contents })) });
@@ -868,7 +926,12 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     const head = realizer.currentHead();
     const remote = `github.com/${repository.owner}/${repository.name}`;
 
-    // 1. The REAL push verification: the remote branch ref observed at the exact sha.
+    // 1. The REAL push verification: the remote branch ref observed at the
+    //    exact sha — gated by the advisory authority pre-check (fail-closed
+    //    end-to-end).
+    if (authorityPreflightRef !== null && (!authorityPreflightRef('push', branch) || !authorityPreflightRef('pull-request', branch))) {
+      return;
+    }
     const observedSha = await repoReader.refHead(branch);
     staging.stagePush({ remote, ref: branch, fromSha: head }, {
       observedSha: observedSha ?? '',
@@ -950,7 +1013,11 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       throw new DogfoodAbortError('PROVIDER_UNAVAILABLE', `the Vercel project link carries no repoId for ${options.repositorySlug} — the gitSource deployment protocol cannot proceed`, 'Inspect the project link (dashboard or API) and re-run after cleanup.');
     }
 
-    // 3. The production deployment of the EXACT PR head revision.
+    // 3. The production deployment of the EXACT PR head revision — gated
+    //    by the advisory authority pre-check (fail-closed end-to-end).
+    if (authorityPreflightRef !== null && !authorityPreflightRef('deployment', 'production')) {
+      return;
+    }
     const startedAt = clock.nowEpochMs();
     const deployment = await client.createProductionDeployment({ projectName: options.vercelProjectName, repoId, ref: head });
     let current: DogfoodVercelDeployment = deployment;
@@ -1163,6 +1230,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     if (!verification.verified) {
       throw new DogfoodAbortError('CONNECTION_REFUSED', `the real GitHub handshake did not verify: ${verification.failure ?? 'unknown failure'}`, 'Check the GitHub credential and re-run.');
     }
+    const beforeConnect = journey.state().transitions.length;
     const connect = await journey.connectRepository(options.repositorySlug);
     if (connect.kind !== 'CONNECTED') {
       throw new DogfoodAbortError('CONNECTION_REFUSED', `the repository connection refused (${connect.kind}): ${connect.detail}`, 'Inspect the repository (it must be empty) and re-run after cleanup.');
@@ -1170,6 +1238,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     if (!connect.simulated) {
       honestNotes.push('the repository connection is REAL (the PAT-backed handshake verified; empty-repository detection ran over the real branches API)');
     }
+    captureStageRecords(beforeConnect); // captures the REPOSITORY_CONNECTED transition (the honest empty-repository state)
     const prior = journey.state().transitions.length;
     await journey.approveAuthority({ approvedBy: options.approvedBy ?? 'p19-dogfood:operator' });
     captureStageRecords(prior);
@@ -1501,8 +1570,9 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
           fetchedAt: runtimeFacts.fetchedAt,
         };
 
-    // Record asks that were parked during the run (the honest ASK path).
-    if (state.pendingAsk !== null) {
+    // Record asks that were parked during the run (the honest ASK path) —
+    // deduplicated by ask id (the tick loop already recorded the parked ones).
+    if (state.pendingAsk !== null && !asks.some((ask) => ask.askId === state.pendingAsk!.askId)) {
       asks.push({ askId: state.pendingAsk.askId, stage: state.pendingAsk.stage, reasonCode: state.pendingAsk.reasonCode, detail: state.pendingAsk.detail });
     }
 
@@ -1516,6 +1586,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
       storeSelection: storeSelection!,
       modelCalls: [...modelCalls],
       repairs: [...repairs],
+      realizedCommitShas: [...realizedCommitShas],
       asks,
       stages: [...stageRecords],
       ticks: journey.ticks().map((tick) => ({ ...tick })),
@@ -1537,10 +1608,7 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
     };
   }
 
-  void grantArtifact;
   void store;
-  void bodyExecutorRef;
-  void repairRef;
   void fabricRef;
 
   return harness;
