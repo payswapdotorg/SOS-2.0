@@ -171,10 +171,11 @@
       "mergedAs": "f284b7b5c93164e9200306fcbbfb9440c533c46d"
     },
     "P19": {
-      "status": "BLOCKED",
+      "status": "READY",
       "dependencies": [
         "P18-INT"
-      ]
+      ],
+      "notes": "Real-world dogfood: the flagship journey (mission -> repo -> hypothesis -> candidate -> assurance -> work graph -> cloud body (user offline) -> independent evaluation -> repair/ASK -> PR -> deployment -> runtime observation -> mission verification -> package learning) against REAL external systems, exact revisions at every stage; reproducibility = a second run on a fresh repository. Owned: tests/real-dogfood, packages/dogfood-live, docs/evidence/production-connectivity/dogfood."
     },
     "P20": {
       "status": "BLOCKED",
@@ -215,7 +216,7 @@
         "P18-B",
         "P18-C"
       ],
-      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A\u2192B\u2192C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
+      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A→B→C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
       "mergedAs": "1b130ad8a82a2bf68856c67d38c485d9cac23c70"
     }
   }
