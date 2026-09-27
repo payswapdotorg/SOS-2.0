@@ -18,7 +18,7 @@ import type { DogfoodReproducibilityRecord, DogfoodRunRecord } from '@sos-2/dogf
 import { GREENFIELD_JOURNEY_STAGES, recomputeCompletionId } from '@sos-2/greenfield-runtime';
 import { ambientSource, credentialEnvNames, realClock, realSleep, RUN_REAL } from './real-world.js';
 import { EVIDENCE_ROOT, writeDogfoodEvidence, repoHeadSha } from '../../src/evidence.js';
-import { writeRunEvidence } from './run-1.real.test.js';
+import { writeRunEvidence } from './run-evidence.js';
 
 const suite = RUN_REAL ? describe : describe.skip;
 

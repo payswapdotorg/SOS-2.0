@@ -29,48 +29,11 @@ import { createRealDogfoodHarness } from '@sos-2/dogfood-live';
 import type { DogfoodRunRecord } from '@sos-2/dogfood-live';
 import { GREENFIELD_JOURNEY_STAGES, recomputeCompletionId } from '@sos-2/greenfield-runtime';
 import { ambientSource, credentialEnvNames, realClock, realSleep, RUN_REAL } from './real-world.js';
+import { writeRunEvidence } from './run-evidence.js';
 import { writeDogfoodEvidence, repoHeadSha } from '../../src/evidence.js';
 
 const suite = RUN_REAL ? describe : describe.skip;
 
-/** Write the full evidence package of one real run (§5 run-N/). */
-export function writeRunEvidence(record: DogfoodRunRecord, head: string, source: Readonly<Record<string, string>>, runDir: 'run-1' | 'run-2'): void {
-  writeDogfoodEvidence({
-    evidence_kind: 'dogfood-journey-record',
-    record: {
-      schema: `sos-2/p19/${runDir}`,
-      credential_envs: credentialEnvNames(source),
-      mission: record.mission,
-      repository: record.repository,
-      implementation_branch: record.implementationBranch,
-      store_selection: record.storeSelection,
-      model_calls: record.modelCalls,
-      repairs: record.repairs,
-      asks: record.asks,
-      stages: record.stages,
-      ticks: record.ticks,
-      pull_request: record.pullRequest,
-      deployment: record.deployment,
-      runtime_verification: record.runtimeVerification,
-      final_state: record.finalState === null ? null : { stage: record.finalState.stage, status: record.finalState.status },
-      pending_ask: record.pendingAsk,
-      honest_notes: record.honestNotes,
-    },
-    file: `${runDir}/journey-record.json`,
-    head,
-  });
-  writeDogfoodEvidence({
-    evidence_kind: 'dogfood-provider-states',
-    record: {
-      schema: `sos-2/p19/${runDir}/provider-states`,
-      credential_envs: credentialEnvNames(source),
-      provider_states: record.providerStates,
-      store_selection: record.storeSelection,
-    },
-    file: `${runDir}/provider-states.json`,
-    head,
-  });
-}
 
 suite('REAL dogfood RUN 1 (RUN_REAL=1): the flagship journey on payswapdotorg/sos-dogfood-r1', () => {
   const source = ambientSource();
