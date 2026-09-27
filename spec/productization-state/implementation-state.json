@@ -3,7 +3,7 @@
   "program": "SOS-2.0-productization-and-autonomous-execution",
   "status": "READY",
   "currentFrontier": [
-    "P19"
+    "P20"
   ],
   "tasks": {
     "P0": {
@@ -171,14 +171,15 @@
       "mergedAs": "f284b7b5c93164e9200306fcbbfb9440c533c46d"
     },
     "P19": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P18-INT"
       ],
-      "notes": "Real-world dogfood: the flagship journey (mission -> repo -> hypothesis -> candidate -> assurance -> work graph -> cloud body (user offline) -> independent evaluation -> repair/ASK -> PR -> deployment -> runtime observation -> mission verification -> package learning) against REAL external systems, exact revisions at every stage; reproducibility = a second run on a fresh repository. Owned: tests/real-dogfood, packages/dogfood-live, docs/evidence/production-connectivity/dogfood."
+      "notes": "Real-world dogfood: the flagship journey (mission -> repo -> hypothesis -> candidate -> assurance -> work graph -> cloud body (user offline) -> independent evaluation -> repair -> PR -> deployment -> runtime observation -> mission verification -> package learning) executed TWICE against REAL external systems (GitHub + OpenRouter + Vercel) with exact revisions at every stage; reproducibility = run 2 on a fresh repository with a fresh harness (identical stage sequence, 7 honest recorded differences). Owned: tests/real-dogfood, packages/dogfood-live, docs/evidence/production-connectivity/dogfood. Two real-provider defects found+fixed at the P19 composition seams (provider-owned code untouched): GitHub zero-commit-repo discovery heuristic; Vercel README.md static-serving exclusion (runtime binding = sos-manifest.json byte-exact). Honest states: github/vercel/openrouter CONNECTED, neon/upstash UNAVAILABLE (DNS), store REFERENCE_FALLBACK.",
+      "mergedAs": "c25856ed4a2b30fa9314b3e929edf592a46f2a1f"
     },
     "P20": {
-      "status": "BLOCKED",
+      "status": "READY",
       "dependencies": [
         "P19"
       ]
