@@ -1,0 +1,173 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-completion-report",
+  "produced_at": "2026-09-27T14:32:54.114Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/run-1/completion-report",
+  "completion": {
+    "journeyId": "p19-dogfood-r1",
+    "missionRef": "sos://Mission/87ae7d75ae11fbb27db5dd057313365f",
+    "authority": {
+      "grantId": "sos://AuthorityGrant/96dbeacaf7b519ea07ce7f400e1dd89e",
+      "grantee": "journey-acting-principal:p13-acting-body:p19-dogfood-r1",
+      "scope": "KIND:Mission",
+      "permissions": [
+        "READ",
+        "REVISE"
+      ]
+    },
+    "stage": "COMPLETED",
+    "sourceRevisions": {
+      "workspaceHead": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "commits": [
+        {
+          "taskId": "p13-scaffold",
+          "sha": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "actionId": "p13-act-commit-8644627b8c21ceed"
+        },
+        {
+          "taskId": "p13-goal-deliver",
+          "sha": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "actionId": "p13-act-commit-0de47f81d93e7196"
+        },
+        {
+          "taskId": "p13-goal-deliver",
+          "sha": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4"
+        }
+      ],
+      "push": {
+        "ref": "sos/mission-p19-dogfood-r1",
+        "sha": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+        "remote": "github.com/payswapdotorg/sos-dogfood-r1"
+      },
+      "pullRequest": {
+        "pullRequestId": "1",
+        "headBranch": "sos/mission-p19-dogfood-r1",
+        "baseBranch": "main"
+      },
+      "deployment": {
+        "deploymentId": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+        "environment": "production",
+        "sourceSha": "d10264db6e013360dcc79d0fb77610d5c5841c19"
+      },
+      "importedBase": {
+        "repository": {
+          "owner": "payswapdotorg",
+          "name": "sos-dogfood-r1"
+        },
+        "branch": "",
+        "revision": ""
+      }
+    },
+    "evaluation": {
+      "certificationId": "p13-certification:c53ab9b5ce532cc7",
+      "verdictRefs": [
+        {
+          "verdictId": "evaluation-verdict:966a3fe2c196fe76",
+          "type": "tests",
+          "targetSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "targetDeploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN"
+        },
+        {
+          "verdictId": "evaluation-verdict:dd6bc75ffa4ea591",
+          "type": "static-contract-checks",
+          "targetSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "targetDeploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN"
+        },
+        {
+          "verdictId": "evaluation-verdict:68aa0634e912c302",
+          "type": "deployment-checks",
+          "targetSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "targetDeploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN"
+        },
+        {
+          "verdictId": "evaluation-verdict:d758fee4957ff308",
+          "type": "runtime-verification",
+          "targetSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "targetDeploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN"
+        },
+        {
+          "verdictId": "evaluation-verdict:ff6ad49e94646770",
+          "type": "security-checks",
+          "targetSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "targetDeploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN"
+        }
+      ],
+      "passed": 5,
+      "failed": 0,
+      "unknown": 0,
+      "uncertainties": []
+    },
+    "remainingUncertainty": [
+      "reference mode: the GitHub connection is the P4 reference adapter (SIMULATED states — never a real GitHub connection)",
+      "reference mode: git and deployment executors are the P9 deterministic reference executors (no real provider evidence exists)",
+      "reference mode: bodies are the P8 reference cloud bodies (deterministic simulators behind the §9 harness seam)",
+      "reference mode: evaluation evidence comes from scripted reference probes (deterministic simulators, not real providers)"
+    ],
+    "tasks": [
+      {
+        "taskId": "p13-goal-deliver",
+        "title": "Implement: Deliver: Build a markdown notes service with a public API",
+        "state": "COMPLETED",
+        "verificationRef": "p13-node-certification:72b104a2d0032805",
+        "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+        "bodyId": "p19-dogfood-openrouter-hosted-coding",
+        "leaseRef": "lease:p13-goal-deliver:0001",
+        "retries": 0
+      },
+      {
+        "taskId": "p13-scaffold",
+        "title": "Provision the repository scaffold",
+        "state": "COMPLETED",
+        "verificationRef": "p13-node-certification:be3f553584e24f4d",
+        "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+        "bodyId": "p19-dogfood-openrouter-hosted-coding",
+        "leaseRef": "lease:p13-scaffold:0001",
+        "retries": 0
+      }
+    ],
+    "producedBy": {
+      "kind": "body",
+      "id": "p13-acting-body:p19-dogfood-r1"
+    },
+    "certifiedUponRequestBy": {
+      "kind": "system",
+      "id": "greenfield-runtime"
+    },
+    "completedAt": "2026-09-27T14:32:54.092Z",
+    "providerStatuses": [
+      {
+        "name": "github-connection (RealGitHubProvider, P17-B)",
+        "status": "CONNECTED",
+        "detail": "the PAT-backed real handshake (login verified via GET /user) — the journey's repository connection is REAL (credential env GITHUB_ACCESS_TOKEN, name only)"
+      },
+      {
+        "name": "git-host + pull-requests (the real GitHub gateway executors)",
+        "status": "CONNECTED",
+        "detail": "commits/push/pull-requests realize through the REAL GitHub REST API (the contents-API initial commit on the empty repository, then the Git Data API single-commit path; PR via POST /repos/<slug>/pulls)"
+      },
+      {
+        "name": "deployment-target (the real Vercel executor)",
+        "status": "CONNECTED",
+        "detail": "deployments realize through the REAL Vercel API (fresh project 'sos-dogfood-r1': gitRepository link + ssoProtection null; production deployment via gitSource {repoId, ref})"
+      },
+      {
+        "name": "bodies (HostedCodingBody, OpenRouter)",
+        "status": "CONNECTED",
+        "detail": "the cloud body executes work programs through REAL OpenRouter completions (model qwen/qwen3-coder-flash; credential env OPENROUTER_API_KEY, name only)"
+      },
+      {
+        "name": "evaluators (the real dogfood probes)",
+        "status": "CONNECTED",
+        "detail": "repo-contents-at-revision, deployment-state, runtime-HTTP and security-scan probes over REAL reads + REAL node execution of the generated test — the body never certifies itself"
+      },
+      {
+        "name": "durable store (Neon/Upstash probes; the live-data-plane precedent)",
+        "status": "REFERENCE",
+        "detail": "The canonical store did not answer a real probe, so the journey runs on the reference in-memory live store — explicitly NOT production durable state (the live-data-plane REFERENCE_FALLBACK precedent; machine-checkable via storeRef + referenceMode)."
+      }
+    ],
+    "completionId": "p13-completion-record:42277cc3ee7aacc7"
+  }
+}

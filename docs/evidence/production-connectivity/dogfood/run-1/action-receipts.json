@@ -1,0 +1,372 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-action-receipts",
+  "produced_at": "2026-09-27T14:32:54.111Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/run-1/action-receipts",
+  "receipts": [
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-push-6bbf7b99bbec1e54",
+      "family": "push",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:0a67e695daab9fc3"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-pull-request-9469739791c9b93d",
+      "family": "pull-request",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:7506a316ebe11819"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-push-6bbf7b99bbec1e54",
+      "family": "push",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:0a67e695daab9fc3"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-pull-request-9469739791c9b93d",
+      "family": "pull-request",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:7506a316ebe11819"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+      "family": "deployment",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+      "evidenceIds": [
+        "action-evidence:651338ecbb0c9c03"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-push-6bbf7b99bbec1e54",
+      "family": "push",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:0a67e695daab9fc3"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-pull-request-9469739791c9b93d",
+      "family": "pull-request",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:7506a316ebe11819"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+      "family": "deployment",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+      "evidenceIds": [
+        "action-evidence:651338ecbb0c9c03"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-8644627b8c21ceed",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "dogfood:empty-repository-base",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:6831f6652409c38a"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-0de47f81d93e7196",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:9df069478016ee1e"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+      "family": "commit",
+      "status": "SUCCEEDED",
+      "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:1ac16da8c135c0a2"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-push-6bbf7b99bbec1e54",
+      "family": "push",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:0a67e695daab9fc3"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-pull-request-9469739791c9b93d",
+      "family": "pull-request",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": null,
+      "evidenceIds": [
+        "action-evidence:7506a316ebe11819"
+      ],
+      "denialReason": null,
+      "failureType": null
+    },
+    {
+      "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+      "family": "deployment",
+      "status": "SUCCEEDED",
+      "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+      "evidenceIds": [
+        "action-evidence:651338ecbb0c9c03"
+      ],
+      "denialReason": null,
+      "failureType": null
+    }
+  ],
+  "honest_notes": [
+    "every consequential action flowed through the authority-gated action gateway (the receipts above are the gateway's own evidence-bound records)"
+  ]
+}

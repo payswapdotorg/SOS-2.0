@@ -1,0 +1,71 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-provider-states",
+  "produced_at": "2026-09-27T14:32:54.110Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/run-1/provider-states",
+  "credential_envs": [
+    "GITHUB_ACCESS_TOKEN",
+    "OPENROUTER_API_KEY",
+    "VERCEL_ORG_ID",
+    "VERCEL_TOKEN"
+  ],
+  "provider_states": [
+    {
+      "provider": "github",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "The real GitHub provider answered an authenticated probe (login payswapdotorg, HTTP 200, API revision 2022-11-28) — CONNECTED on real evidence.",
+      "credentialEnv": "GITHUB_ACCESS_TOKEN",
+      "probedAt": "2026-09-27T14:31:51.673Z"
+    },
+    {
+      "provider": "vercel",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "the real Vercel API answered the authenticated probe (user ekonplacide-5312, id wmDQWzu9ZrQBNLFphlMoQhH4) — CONNECTED on real evidence",
+      "credentialEnv": "VERCEL_TOKEN",
+      "probedAt": "2026-09-27T14:31:52.579Z"
+    },
+    {
+      "provider": "openrouter",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "the model provider answered the authenticated key check (GET /api/v1/key, HTTP 200)",
+      "credentialEnv": "OPENROUTER_API_KEY",
+      "probedAt": "2026-09-27T14:31:52.624Z"
+    },
+    {
+      "provider": "neon",
+      "state": "UNAVAILABLE",
+      "probed": true,
+      "detail": "the DNS probe failed for api.neon.tech: getaddrinfo ENOTFOUND api.neon.tech — recorded verbatim (the P18-A live-data-plane precedent) — no DATABASE_URL exists in the runtime (the canonical durable adapter stays honestly unattached, never fabricated)",
+      "credentialEnv": null,
+      "probedAt": "2026-09-27T14:31:52.632Z"
+    },
+    {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "probed": true,
+      "detail": "the DNS probe failed for upstash.io: getaddrinfo ENOTFOUND upstash.io — recorded verbatim (the P18-A live-data-plane precedent) — the coordination store is never canonical (no UPSTASH_REDIS_REST_URL exists in this runtime; the never-canonical rule holds)",
+      "credentialEnv": null,
+      "probedAt": "2026-09-27T14:31:52.633Z"
+    }
+  ],
+  "store_selection": {
+    "mode": "REFERENCE_FALLBACK",
+    "storeRef": "reference:in-memory-live-store",
+    "referenceMode": true,
+    "canonical": {
+      "provider": "neon",
+      "state": "UNKNOWN",
+      "detail": "no DATABASE_URL exists in the runtime — the canonical durable adapter stays honestly unattached (UNKNOWN, never fabricated)"
+    },
+    "coordination": {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "detail": "the coordination adapter did not answer a real probe (DNS/probe failure recorded verbatim) — coordination-only, never canonical"
+    },
+    "note": "The canonical store did not answer a real probe, so the journey runs on the reference in-memory live store — explicitly NOT production durable state (the live-data-plane REFERENCE_FALLBACK precedent; machine-checkable via storeRef + referenceMode)."
+  }
+}

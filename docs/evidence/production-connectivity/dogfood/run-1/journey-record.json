@@ -1,0 +1,805 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-journey-record",
+  "produced_at": "2026-09-27T14:32:54.103Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/run-1",
+  "credential_envs": [
+    "GITHUB_ACCESS_TOKEN",
+    "OPENROUTER_API_KEY",
+    "VERCEL_ORG_ID",
+    "VERCEL_TOKEN"
+  ],
+  "mission": {
+    "statement": "Build a markdown notes service with a public API",
+    "repositorySlug": "payswapdotorg/sos-dogfood-r1",
+    "source": "web-console:greenfield"
+  },
+  "repository": {
+    "owner": "payswapdotorg",
+    "name": "sos-dogfood-r1",
+    "createdThisRun": true,
+    "htmlUrl": "https://github.com/payswapdotorg/sos-dogfood-r1"
+  },
+  "implementation_branch": "sos/mission-p19-dogfood-r1",
+  "store_selection": {
+    "mode": "REFERENCE_FALLBACK",
+    "storeRef": "reference:in-memory-live-store",
+    "referenceMode": true,
+    "canonical": {
+      "provider": "neon",
+      "state": "UNKNOWN",
+      "detail": "no DATABASE_URL exists in the runtime — the canonical durable adapter stays honestly unattached (UNKNOWN, never fabricated)"
+    },
+    "coordination": {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "detail": "the coordination adapter did not answer a real probe (DNS/probe failure recorded verbatim) — coordination-only, never canonical"
+    },
+    "note": "The canonical store did not answer a real probe, so the journey runs on the reference in-memory live store — explicitly NOT production durable state (the live-data-plane REFERENCE_FALLBACK precedent; machine-checkable via storeRef + referenceMode)."
+  },
+  "model_calls": [
+    {
+      "taskId": "p13-scaffold",
+      "attempt": 1,
+      "engineAttempt": 1,
+      "ok": true,
+      "model": "qwen/qwen3-coder-flash",
+      "responseId": "gen-1790519519-9rsHnCsHXjt0FsqpH1kJ",
+      "usage": {
+        "prompt_tokens": 231,
+        "completion_tokens": 231,
+        "total_tokens": 462
+      },
+      "filesApplied": [
+        "README.md",
+        "sos-manifest.json"
+      ],
+      "error": null
+    },
+    {
+      "taskId": "p13-goal-deliver",
+      "attempt": 1,
+      "engineAttempt": 1,
+      "ok": true,
+      "model": "qwen/qwen3-coder-flash",
+      "responseId": "gen-1790519525-6vvJz2BQnPgqkSjoF1oV",
+      "usage": {
+        "prompt_tokens": 254,
+        "completion_tokens": 1620,
+        "total_tokens": 1874
+      },
+      "filesApplied": [
+        "src/goal-deliver/module.ts",
+        "src/goal-deliver/module.test.ts"
+      ],
+      "error": null
+    }
+  ],
+  "repairs": [
+    {
+      "taskId": "p13-goal-deliver",
+      "attempt": 1,
+      "newSourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "re-committed the planned (correct) files as a new revision through the real GitHub provider and the action gateway"
+    }
+  ],
+  "asks": [],
+  "stages": [
+    {
+      "stage": "MISSION_RECEIVED",
+      "at": "2026-09-27T14:31:56.430Z",
+      "revision": null,
+      "detail": "the raw mission captured at Build a markdown notes service with a public API (source web-console:greenfield)",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 4
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "REPOSITORY_CONNECTED",
+      "at": "2026-09-27T14:31:59.658Z",
+      "revision": null,
+      "detail": "the honest empty-repository state (no revisions exist — the greenfield journey realizes into the empty repository payswapdotorg/sos-dogfood-r1)",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 9
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "AUTHORITY_APPROVED",
+      "at": "2026-09-27T14:31:59.660Z",
+      "revision": null,
+      "detail": "the typed grant sos://AuthorityGrant/96dbeacaf7b519ea07ce7f400e1dd89e (pre-approved by the harness operator; the gateway re-evaluates authority at action time, fail-closed)",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 9
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "MISSION_FORMALIZED",
+      "at": "2026-09-27T14:31:59.662Z",
+      "revision": "sos://Mission/87ae7d75ae11fbb27db5dd057313365f",
+      "detail": "the formalized mission sos://Mission/87ae7d75ae11fbb27db5dd057313365f",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 9
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "PLAN_PREPARED",
+      "at": "2026-09-27T14:31:59.664Z",
+      "revision": "implementation-plan:4f077a961e9c41d0",
+      "detail": "the implementation plan implementation-plan:4f077a961e9c41d0 (2 components, maxRepairAttempts 2)",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 9
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "GRAPH_BUILT",
+      "at": "2026-09-27T14:31:59.668Z",
+      "revision": "implementation-plan:4f077a961e9c41d0",
+      "detail": "the durable task graph + the repository realization plan (implementation branch sos/mission-p19-dogfood-r1)",
+      "receipts": [],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 9
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "WORKSPACE_PROVISIONED",
+      "at": "2026-09-27T14:32:05.882Z",
+      "revision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+      "detail": "the scaffold commit (the repository's first real commit on sos/mission-p19-dogfood-r1)",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 15
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "IMPLEMENTING",
+      "at": "2026-09-27T14:32:25.427Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "the first non-scaffold dispatch (the implementation stage begins)",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 37
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "IMPLEMENTED",
+      "at": "2026-09-27T14:32:30.230Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "all nodes completed (the workspace head is the last realized commit)",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 37
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "CHANGE_REALIZED",
+      "at": "2026-09-27T14:32:33.250Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "the pull request #1 (https://github.com/payswapdotorg/sos-dogfood-r1/pull/1) on branch sos/mission-p19-dogfood-r1 at head d10264db6e01",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-push-6bbf7b99bbec1e54",
+          "family": "push",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:0a67e695daab9fc3"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-pull-request-9469739791c9b93d",
+          "family": "pull-request",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:7506a316ebe11819"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 41
+        },
+        {
+          "provider": "vercel",
+          "requests": 2
+        }
+      ]
+    },
+    {
+      "stage": "DEPLOYED",
+      "at": "2026-09-27T14:32:50.491Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "the production deployment dpl_CPF9dLRrXE4segbN6RppScpiUKAN (https://sos-dogfood-r1-3ho4np5l7-ekonplacidegmailcoms-projects.vercel.app) of the exact revision d10264db6e01 — readyState READY",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-push-6bbf7b99bbec1e54",
+          "family": "push",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:0a67e695daab9fc3"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-pull-request-9469739791c9b93d",
+          "family": "pull-request",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:7506a316ebe11819"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+          "family": "deployment",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+          "evidenceIds": [
+            "action-evidence:651338ecbb0c9c03"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 42
+        },
+        {
+          "provider": "vercel",
+          "requests": 9
+        }
+      ]
+    },
+    {
+      "stage": "RUNTIME_VERIFIED",
+      "at": "2026-09-27T14:32:51.574Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "the independent runtime verification (HTTP GET the deployed URL + the real readyState)",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-push-6bbf7b99bbec1e54",
+          "family": "push",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:0a67e695daab9fc3"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-pull-request-9469739791c9b93d",
+          "family": "pull-request",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:7506a316ebe11819"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+          "family": "deployment",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+          "evidenceIds": [
+            "action-evidence:651338ecbb0c9c03"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 43
+        },
+        {
+          "provider": "vercel",
+          "requests": 10
+        }
+      ]
+    },
+    {
+      "stage": "COMPLETED",
+      "at": "2026-09-27T14:32:54.094Z",
+      "revision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+      "detail": "the evidence-backed completion report granted ONLY by the independent evaluation suite",
+      "receipts": [
+        {
+          "actionId": "p13-act-commit-8644627b8c21ceed",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "dogfood:empty-repository-base",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:6831f6652409c38a"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-0de47f81d93e7196",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:9df069478016ee1e"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-commit-2a5c2b34e1f8c3f4",
+          "family": "commit",
+          "status": "SUCCEEDED",
+          "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:1ac16da8c135c0a2"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-push-6bbf7b99bbec1e54",
+          "family": "push",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:0a67e695daab9fc3"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-pull-request-9469739791c9b93d",
+          "family": "pull-request",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": null,
+          "evidenceIds": [
+            "action-evidence:7506a316ebe11819"
+          ],
+          "denialReason": null,
+          "failureType": null
+        },
+        {
+          "actionId": "p13-act-deployment-2bb96c789b0c7cfd",
+          "family": "deployment",
+          "status": "SUCCEEDED",
+          "sourceRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+          "deploymentRevision": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+          "evidenceIds": [
+            "action-evidence:651338ecbb0c9c03"
+          ],
+          "denialReason": null,
+          "failureType": null
+        }
+      ],
+      "transcriptRefs": [
+        {
+          "provider": "github",
+          "requests": 49
+        },
+        {
+          "provider": "vercel",
+          "requests": 11
+        }
+      ]
+    }
+  ],
+  "ticks": [
+    {
+      "tick": 1,
+      "stage": "MISSION_FORMALIZED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "MISSION_FORMALIZED"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 2,
+      "stage": "PLAN_PREPARED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "PLAN_PREPARED"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 3,
+      "stage": "GRAPH_BUILT",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "GRAPH_BUILT"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 4,
+      "stage": "WORKSPACE_PROVISIONED",
+      "action": {
+        "kind": "NODE_COMPLETED",
+        "taskId": "p13-scaffold",
+        "sourceRevision": "1d32d55ae3e0cbe7121e2d3367a398aec4f9fe32",
+        "certificationId": "p13-node-certification:be3f553584e24f4d"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 5,
+      "stage": "IMPLEMENTED",
+      "action": {
+        "kind": "NODE_COMPLETED",
+        "taskId": "p13-goal-deliver",
+        "sourceRevision": "25a95ee25505d8a2d213729d09808a944afc8757",
+        "certificationId": "p13-node-certification:72b104a2d0032805"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 6,
+      "stage": "CHANGE_REALIZED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "CHANGE_REALIZED"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 7,
+      "stage": "DEPLOYED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "DEPLOYED"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 8,
+      "stage": "RUNTIME_VERIFIED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "RUNTIME_VERIFIED"
+      },
+      "userDeviceOnline": false
+    },
+    {
+      "tick": 9,
+      "stage": "COMPLETED",
+      "action": {
+        "kind": "STAGE_ADVANCED",
+        "stage": "COMPLETED"
+      },
+      "userDeviceOnline": false
+    }
+  ],
+  "pull_request": {
+    "number": 1,
+    "url": "https://github.com/payswapdotorg/sos-dogfood-r1/pull/1",
+    "headBranch": "sos/mission-p19-dogfood-r1",
+    "baseBranch": "main",
+    "headSha": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+    "actionId": ""
+  },
+  "deployment": {
+    "deploymentId": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+    "url": "https://sos-dogfood-r1-3ho4np5l7-ekonplacidegmailcoms-projects.vercel.app",
+    "readyState": "READY",
+    "commitSha": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+    "projectId": "prj_ZHWY6MBMi4ImllySHMimSD1NrjeK",
+    "projectName": "sos-dogfood-r1",
+    "target": "production",
+    "actionId": "",
+    "pollAttempts": 2,
+    "waitedMs": 13059
+  },
+  "runtime_verification": {
+    "rootStatus": 404,
+    "rootBodyExcerpt": "The page could not be found\n\nNOT_FOUND\n\nhkg1::4xlsw-1790519573588-8b3665015e8a\n",
+    "manifestStatus": 200,
+    "manifestByteExact": true,
+    "deployedRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+    "fetchedAt": "2026-09-27T14:32:53.980Z"
+  },
+  "final_state": {
+    "stage": "COMPLETED",
+    "status": "COMPLETED"
+  },
+  "pending_ask": null,
+  "honest_notes": [
+    "the durable store selection degraded to reference:in-memory-live-store (reference mode, explicitly NOT production durable state — the live-data-plane precedent); the canonical Neon adapter is UNKNOWN (no DATABASE_URL exists in the runtime — the canonical durable adapter stays honestly unattached (UNKNOWN, never fabricated))",
+    "the repository connection is REAL (the PAT-backed handshake verified; empty-repository detection ran over the real branches API)",
+    "the default branch 'main' was provisioned at the first realized commit 1d32d55ae3e0 (an empty GitHub repository carries no branch; the realization plan's PR contract needs the base branch)",
+    "the journey COMPLETED against real external systems with exact revisions recorded at every stage (9 cloud ticks, every one with userDeviceOnline=false — the §7 pin)",
+    "repairs occurred: 1 (the engine's bounded repair discipline ran for real)"
+  ]
+}
