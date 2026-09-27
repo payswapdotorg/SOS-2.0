@@ -41,8 +41,12 @@ describe('packages/dogfood-live structure (Work Order P19)', () => {
     const staging = readFileSync(join(OWNED_SRC, 'staging.ts'), 'utf8');
     expect(staging.includes('REAL_OPERATION_NOT_PREPARED')).toBe(true);
     expect(staging.includes('never a fabricated success')).toBe(true);
+    // The executors answer EXACTLY the staged outcomes: every dispatch path
+    // either answers a staged entry or the typed notPreparedFailure.
     const executors = readFileSync(join(OWNED_SRC, 'gateway-executors.ts'), 'utf8');
-    expect(executors.includes('never a fabricated success')).toBe(true);
+    expect(executors.includes('notPreparedFailure')).toBe(true);
+    const notPreparedUses = executors.match(/notPreparedFailure\(/g) ?? [];
+    expect(notPreparedUses.length).toBeGreaterThanOrEqual(4); // git.commit, git.push, git.openPullRequest, deployment.apply
   });
 
   it('the default body model is the §1 pin (qwen/qwen3-coder-flash)', () => {
