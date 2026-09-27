@@ -27,6 +27,7 @@
  */
 
 export * from './environment.js';
+export * from './journey-github.js';
 export * from './vercel-rest.js';
 export * from './provider-snapshot.js';
 export * from './staging.js';

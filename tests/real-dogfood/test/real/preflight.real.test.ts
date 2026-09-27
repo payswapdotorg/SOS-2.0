@@ -86,7 +86,7 @@ suite('REAL dogfood preflight (RUN_REAL=1): the honest provider states before th
     expect(env.openRouter.credentialEnv).toBe('OPENROUTER_API_KEY');
     expect(env.vercel.credentialEnv).toBe('VERCEL_TOKEN');
     expect(env.vercel.orgIdEnv).toBe('VERCEL_ORG_ID');
-    const serialized = JSON.stringify({ env: { ...env, github: { credentialEnv: env.github.credentialEnv }, openRouter: { credentialEnv: env.openRouter.credentialEnv }, vercel: { credentialEnv: env.vercel.credentialEnv, orgIdEnv: env.vercel.orgIdEnv } } });
+    const serialized = JSON.stringify({ env: { ...env, github: { credentialEnv: env.github.credentialEnv }, openRouter: { credentialEnv: env.openRouter.credentialEnv }, vercel: { credentialEnv: env.vercel.credentialEnv, orgIdEnv: env.vercel.orgIdEnv }, databaseUrl: env.databaseUrlEnv, bodyModel: env.bodyModelEnv } });
     for (const value of Object.values(source)) {
       if (value.length > 8) {
         expect(serialized.includes(value), 'a credential VALUE must never appear in a resolved-environment record').toBe(false);

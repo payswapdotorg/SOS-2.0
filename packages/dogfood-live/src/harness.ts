@@ -69,6 +69,7 @@ import type { SandboxPolicy } from '@sos-2/sandbox';
 import { deriveDeterministicArtifactId } from '@sos-2/semantic-spine';
 import { DOGFOOD_DEFAULT_BODY_MODEL, resolveDogfoodEnvironment } from './environment.js';
 import type { DogfoodEnvironmentResolution } from './environment.js';
+import { DogfoodJourneyGitHubProvider } from './journey-github.js';
 import { createDogfoodVercelClient } from './vercel-rest.js';
 import type { DogfoodVercelClient, DogfoodVercelProject, DogfoodVercelDeployment } from './vercel-rest.js';
 import { probeDogfoodProviders, selectDogfoodStore } from './provider-snapshot.js';
@@ -317,7 +318,12 @@ export function createRealDogfoodHarness(options: RealDogfoodHarnessOptions): Re
 
   // ------------------------------------------------------------- providers
   const githubRequestPort = options.githubRequestPort ?? new FetchGitHubRequestPort({ token: env.github.token });
-  const provider = new RealGitHubProvider({ requestPort: githubRequestPort, credentialEnv: env.github.credentialEnv });
+  // The P19-owned composition seam over RealGitHubProvider: the journey's
+  // discovery gets the AUTHORITATIVE branches-probe emptiness for the dogfood
+  // target repository (real GitHub reports a would-be default_branch + a
+  // pushed_at timestamp on a repository with ZERO commits — the provider's
+  // discovery heuristic alone misreads a real empty repository as non-empty).
+  const provider = new DogfoodJourneyGitHubProvider({ requestPort: githubRequestPort, credentialEnv: env.github.credentialEnv }, repository);
   const vercelTranscript = new DeploymentTranscriptRecorder({ credentialReference: env.vercel.credentialEnv });
   const vercelClient = env.vercel.token !== null ? createDogfoodVercelClient({ token: env.vercel.token, teamId: env.vercel.orgId, fetch: options.vercelFetch ?? bindGlobalFetch() }) : null;
   const modelPort = options.modelPort ?? (env.openRouter.apiKey !== null ? new OpenRouterModelClient({ apiKey: env.openRouter.apiKey }) : null);
