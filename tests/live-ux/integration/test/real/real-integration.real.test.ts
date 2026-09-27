@@ -516,9 +516,15 @@ suite('P18-INT REAL integration (RUN_REAL=1): the seam + the deployed journeys',
 
   it('fails CLOSED on the deployed endpoint for a never-held grant (the real denied-action UX)', async () => {
     requireDeployedCredentials();
+    // Fresh actionId + idempotencyKey: a different actor is a semantically
+    // DIFFERENT submission — reusing the summon envelope's carried key would
+    // hit the receipt ledger's replay path (the carried key is honored as
+    // carried, per the endpoint contract) and mask the authority evaluation.
     const deniedEnvelope: Record<string, unknown> = {
       ...summonEnvelope(),
       actor: { kind: 'human', id: DENIED_ACTOR },
+      actionId: 'p18int-real-denied-1',
+      idempotencyKey: 'p18int-real-idem-denied-1',
     };
     const result = await submitToDeployment(deniedEnvelope);
     const receipt = result.receipt;
