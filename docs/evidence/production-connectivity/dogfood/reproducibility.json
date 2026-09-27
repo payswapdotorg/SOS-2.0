@@ -1,0 +1,89 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-reproducibility",
+  "produced_at": "2026-09-27T14:39:00.025Z",
+  "repo_head": "ce22ef531872be392aa27c28073b89f8d4dbee0f",
+  "schema": "sos-2/p19/reproducibility",
+  "reproducibility": {
+    "run1": {
+      "runId": "p19-dogfood:p19-dogfood-r1",
+      "repositorySlug": "payswapdotorg/sos-dogfood-r1"
+    },
+    "run2": {
+      "runId": "p19-dogfood:p19-dogfood-r2",
+      "repositorySlug": "payswapdotorg/sos-dogfood-r2"
+    },
+    "sameStageSequence": true,
+    "sameOutcomeClasses": true,
+    "outcomeClassesRun1": {
+      "finalStage": "COMPLETED",
+      "finalStatus": "COMPLETED",
+      "stageSequence": [
+        "MISSION_RECEIVED",
+        "REPOSITORY_CONNECTED",
+        "AUTHORITY_APPROVED",
+        "MISSION_FORMALIZED",
+        "PLAN_PREPARED",
+        "GRAPH_BUILT",
+        "WORKSPACE_PROVISIONED",
+        "IMPLEMENTING",
+        "IMPLEMENTED",
+        "CHANGE_REALIZED",
+        "DEPLOYED",
+        "RUNTIME_VERIFIED",
+        "COMPLETED"
+      ],
+      "completed": true,
+      "evaluationVerdicts": [
+        "tests",
+        "static-contract-checks",
+        "deployment-checks",
+        "runtime-verification",
+        "security-checks"
+      ],
+      "storeMode": "REFERENCE_FALLBACK",
+      "repairOccurred": false,
+      "askOccurred": false
+    },
+    "outcomeClassesRun2": {
+      "finalStage": "COMPLETED",
+      "finalStatus": "COMPLETED",
+      "stageSequence": [
+        "MISSION_RECEIVED",
+        "REPOSITORY_CONNECTED",
+        "AUTHORITY_APPROVED",
+        "MISSION_FORMALIZED",
+        "PLAN_PREPARED",
+        "GRAPH_BUILT",
+        "WORKSPACE_PROVISIONED",
+        "IMPLEMENTING",
+        "IMPLEMENTED",
+        "CHANGE_REALIZED",
+        "DEPLOYED",
+        "RUNTIME_VERIFIED",
+        "COMPLETED"
+      ],
+      "completed": true,
+      "evaluationVerdicts": [
+        "tests",
+        "static-contract-checks",
+        "deployment-checks",
+        "runtime-verification",
+        "security-checks"
+      ],
+      "repairOccurred": true,
+      "askOccurred": false,
+      "storeMode": "REFERENCE_FALLBACK"
+    },
+    "honestDifferences": [
+      "the repositories differ by design (run 1: https://github.com/payswapdotorg/sos-dogfood-r1; run 2: https://github.com/payswapdotorg/sos-dogfood-r2)",
+      "the workspace heads differ (run 1: d10264db6e013360dcc79d0fb77610d5c5841c19; run 2: 767c474c3e22c0d807bb44883df6ae7c63139f3f) — different repositories mint different exact revisions",
+      "the pull requests differ (run 1 and run 2 each opened their own PR on their own repository)",
+      "the deployments differ (run 1 and run 2 each have their own fresh project + deployment)",
+      "the timestamps differ (run 1 completed at 2026-09-27T14:32:54.092Z; run 2 at 2026-09-27T14:39:00.001Z)",
+      "the model output is provider-real: the OpenRouter completions differ between runs (different response ids/usages; possibly different authored contents exercising the real repair path) — recorded as honest differences, never fabricated equality",
+      "run 2 exercised the REAL repair path (1 repair revision(s)) while run 1 recorded its own honest repair state"
+    ],
+    "note": "the run-2 reproducibility record: the same stage sequence (GREENFIELD_JOURNEY_STAGES), the same per-stage outcome classes and evaluation verdict classes; timestamps/shas/model output differ and are recorded as honest differences, never fabricated equality"
+  }
+}

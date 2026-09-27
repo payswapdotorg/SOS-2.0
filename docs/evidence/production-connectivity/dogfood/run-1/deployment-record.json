@@ -1,0 +1,27 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-deployment-record",
+  "produced_at": "2026-09-27T14:32:54.113Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/run-1/deployment-record",
+  "deployment": {
+    "deploymentId": "dpl_CPF9dLRrXE4segbN6RppScpiUKAN",
+    "url": "https://sos-dogfood-r1-3ho4np5l7-ekonplacidegmailcoms-projects.vercel.app",
+    "readyState": "READY",
+    "commitSha": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+    "projectId": "prj_ZHWY6MBMi4ImllySHMimSD1NrjeK",
+    "projectName": "sos-dogfood-r1",
+    "target": "production",
+    "actionId": "",
+    "pollAttempts": 2,
+    "waitedMs": 13059
+  },
+  "runtime_verification": {
+    "rootStatus": 404,
+    "rootBodyExcerpt": "The page could not be found\n\nNOT_FOUND\n\nhkg1::4xlsw-1790519573588-8b3665015e8a\n",
+    "manifestStatus": 200,
+    "manifestByteExact": true,
+    "deployedRevision": "d10264db6e013360dcc79d0fb77610d5c5841c19",
+    "fetchedAt": "2026-09-27T14:32:53.980Z"
+  }
+}

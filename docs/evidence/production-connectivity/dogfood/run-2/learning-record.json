@@ -1,0 +1,37 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-learning-record",
+  "produced_at": "2026-09-27T14:39:00.022Z",
+  "repo_head": "ce22ef531872be392aa27c28073b89f8d4dbee0f",
+  "schema": "sos-2/p19/run-2/learning-record",
+  "learning": {
+    "packageIds": [
+      "sos://Package/586d59300d16f5d9867131371ae0214b",
+      "sos://Package/46254954318c6b2e5185f92e01296afb"
+    ],
+    "compositionId": "sos://PackageComposition/ea766379990ae43c7a98a7259688f58b",
+    "evidenceIds": [
+      "sos://Evidence/12fa953421f660af5c97fa0ba3b57de1",
+      "sos://Evidence/f5f698d3ac7d09ce285f238da0e8ebda"
+    ],
+    "ecologyAssertion": {
+      "source": "sos://Package/46254954318c6b2e5185f92e01296afb",
+      "target": "sos://Package/586d59300d16f5d9867131371ae0214b",
+      "kind": "COMPATIBLE_WITH"
+    },
+    "realEvidenceRefs": {
+      "pullRequestUrl": "https://github.com/payswapdotorg/sos-dogfood-r2/pull/1",
+      "pullRequestHeadSha": "767c474c3e22c0d807bb44883df6ae7c63139f3f",
+      "deploymentUrl": "https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app",
+      "deploymentCommitSha": "767c474c3e22c0d807bb44883df6ae7c63139f3f",
+      "evaluatorVerdictRefs": [
+        "evaluation-verdict:3f692996a1fcc811",
+        "evaluation-verdict:71d296043481223c",
+        "evaluation-verdict:ff7f2382e4a151c9",
+        "evaluation-verdict:7a1b722bb80b618d",
+        "evaluation-verdict:f7d1e315c593b743"
+      ]
+    },
+    "note": "data-only learned records (FORMING/DISCOVERED maturities; no promotion claimed) carrying the REAL evidence refs (PR sha, deployment URL, evaluator verdict records)"
+  }
+}

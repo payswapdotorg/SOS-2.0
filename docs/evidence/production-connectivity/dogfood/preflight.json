@@ -1,0 +1,110 @@
+{
+  "work_order": "P19",
+  "evidence_kind": "dogfood-preflight",
+  "produced_at": "2026-09-27T14:31:40.849Z",
+  "repo_head": "ccd191f0f078034c332bfc5de6819995a211ca95",
+  "schema": "sos-2/p19/dogfood-preflight",
+  "credential_envs": [
+    "GITHUB_ACCESS_TOKEN",
+    "OPENROUTER_API_KEY",
+    "VERCEL_ORG_ID",
+    "VERCEL_TOKEN"
+  ],
+  "body_model": "qwen/qwen3-coder-flash",
+  "provider_states": [
+    {
+      "provider": "github",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "The real GitHub provider answered an authenticated probe (login payswapdotorg, HTTP 200, API revision 2022-11-28) — CONNECTED on real evidence.",
+      "credentialEnv": "GITHUB_ACCESS_TOKEN",
+      "probedAt": "2026-09-27T14:31:39.684Z"
+    },
+    {
+      "provider": "vercel",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "the real Vercel API answered the authenticated probe (user ekonplacide-5312, id wmDQWzu9ZrQBNLFphlMoQhH4) — CONNECTED on real evidence",
+      "credentialEnv": "VERCEL_TOKEN",
+      "probedAt": "2026-09-27T14:31:40.600Z"
+    },
+    {
+      "provider": "openrouter",
+      "state": "CONNECTED",
+      "probed": true,
+      "detail": "the model provider answered the authenticated key check (GET /api/v1/key, HTTP 200)",
+      "credentialEnv": "OPENROUTER_API_KEY",
+      "probedAt": "2026-09-27T14:31:40.840Z"
+    },
+    {
+      "provider": "neon",
+      "state": "UNAVAILABLE",
+      "probed": true,
+      "detail": "the DNS probe failed for api.neon.tech: getaddrinfo ENOTFOUND api.neon.tech — recorded verbatim (the P18-A live-data-plane precedent) — no DATABASE_URL exists in the runtime (the canonical durable adapter stays honestly unattached, never fabricated)",
+      "credentialEnv": null,
+      "probedAt": "2026-09-27T14:31:40.842Z"
+    },
+    {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "probed": true,
+      "detail": "the DNS probe failed for upstash.io: getaddrinfo ENOTFOUND upstash.io — recorded verbatim (the P18-A live-data-plane precedent) — the coordination store is never canonical (no UPSTASH_REDIS_REST_URL exists in this runtime; the never-canonical rule holds)",
+      "credentialEnv": null,
+      "probedAt": "2026-09-27T14:31:40.848Z"
+    }
+  ],
+  "store_selection": {
+    "mode": "REFERENCE_FALLBACK",
+    "storeRef": "reference:in-memory-live-store",
+    "referenceMode": true,
+    "canonical": {
+      "provider": "neon",
+      "state": "UNKNOWN",
+      "detail": "no DATABASE_URL exists in the runtime — the canonical durable adapter stays honestly unattached (UNKNOWN, never fabricated)"
+    },
+    "coordination": {
+      "provider": "upstash",
+      "state": "UNAVAILABLE",
+      "detail": "the coordination adapter did not answer a real probe (DNS/probe failure recorded verbatim) — coordination-only, never canonical"
+    },
+    "note": "The canonical store did not answer a real probe, so the journey runs on the reference in-memory live store — explicitly NOT production durable state (the live-data-plane REFERENCE_FALLBACK precedent; machine-checkable via storeRef + referenceMode)."
+  },
+  "github_transport_telemetry": {
+    "requests": 1,
+    "api_revision": "2022-11-28",
+    "oauth_scopes": [
+      "admin:enterprise",
+      "admin:gpg_key",
+      "admin:org",
+      "admin:org_hook",
+      "admin:public_key",
+      "admin:repo_hook",
+      "admin:ssh_signing_key",
+      "audit_log",
+      "codespace",
+      "copilot",
+      "delete:packages",
+      "delete_repo",
+      "gist",
+      "notifications",
+      "project",
+      "repo",
+      "user",
+      "workflow",
+      "write:discussion",
+      "write:network_configurations",
+      "write:packages"
+    ],
+    "rate_limit": {
+      "resource": "core",
+      "limit": 5000,
+      "remaining": 4407,
+      "used": 593,
+      "reset_epoch_s": 1790520159
+    }
+  },
+  "honest_notes": [
+    "CONNECTED derives from real probes only (the PAT-backed whoami, the authenticated /v2/user probe, the real key check); UNAVAILABLE/UNKNOWN rows carry the real failures verbatim",
+    "probe-only: no repository/project was created here (the journey runs create their own)"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@sos-2/tests-real-dogfood",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "description": "SOS 2.0 Real-World Dogfood Suites (Work Order P19): TWO strictly separated suites. (1) The DETERMINISTIC suite (default; offline — the REAL adapters' SEAMS scripted at the dogfood adapter boundaries: a scripted GitHubRequestPort simulating the exact GitHub REST surface the harness drives (repo creation, the contents-API initial commit on the empty repository, the Git Data API single-commit path, ref reads, branch creation, pull requests, tree/content reads at exact revisions), a scripted Vercel FetchPort (the §0b shapes: POST /v9/projects with gitRepository, PATCH ssoProtection null, POST /v13/deployments with gitSource {repoId, ref}, the READY poll), the ScriptedHostedModelPort of @sos-2/real-bodies, a scripted runtime fetch, scripted DNS/key probes — NO ambient network/time, fixed vitest seed 424242, run-to-run identical): the full flagship journey to COMPLETED with the EXACT stage sequence; the §7 pin (every cloud tick userDeviceOnline=false); authority fail-closed (a revoked grant → the typed denial at action time with NO executor invocation and NO real provider call); the repair path (the first body output fails a check → the repair revision → the FULL fresh suite re-runs → pass); the ASK path (typed, honest — the non-empty repository and the repair-unavailable fixtures); idempotency (double-submit replays the recorded receipt); the run-2 equivalence logic (same outcome classes, honest diff recording); the evidence shape (schemas, dual redaction, secrets-audit 0 findings); and the honest store-selection states (the reference fallback marker). (2) The env-gated REAL suite (RUN_REAL=1, default OFF, scripts/run-real-if-env.mjs — the honest exit-0 skip when credentials are absent): preflight provider probes → honest CONNECTED/UNAVAILABLE; RUN 1 on payswapdotorg/sos-dogfood-r1 (create repo → full journey → PR → fresh project + production deploy → runtime verify → package learning → evidence); RUN 2 on payswapdotorg/sos-dogfood-r2 with a FRESH harness + fresh stores, same mission, plus the equivalence record; every consequential call recorded as an HTTP transcript + receipt; every stage's exact revision in the journey record; a pre-existing repo/project is a typed abort with cleanup instructions (never silently reused); a Vercel rate trip is recorded as honest DEGRADED; body model variance exercises the real repair path — everything written redacted (dual corpora, env NAMES only) into docs/evidence/production-connectivity/dogfood.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && vitest run && node scripts/run-real-if-env.mjs",
+    "test:reference": "pnpm run build && vitest run",
+    "test:real": "pnpm run build && vitest run --config vitest.real.config.ts"
+  },
+  "dependencies": {
+    "@sos-2/action-gateway": "workspace:*",
+    "@sos-2/deployment-providers": "workspace:*",
+    "@sos-2/dogfood-live": "workspace:*",
+    "@sos-2/greenfield-runtime": "workspace:*",
+    "@sos-2/implementation-orchestrator": "workspace:*",
+    "@sos-2/live-store": "workspace:*",
+    "@sos-2/real-bodies": "workspace:*",
+    "@sos-2/real-github": "workspace:*",
+    "@sos-2/real-observation": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "typescript": "^5.5.0",
+    "vitest": "^3.0.0"
+  }
+}
