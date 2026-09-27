@@ -20,7 +20,11 @@
     "@sos-2/authority": "workspace:*",
     "@sos-2/decision": "workspace:*",
     "@sos-2/deployment-providers": "workspace:*",
-    "@sos-2/real-observation": "workspace:*"
+    "@sos-2/evidence": "workspace:*",
+    "@sos-2/real-observation": "workspace:*",
+    "@sos-2/semantic-spine": "workspace:*",
+    "@sos-2/ui-contracts": "workspace:*",
+    "@sos-2/web-contracts": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
