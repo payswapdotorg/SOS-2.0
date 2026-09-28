@@ -1,10 +1,8 @@
 {
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
-  "status": "READY",
-  "currentFrontier": [
-    "P21"
-  ],
+  "status": "COMPLETE",
+  "currentFrontier": [],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -183,7 +181,7 @@
       "dependencies": [
         "P19"
       ],
-      "notes": "Production release gate — the terminal work order of the P-series. Release audit executed against the full productization tree at base 3bfc469: machine backbone (verify:repo PASS 19 WOs; verify:productization PASS 26 WOs / 91 owned paths; workspace build EXIT 0; deterministic suite 4308 passed / 0 failed, run twice, identical, 114 packages; frozen core 967c066dd716..base 0 modified / 0 deleted — pure additions only; scripted dogfood journey 28/28; zero provider SDK dependencies). Deliverables under docs/evidence/production-release/ (owned path): p20-release-audit-record.json (P16 audit-record schema), p20-release-gate-audit.md (narrative gate audit), backbone-log.md (machine backbone log). Honest states: real provider suites BLOCKED-NO-CREDENTIALS in this environment (never faked; zero SDK deps proven); production deployment recorded as RECORDED-LIVE-EVIDENCE from the P19 run-2 deployment (dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC, repo head ce22ef5) — NOT-REDEPLOYED-NO-CREDENTIALS. Architect approval written into the record by the dispatching lead (architect role) after independent station-side re-verification: both verifiers PASS, build EXIT 0, deterministic 4308/0 x2 matching the worker's numbers exactly, frozen-core diff 0/0, citation spot-checks against the real evidence tree. Delivered by worker session p20-2 (GLM-5.3, Full-Stack) dispatched from the replay agents tab; gated at an independent station; merged as PR #46 (squash). With P20 COMPLETE the frontier is empty: program P0–P20 COMPLETE.",
+      "notes": "Production release gate \u2014 the terminal work order of the P-series. Release audit executed against the full productization tree at base 3bfc469: machine backbone (verify:repo PASS 19 WOs; verify:productization PASS 26 WOs / 91 owned paths; workspace build EXIT 0; deterministic suite 4308 passed / 0 failed, run twice, identical, 114 packages; frozen core 967c066dd716..base 0 modified / 0 deleted \u2014 pure additions only; scripted dogfood journey 28/28; zero provider SDK dependencies). Deliverables under docs/evidence/production-release/ (owned path): p20-release-audit-record.json (P16 audit-record schema), p20-release-gate-audit.md (narrative gate audit), backbone-log.md (machine backbone log). Honest states: real provider suites BLOCKED-NO-CREDENTIALS in this environment (never faked; zero SDK deps proven); production deployment recorded as RECORDED-LIVE-EVIDENCE from the P19 run-2 deployment (dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC, repo head ce22ef5) \u2014 NOT-REDEPLOYED-NO-CREDENTIALS. Architect approval written into the record by the dispatching lead (architect role) after independent station-side re-verification: both verifiers PASS, build EXIT 0, deterministic 4308/0 x2 matching the worker's numbers exactly, frozen-core diff 0/0, citation spot-checks against the real evidence tree. Delivered by worker session p20-2 (GLM-5.3, Full-Stack) dispatched from the replay agents tab; gated at an independent station; merged as PR #46 (squash). With P20 COMPLETE the frontier is empty: program P0\u2013P20 COMPLETE.",
       "mergedAs": "9a1dd1b8df361e62e1f5d96f40aa27cb84bc25d4"
     },
     "P18-A": {
@@ -219,15 +217,17 @@
         "P18-B",
         "P18-C"
       ],
-      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A→B→C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
+      "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A\u2192B\u2192C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
       "mergedAs": "1b130ad8a82a2bf68856c67d38c485d9cac23c70"
     },
     "P21": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P20"
       ],
-      "notes": "Appended post-program by the architect: the operator supplied live provider credentials (GitHub PAT + Composio-managed Vercel/Neon connected accounts), lifting the P20 release record's NOT-REDEPLOYED-NO-CREDENTIALS condition. P21 converts that deferred honest state into fresh live evidence: live provider re-verification probes, a production deployment of the exact release head f7774c7 (or a fully evidenced BLOCKED-PATH), a Neon persistence re-check (UNAVAILABLE-DNS in the P17A/P19 era), all under the unchanged honesty invariants (credential values never in files, dual redaction, 0-findings secrets audit, frozen core untouched, deterministic suites green). Owned: docs/evidence/production-release/p21-live-reverification/**."
+      "notes": "Post-program work order appended by the architect when the operator supplied live provider credentials, lifting P20's NOT-REDEPLOYED-NO-CREDENTIALS. Live re-verification of all four provider channels (github / composio / vercel / neon \u2014 all CONNECTED with real UTC-timestamped probes through the operator's Composio connected accounts; the P17-A/P19 Neon UNAVAILABLE-DNS state lifted for the Composio channel, station direct egress still recorded verbatim). Final-head deployment refresh of f7774c7: FULLY-EVIDENCED BLOCKED-PATH \u2014 provider HTTP 402 api-deployments-free-per-day (100/100 consumed, reset 2026-09-29T07:42:31Z) refused a fully-valid git-source production request; 8-attempt honest mapping trail (Composio pinned-version gitSource drift + 'latest' fix + user_id requirement); no deployment fabricated; exact post-reset retry recipe in p21-deployment-record.json. Machine backbone on the exact base 45e5373: both verifiers PASS, build 109/0, deterministic 4308/0 x2 (worker + independent lead station; live-ux mount-test timing flake reproduced at base control \u2014 pre-existing, environmental), frozen-core 0/0, zero provider SDK deps, secrets audit 0 findings (worker fail-closed dual-redaction + architect independent value-scan). Owned path: docs/evidence/production-release/p21-live-reverification/** (5 files incl. architect approval).",
+      "mergedAs": "aafe05260be733dd12a86bb7ea602acb5b61df63"
     }
-  }
+  },
+  "statusNote": "P0-P20 program + P21 post-program live re-verification COMPLETE (27/27 productization work orders; PR #47 squash-merged as aafe052). Deployment refresh honest BLOCKED-PATH: provider daily-quota refusal, exact retry recipe recorded \u2014 one request after the 2026-09-29T07:42:31Z reset (or with a paid plan) completes it."
 }
