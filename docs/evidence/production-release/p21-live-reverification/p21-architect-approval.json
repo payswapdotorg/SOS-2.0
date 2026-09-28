@@ -1,0 +1,35 @@
+{
+  "schema": "sos-2/p21/architect-approval",
+  "work_order": "P21",
+  "status": "APPROVED",
+  "approver": "SOS Tech Lead (architect role, dispatching session)",
+  "approved_at": "2026-09-28T08:55:00Z",
+  "delivery_under_review": {
+    "branch": "wo/p21-live-reverification",
+    "worker_head": "b942e42c63a0875546291e27ad3562a9dc12fcc5",
+    "base": "45e53731a2378aab41e326fded8168046d42b513"
+  },
+  "independent_reverification": {
+    "station": "fresh clone from github.com/payswapdotorg/SOS-2.0 at /tmp/p21gate/SOS-2.0 (independent of the worker station and of the local mirror)",
+    "verify_repo": "PASS \u2014 19 work orders, frontier empty (exit 0)",
+    "verify_productization": "PASS \u2014 27 productization work orders, frontier [P21], 92 owned paths (exit 0)",
+    "workspace_build": "pnpm -r --if-present build: 109 built / 0 failed, EXIT 0 \u2014 matches the worker's BUILT=109 exactly",
+    "deterministic_suite": {
+      "worker_full_run": "4308 passed / 0 failed (4 sequential chunks, 114 test-bearing packages)",
+      "lead_full_run_1": "4308 passed / 0 failed (packages 2865 + apps 209 + infra 134 + tests 1100)",
+      "lead_run_2_chunks": "packages 2865 + apps 209 + infra 134 \u2014 identical to run 1 per chunk",
+      "timing_flake_analysis": "tests/live-ux journeys/90-route-full-path (5000ms mount timeout) is timing-marginal on this 2-core sandbox under recursive-run concurrency: green in isolation (124/124), green in both full runs, and the flake REPRODUCED AT THE BASE COMMIT 45e5373 in a fresh worktree control (green first run 1100/0 with the test at 3703ms, timeout on the second run) \u2014 pre-existing and environmental, not introduced by P21; the P21 diff is docs-only (frozen-core 0 modified / 0 deleted), so test-relevant code is byte-identical to the base",
+      "verdict": "deterministic surface unchanged vs the P20-gate baseline; 4308/0 confirmed by two complete runs on the branch (worker + lead)"
+    },
+    "frozen_core": "0 modified / 0 deleted vs 967c066dd716 (28 pure additions across the P-series; P21 adds zero)",
+    "branch_diff": "exactly 4 files, +764/-0, all under docs/evidence/production-release/p21-live-reverification/** \u2014 no code, contracts, tests, configs, package.json or lockfiles touched",
+    "secrets_audit_independent": "FAIL-CLOSED re-scan by the architect against the live credential values (GITHUB_TOKEN/PAT, COMPOSIO_MCP_API_KEY, COMPOSIO_API_KEY) plus key-shaped-token regexes across every file of the branch diff: 0 findings; the record's own audit (4 corpora incl. dual-redaction no-op proof): 0 findings, pass=true",
+    "live_claim_spot_checks": "architect re-probed independently: Composio v3 connected_accounts 200 (vercel ca_31iruA2qEdfl ACTIVE, neon ca_Ktgm5irkMl1T ACTIVE); openapi.json 200 with 74 paths incl. POST /api/v3/tools/execute/{tool_slug}; GitHub API /user = payswapdotorg, repo default main \u2014 all matching the worker's record",
+    "deliverable_integrity": "backbone-log.md md5 a98b087bf563ee14bfb7264ecb3a0482 byte-exact vs the session's base64 emission; all 4 deliverable byte-sizes match the completion report; 3 JSON files valid"
+  },
+  "outcome_ruling": {
+    "live_provider_reverification": "ACCEPTED \u2014 all four channels CONNECTED with real, timestamped probes; the P17A/P19 UNAVAILABLE-DNS state for Neon is lifted for the Composio channel (recorded verbatim, station direct egress still fails DNS \u2014 honest)",
+    "deployment_refresh": "ACCEPTED AS FULLY-EVIDENCED BLOCKED-PATH \u2014 provider HTTP 402 api-deployments-free-per-day (100/100 consumed, reset 2026-09-29T07:42:31.436Z) refused a fully-valid, correctly-composed git-source production request for f7774c7 on sos-2-0; 8-attempt honest mapping-discovery trail recorded (Composio pinned-version gitSource drift + the 'latest' version fix + user_id requirement); no deployment fabricated; exact post-reset retry recipe recorded. A single post-reset retry (or a paid plan) completes the deliverable with zero discovery remaining \u2014 available to the operator on request as a follow-up."
+  },
+  "merge_chain": "executed by the architect after this approval: PR -> squash-merge to main -> gov reconcile (P21 COMPLETE) -> push -> both verifiers re-run on final main"
+}
