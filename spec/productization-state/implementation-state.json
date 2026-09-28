@@ -1,8 +1,10 @@
 {
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
-  "status": "COMPLETE",
-  "currentFrontier": [],
+  "status": "READY",
+  "currentFrontier": [
+    "P21"
+  ],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -219,6 +221,13 @@
       ],
       "notes": "Architect integration pass: the seam swap (producer -> data-seam), ungating C's remaining route suites, 8 mandatory route-level journeys, strictly separated deterministic + RUN_REAL integration suites, evidence package. Branch wo/p18-integration. | Architect-gated merge (PR #44, squashed as 1b130ad): the seam swap live (A→B→C ONE product), deterministic suite x2 35/35, RUN_REAL 12/12 with credentials on the deployed exact-head surface, 8/8 route-level journeys, evidence package audited; architect fixes documented in the merge record.",
       "mergedAs": "1b130ad8a82a2bf68856c67d38c485d9cac23c70"
+    },
+    "P21": {
+      "status": "READY",
+      "dependencies": [
+        "P20"
+      ],
+      "notes": "Appended post-program by the architect: the operator supplied live provider credentials (GitHub PAT + Composio-managed Vercel/Neon connected accounts), lifting the P20 release record's NOT-REDEPLOYED-NO-CREDENTIALS condition. P21 converts that deferred honest state into fresh live evidence: live provider re-verification probes, a production deployment of the exact release head f7774c7 (or a fully evidenced BLOCKED-PATH), a Neon persistence re-check (UNAVAILABLE-DNS in the P17A/P19 era), all under the unchanged honesty invariants (credential values never in files, dual redaction, 0-findings secrets audit, frozen core untouched, deterministic suites green). Owned: docs/evidence/production-release/p21-live-reverification/**."
     }
   }
 }
