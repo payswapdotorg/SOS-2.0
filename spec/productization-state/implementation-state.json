@@ -1,8 +1,10 @@
 {
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
-  "status": "COMPLETE",
-  "currentFrontier": [],
+  "status": "READY",
+  "currentFrontier": [
+    "P22"
+  ],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -227,7 +229,15 @@
       ],
       "notes": "Post-program work order appended by the architect when the operator supplied live provider credentials, lifting P20's NOT-REDEPLOYED-NO-CREDENTIALS. Live re-verification of all four provider channels (github / composio / vercel / neon \u2014 all CONNECTED with real UTC-timestamped probes through the operator's Composio connected accounts; the P17-A/P19 Neon UNAVAILABLE-DNS state lifted for the Composio channel, station direct egress still recorded verbatim). Final-head deployment refresh of f7774c7: FULLY-EVIDENCED BLOCKED-PATH \u2014 provider HTTP 402 api-deployments-free-per-day (100/100 consumed, reset 2026-09-29T07:42:31Z) refused a fully-valid git-source production request; 8-attempt honest mapping trail (Composio pinned-version gitSource drift + 'latest' fix + user_id requirement); no deployment fabricated; exact post-reset retry recipe in p21-deployment-record.json. Machine backbone on the exact base 45e5373: both verifiers PASS, build 109/0, deterministic 4308/0 x2 (worker + independent lead station; live-ux mount-test timing flake reproduced at base control \u2014 pre-existing, environmental), frozen-core 0/0, zero provider SDK deps, secrets audit 0 findings (worker fail-closed dual-redaction + architect independent value-scan). Owned path: docs/evidence/production-release/p21-live-reverification/** (5 files incl. architect approval).",
       "mergedAs": "aafe05260be733dd12a86bb7ea602acb5b61df63"
+    },
+    "P22": {
+      "status": "READY",
+      "dependencies": [
+        "P21"
+      ],
+      "notes": "Appended by the architect: the operator supplied a raw Vercel account token (env VERCEL_TOKEN) after P21's fully-evidenced BLOCKED-PATH (402 api-deployments-free-per-day, reset 2026-09-29T07:42:31Z, retry recipe exact). This order closes that path: direct-API production deployment of the program-complete head, runtime verification, and a live credential inventory (env names only). Architect-implemented per the P16/P12 precedent.",
+      "mergedAs": ""
     }
   },
-  "statusNote": "P0-P20 program + P21 post-program live re-verification COMPLETE (27/27 productization work orders; PR #47 squash-merged as aafe052). Deployment refresh honest BLOCKED-PATH: provider daily-quota refusal, exact retry recipe recorded \u2014 one request after the 2026-09-29T07:42:31Z reset (or with a paid plan) completes it."
+  "statusNote": "P0\u2013P21 COMPLETE (27/27); P22 appended \u2014 the final-head deployment completion, unblocked by the operator's raw Vercel token."
 }

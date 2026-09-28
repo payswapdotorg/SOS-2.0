@@ -1,0 +1,89 @@
+{
+  "schema": "sos-2/p22/deployment-completion-record",
+  "work_order": "P22",
+  "evidence_kind": "p22-deployment-completion",
+  "produced_at": "2026-09-28T12:52:00Z",
+  "repo_head_deployed": {
+    "sha": "d9eedb27b9950a9c33ea18d23e0c8b488c633b34",
+    "note": "main HEAD at execution time \u2014 the program-complete head (P0-P21 + reconcile); contains f7774c7 (the P20 release head) as ancestor, plus the P21 work-order append, evidence and reconcile"
+  },
+  "background": {
+    "p21_blocked_path": "provider HTTP 402 api-deployments-free-per-day (100/100 consumed, 0 remaining, reset 2026-09-29T07:42:31.436Z) refused the fully-valid Composio-composed git-source production request for f7774c7 at 2026-09-28T07:42Z",
+    "unblock": "the operator supplied a raw Vercel account token (env VERCEL_TOKEN \u2014 value never recorded) in a wider credential bundle with the directive to use it for the project"
+  },
+  "channel": {
+    "path": "DIRECT Vercel REST API (api.vercel.com) with the operator's raw account token",
+    "credentialEnv": "VERCEL_TOKEN",
+    "account": "ekonplacide-5312 (hobby plan) \u2014 the same account that owns the sos-2-0 project; 35 projects visible; sos-2-0 prj_ad9K6nw6F4zlpg4bmlZi9H is repo-connected to payswapdotorg/SOS-2.0 (repoId 1377439399)"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "request": "POST /v13/deployments {name:'sos-2-0', project:'prj_ad9K6nw6F4zlpg4bmlZi9H', target:'production', gitSource:{type:'github', repoId:1377439399, ref:'d9eedb2\u2026'}}",
+      "response": "HTTP 400 invalid_project_name \u2014 the project-ID field (contains uppercase) was validated as a project NAME; rejected"
+    },
+    {
+      "attempt": 2,
+      "request": "POST /v13/deployments {name:'sos-2-0', target:'production', gitSource:{type:'github', repoId:1377439399, ref:'d9eedb27b9950a9c33ea18d23e0c8b488c633b34'}}",
+      "response": "HTTP 200 \u2014 deployment created (the name field alone identifies the project; no project field needed)",
+      "result": {
+        "deploymentId": "dpl_5zMx7FWhktmbQnTCG2aEV1Dj1Tkv",
+        "url": "sos-2-0-nuhof0n7f-ekonplacidegmailcoms-projects.vercel.app",
+        "target": "production",
+        "initialState": "INITIALIZING",
+        "createdAt": 1790599181381,
+        "createdAtISO": "2026-09-28T12:39:41.381Z"
+      }
+    }
+  ],
+  "polling": [
+    {
+      "t": "12:40:15Z",
+      "state": "BUILDING"
+    },
+    {
+      "t": "12:40:33Z",
+      "state": "BUILDING"
+    },
+    {
+      "t": "12:40:52Z",
+      "state": "BUILDING"
+    },
+    {
+      "t": "12:41:11Z",
+      "state": "READY",
+      "note": "READY ~80s after creation"
+    }
+  ],
+  "quota_note": {
+    "honest_statement": "The raw-token deployment succeeded at 12:39:41Z \u2014 BEFORE the recorded 2026-09-29T07:42:31.436Z quota reset that refused the 07:42Z Composio request. The provider's api-deployments-free-per-day accounting is account-wide across all projects (the operator's account runs 35 active projects with same-day updates: aurum-chat 12:29Z, mos-product 12:20Z, aise 11:11Z, webflix 10:35Z). The exact quota mechanics are the provider's own; the P21 refusal and this success are both recorded verbatim \u2014 nothing is inferred or smoothed."
+  },
+  "runtime_verification": {
+    "deployment_url": {
+      "url": "https://sos-2-0-nuhof0n7f-ekonplacidegmailcoms-projects.vercel.app/",
+      "http": 200,
+      "bytes": 165485,
+      "title": "SOS Console"
+    },
+    "sha_binding": {
+      "pattern": "P17-A gitSource sha echo",
+      "api_meta_githubCommitSha": "d9eedb27b9950a9c33ea18d23e0c8b488c633b34",
+      "expected": "d9eedb27b9950a9c33ea18d23e0c8b488c633b34",
+      "match": true,
+      "githubCommitRef": "d9eedb27b9950a9c33ea18d23e0c8b488c633b34"
+    },
+    "production_alias": {
+      "url": "https://sos-2-0.vercel.app/",
+      "http": 200,
+      "title": "SOS Console",
+      "byte_identical_to_deployment": true,
+      "md5_both": "7d153f28f41ae095fbeafdfcaf2ca0aa",
+      "note": "the production domain now serves exactly this deployment"
+    },
+    "superseded": {
+      "prior_newest": "45e5373 (git-integration auto-deploy at 2026-09-28T05:04:41Z, per the P21 record)",
+      "now": "the program-complete head d9eedb2 is the newest production deployment"
+    }
+  },
+  "honest_statement": "The P21 BLOCKED-PATH is now CLOSED: production binds the exact program-complete head d9eedb27b9950a9c33ea18d23e0c8b488c633b34, runtime-verified three ways (deployment URL, API sha echo, byte-identical production alias). No deployment was fabricated at any point; the full refusal-then-success trail is recorded."
+}
