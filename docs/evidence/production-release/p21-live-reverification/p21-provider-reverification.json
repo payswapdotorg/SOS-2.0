@@ -1,0 +1,291 @@
+{
+  "schemaVersion": "1.0",
+  "record": "P21 Live Provider Re-verification — machine-checkable audit record",
+  "work_order": "P21",
+  "auditor": "P21-delivery-worker (dispatched session)",
+  "base_head": "45e53731a2378aab41e326fded8168046d42b513",
+  "executed_at_head": "45e53731a2378aab41e326fded8168046d42b513 (the exact mandated base; all backbone work executed at this head on branch wo/p21-live-reverification — the only additions on top are the four evidence files of this owned path)",
+  "machine_backbone": {
+    "check": "both verifiers + full workspace build + deterministic suite (every test-bearing package exactly once) + frozen-core diff + provider-SDK scan, on the exact base head 45e53731a2378aab41e326fded8168046d42b513; full command log in backbone-log.md (this directory)",
+    "verify_repo": "PASS (exit 0) — \"SOS 2.0 repository contract check: PASS\", 19 work orders discovered, W-frontier empty",
+    "verify_productization": "PASS (exit 0) — \"SOS productization repository contract check: PASS\", 27 productization work orders, frontier [P21], 92 owned paths, all dependency edges + machine state consistent",
+    "workspace_projects_total": 115,
+    "packages_built": 109,
+    "build_exit": 0,
+    "build_duration_s": 157,
+    "build_note": "pnpm -r --if-present build: 109 packages built, 0 failed (6 projects declare no build script; --if-present skips them by design). Single foreground pass, 2026-09-28T07:14:36Z → 07:17:13Z.",
+    "test_packages_run": 114,
+    "test_packages_passed": 114,
+    "tests_passed_total": 4308,
+    "failures": 0,
+    "test_chunks": "chunk1 1404/0 (39 pkgs, 115s) + chunk2 1461/0 (38 pkgs, 130s) + chunk3 343/0 (14 pkgs, 39s) + chunk4 1100/0 (23 pkgs, 146s) = 4308 passed / 0 failed across 114 packages (430s of suite time)",
+    "test_execution_mode": "The full deterministic suite was executed as 4 sequential chunks (pnpm --filter <chunk-names> run test), chunked by workspace root in topological order (packages/* 39+38, then apps/*+infra/* 14, then tests/* 23), because this sandbox reaps background processes at session boundaries. Each of the 114 test-bearing packages ran exactly once (110 vitest summary lines + 4 custom run-tests.mjs dispatchers); 1 project (@sos-2/web-live-data, apps/web/live-data) declares no test script and is skipped by --if-present. All 5 env-gated real suites printed their honest exit-0 skip lines (RUN_REAL not set: tests/real-dogfood, tests/real-observation, tests/live-ux/actions, tests/live-ux/data-plane, tests/live-ux/integration). No environmental failure this run (the checkout was created as SOS-2.0 from the start — the frozen schema-loader directory assertion held); no test was weakened, skipped or edited; the first full execution was the clean one.",
+    "frozen_core_diff": "git diff 967c066dd71691314df39abdcc56e289aca88fb6..45e53731a2378aab41e326fded8168046d42b513 -- spec/contracts packages/contracts: 28 files changed, 2380 insertions(+), 0 modified, 0 deleted — every change a pure ADDITION from the W-series core-establishment commits (identical to the P16/P20 results; zero commits after the W18 final gate touched either path). The packet's abbreviated base '967c066a' does not resolve; 967c066dd716… is the intended base (the P20 record's note).",
+    "provider_sdk_dependency_scan": "zero provider SDK dependencies anywhere in the workspace — no @neon*/@upstash*/@vercel*/openai/@octokit*/@aws-sdk*/composio* in any package.json of packages/, apps/, infra/, tests/; node infra/production-connectivity/scripts/check-zero-deps.mjs → PASS (exit 0). All live probes ran as transient scripts OUTSIDE the repo tree (never imports into the SOS package surface); this work adds zero dependencies of any kind.",
+    "tracked_tree_drift": "none — git status --porcelain empty after the backbone (the tracked tree at 45e5373 is byte-identical to the clone); the only additions afterwards are the four files of this owned path",
+    "backbone_log": "docs/evidence/production-release/p21-live-reverification/backbone-log.md (every command, exit code, key line, duration)"
+  },
+  "provider_reverification": {
+    "credential_channels": {
+      "github": "api.github.com REST over HTTPS; operator PAT referenced by env NAME GITHUB_ACCESS_TOKEN (Authorization: Bearer header — value never recorded); X-GitHub-Api-Version: 2022-11-28 requested on every probe",
+      "composio": "Composio v3 REST (https://backend.composio.dev/api/v3/…); platform key referenced by env NAME COMPOSIO_API_KEY (X-API-Key header — value never recorded); the alternative MCP key channel (env NAME COMPOSIO_MCP_API_KEY) was NOT needed — the v3 REST channel answered everything; recorded by name only",
+      "composio_execution_endpoint_discovery": "the CURRENT action-execution endpoint was discovered from the LIVE v3 API surface: GET /api/v3/openapi.json → HTTP 200 (936085 bytes, \"Composio Platform API\", openapi 3.0.0, 74 paths) exposes POST /api/v3/tools/execute/{tool_slug} (body: connected_account_id + user_id + arguments | text; header X-API-Key). The tool inventories come from GET /api/v3/tools?toolkit_slug=<slug> (vercel: 35 tools; neon: 69 tools). The v1 API tree is 410-Gone per the dispatch packet (not re-probed here; the stale pip composio-core / deprecated npm @composio/mcp notes are the packet's, not this station's findings).",
+      "composio_execution_requirement": "executions REQUIRE user_id alongside connected_account_id: the first VERCEL_LIST_TEAMS probe without it failed with HTTP 400, error code 1811 'ActionExecute_ConnectedAccountEntityIdRequired' (\"User ID is required with connected account…\") — recorded honestly; the connected accounts are scoped to user_id 'default' and every subsequent execution carried it",
+      "connected_accounts_state": "GET /api/v3/connected_accounts?limit=50 → HTTP 200 @ 2026-09-28T07:32:01.183Z: 6 accounts — vercel ca_31iruA2qEdfl ACTIVE (authScheme API_KEY, toolkit slug 'vercel', created 2026-09-21T07:22:00.525Z, user_id default; bearer-token-type credential held Composio-side, never extracted), neon ca_Ktgm5irkMl1T ACTIVE (authScheme API_KEY, toolkit slug 'neon', created 2026-09-21T07:22:10.805Z, user_id default), plus 4 EXPIRED accounts (2 vercel + 2 github, user_id offisos-infra-agent, status_reason 'Authorization was started but not completed within 10 minutes') — the operator's ACTIVE pair is exactly the pair this work order uses"
+    },
+    "providers": [
+      {
+        "provider": "github",
+        "state": "CONNECTED",
+        "probed": true,
+        "credentialEnv": "GITHUB_ACCESS_TOKEN",
+        "probes": [
+          {
+            "channel": "GET https://api.github.com/user (Authorization: Bearer $GITHUB_ACCESS_TOKEN, Accept: application/vnd.github+json, X-GitHub-Api-Version: 2022-11-28)",
+            "probedAt": "2026-09-28T07:31:31.962Z",
+            "httpStatus": 200,
+            "responseSummary": "login payswapdotorg, id 150378018, type User, created_at 2023-11-09T17:37:34Z; x-github-media-type 'github.v3; format=json'; rate-limit headers on this call: limit 5000, remaining 4336, used 664"
+          },
+          {
+            "channel": "GET https://api.github.com/repos/payswapdotorg/SOS-2.0 (same auth scheme)",
+            "probedAt": "2026-09-28T07:31:46.660Z",
+            "httpStatus": 200,
+            "responseSummary": "full_name payswapdotorg/SOS-2.0, id 1377439399, node_id R_kgDOUhoOpw, default_branch main, private false, pushed_at 2026-09-28T05:04:39Z"
+          },
+          {
+            "channel": "GET https://api.github.com/repos/payswapdotorg/SOS-2.0/branches/main (same auth scheme)",
+            "probedAt": "2026-09-28T07:31:47.112Z",
+            "httpStatus": 200,
+            "responseSummary": "branch main head sha 45e53731a2378aab41e326fded8168046d42b513 (the EXACT P21 base head — the clone and the API agree), protected false"
+          },
+          {
+            "channel": "GET https://api.github.com/rate_limit (same auth scheme)",
+            "probedAt": "2026-09-28T07:31:47.530Z",
+            "httpStatus": 200,
+            "responseSummary": "core resource: limit 5000, used 666, remaining 4334, reset 1790581536 (2026-09-28T07:45:36Z)"
+          }
+        ],
+        "detail": "The real GitHub API answered every authenticated probe with HTTP 200 at current timestamps (2026-09-28T07:31:31–47Z): login payswapdotorg, repo payswapdotorg/SOS-2.0 default branch main with head 45e5373… (the exact P21 base), rate-limit budget healthy. Media type github.v3 (format=json) with the 2022-11-28 API version requested on every probe — CONNECTED on real evidence."
+      },
+      {
+        "provider": "composio",
+        "state": "CONNECTED",
+        "probed": true,
+        "credentialEnv": "COMPOSIO_API_KEY",
+        "probes": [
+          {
+            "channel": "GET https://backend.composio.dev/api/v3/connected_accounts?limit=50 (X-API-Key: $COMPOSIO_API_KEY)",
+            "probedAt": "2026-09-28T07:32:01.183Z",
+            "httpStatus": 200,
+            "responseSummary": "6 connected accounts (total_items 6, 1 page); vercel ca_31iruA2qEdfl ACTIVE + neon ca_Ktgm5irkMl1T ACTIVE (both API_KEY scheme, user_id default); 4 EXPIRED (offisos-infra-agent)"
+          },
+          {
+            "channel": "GET https://backend.composio.dev/api/v3/openapi.json (X-API-Key: $COMPOSIO_API_KEY)",
+            "probedAt": "2026-09-28T07:54:26.560Z (re-read; first read immediately after the account probe ~07:33Z)",
+            "httpStatus": 200,
+            "responseSummary": "the live v3 API surface: 'Composio Platform API', openapi 3.0.0, 74 paths — including POST /api/v3/tools/execute/{tool_slug} (the CURRENT action-execution endpoint this work order used for every vercel/neon action), GET /api/v3/tools, GET /api/v3/tools/{tool_slug}, GET /api/v3/toolkits; 936085 bytes both reads (identical)"
+          },
+          {
+            "channel": "GET https://backend.composio.dev/api/v3/tools?toolkit_slug=vercel&include_deprecated=false&limit=200 (X-API-Key: $COMPOSIO_API_KEY)",
+            "probedAt": "2026-09-28T07:54:28.368Z (re-read; first read ~07:34Z)",
+            "httpStatus": 200,
+            "responseSummary": "35 vercel tools (incl. VERCEL_GET_PROJECT, VERCEL_LIST_ALL_DEPLOYMENTS, VERCEL_GET_DEPLOYMENT_DETAILS, VERCEL_CREATE_NEW_DEPLOYMENT, VERCEL_LIST_TEAMS — the exact action set this record cites); NO project-creation tool exists in the inventory (a fact the deployment-record blocker analysis relies on)"
+          },
+          {
+            "channel": "GET https://backend.composio.dev/api/v3/tools?toolkit_slug=neon&include_deprecated=false&limit=200 (X-API-Key: $COMPOSIO_API_KEY)",
+            "probedAt": "2026-09-28T07:54:28.814Z (re-read; first read ~07:34Z)",
+            "httpStatus": 200,
+            "responseSummary": "69 neon tools (incl. NEON_GET_CURRENT_USER_INFORMATION, NEON_GET_USER_ORGANIZATIONS, NEON_RETRIEVE_PROJECTS_LIST, NEON_GET_BRANCHES_FOR_PROJECT, NEON_ACCESS_PROJECT_DETAILS_BY_ID — the exact actions executed below)"
+          },
+          {
+            "channel": "POST https://backend.composio.dev/api/v3/tools/execute/VERCEL_LIST_TEAMS (connected_account_id ca_31iruA2qEdfl, user_id default, arguments {}) — the first execution WITHOUT user_id failed HTTP 400 error code 1811 'ActionExecute_ConnectedAccountEntityIdRequired', recorded verbatim in the honest notes; the retry with user_id default succeeded",
+            "probedAt": "2026-09-28T07:35:08.005Z (success; the 1811 refusal was at 07:34:55.702Z)",
+            "httpStatus": 200,
+            "responseSummary": "{data, successful: true, error: null, log_id} — 2 teams: 'ekonplacidegmailcom's projects' (team_4KOoA5CgtYaOF85yFXPeMXLt, slug ekonplacidegmailcoms-projects, plan hobby, creatorId wmDQWzu9ZrQBNLFphlMoQhH4 — the P19-recorded vercel user id) and 'tepa'"
+          }
+        ],
+        "detail": "The Composio v3 platform answered every authenticated probe with HTTP 200 at current timestamps (2026-09-28T07:32:01Z onward): the connected-account pair this work order relies on (vercel ca_31iruA2qEdfl, neon ca_Ktgm5irkMl1T) is ACTIVE, the live OpenAPI surface was read to discover the CURRENT action-execution endpoint (POST /api/v3/tools/execute/{tool_slug}), and real tool executions through it succeeded for both toolkits — CONNECTED on real evidence, the exact working channel the dispatch packet described."
+      },
+      {
+        "provider": "vercel",
+        "state": "CONNECTED",
+        "probed": true,
+        "credentialChannel": "Composio connected account ca_31iruA2qEdfl (API_KEY scheme, bearer-token credential held Composio-side — never extracted, never recorded; every action executed THROUGH Composio)",
+        "probes": [
+          {
+            "channel": "Composio action VERCEL_LIST_TEAMS (ca_31iruA2qEdfl, user_id default, arguments {})",
+            "probedAt": "2026-09-28T07:35:08.005Z",
+            "outcome": "successful — 2 teams (ekonplacidegmailcoms-projects team_4KOoA5CgtYaOF85yFXPeMXLt + tepa); the projects live under ekonplacidegmailcoms-projects"
+          },
+          {
+            "channel": "Composio action VERCEL_GET_PROJECT (arguments {projectIdOrName: 'sos-dogfood-r2'})",
+            "probedAt": "2026-09-28T07:35:33.017Z",
+            "outcome": "successful — prj_WESDjCys33YVQ97idvJNVvgz9mLn (the P19 project, EXISTS as the packet expected), framework null, rootDirectory null, nodeVersion 24.x; link {type github, org payswapdotorg, repo sos-dogfood-r2, repoId 1390970813, productionBranch main}; latest deployment READY production at 767c474c3e22c0d807bb44883df6ae7c63139f3f"
+          },
+          {
+            "channel": "Composio action VERCEL_GET_PROJECT (arguments {projectIdOrName: 'sos-2-0'})",
+            "probedAt": "2026-09-28T07:35:47.609Z",
+            "outcome": "successful — prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ (the P17-A project), framework nextjs, rootDirectory apps/web, nodeVersion 24.x; link {type github, org payswapdotorg, repo SOS-2.0, repoId 1377439399, productionBranch main} — REPO-CONNECTED to the main repository, the clean-path precondition for the deployment refresh"
+          },
+          {
+            "channel": "Composio action VERCEL_LIST_ALL_DEPLOYMENTS (arguments {app: 'sos-dogfood-r2', limit: 20})",
+            "probedAt": "2026-09-28T07:36:15.860Z",
+            "outcome": "successful — exactly 1 deployment: dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC READY production at 767c474c3e22c0d807bb44883df6ae7c63139f3f (the P19 run-2 record, unchanged and still live)"
+          },
+          {
+            "channel": "Composio action VERCEL_LIST_ALL_DEPLOYMENTS (arguments {app: 'sos-2-0', limit: 20})",
+            "probedAt": "2026-09-28T07:36:16.801Z",
+            "outcome": "successful — 20 deployments, all READY; newest production: dpl_CognZCkMJVxXN2af5NbMAZBJxmsy at 45e53731a2378aab41e326fded8168046d42b513 (main, created 2026-09-28T05:04:41.448Z — the P21 base head auto-deployed by the git integration on the architect's frontier push) and dpl_3rogimz4PRRDp9W5up5XtmRyfPnW at 9a1dd1b8df361e62e1f5d96f40aa27cb84bc25d4 (the P20 release commit); preview deployments at 3f98022 (wo/p20-production-release), 3bfc469, c25856e and the wo/p19-real-dogfood series — NONE of the 20 binds f7774c7 (verified: no deployment at the release head exists)"
+          },
+          {
+            "channel": "Composio action VERCEL_GET_DEPLOYMENT_DETAILS (arguments {idOrUrl: 'dpl_CognZCkMJVxXN2af5NbMAZBJxmsy', withGitRepoInfo: true})",
+            "probedAt": "2026-09-28T07:43:59.619Z",
+            "outcome": "successful — READY, target production, url sos-2-0-owd4qtvuu-ekonplacidegmailcoms-projects.vercel.app, meta.githubCommitSha 45e5373…, ref main"
+          },
+          {
+            "channel": "Composio action VERCEL_GET_DEPLOYMENT_DETAILS (arguments {idOrUrl: 'dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC'})",
+            "probedAt": "2026-09-28T07:44:01.110Z",
+            "outcome": "successful — READY, target production, url sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app, meta.githubCommitSha 767c474… (the P19 run-2 deployment, still live)"
+          },
+          {
+            "channel": "Runtime HTTP verification (direct fetches of the deployment URLs — recorded as a distinct channel from the Composio action channel): GET https://sos-2-0-owd4qtvuu-ekonplacidegmailcoms-projects.vercel.app/",
+            "probedAt": "2026-09-28T07:44:29.361Z",
+            "outcome": "HTTP 200, 165485 bytes, 0.997s — the SOS Console (the apps/web Next.js production build) serving live at the current main head"
+          },
+          {
+            "channel": "Runtime HTTP verification: GET https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app/sos-manifest.json",
+            "probedAt": "2026-09-28T07:44:30.369Z",
+            "outcome": "HTTP 200, 248 bytes — byte-exact against the GitHub raw content at the deployed revision (GET /repos/payswapdotorg/sos-dogfood-r2/contents/sos-manifest.json?ref=767c474… → 200, 248 bytes; md5 ad622e86f60fe90f3097db460897ae2d on both): the P19 run-2 runtime binding re-verified LIVE at current time"
+          }
+        ],
+        "detail": "The Vercel provider answered every probe through the Composio channel (ca_31iruA2qEdfl) with successful action executions at current timestamps (2026-09-28T07:35:08–07:44:02Z): teams, both projects (the repo-connected sos-2-0 AND the P19 sos-dogfood-r2 the packet expected), both deployment lists, both deployment details, plus live runtime HTTP on the current production URL and a byte-exact re-verification of the P19 manifest binding — CONNECTED on real evidence. (Direct station egress to api.vercel.com also answers — HTTP 403 unauthenticated — recorded for completeness; all AUTHENTICATED vercel traffic went through Composio.)"
+      },
+      {
+        "provider": "neon",
+        "state": "CONNECTED",
+        "probed": true,
+        "credentialChannel": "Composio connected account ca_Ktgm5irkMl1T (API_KEY scheme, key held Composio-side — never extracted, never recorded; every action executed THROUGH Composio)",
+        "previous_state": "UNAVAILABLE in the P17-A/P19 era (api.neon.tech getaddrinfo ENOTFOUND / NODATA, recorded verbatim in p17a/p19 provider-states) — this work order re-checks with the working credential channel",
+        "probes": [
+          {
+            "channel": "Composio action NEON_GET_CURRENT_USER_INFORMATION (ca_Ktgm5irkMl1T, user_id default, arguments {})",
+            "probedAt": "2026-09-28T07:36:33.001Z",
+            "outcome": "successful — login ekontetevi, email ekontetevi@gmail.com, id df81bf35-7fd3-4add-afb9-739262f51f2f, 2 auth accounts (google + keycloak)"
+          },
+          {
+            "channel": "Composio action NEON_GET_USER_ORGANIZATIONS (arguments {})",
+            "probedAt": "2026-09-28T07:36:52.030Z",
+            "outcome": "successful — 2 organizations: webflix (org-proud-truth-25823860) and Tetevi (org-shy-shadow-21570034)"
+          },
+          {
+            "channel": "Composio action NEON_RETRIEVE_PROJECTS_LIST (arguments {} — first attempt)",
+            "probedAt": "2026-09-28T07:36:43.094Z",
+            "outcome": "refused (successful: false): 'org_id is required, you can find it on your organization settings page' — recorded honestly; the account's projects are enumerated per-organization"
+          },
+          {
+            "channel": "Composio action NEON_RETRIEVE_PROJECTS_LIST (arguments {org_id: 'org-shy-shadow-21570034'})",
+            "probedAt": "2026-09-28T07:37:01.074Z",
+            "outcome": "successful — 10 projects (roamlink-pa011, aurum-prod-w079, aurum-prod, roamlink-demo, zeck-preview, aise, mos-production, office-production, adcos, Workflow; regions aws-us-east-1/aws-us-east-2)"
+          },
+          {
+            "channel": "Composio action NEON_RETRIEVE_PROJECTS_LIST (arguments {org_id: 'org-proud-truth-25823860'})",
+            "probedAt": "2026-09-28T07:37:02.056Z",
+            "outcome": "successful — 2 projects (sporta-beta, webflix)"
+          },
+          {
+            "channel": "Composio action NEON_GET_BRANCHES_FOR_PROJECT (arguments {project_id: 'sparkling-forest-44052051'})",
+            "probedAt": "2026-09-28T07:37:18.483Z",
+            "outcome": "successful — 1 branch: main (br-misty-salad-auoc67q9, updated 2026-09-28T07:24:42Z)"
+          },
+          {
+            "channel": "Composio action NEON_ACCESS_PROJECT_DETAILS_BY_ID (arguments {project_id: 'sparkling-forest-44052051'})",
+            "probedAt": "2026-09-28T07:37:19.318Z",
+            "outcome": "successful — project webflix, region aws-us-east-1, pg_version 18"
+          },
+          {
+            "channel": "Direct station egress probe (recorded for the honest channel distinction): curl https://api.neon.tech/api/v2/users/me (unauthenticated)",
+            "probedAt": "2026-09-28T07:54:29.401Z",
+            "outcome": "DNS FAILURE from this station: 'curl: (6) Could not resolve host: api.neon.tech' — recorded verbatim (the P17-A/P19 station condition persists HERE for direct egress); the provider is nonetheless fully reachable THROUGH the Composio channel, which is the credential channel this work order mandates"
+          }
+        ],
+        "detail": "The persistence lane re-check LIFTS the P17-A/P19 UNAVAILABLE-DNS state for the credential channel: through the Composio connected account ca_Ktgm5irkMl1T the Neon API answered every probe at current timestamps (2026-09-28T07:36:33–07:37:20Z) — user info, 2 organizations, 12 projects across them, branches, and project details (pg 18, aws-us-east-1) — CONNECTED on real evidence through the channel. Honest scope: no SOS-named project exists in the account (the 12 projects are the operator's other work); P21 does not provision provider resources, so no SOS Neon project was created — the re-check records the channel state, exactly what the work order asks. The station's OWN direct api.neon.tech egress still fails DNS (recorded verbatim above): the lane's availability is a property of the Composio channel, not of station egress."
+      }
+    ],
+    "honest_notes": [
+      "Every provider state above derives from a real probe executed at this station at the recorded UTC timestamp; no state is inferred, cached or fabricated.",
+      "The first Composio execution attempt (VERCEL_LIST_TEAMS without user_id) failed with HTTP 400 error code 1811 'ActionExecute_ConnectedAccountEntityIdRequired' — recorded verbatim, then resolved by carrying user_id 'default' on every subsequent execution (the account's user scope).",
+      "The first NEON_RETRIEVE_PROJECTS_LIST attempt (no org_id) was refused ('org_id is required…') — recorded verbatim, then resolved by enumerating organizations first.",
+      "Credential VALUES appear nowhere in this record (or any file of this owned path): GITHUB_ACCESS_TOKEN, COMPOSIO_API_KEY and COMPOSIO_MCP_API_KEY are referenced by env NAME only; the Vercel and Neon credentials are referenced by Composio connected-account ID only (ca_31iruA2qEdfl / ca_Ktgm5irkMl1T) — they are held Composio-side and were never extracted.",
+      "The provider raw responses were captured OUTSIDE the repo tree (transient probe scripts under /home/z/.p21-work/) and only redacted summaries were serialized into these records; the fail-closed dual-redaction (deployment corpus, then observation corpus) was applied to every serialized file before commit and proved a no-op (see p21-secrets-audit.json).",
+      "The station-egress contrast is recorded honestly: api.github.com, backend.composio.dev and api.vercel.com answer directly from this station; api.neon.tech does NOT (DNS failure, verbatim) — Neon's CONNECTED state is a Composio-channel property, and the record says so explicitly."
+    ]
+  },
+  "points": [
+    {
+      "point": "Provider re-verification: live, current-time probes against every provider that now has a working credential channel (GitHub via the operator's PAT; Vercel and Neon via the Composio-managed connected accounts), with exact timestamps, revisions, account identifiers and the exact channel used",
+      "result": "PASS",
+      "evidence": [
+        "github CONNECTED @ 2026-09-28T07:31:31–47Z: GET /user (login payswapdotorg, HTTP 200), GET /repos/payswapdotorg/SOS-2.0 (default branch main, HTTP 200), GET /branches/main (head 45e5373… — the exact P21 base), GET /rate_limit (core 5000/4334 remaining) — channel: api.github.com REST, Authorization Bearer with env-name GITHUB_ACCESS_TOKEN, X-GitHub-Api-Version 2022-11-28 requested, media type github.v3 (provider_states github probes in this record)",
+        "composio CONNECTED @ 2026-09-28T07:32:01Z onward: GET /api/v3/connected_accounts?limit=50 → 200 (vercel ca_31iruA2qEdfl ACTIVE, neon ca_Ktgm5irkMl1T ACTIVE); the CURRENT action-execution endpoint discovered from the LIVE OpenAPI surface (GET /api/v3/openapi.json → 200, 74 paths): POST /api/v3/tools/execute/{tool_slug} with {connected_account_id, user_id, arguments} — exactly what every vercel/neon action below used",
+        "vercel CONNECTED @ 2026-09-28T07:35:08–07:44:02Z through Composio actions VERCEL_LIST_TEAMS / VERCEL_GET_PROJECT ×2 / VERCEL_LIST_ALL_DEPLOYMENTS ×2 / VERCEL_GET_DEPLOYMENT_DETAILS ×2 (all successful; sos-dogfood-r2 prj_WESDjCys33YVQ97idvJNVvgz9mLn exists as the packet expected; sos-2-0 prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ is repo-connected to payswapdotorg/SOS-2.0 repoId 1377439399) + live runtime HTTP on the current production URL (200, the SOS Console) + the P19 run-2 manifest binding re-verified byte-exact LIVE",
+        "neon CONNECTED @ 2026-09-28T07:36:33–07:37:20Z through Composio actions NEON_GET_CURRENT_USER_INFORMATION / NEON_GET_USER_ORGANIZATIONS / NEON_RETRIEVE_PROJECTS_LIST (×3: the honest org_id refusal + 2 orgs) / NEON_GET_BRANCHES_FOR_PROJECT / NEON_ACCESS_PROJECT_DETAILS_BY_ID — the P17-A/P19 UNAVAILABLE-DNS state is lifted FOR THE CHANNEL (station direct egress still fails DNS, recorded verbatim; the channel distinction is explicit)"
+      ]
+    },
+    {
+      "point": "Deployment refresh: a NEW production deployment of the exact release head (f7774c7) created and bound to the release evidence — or the fully evidenced BLOCKED-PATH (never faked, never silently skipped)",
+      "result": "BLOCKED-PATH-RECORDED",
+      "evidence": [
+        "the clean path was selected and attempted: a git-source production deployment pinned to f7774c731019e8e700f6357a144e1c78082ef67a on the repo-connected project sos-2-0 (prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ, link org payswapdotorg repo SOS-2.0 repoId 1377439399 productionBranch main), through the Composio action VERCEL_CREATE_NEW_DEPLOYMENT on ca_31iruA2qEdfl",
+        "the request was composed CORRECTLY through the channel (after an honest 8-attempt mapping-discovery trail — every attempt, its arguments and its exact response recorded) and the PROVIDER refused it: HTTP 402 payment_required, 'Resource is limited - try again in 24 hours (more than 100, code: \"api-deployments-free-per-day\")', limit {total 100, remaining 0, reset 1790667751436 = 2026-09-29T07:42:31.436Z}",
+        "no alternative path exists through the Composio channel (files-based deploy shares the same quota-gated POST /v13/deployments endpoint; the 35-tool inventory has NO project-creation tool; redeploy-via-deploymentId requires an existing deployment at the sha — none exists — and is itself quota-gated; the MCP/tool_router channels share the same execution backend); every reasoning step recorded",
+        "NO deployment at f7774c7 was created and none is claimed: the deployments list was re-read after the refusal (20 sos-2-0 deployments, none at f7774c7). The full evidence trail, the current live state and the exact post-reset retry recipe are in p21-deployment-record.json (this directory)"
+      ]
+    },
+    {
+      "point": "Persistence lane re-check: Neon was UNAVAILABLE (DNS) in the P17A/P19 era; with the Composio-managed Neon account, re-probe and record the current honest state either way",
+      "result": "PASS",
+      "evidence": [
+        "neon state CHANGED from UNAVAILABLE (P17-A/P19: api.neon.tech getaddrinfo ENOTFOUND/NODATA, recorded verbatim in the era's provider-states) to CONNECTED through the Composio channel ca_Ktgm5irkMl1T: user info, 2 organizations, 12 projects, branches (main), project details (pg 18, aws-us-east-1) — all successful at 2026-09-28T07:36:33–07:37:20Z (the neon probes in this record)",
+        "honest scope recorded: the 12 projects are the operator's other work (no SOS-named project exists); P21 does not provision provider resources, so none was created — the lane re-check records the CHANNEL state, which is what the work order asks",
+        "the station's own direct egress to api.neon.tech STILL fails DNS ('curl: (6) Could not resolve host: api.neon.tech', recorded verbatim): Neon's availability is a Composio-channel property — the record distinguishes channel from station egress explicitly, never conflating them"
+      ]
+    },
+    {
+      "point": "Honesty invariants (unchanged from P19/P20): credential VALUES never in any file/transcript/record (env-var NAMES and Composio account IDs only); dual-redaction before serialization; secrets audit of all new evidence = 0 findings; no provider became an SOS semantic dependency; frozen W0–W18 core untouched; deterministic reference-mode suites remain green",
+      "result": "PASS",
+      "evidence": [
+        "machine_backbone (this record): deterministic suite 4308 passed / 0 failed across all 114 test-bearing packages at the exact base head (chunks 1404+1461+343+1100), matching the P20-gate baseline EXACTLY; all 5 env-gated real suites printed their honest exit-0 skip lines (RUN_REAL not set)",
+        "frozen-core diff 967c066dd716..45e5373 over spec/contracts + packages/contracts: 0 modified, 0 deleted (28 pure additions from the W-series establishment commits — the identical P16/P20 result); tracked tree pristine before the evidence files",
+        "zero provider SDK dependencies anywhere in the workspace (scan of every package.json: no @neon*/@upstash*/@vercel*/openai/@octokit*/@aws-sdk*/composio*); check-zero-deps.mjs PASS; every live probe ran as a transient script OUTSIDE the repo tree — this work adds zero dependencies and zero code to the deterministic surface",
+        "p21-secrets-audit.json (this directory): 0 findings across all 4 new files — the repo's source-scan corpus PLUS a P21-added Composio-prefix corpus (the repo corpora predate Composio keys) scanned every file; the fail-closed dual-redaction (deployment corpus then observation corpus) proved a NO-OP on every serialized file; findings would have carried pattern ids + file + line only, never matched text",
+        "the two honest provider refusals encountered (Composio 400 code 1811 without user_id; Neon org_id required) and the one provider quota refusal (Vercel 402) are recorded verbatim with their exact responses — never smoothed, never retried with fake credentials, never fabricated green"
+      ]
+    },
+    {
+      "point": "Machine backbone (unchanged discipline): verify:repo PASS + verify:productization PASS (frontier [P21]) on the exact base; full workspace build EXIT 0; deterministic suite green (4308/0, the P20-gate baseline); frozen-core diff 0/0; zero provider SDK dependencies added",
+      "result": "PASS",
+      "evidence": [
+        "verify:repo PASS (19 WOs, W-frontier empty) and verify:productization PASS (27 WOs, frontier [P21], 92 owned paths) — both BEFORE any work started, both at the exact base 45e53731a2378aab41e326fded8168046d42b513 (§2 of backbone-log.md)",
+        "pnpm -r --if-present build → EXIT 0 in 157s: 109 packages built / 0 failed (115 projects; 6 declare no build script)",
+        "the deterministic suite: 4308 passed / 0 failed over 114 packages in 4 sequential chunks (115s + 130s + 39s + 146s) — EXACTLY the P20-gate baseline count; the exact chunk composition, per-chunk numbers and counting method are recorded in machine_backbone.test_execution_mode and backbone-log.md §3.2",
+        "frozen-core 0 modified / 0 deleted; provider-SDK scan zero; tracked-tree drift none (backbone-log.md §3.3–§3.5)"
+      ]
+    }
+  ],
+  "architect_approval": {
+    "status": "PENDING-ARCHITECT",
+    "note": "This record requests the architect's independent re-verification (the dispatching lead re-verifies every claim before merge — the probes are reproducible from the recorded channels, arguments and timestamps). The worker never self-approves."
+  },
+  "completion": {
+    "architect_approval": "PENDING-ARCHITECT",
+    "actual_merge": "PENDING — the merge of wo/p21-live-reverification carrying docs/evidence/production-release/p21-live-reverification/ (this directory) is the architect's act",
+    "machine_state_reconciliation": "PENDING — the Tech Lead's task-push-chain reconcile marks P21 COMPLETE with mergedAs and empties the frontier; NOT performed by the delivery worker (spec/productization-state/implementation-state.json is outside the worker's owned surface)",
+    "work_order_checklist_mapped": [
+      "Gate bullet 1 (provider re-verification with exact channels/timestamps/revisions): points[0] + provider_reverification.providers (github/composio/vercel/neon, every probe with channel, timestamp, HTTP status, response summary)",
+      "Gate bullet 2 (deployment refresh bound to the release head or the fully evidenced BLOCKED-PATH): points[1] + p21-deployment-record.json (the 8-attempt trail, the provider 402 refusal verbatim, the current live state, the exact post-reset retry recipe)",
+      "Gate bullet 3 (persistence lane re-check): points[2] + provider_reverification.providers[neon]",
+      "Honesty invariants (credential names only, dual-redaction, 0-findings audit, no provider SDK, frozen core, green suites): points[3] + p21-secrets-audit.json + machine_backbone",
+      "Machine backbone (unchanged discipline): points[4] + backbone-log.md"
+    ]
+  }
+}
