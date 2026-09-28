@@ -1,0 +1,171 @@
+{
+  "schemaVersion": "1.0",
+  "record": "P20 Production Release Gate — machine-checkable audit record",
+  "work_order": "P20",
+  "auditor": "P20-release-worker (dispatched Tech-Lead session)",
+  "base_head": "3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d",
+  "executed_at_head": "3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d",
+  "machine_backbone": {
+    "check": "both verifiers + full workspace build + deterministic suite (every test-bearing package exactly once) + frozen-core diff + P19 scripted-mode reproducibility spot-check, on the exact main head 3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d",
+    "verify_repo": "PASS (exit 0) — \"SOS 2.0 repository contract check: PASS\", 19 work orders discovered, W-frontier empty",
+    "verify_productization": "PASS (exit 0) — \"SOS productization repository contract check: PASS\", 26 productization work orders, frontier [P20], 91 owned paths, all dependency edges + machine state consistent",
+    "workspace_projects_total": 115,
+    "packages_built": 109,
+    "build_exit": 0,
+    "build_duration_s": 142,
+    "build_note": "pnpm -r --if-present build: 109 packages built, 0 failed (6 projects declare no build script; --if-present skips them by design). Single foreground pass after the rename noted below; the same 109/109 result was first reached chunk-by-chunk (4 topological chunks + 1 single-package completion), every chunk exit 0.",
+    "test_packages_run": 114,
+    "test_packages_passed": 114,
+    "tests_passed_total": 4308,
+    "failures": 0,
+    "test_summary_lines": 104,
+    "test_chunks": "chunk1 1077/0 (73s) + chunk2 1413/0 (105s) + chunk3 707/0 (98s) + chunk4 1111/0 (163s) = 4308 passed / 0 failed across 114 packages (439s of suite time)",
+    "test_execution_mode": "The full deterministic suite was executed as 4 sequential topological chunks (pnpm --filter <chunk> run --if-present test) because this sandbox reaps every background process at session boundaries, making a single >10-minute foreground run infeasible. Each of the 114 test-bearing packages ran exactly once; 1 project (@sos-2/web-live-data, apps/web/live-data) declares no test script and is skipped by --if-present. All 5 env-gated real suites printed their honest exit-0 skip lines (RUN_REAL not set: tests/real-dogfood, tests/real-observation, tests/live-ux/actions, tests/live-ux/data-plane, tests/live-ux/integration).",
+    "environment_incident_recorded_honestly": "The first full-suite attempt failed 1 test in frozen-core packages/contracts (test/schema-loader.test.ts:13 asserts the checkout directory name matches /SOS-2\\.0$/; the initial clone directory sos-2.0-p20 violated that environmental assumption — a station artifact, not a code regression). Resolved by renaming the checkout to /home/z/SOS-2.0 (the shape the frozen test asserts) and re-running the ENTIRE build + all 4 test chunks clean: 109/109 built, 4308/0. No test was weakened, skipped, or edited.",
+    "frozen_core_diff": "git diff 967c066dd71691314df39abdcc56e289aca88fb6..3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d -- spec/contracts packages/contracts: 28 files changed, 2380 insertions(+), 0 modified, 0 deleted — every change is a pure ADDITION from the W-series core-establishment commits themselves (c4d2e20 gov guardrails, adf3156 W0.5 PR #1, e6be279 W18 final gate); ZERO commits after the W18 final gate touched either path. Note: the dispatch packet's abbreviated base '967c066a' does not resolve (the 7th char of the actual commit is 'd'); the intended base is 967c066dd71691314df39abdcc56e289aca88fb6 — the same commit the P16 record cites as '967c066'.",
+    "reproducibility_spot_check": "P19 dogfood scripted-world journey (tests/real-dogfood, non-real mode): EXIT 0 — 7 test files, 28/28 tests passed in 12s (journey 10, reproducibility 3 incl. fresh-harness run-2 equivalence + honest-differences recording, repair/ask 3, evidence shape 3, authority 2, idempotency 1, structure 6); the RUN_REAL real-provider re-run printed its honest exit-0 skip (BLOCKED-NO-CREDENTIALS at this station: no GITHUB_ACCESS_TOKEN / OPENROUTER_API_KEY / VERCEL_TOKEN / VERCEL_ORG_ID exists in this environment; the ambient DATABASE_URL is a file: URL, not a provider credential).",
+    "provider_sdk_dependency_scan": "zero provider SDK dependencies anywhere in the workspace (no @neon*/@upstash*/@vercel*/openai/@octokit*/@aws-sdk* in any package.json); the semantic core packages (contracts, semantic-spine, authority, mission, value, context, system-state, architecture, provenance, telemetry) depend only on the established toolchain (ajv, fast-check, typescript, vitest, @types/node); node infra/production-connectivity/scripts/check-zero-deps.mjs → PASS (exit 0)",
+    "tracked_tree_drift": "none — git status --porcelain empty after the backbone; the tracked tree at 3bfc469 is byte-identical to the clone",
+    "backbone_log": "docs/evidence/production-release/backbone-log.md (every command, exit code, key line, duration)"
+  },
+  "points": [
+    {
+      "point": "All P17-P19 lanes complete and merged; frontier reconciled",
+      "result": "PASS",
+      "evidence": [
+        "spec/productization-state/implementation-state.json (base 3bfc469): P17-A COMPLETE (mergedAs 9b147044a72af47bed682677fa0f3262c49156ae), P17-B COMPLETE (c0983a9affc2663763816ad0a97f0a196001e5e8), P17-C COMPLETE (f284b7b5c93164e9200306fcbbfb9440c533c46d), P18-A COMPLETE (780b75e86e95f7d421f7846053f6861a68e1d8dc), P18-B COMPLETE (e7219da01d92ec9a9db929765a3b0a6d9f9b856e), P18-C COMPLETE (65a25627a0e48a07a1e7e94ba1e8a3d1f8b0c65a), P18-INT COMPLETE (1b130ad8a82a2bf68856c67d38c485d9cac23c70), P19 COMPLETE (c25856ed4a2b30fa9314b3e929edf592a46f2a1f), currentFrontier [\"P20\"]",
+        "git log at the executed head confirms each mergedAs is an ancestor of 3bfc469: P17-A 'P17-A Real Persistence + Deployment (PR #38, squash)', P17-B 'P17-B Real GitHub + Execution Connectivity (PR #36, squash)', P17-C 'P17-C Real Observation Sources + Live-Mission UX Wiring (PR #37, squash)', P18-A 'P18-A Live Data Plane (PR #39, squash)', P18-B 'P18-B Live Actions + Mission UX (lane B of 3) (#41)', P18-C 'P18-C UX Discoverability + End-to-End Journey Instrumentation (lane C of 3) (#40)', P18-INT 'P18-INT Architect Integration Pass (PR #44)', P19 'P19 Real-World Dogfood (PR #45)', then gov reconcile 3bfc469 'P19 COMPLETE (PR #45); frontier P20 READY'",
+        "machine backbone: pnpm verify:productization PASS at the exact head — 'Productization Work Orders: 26, Frontier: P20, Owned paths: 91, All dependency edges, owned paths and machine state are consistent'",
+        "honest note: the dispatch packet anticipated '23 productization tasks'; the machine state contains 26 task entries (P0..P16 + P17-A/B/C + P18-A/B/C/INT + P19 = 25 COMPLETE + P20 READY). The verifier's own authoritative count is 26 and its state-coherence check PASSes; the packet's 23 was a stale count, not a gate discrepancy."
+      ]
+    },
+    {
+      "point": "Real-system evidence bundle: provider states (CONNECTED with exact revisions), deployment revision bound to the final head, end-to-end dogfood transcripts",
+      "result": "PASS-RECORDED",
+      "evidence": [
+        "provider states with exact API revisions (P19, dogfood/preflight.json + run-2/provider-states.json, probed 2026-09-27T14:37:56-57Z): github CONNECTED (login payswapdotorg, API revision 2022-11-28, credential env GITHUB_ACCESS_TOKEN), vercel CONNECTED (user ekonplacide-5312, id wmDQWzu9ZrQBNLFphlMoQhH4), openrouter CONNECTED (GET /api/v1/key HTTP 200); neon UNAVAILABLE (getaddrinfo ENOTFOUND api.neon.tech, recorded verbatim); upstash UNAVAILABLE (getaddrinfo ENOTFOUND upstash.io, recorded verbatim); store REFERENCE_FALLBACK (reference:in-memory-live-store, explicit marker)",
+        "P17-A provider states (persistence-deployment/provider-states.json): vercel CONNECTED (api revision vercel.v2), r2 CONNECTED (s3.2006-03-01, full SigV4 write-once journey in r2-integration.json: bucket provision, 1-byte probe, evidence-bundle object under production/evidence/<sha256>, byte-exact read-back, honest 404, retention-path delete), neon UNAVAILABLE (transport failure recorded verbatim), upstash UNAVAILABLE (NXDOMAIN recorded verbatim); architect-reproduction/ (2026-09-25 ~23:07-23:09 UTC, P17-A head 1b5ea91): independent re-execution — Vercel CONNECTED (fresh deployment dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B from exact head, READY, preview HTTP 200), R2 CONNECTED, Neon UNAVAILABLE (NODATA), Upstash UNAVAILABLE (NXDOMAIN)",
+        "deployment revisions bound to recorded heads: P19 run-2 deployment-record.json — dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC, READY, target production, commitSha 767c474c3e22c0d807bb44883df6ae7c63139f3f (run-2 PR head, https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app), runtime verification manifestStatus 200 + manifestByteExact true at the deployed revision; P19 run-1 — dpl_CPF9dLRrXE4segbN6RppScpiUKAN READY at d10264db6e013360dcc79d0fb77610d5c5841c19; P17-A vercel-deployment.json — dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q READY from the exact branch head b5938ea4654144df287ce3e907389fc1f911ccf6 (binding_verified: observed_commit_sha === requested sha, preview HTTP 200 serving the SOS Console); P17-A architect reproduction — dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B READY at 1b5ea9127b52e8a822338ac7b27dc6ed2a4a54dd",
+        "end-to-end dogfood transcripts (dogfood/run-1/ + run-2/ journey-record.json): the 13-stage flagship journey (MISSION_RECEIVED → … → COMPLETED) with the exact revision at every stage, every cloud tick userDeviceOnline=false (the §7 pin: run-2 all 9 ticks false), 2 real OpenRouter completions each with response id + usage, 1 repair revision with the full fresh evaluator suite re-run, 0 asks, PR #1 on each fresh repository, action receipts for every consequential action (run-2: 30 receipts), completion granted by the independent evaluation suite (5 verdict types: tests, static-contract-checks, deployment-checks, runtime-verification, security-checks — certified-by ≠ produced-by), learning records carrying the real evidence refs",
+        "honest scope: NO deployment is bound to the CURRENT main head 3bfc469 — the closest main-adjacent live deployments are the P18-B record (dpl_BFvUARnpuK9otSSCwsEBSdpXR9Xd READY at 1dab86017cbb4f5d6274a891a998129443a31f56, an ancestor of its suite head 3c38800 on lane branch wo/p18b) and the P17-A records at their own exact heads. A fresh deployment at 3bfc469 was NOT made (no credentials in this environment) — see production_deployment below; the binding is to the recorded live evidence, never a fabricated fresh claim."
+      ]
+    },
+    {
+      "point": "Reproducibility: the flagship journey can be re-run against a fresh repository with the recorded outcomes",
+      "result": "PASS-RECORDED",
+      "evidence": [
+        "dogfood/reproducibility.json (P19, produced at repo_head ce22ef531872be392aa27c28073b89f8d4dbee0f): run 2 executed on a FRESH repository (payswapdotorg/sos-dogfood-r2) with a completely FRESH harness instance + fresh stores; sameStageSequence true (the frozen GREENFIELD_JOURNEY_STAGES, 13 stages), sameOutcomeClasses true (finalStage/finalStatus COMPLETED, the same 5 evaluation-verdict classes, storeMode REFERENCE_FALLBACK both runs), with 7 honest recorded differences (repositories, workspace heads, PRs, deployments, timestamps, provider-real model output, run-2's real repair path) — 'recorded, never fabricated into equality'",
+        "machine backbone §3.5 (this station, this gate): the scripted/deterministic mode of tests/real-dogfood re-run green — EXIT 0, 7 test files, 28/28 tests passed, including 'both runs COMPLETE with the SAME outcome classes (stage sequence, verdict classes, store mode)' and 'the equivalence record is honest: the differences are recorded, never fabricated into equality' + the full scripted flagship journey (10 tests), the repair path, authority fail-closed, idempotency, evidence shape, structure",
+        "the REAL-provider re-run (RUN_REAL=1, fresh external repositories) is BLOCKED-NO-CREDENTIALS at this station: no GITHUB_ACCESS_TOKEN / OPENROUTER_API_KEY / VERCEL_TOKEN / VERCEL_ORG_ID exists in this environment; it was never attempted with fake credentials. The real-mode reproducibility stands on the recorded P19 run-2 evidence (fresh repo + fresh harness, above); an independent real re-execution remains an architect-side act at a credentialed station."
+      ]
+    },
+    {
+      "point": "Deterministic reference-mode suites remain green; real-provider suites recorded honestly",
+      "result": "PASS",
+      "evidence": [
+        "machine backbone §3.3 at the exact head 3bfc469: 4308 tests passed / 0 failed across all 114 test-bearing workspace packages (115 projects; 1 declares no test script), every package exit 0 (chunks 1077+1413+707+1111)",
+        "all 5 env-gated real suites printed their honest exit-0 skip lines in the run (RUN_REAL not set): tests/real-dogfood ('the real-dogfood suite stays OFF (deterministic integrated suite only)'), tests/real-observation, tests/live-ux/actions, tests/live-ux/data-plane, tests/live-ux/integration — the default-OFF design held; nothing real ran uninvited and nothing was fabricated green",
+        "real-provider suites recorded honestly across P17-P19 (the evidence tree): P17-A persistence (vercel/r2 CONNECTED, neon/upstash UNAVAILABLE verbatim), P17-B github-execution (github CONNECTED with the full scratch-repo lifecycle + the honest HTTP 422 creation refusal recorded as typed UNSUPPORTED, real OpenRouter body execution with independent evaluation PASS), P17-C observation (6 real source records, webhook transport with fail-closed INVALID_SIGNATURE, origin honesty note: GitHub cannot deliver webhooks into the sandbox), P18 lanes (REFERENCE_FALLBACK store selection with explicit markers; deployment-creation 403 from the function context recorded verbatim; ASK plane honestly unwired ASK_ENTRY_UNKNOWN), P19 dogfood (both runs' honest states, REFERENCE_FALLBACK, DNS failures verbatim)"
+      ]
+    },
+    {
+      "point": "No provider became an SOS semantic dependency; frozen W0-W18 core untouched",
+      "result": "PASS",
+      "evidence": [
+        "machine backbone §3.4: git diff 967c066dd716..3bfc469 over spec/contracts + packages/contracts — 0 modified, 0 deleted (28 pure additions, all from the W-series core-establishment commits c4d2e20/adf3156/e6be279; zero commits after the W18 final gate e6be279 touched either path)",
+        "provider SDK dependency scan (this gate): ZERO provider SDK dependencies anywhere in the workspace — no @neon*/@upstash*/@vercel*/openai/@octokit*/@aws-sdk* in any package.json of packages/, apps/, infra/, tests/; every provider is reached through hand-written REST/SigV4 adapters in provider-owned edge packages",
+        "the semantic core (contracts, semantic-spine, authority, mission, value, context, system-state, architecture, provenance, telemetry) declares only the established toolchain (ajv, fast-check, typescript, vitest, @types/node) — no provider package appears in any semantic dependency closure; providers attach at the edge adapters (real-github, real-bodies, real-observation, deployment-providers, live-store ports)",
+        "node infra/production-connectivity/scripts/check-zero-deps.mjs → PASS (exit 0): zero external registry dependencies in the connectivity infrastructure package",
+        "dogfood/ARCHITECTURE-DELTA.json (P19): affected artifacts are packages/dogfood-live + tests/real-dogfood + the dogfood evidence directory only — 'P19 adds NO semantic changes (mechanism adapters + harness only)'; the two real-provider defects found during dogfood were fixed at the P19 composition seams (packages/dogfood-live journey-github.ts, the sos-manifest.json runtime binding) with provider-owned code untouched"
+      ]
+    },
+    {
+      "point": "Honest-state discipline: no fabricated HEALTHY/CONNECTED anywhere",
+      "result": "PASS",
+      "evidence": [
+        "every provider state in the P17-P19 evidence derives from a real probe or is recorded with its real failure verbatim: neon UNAVAILABLE (api.neon.tech ENOTFOUND/NODATA — P17-A, P18-A, P19 all consistent), upstash UNAVAILABLE (NXDOMAIN — same), github/vercel/openrouter/r2 CONNECTED only where an authenticated probe answered (exact api revisions 2022-11-28 / vercel.v2 / s3.2006-03-01 recorded)",
+        "the durable store is never presented as production state when the canonical provider did not answer: REFERENCE_FALLBACK with the machine-checkable markers (store_ref reference:in-memory-live-store / reference:in-memory-observation-store, reference_mode true, persisted false, provenance matrix REFERENCE_IN_MEMORY) across P18-A, P18-INT and both P19 runs",
+        "honest refusals are recorded as evidence, never smoothed: P17-B's HTTP 422 repository-creation refusal (typed UNSUPPORTED), P18-B's 403 deployment-creation from the function context + the 402 quota exhaustion with reset instant, P17-C's webhook origin honesty note, the P19 README.md static-serving limitation + root 404 documented in every runtime verdict",
+        "this gate's own record upholds the same discipline: the real suites are recorded BLOCKED-NO-CREDENTIALS (never attempted with fake credentials, never marked green), the deployment mode is RECORDED-LIVE-EVIDENCE (no fresh live deployment claimed), and the one environmental test failure at this station (clone-directory assertion) is recorded with its cause and full clean re-run rather than hidden (backbone-log.md)"
+      ]
+    },
+    {
+      "point": "The release gate records the exact tested head and the live production deployment revision (the work order's closing recording requirement)",
+      "result": "PASS-RECORDED",
+      "evidence": [
+        "exact tested head (this record): base_head = executed_at_head = 3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d (main, 'gov: reconcile state after P19 merge — P19 COMPLETE (PR #45); frontier P20 READY'), verified by git rev-parse at every backbone step; tracked tree pristine (git status --porcelain empty)",
+        "live production deployment revision (recorded): P19 run-2 — dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC, READY, production, source 767c474c3e22c0d807bb44883df6ae7c63139f3f, runtime-verified byte-exact (sos-manifest.json HTTP 200); P19 run-1 — dpl_CPF9dLRrXE4segbN6RppScpiUKAN READY at d10264db6e013360dcc79d0fb77610d5c5841c19; main-repo deployments — P17-A dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q READY at exact head b5938ea (binding verified) + architect-reproduction dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B READY at 1b5ea91; P18-A observed latest production dpl_4ajdk7WFtpJ69xzgUw7wea47g1Xj bound to the observed head 3717b6c; P18-B dpl_BFvUARnpuK9otSSCwsEBSdpXR9Xd READY at 1dab860 (ancestor of suite head 3c38800)",
+        "honest scope: no NEW live deployment at 3bfc469 was made — this environment holds no provider credentials; production_deployment.mode records RECORDED-LIVE-EVIDENCE with the NOT-REDEPLOYED-NO-CREDENTIALS scoping (see below). The Tech Lead's independent re-verification at a credentialed station may convert this to a fresh live record."
+      ]
+    }
+  ],
+  "production_deployment": {
+    "mode": "RECORDED-LIVE-EVIDENCE (NOT-REDEPLOYED-NO-CREDENTIALS at this station)",
+    "honest_statement": "This gate binds to the RECORDED live deployment evidence, not a fresh deployment: this environment holds no provider credentials (no VERCEL_TOKEN / VERCEL_ORG_ID — verified: no provider credential env vars exist; the ambient DATABASE_URL is a file: URL, not a provider credential), so no new live deployment of the exact final head 3bfc469 was made and none is claimed. The recorded live production deployments this release rests on: the P19 run-2 dogfood deployment dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC (READY, production, source 767c474c3e22c0d807bb44883df6ae7c63139f3f — the run-2 PR head, runtime-verified byte-exact against the deployed revision) and the P17-A main-repository deployments (dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q from exact head b5938ea with binding_verified true; the architect-reproduction dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B from exact head 1b5ea91). A fresh live deployment record with source_revision_sha == 3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d is the architect-side operational act once credentials exist — per the P3 no-fabrication rule, never fabricated here.",
+    "revision_record": {
+      "environment": "production",
+      "provider": "vercel (recorded live evidence: P19 run-2 dogfood deployment + P17-A exact-head deployments)",
+      "region": "iad1 (P17-A project record); hkg1 edge served the P19 runtime verifications",
+      "source_revision_sha": "3bfc469a58ff4a4fbc5e7d653cb49f759b04e73d (the exact tested head this gate ran on — NOT itself deployed live; see honest_statement)",
+      "deployment_revision_id": null,
+      "recorded_live_deployments": [
+        {
+          "deployment_revision_id": "dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC",
+          "source": "P19 run-2 (dogfood/run-2/deployment-record.json, produced_at 2026-09-27T14:39:00.021Z, repo_head ce22ef531872be392aa27c28073b89f8d4dbee0f)",
+          "project": "sos-dogfood-r2 (prj_WESDjCys33YVQ97idvJNVvgz9mLn)",
+          "ready_state": "READY",
+          "source_commit_sha": "767c474c3e22c0d807bb44883df6ae7c63139f3f (run-2 PR #1 head)",
+          "url": "https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app",
+          "runtime_verification": "GET /sos-manifest.json → 200, manifestByteExact true at the deployed revision (root 404 documented as the zero-config static limitation)"
+        },
+        {
+          "deployment_revision_id": "dpl_BVGQujQjFnmyW6yEzkQF1u6oZi2Q",
+          "source": "P17-A (persistence-deployment/vercel-deployment.json, produced_at 2026-09-25T22:08:08.322Z)",
+          "project": "sos-2-0 (prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ, repo payswapdotorg/SOS-2.0, rootDirectory apps/web, framework nextjs)",
+          "ready_state": "READY",
+          "source_commit_sha": "b5938ea4654144df287ce3e907389fc1f911ccf6 (the exact branch head; binding_verified: observed_commit_sha === requested sha)",
+          "url": "https://sos-2-0-91mffwr2s-ekonplacidegmailcoms-projects.vercel.app",
+          "rollback_pointer": "dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU (the prior deployment of that lane)"
+        },
+        {
+          "deployment_revision_id": "dpl_6T5Ef6JFvDEVVcETR2TEeo8H626B",
+          "source": "P17-A architect reproduction (persistence-deployment/architect-reproduction/vercel-deployment.json, 2026-09-25 ~23:07-23:09 UTC)",
+          "project": "sos-2-0",
+          "ready_state": "READY",
+          "source_commit_sha": "1b5ea9127b52e8a822338ac7b27dc6ed2a4a54dd (the P17-A head after the worker delivery + gate-fix commit)",
+          "url": "https://sos-2-0-175vaxh4u-ekonplacidegmailcoms-projects.vercel.app",
+          "note": "the architect's independent re-execution of the RUN_REAL deployment journey — preview HTTP 200"
+        }
+      ],
+      "registered_at": "2026-09-27T23:29:08Z (this gate record)",
+      "rollback_pointer": {
+        "previous_deployment_revision_id": "dpl_7WGZGQC27VVX6xgy4FDSmJJYBuWU (recorded in the P17-A revision record)"
+      }
+    }
+  },
+  "architect_approval": {
+    "status": "APPROVED",
+    "approver": "SOS Tech Lead (architect role, dispatching session)",
+    "approved_at": "2026-09-28T00:07:00Z",
+    "independent_re_verification": {
+      "station": "/tmp/p20gate (fresh clone at base 3bfc469, overlay of the worker delivery)",
+      "verify_repo": "PASS (19 WOs, W-frontier empty)",
+      "verify_productization": "PASS (26 WOs, frontier [P20], 91 owned paths)",
+      "workspace_build": "EXIT 0 (full -r build at the station)",
+      "deterministic_suite": "4308 passed / 0 failed, run 1 AND run 2 IDENTICAL on the overlaid tree (matches the worker's own 4308/0 exactly)",
+      "frozen_core_diff": "967c066dd716..HEAD over spec/contracts + packages/contracts: 0 modified, 0 deleted (pure additions)",
+      "review_spot_checks": "P19 run-2 deployment revision dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC verified in dogfood/run-2 records; P17-A provider-states honest (neon UNAVAILABLE recorded verbatim); production_deployment mode RECORDED-LIVE-EVIDENCE honest"
+    },
+    "note": "The worker never self-approved; this approval is the architect's triple component #1. Components #2 (merge) and #3 (machine-state reconcile) follow on push."
+  },
+  "completion": {
+    "architect_approval": "PENDING-ARCHITECT (this record requests it; the work order's completion is 'Architect approval + actual merge + productization machine-state reconciliation')",
+    "actual_merge": "PENDING — the merge of the P20 branch carrying docs/evidence/production-release/ (this directory)",
+    "machine_state_reconciliation": "PENDING — the Tech Lead's task-push-chain reconcile marks P20 COMPLETE with mergedAs and empties the frontier; NOT performed by the release worker (spec/productization-state/implementation-state.json is outside the worker's owned surface)",
+    "work_order_checklist_mapped": [
+      "Gate bullets 1-6 + the closing recording requirement: recorded as points[0..6] above with per-point evidence citations",
+      "'The release gate must record the exact tested head and the live production deployment revision': base_head/executed_at_head + production_deployment.revision_record (recorded live deployments cited with their revisions and states)",
+      "'Do not mark the program complete because adapters exist': this record claims only what was re-run at this station (§ machine_backbone) plus what the recorded evidence shows; the real-provider re-execution remains architect-side (BLOCKED-NO-CREDENTIALS here)"
+    ]
+  }
+}
