@@ -1,10 +1,8 @@
 {
   "schemaVersion": "2.0",
   "program": "SOS-2.0-productization-and-autonomous-execution",
-  "status": "READY",
-  "currentFrontier": [
-    "P22"
-  ],
+  "status": "COMPLETE",
+  "currentFrontier": [],
   "tasks": {
     "P0": {
       "status": "COMPLETE",
@@ -231,13 +229,13 @@
       "mergedAs": "aafe05260be733dd12a86bb7ea602acb5b61df63"
     },
     "P22": {
-      "status": "READY",
+      "status": "COMPLETE",
       "dependencies": [
         "P21"
       ],
-      "notes": "Appended by the architect: the operator supplied a raw Vercel account token (env VERCEL_TOKEN) after P21's fully-evidenced BLOCKED-PATH (402 api-deployments-free-per-day, reset 2026-09-29T07:42:31Z, retry recipe exact). This order closes that path: direct-API production deployment of the program-complete head, runtime verification, and a live credential inventory (env names only). Architect-implemented per the P16/P12 precedent.",
-      "mergedAs": ""
+      "notes": "Architect-implemented (P16/P12 precedent). The operator supplied a raw Vercel account token after P21's fully-evidenced BLOCKED-PATH (402 api-deployments-free-perday, reset 2026-09-29T07:42:31Z). The deployment executed DIRECTLY through the Vercel REST API: production deployment dpl_5zMx7FWhktmbQnTCG2aEV1Dj1Tkv of the exact program-complete head d9eedb27b995 (contains f7774c7 + all P21 evidence), created 2026-09-28T12:39:41Z, READY in ~80s, runtime-verified three ways (deployment URL 200 SOS Console; API meta.githubCommitSha echo exact \u2014 the P17-A pattern; production alias sos-2-0.vercel.app byte-identical, md5 7d153f28f41ae095fbeafdfcaf2ca0aa both). The refusal-then-success quota trail recorded verbatim. Credential inventory of every operator-supplied channel live-statused honestly (env NAMES only; credential-value scan 0 findings; the neon api.neon.tech public-DNS NODATA proof explains the P17A/P19 station-DNS mystery). Machine gate at a fresh station: verify:repo + verify:productization PASS (28 WOs, 93 owned paths), build 109/0, full deterministic suite 4308/0 (114 packages; the tests/*-vs-** filter forensics recorded), frozen-core 0/0, evidence-only diff. THE P21 BLOCKED-PATH IS CLOSED: production binds the program-complete head.",
+      "mergedAs": "a8303dcdc4c197a37f5846d6c8abdbbbe35a1489"
     }
   },
-  "statusNote": "P0\u2013P21 COMPLETE (27/27); P22 appended \u2014 the final-head deployment completion, unblocked by the operator's raw Vercel token."
+  "statusNote": "P0\u2013P22 COMPLETE (28/28 productization work orders; PR #48 squash-merged as a8303dcd). Production deployment of the program-complete head d9eedb2 LIVE and runtime-verified; the P21 deployment BLOCKED-PATH closed. All provider channels statused live in the P22 credential inventory."
 }
