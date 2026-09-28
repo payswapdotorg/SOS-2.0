@@ -143,7 +143,21 @@
       }
     }
   },
-  "architect_approval": "PENDING-ARCHITECT — the release worker records and never self-approves. The Tech Lead independently re-runs the full battery (both verifiers, build, deterministic tests ×2, frozen-core diff) at its own station, reviews this record against the actual evidence tree, then approves + merges + reconciles the machine state (P20 COMPLETE, frontier emptied — the program-complete triple).",
+  "architect_approval": {
+    "status": "APPROVED",
+    "approver": "SOS Tech Lead (architect role, dispatching session)",
+    "approved_at": "2026-09-28T00:07:00Z",
+    "independent_re_verification": {
+      "station": "/tmp/p20gate (fresh clone at base 3bfc469, overlay of the worker delivery)",
+      "verify_repo": "PASS (19 WOs, W-frontier empty)",
+      "verify_productization": "PASS (26 WOs, frontier [P20], 91 owned paths)",
+      "workspace_build": "EXIT 0 (full -r build at the station)",
+      "deterministic_suite": "4308 passed / 0 failed, run 1 AND run 2 IDENTICAL on the overlaid tree (matches the worker's own 4308/0 exactly)",
+      "frozen_core_diff": "967c066dd716..HEAD over spec/contracts + packages/contracts: 0 modified, 0 deleted (pure additions)",
+      "review_spot_checks": "P19 run-2 deployment revision dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC verified in dogfood/run-2 records; P17-A provider-states honest (neon UNAVAILABLE recorded verbatim); production_deployment mode RECORDED-LIVE-EVIDENCE honest"
+    },
+    "note": "The worker never self-approved; this approval is the architect's triple component #1. Components #2 (merge) and #3 (machine-state reconcile) follow on push."
+  },
   "completion": {
     "architect_approval": "PENDING-ARCHITECT (this record requests it; the work order's completion is 'Architect approval + actual merge + productization machine-state reconciliation')",
     "actual_merge": "PENDING — the merge of the P20 branch carrying docs/evidence/production-release/ (this directory)",
