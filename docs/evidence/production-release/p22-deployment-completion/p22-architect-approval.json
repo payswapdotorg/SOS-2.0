@@ -1,0 +1,31 @@
+{
+  "schema": "sos-2/p22/architect-approval",
+  "work_order": "P22",
+  "status": "APPROVED",
+  "approver": "SOS Tech Lead (architect role, dispatching session)",
+  "approved_at": "2026-09-28T13:05:00Z",
+  "delivery_under_review": {
+    "branch": "wo/p22-deployment-completion",
+    "head": "9554ac4 (state append + WO + 2 evidence files; the approval file is this commit's successor)",
+    "base": "d9eedb27b9950a9c33ea18d23e0c8b488c633b34 (main, program-complete head)"
+  },
+  "independent_reverification": {
+    "station": "fresh clone from github.com/payswapdotorg/SOS-2.0 at /tmp/p22gate/SOS-2.0",
+    "verify_repo": "PASS \u2014 19 work orders, frontier empty (exit 0)",
+    "verify_productization": "PASS \u2014 28 work orders (P22 appended), frontier [P22], 93 owned paths, all dependency edges + machine state consistent (exit 0; the append-state shape mirrors the P21 append exactly)",
+    "workspace_build": "pnpm -r --if-present build: 109 built / 0 failed, EXIT 0 \u2014 the P20/P21-gate baseline",
+    "deterministic_suite": "FULL PASS 4308/0 \u2014 packages 2865 (73 summaries) + apps 209 (11) + infra 134 (2) + tests/* 919 (20) + tests/live-ux/* nested 181 (4) = 4308 across 114 test-bearing packages, zero failures, every chunk EXIT 0. NOTE (filter forensics, recorded honestly): a './tests/*' single-star filter misses the three nested tests/live-ux/* workspace packages (181 tests) \u2014 the complete count requires the './**' depth filter; the first partial count (4127) is retained in the record as the discovery trail. Single full run (not \u00d72) \u2014 justified: the branch diff is 100% evidence/state docs (zero code delta vs the P21-gated tree, which proved 4308/0 twice); the deterministic surface is byte-identical by diff identity.",
+    "frozen_core": "0 modified / 0 deleted vs 967c066dd716 (unchanged from the P21 gate)",
+    "branch_diff": "4 files, +249/-3: the WO, the state append (P22 READY, frontier [P22]), deployment-completion-record.json, credential-inventory.json \u2014 no code, contracts, tests, configs, package.json or lockfiles touched",
+    "secrets_audit": {
+      "credential_value_scan": "0 FINDINGS \u2014 every secret-class value in the sandbox store (GITHUB_PAT/TOKEN, COMPOSIO ak_/ck_ keys, NEON napi_ x2, OPENROUTER sk-or-v1-, VERCEL vcp_, E2B e2b_, UPSTASH tokens, CLOUDFLARE cfat_ + R2 secret key, ALIBABA sk-ws-, LIVEKIT secret) hunted byte-exact + token-shaped-regex across every file of the diff: zero matches",
+      "identifier_config_scan": "2 matches BY DESIGN, both non-credential identifiers in prose: the Cloudflare account id 7e333607c4ceeef5d092be1bb94108bf (the same identifier class as the P21-recorded prj_/ca_/repoId values; grants nothing without the absent token) and the Upstash REST endpoint URL (NXDOMAIN-dead; its token is absent from every file). The token-shaped regexes (napi_/sk-or-/vcp_/cfat_/ghp_/ck_/ak_/e2b_/sk-ws-) matched NOTHING."
+    },
+    "runtime_recheck": "the deployed production was re-verified during this gate: sos-2-0.vercel.app 200 (SOS Console), the completion record's md5-identity claim reproduced, API meta.githubCommitSha === d9eedb27b9950a9c33ea18d23e0c8b488c633b34"
+  },
+  "outcome_ruling": {
+    "deployment_completion": "ACCEPTED \u2014 the P21 BLOCKED-PATH is CLOSED: production deployment dpl_5zMx7FWhktmbQnTCG2aEV1Dj1Tkv of the exact program-complete head d9eedb2, READY, runtime-verified three ways (deployment URL 200 + title; API sha echo exact; production alias byte-identical md5 7d153f28f41ae095fbeafdfcaf2ca0aa). The refusal-then-success quota trail is recorded verbatim \u2014 nothing inferred, nothing smoothed.",
+    "credential_inventory": "ACCEPTED \u2014 honest statuses throughout: live (github, vercel, composio-ak, openrouter), keys-staged/hostname-unresolvable (neon \u2014 with the public-DNS NODATA proof that explains the P17A/P19 station-DNS mystery), URL-NXDOMAIN (upstash), token-live/R2-403-unresolved (cloudflare), staged-unprobed (e2b, alibaba, livekit)."
+  },
+  "merge_chain": "executed by the architect after this approval: PR -> squash-merge to main -> gov reconcile (P22 COMPLETE) -> push -> both verifiers re-run on final main"
+}
