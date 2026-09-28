@@ -1,0 +1,174 @@
+{
+  "work_order": "P21",
+  "evidence_kind": "p21-deployment-refresh-record",
+  "produced_at": "2026-09-28T07:57:00.000Z",
+  "repo_head": "45e53731a2378aab41e326fded8168046d42b513 (the exact base; this record is committed on branch wo/p21-live-reverification — the branch head after the evidence commit is recorded in the completion report)",
+  "schema": "sos-2/p21/deployment-record",
+  "deployment": null,
+  "deployment_honest_statement": "NO new production deployment of the release head f7774c731019e8e700f6357a144e1c78082ef67a was created: the clean git-source path was composed correctly through the Composio channel and the PROVIDER refused the creation with an HTTP 402 daily-quota exhaustion (api-deployments-free-per-day: 100/100 consumed, 0 remaining, reset 2026-09-29T07:42:31.436Z). Per the P3 no-fabrication rule this record claims no deploymentId, no url, no readyState — the BLOCKED-PATH evidence below is the complete, honest outcome (the work order's explicitly acceptable result).",
+  "blocked_path": {
+    "state": "BLOCKED-PATH",
+    "blocked_at": "2026-09-28T07:42:31.618Z",
+    "target": "a NEW vercel PRODUCTION deployment of the EXACT release head f7774c731019e8e700f6357a144e1c78082ef67a (the 'gov: reconcile state after P20 merge — P20 COMPLETE (PR #46); frontier EMPTY' commit)",
+    "channel": "Composio v3 tool execution: POST https://backend.composio.dev/api/v3/tools/execute/VERCEL_CREATE_NEW_DEPLOYMENT (header X-API-Key by env NAME COMPOSIO_API_KEY; body {connected_account_id: 'ca_31iruA2qEdfl', user_id: 'default', arguments: {…}}) — the CURRENT v3 action-execution endpoint discovered from GET /api/v3/openapi.json (200, 74 paths)",
+    "clean_path_selected": "git-source deployment pinned to the exact release head on the repo-connected project: sos-2-0 (prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ, framework nextjs, rootDirectory apps/web, nodeVersion 24.x; link {type github, org payswapdotorg, repo SOS-2.0, repoId 1377439399, productionBranch main}) — the project's git connection was verified live through VERCEL_GET_PROJECT before the attempts",
+    "attempts": [
+      {
+        "n": 1,
+        "at": "2026-09-28T07:37:48.338Z (response 07:37:48.924Z)",
+        "tool_version": "pinned (00000000_00 — the default)",
+        "arguments": "{project: 'sos-2-0', target: 'production', gitSource: {type: 'github', repoUuid: '1377439399', ref: 'main', sha: 'f7774c731019e8e700f6357a144e1c78082ef67a'}, skipAutoDetectionConfirmation: '1', forceNew: '1'}",
+        "response": "Composio validation refusal (successful: false): \"Invalid request data provided\\n- Value error, Either 'files' or 'gitSource'/'gitMetadata' must be provided on parameter `files`\" — the PINNED tool version's argument mapping silently drops the gitSource argument from the composed provider request (schema drift between the published input_parameters and the server-side model)"
+      },
+      {
+        "n": 2,
+        "at": "2026-09-28T07:38:35.840Z (response 07:38:36.335Z)",
+        "tool_version": "pinned (00000000_00)",
+        "arguments": "same as attempt 1 with name: 'sos-2-0' instead of project: 'sos-2-0'",
+        "response": "identical refusal: \"Value error, Either 'files' or 'gitSource'/'gitMetadata' must be provided on parameter `files`\""
+      },
+      {
+        "n": 3,
+        "at": "2026-09-28T07:39:48.134Z (response 07:39:48.803Z)",
+        "tool_version": "pinned (00000000_00)",
+        "arguments": "same as attempt 1 with gitSource.repoId ('1377439399') instead of gitSource.repoUuid",
+        "response": "\"Invalid request data provided\\n- Following fields are missing: {'gitSource.repoUuid'}\\n- Value error, Either 'files' or 'gitSource'/'gitMetadata' must be provided on parameter `files`\" — proves the pinned version validates the PUBLISHED schema (repoUuid required) while the composed provider request still never carries gitSource"
+      },
+      {
+        "n": 4,
+        "at": "2026-09-28T07:40:30.158Z (response 07:40:30.809Z)",
+        "tool_version": "pinned (00000000_00)",
+        "arguments": "{project: 'sos-2-0', target: 'production', files: {gitSource: {type: 'github', repoUuid: '1377439399', ref: 'main', sha: 'f7774c7…'}}, skipAutoDetectionConfirmation: '1', forceNew: '1'} — testing the error's 'on parameter `files`' hint",
+        "response": "\"Invalid request data provided\\n- Input should be a valid list on parameter `files`\" — files must be a file-item LIST on this version; it cannot carry gitSource"
+      },
+      {
+        "n": 5,
+        "at": "2026-09-28T07:41:04.097Z (response 07:41:04.793Z)",
+        "tool_version": "pinned (00000000_00)",
+        "arguments": "{project: 'sos-2-0', target: 'production', gitMetadata: {remoteUrl: 'https://github.com/payswapdotorg/SOS-2.0.git', commitAuthorName: 'SOS Tech Lead', commitAuthorEmail: 'tech-lead@sos.payswapdotorg', commitMessage: 'gov: reconcile state after P20 merge — P20 COMPLETE (PR #46); frontier EMPTY — program P0–P20 COMPLETE', commitRef: 'main', commitSha: 'f7774c7…', dirty: false}, skipAutoDetectionConfirmation: '1', forceNew: '1'}",
+        "response": "the same either-refusal: \"Value error, Either 'files' or 'gitSource'/'gitMetadata' must be provided on parameter `files`\" — gitMetadata is dropped identically on the pinned version"
+      },
+      {
+        "n": 6,
+        "at": "2026-09-28T07:41:57.121Z (response 07:41:57.695Z)",
+        "tool_version": "latest (20260915_00 — discovered from the tool's available_versions)",
+        "arguments": "attempt 1's arguments re-sent with version: 'latest'",
+        "response": "\"Invalid request data provided\\n- Following fields are missing: {'name', 'gitSource.repoId'}\" — the LATEST version carries the FIXED argument mapping: it requires the Vercel-native body shape (name + gitSource.repoId) instead of the drifted repoUuid form"
+      },
+      {
+        "n": 7,
+        "at": "2026-09-28T07:42:18.996Z (response 07:42:19.505Z)",
+        "tool_version": "latest (20260915_00)",
+        "arguments": "{name: 'sos-2-0', target: 'production', gitSource: {type: 'github', repoId: 1377439399 (number), ref: 'main', sha: 'f7774c7…'}, skipAutoDetectionConfirmation: '1', forceNew: '1'}",
+        "response": "\"Invalid request data provided\\n- Input should be a valid string on parameter `gitSource.repoId`\" — repoId must be the repo id as a STRING"
+      },
+      {
+        "n": 8,
+        "at": "2026-09-28T07:42:26.005Z (response 07:42:31.618Z)",
+        "tool_version": "latest (20260915_00)",
+        "arguments": "{name: 'sos-2-0', target: 'production', gitSource: {type: 'github', repoId: '1377439399', ref: 'main', sha: 'f7774c731019e8e700f6357a144e1c78082ef67a'}, skipAutoDetectionConfirmation: '1', forceNew: '1'}",
+        "response": "THE REQUEST COMPOSED AND REACHED THE VERCEL API — the PROVIDER refused it: \"Failed to create deployment (status 402). Response: {\\\"error\\\":{\\\"code\\\":\\\"payment_required\\\",\\\"message\\\":\\\"Resource is limited - try again in 24 hours (more than 100, code: \\\\\\\"api-deployments-free-per-day\\\\\\\")\\\",\\\"limit\\\":{\\\"total\\\":100,\\\"remaining\\\":0,\\\"reset\\\":1790667751436},\\\"resource\\\":\\\"api-deployments-free-per-day\\\"}}\" — the free-plan account's daily API-created-deployment quota is fully consumed"
+      }
+    ],
+    "provider_refusal": {
+      "http_status": 402,
+      "code": "payment_required",
+      "resource": "api-deployments-free-per-day",
+      "message": "Resource is limited - try again in 24 hours (more than 100, code: \"api-deployments-free-per-day\")",
+      "limit": { "total": 100, "remaining": 0, "reset_epoch_ms": 1790667751436, "reset_utc": "2026-09-29T07:42:31.436Z" },
+      "precedent": "the P18-B record's 402 quota exhaustion with reset instant (recorded verbatim then, recorded verbatim now — the same honest-refusal class)"
+    },
+    "why_no_alternative_through_the_channel": [
+      "files-based deploy: the same provider endpoint (POST /v13/deployments through VERCEL_CREATE_NEW_DEPLOYMENT) and the same account-level resource (api-deployments-free-per-day) — the refusal's resource name covers every API-created deployment regardless of git/files source; a files attempt would be refused identically (and a successful junk-file deployment would never bind f7774c7, so none was attempted)",
+      "no project-creation tool: the Composio vercel inventory (35 tools, read live) contains no create-project action — provisioning a fresh quota-scoped project in the account's other team is not available through this channel",
+      "redeploy-via-deploymentId: VERCEL_CREATE_NEW_DEPLOYMENT accepts an existing deploymentId to redeploy — but no deployment at f7774c7 exists (verified in the 20-deployment list), and a redeploy of any OTHER deployment would bind to that deployment's own sha (not the release head) while consuming the same exhausted quota; not attempted (it could only produce a wrong binding or another 402)",
+      "VERCEL_DEPLOY_EDGE_FUNCTION deploys edge functions to an existing deployment — not a project production deployment of a git revision; not a path",
+      "VERCEL_UPDATE_PROJECT mutates project configuration — it creates no deployment (and mutating the productionBranch could not target f7774c7: no branch head sits at that sha, and creating one would both pollute the repository and trigger at most a preview deployment through the GitHub channel, not a production deployment through Composio); not a path",
+      "the MCP channel (env NAME COMPOSIO_MCP_API_KEY) and the tool_router endpoints share the same Composio execution backend and the same provider account — they cannot lift a provider-side quota; not distinct paths",
+      "waiting for the quota reset (2026-09-29T07:42:31.436Z, ~24h away) is outside this work session's feasibility — recorded as the honest path forward instead of fabricating success"
+    ],
+    "retry_recipe": {
+      "note": "the EXACT request that composed and reached the provider (attempt 8) — a single re-execution after the quota reset is the complete unblock; no discovery remains",
+      "endpoint": "POST https://backend.composio.dev/api/v3/tools/execute/VERCEL_CREATE_NEW_DEPLOYMENT",
+      "headers": "X-API-Key: <env COMPOSIO_API_KEY> (name only)",
+      "body": {
+        "connected_account_id": "ca_31iruA2qEdfl",
+        "user_id": "default",
+        "version": "latest",
+        "arguments": {
+          "name": "sos-2-0",
+          "target": "production",
+          "gitSource": { "type": "github", "repoId": "1377439399", "ref": "main", "sha": "f7774c731019e8e700f6357a144e1c78082ef67a" },
+          "skipAutoDetectionConfirmation": "1",
+          "forceNew": "1"
+        }
+      },
+      "then": "poll VERCEL_GET_DEPLOYMENT_DETAILS {idOrUrl: <returned deploymentId>} until readyState READY; runtime-verify the deployment URL (the P17-A binding pattern: observed meta.githubCommitSha === f7774c7…); record per the P19 deployment-record shape (deploymentId, url, readyState, commitSha, projectId, target, waitedMs, fetch timestamps)"
+    }
+  },
+  "current_live_state": {
+    "note": "the honest live state of the account's deployments at probe time (2026-09-28T07:35–07:44Z) — what ACTUALLY serves production right now, so the architect can weigh the BLOCKED-PATH against reality",
+    "sos_2_0_project": {
+      "project": "sos-2-0 (prj_ad9K6nw6F4zlpg4bmlZi9HQyNhvQ; repo-connected: org payswapdotorg / repo SOS-2.0 / repoId 1377439399 / productionBranch main; framework nextjs, rootDirectory apps/web)",
+      "newest_production_deployment": {
+        "deploymentId": "dpl_CognZCkMJVxXN2af5NbMAZBJxmsy",
+        "url": "https://sos-2-0-owd4qtvuu-ekonplacidegmailcoms-projects.vercel.app",
+        "readyState": "READY",
+        "target": "production",
+        "commitSha": "45e53731a2378aab41e326fded8168046d42b513",
+        "commitRef": "main",
+        "created_at": "2026-09-28T05:04:41.448Z (auto-deployed by the git integration when the architect pushed the P21 frontier commit — the P21 BASE head, NOT the release head)",
+        "runtime": "HTTP 200 @ 2026-09-28T07:44:29.361Z (165485 bytes) — the SOS Console serving live (see runtime_verification below)"
+      },
+      "p20_release_commit_deployment": {
+        "deploymentId": "dpl_3rogimz4PRRDp9W5up5XtmRyfPnW",
+        "url": "https://sos-2-0-2ptwiahwz-ekonplacidegmailcoms-projects.vercel.app",
+        "readyState": "READY",
+        "target": "production",
+        "commitSha": "9a1dd1b8df361e62e1f5d96f40aa27cb84bc25d4 (the P20 release commit, f7774c7's parent)",
+        "created_at": "2026-09-28T00:15:25.288Z"
+      },
+      "release_head_deployment": "NONE — verified: none of the 20 listed sos-2-0 deployments binds f7774c731019e8e700f6357a144e1c78082ef67a (f7774c7 is an ancestor of the live main head 45e5373; the git integration auto-deploys branch HEADS, so the release head reached production only through its descendant 45e5373, which contains it)"
+    },
+    "sos_dogfood_r2_project": {
+      "project": "sos-dogfood-r2 (prj_WESDjCys33YVQ97idvJNVvgz9mLn; link org payswapdotorg / repo sos-dogfood-r2 / repoId 1390970813 / productionBranch main — the P19 project the dispatch packet expected to exist: CONFIRMED LIVE)",
+      "only_deployment": {
+        "deploymentId": "dpl_7wM9D5kc1r55jzGczuuLXBm8T3KC",
+        "url": "https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app",
+        "readyState": "READY",
+        "target": "production",
+        "commitSha": "767c474c3e22c0d807bb44883df6ae7c63139f3f (the run-2 PR head)",
+        "created_at": "2026-09-27T14:38:35.866Z",
+        "runtime": "the manifest binding re-verified LIVE — see runtime_verification below"
+      }
+    }
+  },
+  "runtime_verification": {
+    "note": "no NEW deployment exists to verify (deployment: null — never fabricated); the LIVE production deployments were re-verified at current time instead, so this record still carries real runtime evidence:",
+    "sos_2_0_current_production": {
+      "url": "https://sos-2-0-owd4qtvuu-ekonplacidegmailcoms-projects.vercel.app/",
+      "rootStatus": 200,
+      "bytes": 165485,
+      "fetchedAt": "2026-09-28T07:44:29.361Z",
+      "detail": "the SOS Console (the apps/web Next.js production build at the live main head 45e5373) serving in production — the P17-A 'preview HTTP 200 serving the SOS Console' verification pattern, re-proved at current time on the CURRENT production deployment",
+      "manifestStatus": null,
+      "manifest_note": "sos-manifest.json is the P19 DOGFOOD runtime binding — a harness-generated artifact of the dogfood deployments, NOT a tracked file of the release tree (verified: no sos-manifest* file exists anywhere in the repository; apps/web has no public/ directory and no manifest route). The byte-exact manifest check therefore applies to the dogfood deployment (below), while the main-repo deployment's binding basis is the deployment's gitSource sha echo (the P17-A binding_verified pattern) — recorded honestly rather than force-fitting the dogfood pattern onto a Next.js deployment"
+    },
+    "p19_run2_manifest_binding_reverified": {
+      "url": "https://sos-dogfood-r2-43ry34xrp-ekonplacidegmailcoms-projects.vercel.app/sos-manifest.json",
+      "manifestStatus": 200,
+      "manifestBytes": 248,
+      "fetchedAt": "2026-09-28T07:44:30.369Z",
+      "source_comparison": "GET https://api.github.com/repos/payswapdotorg/sos-dogfood-r2/contents/sos-manifest.json?ref=767c474c3e22c0d807bb44883df6ae7c63139f3f (Authorization: Bearer $GITHUB_ACCESS_TOKEN by env NAME; Accept: application/vnd.github.raw+json) → HTTP 200, 248 bytes @ 2026-09-28T07:44:41.707Z",
+      "manifestByteExact": true,
+      "byte_exactness_proof": "md5 ad622e86f60fe90f3097db460897ae2d on BOTH the served manifest and the repository content at the deployed revision (cmp: identical) — the P19 run-2 deployment-record's manifestStatus 200 + manifestByteExact true re-verified LIVE at current time, 17+ hours after it was first recorded",
+      "deployedRevision": "767c474c3e22c0d807bb44883df6ae7c63139f3f"
+    }
+  },
+  "honest_notes": [
+    "The BLOCKED-PATH is a PROVIDER-SIDE quota refusal on a PROVEN-WORKING channel: attempts 1–7 document the mapping discovery (the pinned tool version's drifted gitSource mapping, fixed in the 'latest' version — recorded for every future Composio-driven deployment in this program), and attempt 8 is a fully-valid, fully-composed production deployment request pinned to the exact release head that the Vercel API refused with 402 api-deployments-free-per-day (verbatim above).",
+    "Nothing in this record fabricates a deployment: deployment is null, no deploymentId/url/readyState is invented, and the live state section records exactly what serves production right now (the P21 base head 45e5373 — which CONTAINS the release head as an ancestor — and the P20 release commit 9a1dd1b).",
+    "The quota reset (2026-09-29T07:42:31.436Z) is ~24 hours after the refusal; the retry_recipe is the complete unblock (one request, no discovery left) — the architect-side operational act once the quota resets, or immediately with a paid plan.",
+    "All timestamps are UTC from the probe executions; every channel is recorded by exact endpoint/action + auth scheme with credentials referenced by env-var NAME or Composio connected-account ID only — no credential VALUE appears in this or any sibling file (see p21-secrets-audit.json)."
+  ]
+}
